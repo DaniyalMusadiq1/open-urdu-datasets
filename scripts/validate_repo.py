@@ -21,9 +21,9 @@ def main():
         raise ValueError("catalog CSV differs from JSON")
     hosted = []
     for row in rows:
-        if row["verification_status"] == "verified":
-            if not row["verification_evidence"].get("data_sha256"):
-                raise ValueError("verified entry lacks data checksum")
+        if (row["verification_status"] == "verified"
+                and not row["verification_evidence"].get("data_sha256")):
+            raise ValueError("verified entry lacks data checksum")
         if not row["hosted"]:
             continue
         if row["license"] not in ALLOWED or row["redistribution_status"] != "explicitly_permitted":

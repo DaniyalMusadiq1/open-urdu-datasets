@@ -35,4 +35,4 @@ Counts are source-reported and scoped, not locally verified totals. Entries over
 | CAMIO Transcription Languages | printed OCR / document layout | Urdu Arabic script (font unspecified) | unknown | images / XML annotations | unspecified | [source](https://catalog.ldc.upenn.edu/LDC2022T07) | unverified; link-only |
 | IIIT-Urdu OCR | printed Nastaliq OCR | Urdu Nastaliq | 1610 text-line images (source_reported) | images / transcriptions; exact distribution not checked | unspecified | [source](https://ilocr.iiit.ac.in/dataset/38/) | unverified; link-only |
 
-See [license policy](docs/LICENSE_POLICY.md), [coverage gaps](docs/COVERAGE.md), [JSON](catalog/datasets.json) and [typed CSV](catalog/datasets.csv). The initial README remains unchanged pending maintainer approval to replace it.
+See [license policy](docs/LICENSE_POLICY.md), [coverage gaps](docs/COVERAGE.md), [JSON](catalog/datasets.json) and [typed CSV](catalog/datasets.csv). The README now contains the approved catalog overview; derived hosted samples remain separately scoped.

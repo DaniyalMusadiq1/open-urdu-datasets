@@ -4,7 +4,6 @@ Usage: python scripts/select_vocabulary_sample.py /path/to/ur.translit.sampled.t
 No downloads or overwriting. See SOURCES.md for the official archive and byte range.
 """
 import argparse
-import json
 
 from urdu_data.core import sha256, write_records
 

@@ -10,17 +10,17 @@ Not release-ready. 28 upstream discovery entries (27 dataset/corpus resources an
 - Derived sample schema, manifest SHA-256 and record count: pass (25 records).
 - Sample reproduction from the complete upstream member: byte-for-byte match.
 - Complete upstream Urdu training member: 2,185,405 bytes; 106,260 rows; 25,000 native word types; locally computed SHA-256 recorded. Whole 2 GB archive not downloaded/hashed.
-- Existing README and LICENSE exactly match the approved main branch.
+- Approved README replacement applied on the feature branch; the project LICENSE is unchanged.
 - Plain Python, pandas and Hugging Face catalog examples: all executed successfully (28 entries).
-- Pytest: 9 passed, 1 failed. The URI-format rejection test fails because `jsonschema` alone does not install its optional URI checker. Proposed dependency is `jsonschema[format-nongpl]`.
-- Ruff: failed, 5 findings across import ordering, nested conditional style, exception type and one unused import. Proposed patch addresses these; it has not been applied or retested.
+- Pytest after the approved dependency fix: 10 passed. `jsonschema[format-nongpl]` now declares the URI-format checker dependency. One environment plugin deprecation warning is unrelated to this project.
+- Ruff: all checks passed after applying the approved import/style/exception fixes.
 - Every pending added file was below 100 MB; no LFS or large binary artifact used.
 - No Makhzan raw files or NC corpus files were downloaded into the repository. The only included language data is the attributed CC-BY-SA Dakshina sample. AI-drafted Urdu documentation and Unicode software fixtures are marked; no synthetic data is represented as human-reviewed.
 - Automated sample email/URL-pattern triage: 0 matches. This is not a PII/toxicity audit or a language-quality guarantee.
 
 ## Link evidence
 
-Source metadata GET outcomes are in `catalog/source-checks.json`. The separate HEAD batch is recorded in `catalog/link-check-results.json` when complete. Source metadata accessibility never promotes data verification. Shell GET 403 responses affected Wikimedia, current Common Voice, fastText and the CC legalcode endpoint; alternate official web evidence is identified separately. Gated sources were not accessed or new permissions requested.
+Source metadata GET outcomes are in `catalog/source-checks.json`. The separate HEAD batch is recorded in `catalog/link-check-results.json` (63 OK, 1 unresolved Tatoeba documentation URL returning 503 in the initial batch). Source metadata accessibility never promotes data verification. Shell GET 403 responses affected Wikimedia, current Common Voice, fastText and the CC legalcode endpoint; alternate official web evidence is identified separately. Gated sources were not accessed or new permissions requested.
 
 ## Rights and exclusions
 
@@ -28,11 +28,13 @@ Makhzan raw republication is forbidden. XNLI is CC-BY-NC-4.0; UD Urdu UDTB and X
 
 ## Approval and remaining work
 
-`docs/proposed-updates.diff` is a concrete proposal to update README.md, pyproject.toml, core/CLI, one test and two scripts. It declares URI format dependencies, fixes lint and updates the README with actual draft counts and the catalog table. It has not overwritten the source files. `README.proposed.md` previews the replacement README. Applying these changes requires maintainer approval under the no-overwrite rule. CI success is not claimed.
+The maintainer approved the proposed README/dependency/tooling patch. It has been applied and locally validated. `docs/proposed-updates.diff` and `README.proposed.md` are historical review artifacts; they do not indicate pending approval. No main merge or release is claimed.
 
-The catalog and sample deliberately have separate manifests; the existing generic validator covers upstream entries and `scripts/validate_hosted.py` covers the sample. The original README still describes initialization; consult CATALOG.md and this report until its proposed replacement is approved.
+The catalog and sample have separate manifests. `scripts/validate_repo.py` covers upstream entries; `scripts/validate_hosted.py` covers the sample. All three catalog loading examples passed after the dependency update.
 
-Next: approve and apply the proposed updates; rerun checks; reconcile unresolved URLs; review dataset licenses and full distributions individually; obtain native Urdu review of spellings, romanizations and README.ur.md; source permitted Urdu–English pairs and reviewed glosses/POS/examples; fill task gaps in docs/COVERAGE.md. Do not merge to main or tag until separate approval and passing checks.
+Remaining release blockers: fewer than 25 verified datasets; incomplete task coverage and Urdu-English pair hosting; source-level rights/distribution checks and native Urdu review are incomplete; GitHub Actions results must be checked on the updated commit. The earlier commit had Quality failure, Link checks failure, and Hosted samples success; these results do not describe the updated code.
+
+Next: resolve any link-check failures, independently verify scoped distributions and rights, obtain native Urdu review of spellings/romanizations and README.ur.md, and source permitted Urdu-English pairs and reviewed glosses/POS/examples. See docs/COVERAGE.md. Keep v0.1.0 unpublished while release blockers remain.
 
 ## Upstream catalog license labels (source claims, not cleared underlying rights)
 

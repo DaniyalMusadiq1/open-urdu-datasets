@@ -8,8 +8,16 @@ import urllib.request
 from pathlib import Path
 from urllib.parse import urlparse
 
-from .core import (decode_csv_cells, duplicate_groups, normalize, read_records,
-                   stats, validate, verify_checksums, write_records)
+from .core import (
+    decode_csv_cells,
+    duplicate_groups,
+    normalize,
+    read_records,
+    stats,
+    validate,
+    verify_checksums,
+    write_records,
+)
 
 
 def check_link(url):

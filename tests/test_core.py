@@ -3,8 +3,16 @@ import json
 
 import pytest
 
-from urdu_data.core import (decode_csv_cells, duplicate_groups, normalize, read_records,
-                            sha256, validate, verify_checksums, write_records)
+from urdu_data.core import (
+    decode_csv_cells,
+    duplicate_groups,
+    normalize,
+    read_records,
+    sha256,
+    validate,
+    verify_checksums,
+    write_records,
+)
 
 
 def test_normalization_default_preserves_joiners_diacritics_and_letters():
@@ -47,7 +55,7 @@ def test_invalid_utf8_and_jsonl_are_rejected(tmp_path):
     with pytest.raises(UnicodeDecodeError):
         read_records(path)
     path.write_text('[1,2]\n', encoding="utf-8")
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         read_records(path)
 
 

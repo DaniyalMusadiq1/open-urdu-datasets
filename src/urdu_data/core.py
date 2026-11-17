@@ -20,7 +20,7 @@ def read_records(path):
                     raise ValueError(f"blank JSONL line {line_number}")
                 row = json.loads(line)
                 if not isinstance(row, dict):
-                    raise ValueError(f"JSONL line {line_number} must be an object")
+                    raise TypeError(f"JSONL line {line_number} must be an object")
                 rows.append(row)
             return rows
         if path.suffix == ".json":
