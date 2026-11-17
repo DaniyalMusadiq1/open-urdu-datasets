@@ -1,0 +1,81 @@
+[
+  {
+    "id": "dakshina-ur-sample",
+    "name": "Dakshina Urdu romanization sample (derived; not an independent dataset)",
+    "category_task": "vocabulary / transliteration / sentences",
+    "original_source_url": "https://github.com/google-research-datasets/dakshina",
+    "download_url": "https://storage.googleapis.com/gresearch/dakshina/dakshina_dataset_v1.0.tar",
+    "license": "CC-BY-SA-4.0",
+    "license_url": "https://github.com/google-research-datasets/dakshina#license",
+    "size_record_count": {
+      "value": 25,
+      "unit": "records",
+      "basis": "locally_counted",
+      "scope": "derived deterministic sample"
+    },
+    "format": "JSONL",
+    "language_script": "Urdu Arabic and Roman (Latin)",
+    "collection_method": "human romanization of Wikipedia-derived words and sentences",
+    "annotation_quality_notes": "Upstream attestation counts and round-trip checks; no local native review.",
+    "known_limitations": "All 25 records unreviewed locally. English/POS/example null; no representative coverage. Complete upstream archive not verified.",
+    "pii_toxicity_notes": "Not independently screened. Treat public text, usernames and audio as potentially sensitive; no PII-free claim.",
+    "redistribution_status": "explicitly_permitted",
+    "citation_bibtex": "@misc{dakshina-ur,\n  title = {Dakshina — Urdu},\n  howpublished = {\\url{https://github.com/google-research-datasets/dakshina}},\n  note = {Source accessed 2026-11-17; publisher metadata citation, not an invented paper citation}\n}",
+    "date_accessed": "2026-11-17",
+    "link_check": {
+      "status": "ok",
+      "scope": "source metadata only; download and license URL checks tracked separately",
+      "date": "2026-11-17"
+    },
+    "verification_status": "pending_review",
+    "hosted": true,
+    "local_path": "datasets/vocabulary/dakshina-urdu-sample",
+    "version": "1.0",
+    "verification_evidence": {
+      "data_sha256": "09f153443c91ca53db4d3ccb34670dedb7babf12fe6685e7cc0634d359c8f896",
+      "upstream_member_sha256": "41f4f4109e60813f578a70a75b19189acb907e800a862401b7205f6f4a51e7f2",
+      "upstream_member_records": 106260,
+      "native_word_types": 25000,
+      "human_reviewed_records": 0,
+      "checksums": "datasets/vocabulary/dakshina-urdu-sample/checksums.sha256"
+    }
+  },
+  {
+    "id": "belebele-ur-en-eval-sample",
+    "name": "Belebele Urdu-English evaluation passage sample (derived)",
+    "category_task": "evaluation / Urdu-English passage alignment",
+    "original_source_url": "https://huggingface.co/datasets/facebook/belebele",
+    "download_url": "https://huggingface.co/datasets/facebook/belebele/tree/7899cdfa4e1e0d733fd77c848e2c273cb1d32be2",
+    "license": "CC-BY-SA-4.0",
+    "license_url": "https://github.com/facebookresearch/belebele/blob/main/LICENSE_CC-BY-SA4.0",
+    "size_record_count": {
+      "value": 5,
+      "unit": "passage pairs",
+      "basis": "locally_counted",
+      "scope": "derived deterministic evaluation-only sample"
+    },
+    "format": "JSONL",
+    "language_script": "Urdu Arabic script and English Latin",
+    "collection_method": "source-ID alignment and exact copy of publisher evaluation passages",
+    "annotation_quality_notes": "All 900 publisher question IDs and answer IDs align across English and both Urdu variants; no local native-speaker correctness review.",
+    "known_limitations": "Five nonrepresentative passages; all locally unreviewed. Historical-conflict content. Evaluation only; no training/model-selection validation.",
+    "pii_toxicity_notes": "Not independently screened. Treat public text, usernames and audio as potentially sensitive; no PII-free claim.",
+    "redistribution_status": "explicitly_permitted",
+    "citation_bibtex": "@misc{belebele-ur,\n  title = {Belebele — Urdu Arabic and Latin scripts},\n  howpublished = {\\url{https://huggingface.co/datasets/facebook/belebele}},\n  note = {Source accessed 2026-11-17; publisher metadata citation, not an invented paper citation}\n}",
+    "date_accessed": "2026-11-17",
+    "link_check": {
+      "status": "ok",
+      "scope": "source metadata only; download and license URL checks tracked separately",
+      "date": "2026-11-17"
+    },
+    "verification_status": "pending_review",
+    "hosted": true,
+    "local_path": "datasets/translation/belebele-urdu-english-eval-sample",
+    "version": "7899cdfa4e1e0d733fd77c848e2c273cb1d32be2",
+    "verification_evidence": {
+      "data_sha256": "7ce57fc1776cf98dc0284985e36a4df9bd5a6f9a940d1de821c298c2ce8d1426",
+      "human_reviewed_records": 0,
+      "source_metadata": "catalog/data-verification.json"
+    }
+  }
+]

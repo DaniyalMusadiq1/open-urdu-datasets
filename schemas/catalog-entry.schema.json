@@ -1,0 +1,196 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Dataset catalog entry",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "category_task",
+    "original_source_url",
+    "download_url",
+    "license",
+    "license_url",
+    "size_record_count",
+    "format",
+    "language_script",
+    "collection_method",
+    "annotation_quality_notes",
+    "known_limitations",
+    "pii_toxicity_notes",
+    "redistribution_status",
+    "citation_bibtex",
+    "date_accessed",
+    "link_check",
+    "verification_status",
+    "hosted",
+    "local_path",
+    "version",
+    "verification_evidence"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-z0-9][a-z0-9-]+$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "category_task": {
+      "type": "string",
+      "minLength": 1
+    },
+    "original_source_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "download_url": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "license": {
+      "type": "string",
+      "minLength": 1
+    },
+    "license_url": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "size_record_count": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "required": [
+            "value",
+            "unit",
+            "basis",
+            "scope"
+          ],
+          "properties": {
+            "value": {
+              "type": "number",
+              "minimum": 0
+            },
+            "unit": {
+              "type": "string"
+            },
+            "basis": {
+              "enum": [
+                "source_reported",
+                "locally_counted"
+              ]
+            },
+            "scope": {
+              "type": "string"
+            },
+            "splits": {
+              "type": "object"
+            }
+          }
+        }
+      ]
+    },
+    "format": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "language_script": {
+      "type": "string",
+      "minLength": 1
+    },
+    "collection_method": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "annotation_quality_notes": {
+      "type": "string",
+      "minLength": 1
+    },
+    "known_limitations": {
+      "type": "string",
+      "minLength": 1
+    },
+    "pii_toxicity_notes": {
+      "type": "string",
+      "minLength": 1
+    },
+    "redistribution_status": {
+      "type": "string",
+      "minLength": 1
+    },
+    "citation_bibtex": {
+      "type": "string",
+      "minLength": 1
+    },
+    "date_accessed": {
+      "type": "string",
+      "format": "date"
+    },
+    "link_check": {
+      "type": "object",
+      "required": [
+        "status",
+        "scope",
+        "date"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "ok",
+            "partial",
+            "unverified"
+          ]
+        },
+        "scope": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string",
+          "format": "date"
+        }
+      },
+      "additionalProperties": false
+    },
+    "verification_status": {
+      "enum": [
+        "verified",
+        "unverified",
+        "pending_review"
+      ]
+    },
+    "hosted": {
+      "type": "boolean"
+    },
+    "local_path": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "version": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "verification_evidence": {
+      "type": "object",
+      "minProperties": 1
+    }
+  },
+  "additionalProperties": false
+}

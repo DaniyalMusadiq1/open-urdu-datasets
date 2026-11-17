@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "Cite this catalog for discovery; cite original dataset authors when using their data."
+title: "open-urdu-datasets"
+type: software
+authors:
+  - name: DaniyalMusadiq1
+repository-code: "https://github.com/DaniyalMusadiq1/open-urdu-datasets"
+license: MIT
+abstract: "An in-progress Urdu and Roman Urdu dataset catalog with explicit provenance and verification status."

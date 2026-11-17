@@ -1,0 +1,389 @@
+{
+  "date": "2026-11-17",
+  "method": "HEAD",
+  "results": [
+    {
+      "url": "https://archive.ics.uci.edu/dataset/458/roman+urdu+data+set",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://archive.ics.uci.edu/dataset/458/roman+urdu+data+set"
+    },
+    {
+      "url": "https://archive.ics.uci.edu/dataset/458/roman+urdu+data+set#license",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://archive.ics.uci.edu/dataset/458/roman+urdu+data+set#license"
+    },
+    {
+      "url": "https://archive.ics.uci.edu/dataset/854/roman+urdu+sentiment+analysis+dataset+(rusad)",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://archive.ics.uci.edu/dataset/854/roman+urdu+sentiment+analysis+dataset+(rusad)"
+    },
+    {
+      "url": "https://archive.ics.uci.edu/dataset/854/roman+urdu+sentiment+analysis+dataset+(rusad)#license",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://archive.ics.uci.edu/dataset/854/roman+urdu+sentiment+analysis+dataset+(rusad)#license"
+    },
+    {
+      "url": "https://catalog.ldc.upenn.edu/LDC2007S03",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://catalog.ldc.upenn.edu/LDC2007S03"
+    },
+    {
+      "url": "https://catalog.ldc.upenn.edu/LDC2022T07",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://catalog.ldc.upenn.edu/LDC2022T07"
+    },
+    {
+      "url": "https://dumps.wikimedia.org/urwiki/",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://dumps.wikimedia.org/urwiki/"
+    },
+    {
+      "url": "https://dumps.wikimedia.org/urwiki/latest/",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://dumps.wikimedia.org/urwiki/latest/"
+    },
+    {
+      "url": "https://en.wiki.tatoeba.org/articles/show/using-the-tatoeba-corpus",
+      "status": "unverified",
+      "http_status": 503
+    },
+    {
+      "url": "https://fasttext.cc/docs/en/crawl-vectors.html",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://fasttext.cc/docs/en/crawl-vectors.html"
+    },
+    {
+      "url": "https://fasttext.cc/docs/en/crawl-vectors.html#license",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://fasttext.cc/docs/en/crawl-vectors.html#license"
+    },
+    {
+      "url": "https://github.com/UniversalDependencies/UD_Urdu-UDTB",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://github.com/UniversalDependencies/UD_Urdu-UDTB"
+    },
+    {
+      "url": "https://github.com/UniversalDependencies/UD_Urdu-UDTB/blob/master/LICENSE.txt",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://github.com/UniversalDependencies/UD_Urdu-UDTB/blob/master/LICENSE.txt"
+    },
+    {
+      "url": "https://github.com/facebookresearch/XNLI/blob/main/LICENSE",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://github.com/facebookresearch/XNLI/blob/main/LICENSE"
+    },
+    {
+      "url": "https://github.com/google-research-datasets/dakshina",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://github.com/google-research-datasets/dakshina"
+    },
+    {
+      "url": "https://github.com/google-research-datasets/dakshina#license",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://github.com/google-research-datasets/dakshina#license"
+    },
+    {
+      "url": "https://github.com/zeerakahmed/makhzan",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://github.com/zeerakahmed/makhzan"
+    },
+    {
+      "url": "https://github.com/zeerakahmed/makhzan#license",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://github.com/zeerakahmed/makhzan#license"
+    },
+    {
+      "url": "https://huggingface.co/datasets/CohereLabs/aya_collection_language_split",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/CohereLabs/aya_collection_language_split"
+    },
+    {
+      "url": "https://huggingface.co/datasets/CohereLabs/aya_collection_language_split/blob/a3af2fde4b4cb5b2775830b11244a1a20b5f004f/README.md#licensing-information",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/CohereLabs/aya_collection_language_split/blob/a3af2fde4b4cb5b2775830b11244a1a20b5f004f/README.md#licensing-information"
+    },
+    {
+      "url": "https://huggingface.co/datasets/CohereLabs/aya_collection_language_split/tree/a3af2fde4b4cb5b2775830b11244a1a20b5f004f",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/CohereLabs/aya_collection_language_split/tree/a3af2fde4b4cb5b2775830b11244a1a20b5f004f"
+    },
+    {
+      "url": "https://huggingface.co/datasets/CohereLabs/aya_dataset",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/CohereLabs/aya_dataset"
+    },
+    {
+      "url": "https://huggingface.co/datasets/CohereLabs/aya_dataset/blob/f9ea04583f02a8f86404ff6c58bf75fe637df8a2/README.md#licensing-information",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/CohereLabs/aya_dataset/blob/f9ea04583f02a8f86404ff6c58bf75fe637df8a2/README.md#licensing-information"
+    },
+    {
+      "url": "https://huggingface.co/datasets/CohereLabs/aya_dataset/tree/f9ea04583f02a8f86404ff6c58bf75fe637df8a2",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/CohereLabs/aya_dataset/tree/f9ea04583f02a8f86404ff6c58bf75fe637df8a2"
+    },
+    {
+      "url": "https://huggingface.co/datasets/Davlan/sib200",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/Davlan/sib200"
+    },
+    {
+      "url": "https://huggingface.co/datasets/Davlan/sib200/blob/38977a667f6fc264d5c26ec57a01e16db040b358/README.md#licensing-information",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/Davlan/sib200/blob/38977a667f6fc264d5c26ec57a01e16db040b358/README.md#licensing-information"
+    },
+    {
+      "url": "https://huggingface.co/datasets/Davlan/sib200/tree/38977a667f6fc264d5c26ec57a01e16db040b358",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/Davlan/sib200/tree/38977a667f6fc264d5c26ec57a01e16db040b358"
+    },
+    {
+      "url": "https://huggingface.co/datasets/Helsinki-NLP/opus-100",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/Helsinki-NLP/opus-100"
+    },
+    {
+      "url": "https://huggingface.co/datasets/Helsinki-NLP/opus-100/tree/805090dc28bf78897da9641cdf08b61287580df9",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/Helsinki-NLP/opus-100/tree/805090dc28bf78897da9641cdf08b61287580df9"
+    },
+    {
+      "url": "https://huggingface.co/datasets/ai4bharat/IndicSentiment",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/ai4bharat/IndicSentiment"
+    },
+    {
+      "url": "https://huggingface.co/datasets/ai4bharat/IndicSentiment/tree/dc8f3f66886531c6897fedffca1e938a68fc5013",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/ai4bharat/IndicSentiment/tree/dc8f3f66886531c6897fedffca1e938a68fc5013"
+    },
+    {
+      "url": "https://huggingface.co/datasets/allenai/c4",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/allenai/c4"
+    },
+    {
+      "url": "https://huggingface.co/datasets/allenai/c4/blob/1588ec454efa1a09f29cd18ddd04fe05fc8653a2/README.md#licensing-information",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/allenai/c4/blob/1588ec454efa1a09f29cd18ddd04fe05fc8653a2/README.md#licensing-information"
+    },
+    {
+      "url": "https://huggingface.co/datasets/allenai/c4/tree/1588ec454efa1a09f29cd18ddd04fe05fc8653a2",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/allenai/c4/tree/1588ec454efa1a09f29cd18ddd04fe05fc8653a2"
+    },
+    {
+      "url": "https://huggingface.co/datasets/allenai/nllb",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/allenai/nllb"
+    },
+    {
+      "url": "https://huggingface.co/datasets/allenai/nllb/blob/c36967abb45f06ff7659849372ab41e01838193e/README.md#licensing-information",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/allenai/nllb/blob/c36967abb45f06ff7659849372ab41e01838193e/README.md#licensing-information"
+    },
+    {
+      "url": "https://huggingface.co/datasets/allenai/nllb/tree/c36967abb45f06ff7659849372ab41e01838193e",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/allenai/nllb/tree/c36967abb45f06ff7659849372ab41e01838193e"
+    },
+    {
+      "url": "https://huggingface.co/datasets/cis-lmu/Glot500",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/cis-lmu/Glot500"
+    },
+    {
+      "url": "https://huggingface.co/datasets/cis-lmu/Glot500/tree/f7b3e9d11a7e974ec0d021342cd8b41fd67510c1",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/cis-lmu/Glot500/tree/f7b3e9d11a7e974ec0d021342cd8b41fd67510c1"
+    },
+    {
+      "url": "https://huggingface.co/datasets/csebuetnlp/xlsum",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/csebuetnlp/xlsum"
+    },
+    {
+      "url": "https://huggingface.co/datasets/csebuetnlp/xlsum/blob/30fece425f9a3866e04321773ca7a80056d55ca6/README.md#licensing-information",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/csebuetnlp/xlsum/blob/30fece425f9a3866e04321773ca7a80056d55ca6/README.md#licensing-information"
+    },
+    {
+      "url": "https://huggingface.co/datasets/csebuetnlp/xlsum/tree/30fece425f9a3866e04321773ca7a80056d55ca6",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/csebuetnlp/xlsum/tree/30fece425f9a3866e04321773ca7a80056d55ca6"
+    },
+    {
+      "url": "https://huggingface.co/datasets/facebook/belebele",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/facebook/belebele"
+    },
+    {
+      "url": "https://huggingface.co/datasets/facebook/belebele/blob/7899cdfa4e1e0d733fd77c848e2c273cb1d32be2/README.md#licensing-information",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/facebook/belebele/blob/7899cdfa4e1e0d733fd77c848e2c273cb1d32be2/README.md#licensing-information"
+    },
+    {
+      "url": "https://huggingface.co/datasets/facebook/belebele/tree/7899cdfa4e1e0d733fd77c848e2c273cb1d32be2",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/facebook/belebele/tree/7899cdfa4e1e0d733fd77c848e2c273cb1d32be2"
+    },
+    {
+      "url": "https://huggingface.co/datasets/facebook/flores",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/facebook/flores"
+    },
+    {
+      "url": "https://huggingface.co/datasets/facebook/flores/blob/71abf77d8b7beb5cfef59898d6b24d92ab7654fc/README.md#licensing-information",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/facebook/flores/blob/71abf77d8b7beb5cfef59898d6b24d92ab7654fc/README.md#licensing-information"
+    },
+    {
+      "url": "https://huggingface.co/datasets/facebook/flores/tree/71abf77d8b7beb5cfef59898d6b24d92ab7654fc",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/facebook/flores/tree/71abf77d8b7beb5cfef59898d6b24d92ab7654fc"
+    },
+    {
+      "url": "https://huggingface.co/datasets/facebook/xnli",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/facebook/xnli"
+    },
+    {
+      "url": "https://huggingface.co/datasets/facebook/xnli/tree/b8dd5d7af51114dbda02c0e3f6133f332186418e",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/facebook/xnli/tree/b8dd5d7af51114dbda02c0e3f6133f332186418e"
+    },
+    {
+      "url": "https://huggingface.co/datasets/google/fleurs",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/google/fleurs"
+    },
+    {
+      "url": "https://huggingface.co/datasets/google/fleurs/blob/70bb2e84b976b7e960aa89f1c648e09c59f894dd/README.md#licensing-information",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/google/fleurs/blob/70bb2e84b976b7e960aa89f1c648e09c59f894dd/README.md#licensing-information"
+    },
+    {
+      "url": "https://huggingface.co/datasets/google/fleurs/tree/70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/google/fleurs/tree/70bb2e84b976b7e960aa89f1c648e09c59f894dd"
+    },
+    {
+      "url": "https://huggingface.co/datasets/oscar-corpus/OSCAR-2301",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/oscar-corpus/OSCAR-2301"
+    },
+    {
+      "url": "https://huggingface.co/datasets/oscar-corpus/OSCAR-2301/blob/c2930464071faebadfb5491e2b4f99666da7a1e6/README.md#licensing-information",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/oscar-corpus/OSCAR-2301/blob/c2930464071faebadfb5491e2b4f99666da7a1e6/README.md#licensing-information"
+    },
+    {
+      "url": "https://huggingface.co/datasets/oscar-corpus/OSCAR-2301/tree/c2930464071faebadfb5491e2b4f99666da7a1e6",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/oscar-corpus/OSCAR-2301/tree/c2930464071faebadfb5491e2b4f99666da7a1e6"
+    },
+    {
+      "url": "https://huggingface.co/datasets/statmt/cc100",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/statmt/cc100"
+    },
+    {
+      "url": "https://huggingface.co/datasets/statmt/cc100/tree/8c658c983d32eab9170d77d416252cfaa0c23e96",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/statmt/cc100/tree/8c658c983d32eab9170d77d416252cfaa0c23e96"
+    },
+    {
+      "url": "https://huggingface.co/datasets/unimelb-nlp/wikiann",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/unimelb-nlp/wikiann"
+    },
+    {
+      "url": "https://huggingface.co/datasets/unimelb-nlp/wikiann/tree/f0a3be6dc5564c0cc4150bb660144800a1f539d4",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/datasets/unimelb-nlp/wikiann/tree/f0a3be6dc5564c0cc4150bb660144800a1f539d4"
+    },
+    {
+      "url": "https://ilocr.iiit.ac.in/dataset/38/",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://ilocr.iiit.ac.in/dataset/38/"
+    },
+    {
+      "url": "https://mozilladatacollective.com/datasets/cmu5x1w3400cyo107st8cgsoq",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://mozilladatacollective.com/datasets/cmu5x1w3400cyo107st8cgsoq"
+    },
+    {
+      "url": "https://storage.googleapis.com/gresearch/dakshina/dakshina_dataset_v1.0.tar",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://storage.googleapis.com/gresearch/dakshina/dakshina_dataset_v1.0.tar"
+    },
+    {
+      "url": "https://tatoeba.org/en/downloads",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://tatoeba.org/en/downloads"
+    }
+  ]
+}

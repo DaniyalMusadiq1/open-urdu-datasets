@@ -1,0 +1,16 @@
+name: Rights or privacy concern
+description: Report an issue without posting sensitive content
+body:
+  - type: input
+    id: dataset
+    attributes:
+      label: Dataset ID or affected file path
+    validations:
+      required: true
+  - type: textarea
+    id: concern
+    attributes:
+      label: Non-sensitive description and requested action
+      description: Do not paste personal data or harmful records. Use GitHub reporting channels for private details.
+    validations:
+      required: true

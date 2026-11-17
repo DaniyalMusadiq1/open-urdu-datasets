@@ -1,0 +1,11 @@
+{
+  "date": "2026-11-17",
+  "method": "HEAD",
+  "results": [
+    {
+      "url": "https://en.wiki.tatoeba.org/articles/show/using-the-tatoeba-corpus",
+      "status": "unverified",
+      "http_status": 503
+    }
+  ]
+}

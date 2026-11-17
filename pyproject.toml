@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "open-urdu-datasets"
+version = "0.0.0"
+description = "Transparent dataset catalog validation and conservative Urdu text utilities"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+dependencies = ["jsonschema[format-nongpl]>=4.22,<5"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "ruff>=0.11,<1"]
+examples = ["pandas>=2,<4", "datasets>=3,<5"]
+
+[project.scripts]
+urdu-data = "urdu_data.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+

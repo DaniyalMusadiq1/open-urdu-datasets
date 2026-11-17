@@ -1,0 +1,1145 @@
+[
+  {
+    "id": "xnli-ur",
+    "name": "XNLI — Urdu",
+    "category_task": "NLI / evaluation",
+    "original_source_url": "https://huggingface.co/datasets/facebook/xnli",
+    "download_url": "https://huggingface.co/datasets/facebook/xnli/tree/b8dd5d7af51114dbda02c0e3f6133f332186418e",
+    "license": "CC-BY-NC-4.0",
+    "license_url": "https://github.com/facebookresearch/XNLI/blob/main/LICENSE",
+    "size_record_count": {
+      "value": 400202,
+      "unit": "records",
+      "basis": "source_reported",
+      "scope": "ur configuration, all splits",
+      "splits": {
+        "train": 392702,
+        "test": 5010,
+        "validation": 2490
+      }
+    },
+    "format": "See versioned distribution file list; not independently validated",
+    "language_script": "Urdu Arabic script (font unspecified)",
+    "collection_method": "human translations (evaluation); machine-translated training",
+    "annotation_quality_notes": "No independent annotation audit performed.",
+    "known_limitations": "Training and evaluation use different construction methods. Keep official splits.",
+    "pii_toxicity_notes": "Not independently screened. Treat public text, usernames and audio as potentially sensitive; no PII-free claim.",
+    "redistribution_status": "excluded_by_policy",
+    "citation_bibtex": "@misc{xnli-ur,\n  title = {XNLI — Urdu},\n  howpublished = {\\url{https://huggingface.co/datasets/facebook/xnli}},\n  note = {Source accessed 2026-11-17; publisher metadata citation, not an invented paper citation}\n}",
+    "date_accessed": "2026-11-17",
+    "link_check": {
+      "status": "ok",
+      "scope": "source metadata only; download and license URL checks tracked separately",
+      "date": "2026-11-17"
+    },
+    "verification_status": "unverified",
+    "hosted": false,
+    "local_path": null,
+    "version": "b8dd5d7af51114dbda02c0e3f6133f332186418e",
+    "verification_evidence": {
+      "metadata_url": "https://huggingface.co/api/datasets/facebook/xnli",
+      "metadata_sha256": "9715c313fa1ca5bcf228f40f64ee5350ca696e3a2521afeed2892e1a5e13a22f",
+      "card_url": "https://huggingface.co/datasets/facebook/xnli/blob/b8dd5d7af51114dbda02c0e3f6133f332186418e/README.md",
+      "card_sha256": "e951158edde65027380c20e827c3c2ac7ca9903bff0ff65209806b9d71a0607a",
+      "data_downloaded": false
+    }
+  },
+  {
+    "id": "flores-200-ur",
+    "name": "FLORES-200 — Urdu",
+    "category_task": "translation / evaluation",
+    "original_source_url": "https://huggingface.co/datasets/facebook/flores",
+    "download_url": "https://huggingface.co/datasets/facebook/flores/tree/71abf77d8b7beb5cfef59898d6b24d92ab7654fc",
+    "license": "CC-BY-SA-4.0",
+    "license_url": "https://huggingface.co/datasets/facebook/flores/blob/71abf77d8b7beb5cfef59898d6b24d92ab7654fc/README.md#licensing-information",
+    "size_record_count": null,
+    "format": "See versioned distribution file list; not independently validated",
+    "language_script": "Urdu Arabic script (font unspecified)",
+    "collection_method": "human translation",
+    "annotation_quality_notes": "No independent annotation audit performed.",
+    "known_limitations": "Gated distribution. Evaluation-only intended usage; no access requested.",
+    "pii_toxicity_notes": "Not independently screened. Treat public text, usernames and audio as potentially sensitive; no PII-free claim.",
+    "redistribution_status": "not_established",
+    "citation_bibtex": "@misc{flores-200-ur,\n  title = {FLORES-200 — Urdu},\n  howpublished = {\\url{https://huggingface.co/datasets/facebook/flores}},\n  note = {Source accessed 2026-11-17; publisher metadata citation, not an invented paper citation}\n}",
+    "date_accessed": "2026-11-17",
+    "link_check": {
+      "status": "ok",
+      "scope": "source metadata only; download and license URL checks tracked separately",
+      "date": "2026-11-17"
+    },
+    "verification_status": "unverified",
+    "hosted": false,
+    "local_path": null,
+    "version": "71abf77d8b7beb5cfef59898d6b24d92ab7654fc",
+    "verification_evidence": {
+      "metadata_url": "https://huggingface.co/api/datasets/facebook/flores",
+      "metadata_sha256": "5c2c0e8ca6204eff7e7d10876e4fe739db841592ea8088fc0c4020b0cf61ce17",
+      "card_url": "https://huggingface.co/datasets/facebook/flores/blob/71abf77d8b7beb5cfef59898d6b24d92ab7654fc/README.md",
+      "card_sha256": "614d257b248eef811a752106e228a154cb863be6caa3a24cf89248032b9f7246",
+      "data_downloaded": false
+    }
+  },
+  {
+    "id": "belebele-ur",
+    "name": "Belebele — Urdu Arabic and Latin scripts",
+    "category_task": "QA / reading comprehension / evaluation",
+    "original_source_url": "https://huggingface.co/datasets/facebook/belebele",
+    "download_url": "https://huggingface.co/datasets/facebook/belebele/tree/7899cdfa4e1e0d733fd77c848e2c273cb1d32be2",
+    "license": "CC-BY-SA-4.0",
+    "license_url": "https://github.com/facebookresearch/belebele/blob/main/LICENSE_CC-BY-SA4.0",
+    "size_record_count": {
+      "value": 1800,
+      "unit": "Urdu question rows across two script variants",
+      "basis": "locally_counted",
+      "scope": "900 urd_Arab + 900 urd_Latn at pinned version; same underlying 900 questions, not independent examples",
+      "splits": {
+        "urd_Arab": 900,
+        "urd_Latn": 900
+      }
+    },
+    "format": "JSONL",
+    "language_script": "Urdu Arabic and Roman (Latin)",
+    "collection_method": "publisher human-authored questions and translations; Romanized variant process not independently audited",
+    "annotation_quality_notes": "All 900 publisher question IDs and answer IDs align across English and both Urdu variants; no local native-speaker correctness review.",
+    "known_limitations": "Technical/source/license verification of explicitly scoped Urdu Arabic/Latin evaluation files, aligned to English; not a native annotation audit. Evaluation-only; no training or model-selection validation. FLORES passages overlap other benchmarks.",
+    "pii_toxicity_notes": "Not independently screened. Treat public text, usernames and audio as potentially sensitive; no PII-free claim.",
+    "redistribution_status": "explicitly_permitted",
+    "citation_bibtex": "@misc{belebele-ur,\n  title = {Belebele — Urdu Arabic and Latin scripts},\n  howpublished = {\\url{https://huggingface.co/datasets/facebook/belebele}},\n  note = {Source accessed 2026-11-17; publisher metadata citation, not an invented paper citation}\n}",
+    "date_accessed": "2026-11-17",
+    "link_check": {
+      "status": "ok",
+      "scope": "source metadata only; download and license URL checks tracked separately",
+      "date": "2026-11-17"
+    },
+    "verification_status": "verified",
+    "hosted": false,
+    "local_path": null,
+    "version": "7899cdfa4e1e0d733fd77c848e2c273cb1d32be2",
+    "verification_evidence": {
+      "metadata_url": "https://huggingface.co/api/datasets/facebook/belebele",
+      "metadata_sha256": "94288e1594b5610a62bda949a5477d450c23f6e5f5c29f514cfd6a023ef7de24",
+      "card_url": "https://huggingface.co/datasets/facebook/belebele/blob/7899cdfa4e1e0d733fd77c848e2c273cb1d32be2/README.md",
+      "card_sha256": "311c1a2dc30595eb6c7788c0c20548ea00169eef93dc5b0436c7ccdacaf84231",
+      "data_downloaded": true,
+      "scope": "complete eng_Latn, urd_Arab and urd_Latn JSONL at the pinned publisher revision; other languages not checked",
+      "version": "7899cdfa4e1e0d733fd77c848e2c273cb1d32be2",
+      "files": {
+        "eng_Latn": {
+          "url": "https://huggingface.co/datasets/facebook/belebele/resolve/7899cdfa4e1e0d733fd77c848e2c273cb1d32be2/data/eng_Latn.jsonl",
+          "bytes": 836071,
+          "sha256": "15af884c2b5994fdc71199e79d553a1864b08ce1b31894aa87f6be925a064a31",
+          "records": 900
+        },
+        "urd_Arab": {
+          "url": "https://huggingface.co/datasets/facebook/belebele/resolve/7899cdfa4e1e0d733fd77c848e2c273cb1d32be2/data/urd_Arab.jsonl",
+          "bytes": 3075650,
+          "sha256": "68aa20692ec92883e0b1cfa8e4a720da1c02a773305fe6334472505152276c22",
+          "records": 900
+        },
+        "urd_Latn": {
+          "url": "https://huggingface.co/datasets/facebook/belebele/resolve/7899cdfa4e1e0d733fd77c848e2c273cb1d32be2/data/urd_Latn.jsonl",
+          "bytes": 965677,
+          "sha256": "19028cfb8e439fb66c23b6685aedf404e2a026a5586327bb096ec3ce7627fedd",
+          "records": 900
+        }
+      },
+      "aligned_question_ids": 900,
+      "checks": [
+        "UTF-8",
+        "JSONL field/type validation",
+        "dialect IDs",
+        "answer-ID domain",
+        "unique source-link+question-number IDs",
+        "all cross-language IDs and answer IDs align"
+      ],
+      "aggregate_sha256": "78a482f631bb4179efe18086f428eeb78634b70013764d6e4233dd1ca305e6ae",
+      "aggregate_order": [
+        "eng_Latn",
+        "urd_Arab",
+        "urd_Latn"
+      ],
+      "license_url": "https://github.com/facebookresearch/belebele/blob/main/LICENSE_CC-BY-SA4.0",
+      "license_sha256": "1a6412be305196953f3217ce64b4a11c502107efd0910bde13f5c654e740e86d",
+      "human_reviewed_records": 0,
+      "data_sha256": "78a482f631bb4179efe18086f428eeb78634b70013764d6e4233dd1ca305e6ae"
+    }
+  },
+  {
+    "id": "sib200-ur",
+    "name": "SIB-200 — Urdu",
+    "category_task": "text classification / evaluation",
+    "original_source_url": "https://huggingface.co/datasets/Davlan/sib200",
+    "download_url": "https://huggingface.co/datasets/Davlan/sib200/tree/38977a667f6fc264d5c26ec57a01e16db040b358",
+    "license": "CC-BY-SA-4.0",
+    "license_url": "https://huggingface.co/datasets/Davlan/sib200/blob/38977a667f6fc264d5c26ec57a01e16db040b358/README.md#licensing-information",
+    "size_record_count": null,
+    "format": "TSV",
+    "language_script": "Urdu Arabic script (font unspecified)",
+    "collection_method": "human labels over translated FLORES sentences",
+    "annotation_quality_notes": "No independent annotation audit performed.",
+    "known_limitations": "Derived from FLORES; overlaps evaluation text. License wording in body is less precise than YAML.",
+    "pii_toxicity_notes": "Not independently screened. Treat public text, usernames and audio as potentially sensitive; no PII-free claim.",
+    "redistribution_status": "not_established",
+    "citation_bibtex": "@misc{sib200-ur,\n  title = {SIB-200 — Urdu},\n  howpublished = {\\url{https://huggingface.co/datasets/Davlan/sib200}},\n  note = {Source accessed 2026-11-17; publisher metadata citation, not an invented paper citation}\n}",
+    "date_accessed": "2026-11-17",
+    "link_check": {
+      "status": "ok",
+      "scope": "source metadata only; download and license URL checks tracked separately",
+      "date": "2026-11-17"
+    },
+    "verification_status": "unverified",
+    "hosted": false,
+    "local_path": null,
+    "version": "38977a667f6fc264d5c26ec57a01e16db040b358",
+    "verification_evidence": {
+      "metadata_url": "https://huggingface.co/api/datasets/Davlan/sib200",
+      "metadata_sha256": "e1404beb1f7fe8c20fb71bd43225a7260259b1bf8308fe4f9752ca669e919c04",
+      "card_url": "https://huggingface.co/datasets/Davlan/sib200/blob/38977a667f6fc264d5c26ec57a01e16db040b358/README.md",
+      "card_sha256": "73afd1b67ee71b07e28d52b52374de8bf40f884dd6a475be8fde20821cae1838",
+      "data_downloaded": false
+    }
+  },
+  {
+    "id": "wikiann-ur",
+    "name": "WikiANN — Urdu",
+    "category_task": "NER",
+    "original_source_url": "https://huggingface.co/datasets/unimelb-nlp/wikiann",
+    "download_url": "https://huggingface.co/datasets/unimelb-nlp/wikiann/tree/f0a3be6dc5564c0cc4150bb660144800a1f539d4",
+    "license": "unspecified",
+    "license_url": null,
+    "size_record_count": {
+      "value": 22000,
+      "unit": "records",
+      "basis": "source_reported",
+      "scope": "ur configuration, all splits",
+      "splits": {
+        "validation": 1000,
+        "test": 1000,
+        "train": 20000
+      }
+    },
+    "format": "See versioned distribution file list; not independently validated",
+    "language_script": "Urdu Arabic script (font unspecified)",
+    "collection_method": "automatically derived from Wikipedia",
+    "annotation_quality_notes": "No independent annotation audit performed.",
+    "known_limitations": "Distant supervision; not gold native-speaker annotation. Card license unknown.",
+    "pii_toxicity_notes": "Not independently screened. Treat public text, usernames and audio as potentially sensitive; no PII-free claim.",
+    "redistribution_status": "not_established",
+    "citation_bibtex": "@misc{wikiann-ur,\n  title = {WikiANN — Urdu},\n  howpublished = {\\url{https://huggingface.co/datasets/unimelb-nlp/wikiann}},\n  note = {Source accessed 2026-11-17; publisher metadata citation, not an invented paper citation}\n}",
+    "date_accessed": "2026-11-17",
+    "link_check": {
+      "status": "ok",
+      "scope": "source metadata only; download and license URL checks tracked separately",
+      "date": "2026-11-17"
+    },
+    "verification_status": "unverified",
+    "hosted": false,
+    "local_path": null,
+    "version": "f0a3be6dc5564c0cc4150bb660144800a1f539d4",
+    "verification_evidence": {
+      "metadata_url": "https://huggingface.co/api/datasets/unimelb-nlp/wikiann",
+      "metadata_sha256": "8904c8616a9a5d6afe32893782f69c7edcde93285d8deca948a997e5c7817f0c",
+      "card_url": "https://huggingface.co/datasets/unimelb-nlp/wikiann/blob/f0a3be6dc5564c0cc4150bb660144800a1f539d4/README.md",
+      "card_sha256": "75477d9d1890dd2845b1a83b37eaf7a345688229841314069a4b3ae6766a7929",
+      "data_downloaded": false
+    }
+  },
+  {
+    "id": "opus100-en-ur",
+    "name": "OPUS-100 — English–Urdu",
+    "category_task": "parallel translation",
+    "original_source_url": "https://huggingface.co/datasets/Helsinki-NLP/opus-100",
+    "download_url": "https://huggingface.co/datasets/Helsinki-NLP/opus-100/tree/805090dc28bf78897da9641cdf08b61287580df9",
+    "license": "unspecified",
+    "license_url": null,
+    "size_record_count": {
+      "value": 757913,
+      "unit": "records",
+      "basis": "source_reported",
+      "scope": "en-ur configuration, all splits",
+      "splits": {
+        "test": 2000,
+        "train": 753913,
+        "validation": 2000
+      }
+    },
+    "format": "See versioned distribution file list; not independently validated",
+    "language_script": "Urdu Arabic script (font unspecified)",
+    "collection_method": "aligned existing multilingual corpora",
+    "annotation_quality_notes": "No independent annotation audit performed.",
+    "known_limitations": "Mixture of OPUS sources; component rights require checking. Do not infer a blanket license.",
+    "pii_toxicity_notes": "Not independently screened. Treat public text, usernames and audio as potentially sensitive; no PII-free claim.",
+    "redistribution_status": "not_established",
+    "citation_bibtex": "@misc{opus100-en-ur,\n  title = {OPUS-100 — English–Urdu},\n  howpublished = {\\url{https://huggingface.co/datasets/Helsinki-NLP/opus-100}},\n  note = {Source accessed 2026-11-17; publisher metadata citation, not an invented paper citation}\n}",
+    "date_accessed": "2026-11-17",
+    "link_check": {
+      "status": "ok",
+      "scope": "source metadata only; download and license URL checks tracked separately",
+      "date": "2026-11-17"
+    },
+    "verification_status": "unverified",
+    "hosted": false,
+    "local_path": null,
+    "version": "805090dc28bf78897da9641cdf08b61287580df9",
+    "verification_evidence": {
+      "metadata_url": "https://huggingface.co/api/datasets/Helsinki-NLP/opus-100",
+      "metadata_sha256": "8d46b84c946a2533a3b47094ad745ecbc02e3bd30edae7f161ecae2ddf8c253d",
+      "card_url": "https://huggingface.co/datasets/Helsinki-NLP/opus-100/blob/805090dc28bf78897da9641cdf08b61287580df9/README.md",
+      "card_sha256": "cfb7a6bfe60be019014da96a8942706c0bcacf6cba1d3341904a52fe56b33684",
+      "data_downloaded": false
+    }
+  },
+  {
+    "id": "fleurs-ur-pk",
+    "name": "FLEURS — Urdu Pakistan",
+    "category_task": "ASR / speech evaluation",
+    "original_source_url": "https://huggingface.co/datasets/google/fleurs",
+    "download_url": "https://huggingface.co/datasets/google/fleurs/tree/70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+    "license": "CC-BY-4.0",
+    "license_url": "https://huggingface.co/datasets/google/fleurs/blob/70bb2e84b976b7e960aa89f1c648e09c59f894dd/README.md#licensing-information",
+    "size_record_count": {
+      "value": 2675,
+      "unit": "records",
+      "basis": "source_reported",
+      "scope": "ur_pk configuration, all splits",
+      "splits": {
+        "train": 2109,
+        "validation": 267,
+        "test": 299
+      }
+    },
+    "format": "TSV / WAV archives / Parquet",
+    "language_script": "Urdu Arabic script (font unspecified)",
+    "collection_method": "human read speech from translated prompts",
+    "annotation_quality_notes": "No independent annotation audit performed.",
+    "known_limitations": "Voice recordings can identify speakers. Complete audio not downloaded.",
+    "pii_toxicity_notes": "Not independently screened. Treat public text, usernames and audio as potentially sensitive; no PII-free claim.",
+    "redistribution_status": "not_established",
+    "citation_bibtex": "@misc{fleurs-ur-pk,\n  title = {FLEURS — Urdu Pakistan},\n  howpublished = {\\url{https://huggingface.co/datasets/google/fleurs}},\n  note = {Source accessed 2026-11-17; publisher metadata citation, not an invented paper citation}\n}",
+    "date_accessed": "2026-11-17",
+    "link_check": {
+      "status": "ok",
+      "scope": "source metadata only; download and license URL checks tracked separately",
+      "date": "2026-11-17"
+    },
+    "verification_status": "unverified",
+    "hosted": false,
+    "local_path": null,
+    "version": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+    "verification_evidence": {
+      "metadata_url": "https://huggingface.co/api/datasets/google/fleurs",
+      "metadata_sha256": "bfa270b73ec6ad5a796688e1f415656f058a632fb15cca9a599b673b304a0093",
+      "card_url": "https://huggingface.co/datasets/google/fleurs/blob/70bb2e84b976b7e960aa89f1c648e09c59f894dd/README.md",
+      "card_sha256": "688f79f2a5c731af3796e9f683eb02f9b3f09d040decd8c5625d0f37098e71c6",
+      "data_downloaded": false
+    }
+  },
+  {
+    "id": "mc4-ur",
+    "name": "mC4 — Urdu",
+    "category_task": "web corpus",
+    "original_source_url": "https://huggingface.co/datasets/allenai/c4",
+    "download_url": "https://huggingface.co/datasets/allenai/c4/tree/1588ec454efa1a09f29cd18ddd04fe05fc8653a2",
+    "license": "ODC-By-1.0",
+    "license_url": "https://huggingface.co/datasets/allenai/c4/blob/1588ec454efa1a09f29cd18ddd04fe05fc8653a2/README.md#licensing-information",
+    "size_record_count": null,
+    "format": "See versioned distribution file list; not independently validated",
+    "language_script": "Urdu Arabic script (font unspecified)",
+    "collection_method": "Common Crawl extraction and filtering",
+    "annotation_quality_notes": "No independent annotation audit performed.",
+    "known_limitations": "ODC attribution metadata does not clear rights in every crawled document.",
+    "pii_toxicity_notes": "Not independently screened. Treat public text, usernames and audio as potentially sensitive; no PII-free claim.",
+    "redistribution_status": "not_established",
+    "citation_bibtex": "@misc{mc4-ur,\n  title = {mC4 — Urdu},\n  howpublished = {\\url{https://huggingface.co/datasets/allenai/c4}},\n  note = {Source accessed 2026-11-17; publisher metadata citation, not an invented paper citation}\n}",
+    "date_accessed": "2026-11-17",
+    "link_check": {
+      "status": "ok",
+      "scope": "source metadata only; download and license URL checks tracked separately",
+      "date": "2026-11-17"
+    },
+    "verification_status": "unverified",
+    "hosted": false,
+    "local_path": null,
+    "version": "1588ec454efa1a09f29cd18ddd04fe05fc8653a2",
+    "verification_evidence": {
+      "metadata_url": "https://huggingface.co/api/datasets/allenai/c4",
+      "metadata_sha256": "24423e97efba6b14f6d250a252100845c455a2767e26622f1691b56e2a87db58",
+      "card_url": "https://huggingface.co/datasets/allenai/c4/blob/1588ec454efa1a09f29cd18ddd04fe05fc8653a2/README.md",
+      "card_sha256": "bfa4b9d8af6f9d2955d39b7cb617d580763aad7fb9024e425be60738b69ea140",
+      "data_downloaded": false
+    }
+  },
+  {
+    "id": "nllb-ur",
+    "name": "NLLB mined bitext — Urdu",
+    "category_task": "parallel translation",
+    "original_source_url": "https://huggingface.co/datasets/allenai/nllb",
+    "download_url": "https://huggingface.co/datasets/allenai/nllb/tree/c36967abb45f06ff7659849372ab41e01838193e",
+    "license": "ODC-By-1.0",
+    "license_url": "https://huggingface.co/datasets/allenai/nllb/blob/c36967abb45f06ff7659849372ab41e01838193e/README.md#licensing-information",
+    "size_record_count": null,
+    "format": "See versioned distribution file list; not independently validated",
+    "language_script": "Urdu Arabic script (font unspecified)",
+    "collection_method": "machine-mined parallel web text",
+    "annotation_quality_notes": "No independent annotation audit performed.",
+    "known_limitations": "Original-source terms also apply; automatically aligned, not human annotated. Urdu pairs not counted here.",
+    "pii_toxicity_notes": "Not independently screened. Treat public text, usernames and audio as potentially sensitive; no PII-free claim.",
+    "redistribution_status": "not_established",
+    "citation_bibtex": "@misc{nllb-ur,\n  title = {NLLB mined bitext — Urdu},\n  howpublished = {\\url{https://huggingface.co/datasets/allenai/nllb}},\n  note = {Source accessed 2026-11-17; publisher metadata citation, not an invented paper citation}\n}",
+    "date_accessed": "2026-11-17",
+    "link_check": {
+      "status": "ok",
+      "scope": "source metadata only; download and license URL checks tracked separately",
+      "date": "2026-11-17"
+    },
+    "verification_status": "unverified",
+    "hosted": false,
+    "local_path": null,
+    "version": "c36967abb45f06ff7659849372ab41e01838193e",
+    "verification_evidence": {
+      "metadata_url": "https://huggingface.co/api/datasets/allenai/nllb",
+      "metadata_sha256": "fff48c19c0aacc66b00b6a2bbc98d788ab80737f830bd759512df3293b708281",
+      "card_url": "https://huggingface.co/datasets/allenai/nllb/blob/c36967abb45f06ff7659849372ab41e01838193e/README.md",
+      "card_sha256": "e759e8a8c81d5525cbbd72b6ec8898644b994114362b3aad2500b09e3a83ba0a",
+      "data_downloaded": false
+    }
+  },
+  {
+    "id": "oscar2301-ur",
+    "name": "OSCAR 23.01 — Urdu",
+    "category_task": "web corpus",
+    "original_source_url": "https://huggingface.co/datasets/oscar-corpus/OSCAR-2301",
+    "download_url": "https://huggingface.co/datasets/oscar-corpus/OSCAR-2301/tree/c2930464071faebadfb5491e2b4f99666da7a1e6",
+    "license": "CC0-1.0",
+    "license_url": "https://huggingface.co/datasets/oscar-corpus/OSCAR-2301/blob/c2930464071faebadfb5491e2b4f99666da7a1e6/README.md#licensing-information",
+    "size_record_count": {
+      "value": 887004,
+      "unit": "documents",
+      "basis": "source_reported",
+      "scope": "Urdu card table; not local count"
+    },
+    "format": "See versioned distribution file list; not independently validated",
+    "language_script": "Urdu Arabic script (font unspecified)",
+    "collection_method": "Common Crawl filtering and language identification",
+    "annotation_quality_notes": "No independent annotation audit performed.",
+    "known_limitations": "CC0 concerns packaging/metadata/annotations; underlying content rights differ. Access suspended/gated; no permission requested.",
+    "pii_toxicity_notes": "Not independently screened. Treat public text, usernames and audio as potentially sensitive; no PII-free claim.",
+    "redistribution_status": "not_established",
+    "citation_bibtex": "@misc{oscar2301-ur,\n  title = {OSCAR 23.01 — Urdu},\n  howpublished = {\\url{https://huggingface.co/datasets/oscar-corpus/OSCAR-2301}},\n  note = {Source accessed 2026-11-17; publisher metadata citation, not an invented paper citation}\n}",
+    "date_accessed": "2026-11-17",
+    "link_check": {
+      "status": "ok",
+      "scope": "source metadata only; download and license URL checks tracked separately",
+      "date": "2026-11-17"
+    },
+    "verification_status": "unverified",
+    "hosted": false,
+    "local_path": null,
+    "version": "c2930464071faebadfb5491e2b4f99666da7a1e6",
+    "verification_evidence": {
+      "metadata_url": "https://huggingface.co/api/datasets/oscar-corpus/OSCAR-2301",
+      "metadata_sha256": "b8cfbe408982c4455545151d7186b59ceb53e656046efa93c95c5cd860a24ba3",
+      "card_url": "https://huggingface.co/datasets/oscar-corpus/OSCAR-2301/blob/c2930464071faebadfb5491e2b4f99666da7a1e6/README.md",
+      "card_sha256": "d41d12315815aad3e62f2c885c83b3f33e73a631ec1d08821a041f4efca7193d",
+      "data_downloaded": false
+    }
+  },
+  {
+    "id": "cc100-ur",
+    "name": "CC-100 — Urdu",
+    "category_task": "web corpus",
+    "original_source_url": "https://huggingface.co/datasets/statmt/cc100",
+    "download_url": "https://huggingface.co/datasets/statmt/cc100/tree/8c658c983d32eab9170d77d416252cfaa0c23e96",
+    "license": "unspecified",
+    "license_url": null,
+    "size_record_count": null,
+    "format": "See versioned distribution file list; not independently validated",
+    "language_script": "Urdu Arabic script (font unspecified)",
+    "collection_method": "Common Crawl filtering",
+    "annotation_quality_notes": "No independent annotation audit performed.",
+    "known_limitations": "Unspecified underlying rights and potential language-ID errors.",
+    "pii_toxicity_notes": "Not independently screened. Treat public text, usernames and audio as potentially sensitive; no PII-free claim.",
+    "redistribution_status": "not_established",
+    "citation_bibtex": "@misc{cc100-ur,\n  title = {CC-100 — Urdu},\n  howpublished = {\\url{https://huggingface.co/datasets/statmt/cc100}},\n  note = {Source accessed 2026-11-17; publisher metadata citation, not an invented paper citation}\n}",
+    "date_accessed": "2026-11-17",
+    "link_check": {
+      "status": "ok",
+      "scope": "source metadata only; download and license URL checks tracked separately",
+      "date": "2026-11-17"
+    },
+    "verification_status": "unverified",
+    "hosted": false,
+    "local_path": null,
+    "version": "8c658c983d32eab9170d77d416252cfaa0c23e96",
+    "verification_evidence": {
+      "metadata_url": "https://huggingface.co/api/datasets/statmt/cc100",
+      "metadata_sha256": "009d9ffc53f3dfe3f495da43ced413cd90ab4c17a88f45f44d65b77b87bf22cd",
+      "card_url": "https://huggingface.co/datasets/statmt/cc100/blob/8c658c983d32eab9170d77d416252cfaa0c23e96/README.md",
+      "card_sha256": "20dbfec1b0a4cd8d11a4f4f4c808ef16222de79519fdb7bf127b9262d25ac2d3",
+      "data_downloaded": false
+    }
+  },
+  {
+    "id": "glot500-ur",
+    "name": "Glot500 — Urdu",
+    "category_task": "multilingual corpus",
+    "original_source_url": "https://huggingface.co/datasets/cis-lmu/Glot500",
+    "download_url": "https://huggingface.co/datasets/cis-lmu/Glot500/tree/f7b3e9d11a7e974ec0d021342cd8b41fd67510c1",
+    "license": "unspecified",
+    "license_url": null,
+    "size_record_count": null,
+    "format": "See versioned distribution file list; not independently validated",
+    "language_script": "Urdu Arabic script (font unspecified)",
+    "collection_method": "compiled multilingual sources",
+    "annotation_quality_notes": "No independent annotation audit performed.",
+    "known_limitations": "Component licenses differ. Do not relicense the compilation as one permissive corpus.",
+    "pii_toxicity_notes": "Not independently screened. Treat public text, usernames and audio as potentially sensitive; no PII-free claim.",
+    "redistribution_status": "not_established",
+    "citation_bibtex": "@misc{glot500-ur,\n  title = {Glot500 — Urdu},\n  howpublished = {\\url{https://huggingface.co/datasets/cis-lmu/Glot500}},\n  note = {Source accessed 2026-11-17; publisher metadata citation, not an invented paper citation}\n}",
+    "date_accessed": "2026-11-17",
+    "link_check": {
+      "status": "ok",
+      "scope": "source metadata only; download and license URL checks tracked separately",
+      "date": "2026-11-17"
+    },
+    "verification_status": "unverified",
+    "hosted": false,
+    "local_path": null,
+    "version": "f7b3e9d11a7e974ec0d021342cd8b41fd67510c1",
+    "verification_evidence": {
+      "metadata_url": "https://huggingface.co/api/datasets/cis-lmu/Glot500",
+      "metadata_sha256": "592fa66654c1de6d2e650b3541d575495bacbf89948e3d48282170b9c5aaef18",
+      "card_url": "https://huggingface.co/datasets/cis-lmu/Glot500/blob/f7b3e9d11a7e974ec0d021342cd8b41fd67510c1/README.md",
+      "card_sha256": "d9c58c3ceed722754ad5ef564969f17fa2838c4983c9a8ab7c9ab4df570a7b7a",
+      "data_downloaded": false
+    }
+  },
+  {
+    "id": "aya-human-ur",
+    "name": "Aya Dataset — Urdu",
+    "category_task": "instruction / conversation",
+    "original_source_url": "https://huggingface.co/datasets/CohereLabs/aya_dataset",
+    "download_url": "https://huggingface.co/datasets/CohereLabs/aya_dataset/tree/f9ea04583f02a8f86404ff6c58bf75fe637df8a2",
+    "license": "Apache-2.0",
+    "license_url": "https://huggingface.co/datasets/CohereLabs/aya_dataset/blob/f9ea04583f02a8f86404ff6c58bf75fe637df8a2/README.md#licensing-information",
+    "size_record_count": null,
+    "format": "See versioned distribution file list; not independently validated",
+    "language_script": "Urdu Arabic script (font unspecified)",
+    "collection_method": "crowd human writing and human edits of generated prompts",
+    "annotation_quality_notes": "No independent annotation audit performed.",
+    "known_limitations": "Not uniformly originally human-authored. Contains annotator IDs and demographic metadata; language imbalance.",
+    "pii_toxicity_notes": "Not independently screened. Treat public text, usernames and audio as potentially sensitive; no PII-free claim.",
+    "redistribution_status": "not_established",
+    "citation_bibtex": "@misc{aya-human-ur,\n  title = {Aya Dataset — Urdu},\n  howpublished = {\\url{https://huggingface.co/datasets/CohereLabs/aya_dataset}},\n  note = {Source accessed 2026-11-17; publisher metadata citation, not an invented paper citation}\n}",
+    "date_accessed": "2026-11-17",
+    "link_check": {
+      "status": "ok",
+      "scope": "source metadata only; download and license URL checks tracked separately",
+      "date": "2026-11-17"
+    },
+    "verification_status": "unverified",
+    "hosted": false,
+    "local_path": null,
+    "version": "f9ea04583f02a8f86404ff6c58bf75fe637df8a2",
+    "verification_evidence": {
+      "metadata_url": "https://huggingface.co/api/datasets/CohereLabs/aya_dataset",
+      "metadata_sha256": "d74192f7a71d000c1441eae33216d54a0740d15d7d4b2167f54ca5a9089de081",
+      "card_url": "https://huggingface.co/datasets/CohereLabs/aya_dataset/blob/f9ea04583f02a8f86404ff6c58bf75fe637df8a2/README.md",
+      "card_sha256": "3ac54f63eec84100c155571945da01c7c18cd8ec97ea94639e2b94a6860e8573",
+      "data_downloaded": false
+    }
+  },
+  {
+    "id": "aya-collection-ur",
+    "name": "Aya Collection — Urdu",
+    "category_task": "instruction / conversation",
+    "original_source_url": "https://huggingface.co/datasets/CohereLabs/aya_collection_language_split",
+    "download_url": "https://huggingface.co/datasets/CohereLabs/aya_collection_language_split/tree/a3af2fde4b4cb5b2775830b11244a1a20b5f004f",
+    "license": "Apache-2.0",
+    "license_url": "https://huggingface.co/datasets/CohereLabs/aya_collection_language_split/blob/a3af2fde4b4cb5b2775830b11244a1a20b5f004f/README.md#licensing-information",
+    "size_record_count": {
+      "value": 4458535,
+      "unit": "records",
+      "basis": "source_reported",
+      "scope": "urdu configuration, all splits",
+      "splits": {
+        "train": 3876197,
+        "validation": 273872,
+        "test": 308466
+      }
+    },
+    "format": "See versioned distribution file list; not independently validated",
+    "language_script": "Urdu Arabic script (font unspecified)",
+    "collection_method": "templates, machine translation and human data mixture",
+    "annotation_quality_notes": "No independent annotation audit performed.",
+    "known_limitations": "Contains Aya Dataset as a component; not independent of that catalog entry. Review component rights; never call all rows human-verified.",
+    "pii_toxicity_notes": "Not independently screened. Treat public text, usernames and audio as potentially sensitive; no PII-free claim.",
+    "redistribution_status": "not_established",
+    "citation_bibtex": "@misc{aya-collection-ur,\n  title = {Aya Collection — Urdu},\n  howpublished = {\\url{https://huggingface.co/datasets/CohereLabs/aya_collection_language_split}},\n  note = {Source accessed 2026-11-17; publisher metadata citation, not an invented paper citation}\n}",
+    "date_accessed": "2026-11-17",
+    "link_check": {
+      "status": "ok",
+      "scope": "source metadata only; download and license URL checks tracked separately",
+      "date": "2026-11-17"
+    },
+    "verification_status": "unverified",
+    "hosted": false,
+    "local_path": null,
+    "version": "a3af2fde4b4cb5b2775830b11244a1a20b5f004f",
+    "verification_evidence": {
+      "metadata_url": "https://huggingface.co/api/datasets/CohereLabs/aya_collection_language_split",
+      "metadata_sha256": "5c27e41a6cae94e4c6ed2aa8f6f0bbe73cce06e3d4cbb47e7b518402cb8648ef",
+      "card_url": "https://huggingface.co/datasets/CohereLabs/aya_collection_language_split/blob/a3af2fde4b4cb5b2775830b11244a1a20b5f004f/README.md",
+      "card_sha256": "453f2533dff0f575876bd5919e695db17f0b9c1d1b76b7d35e85ee0e9845bed1",
+      "data_downloaded": false
+    }
+  },
+  {
+    "id": "indic-sentiment-ur",
+    "name": "IndicSentiment — Urdu",
+    "category_task": "sentiment / translated text",
+    "original_source_url": "https://huggingface.co/datasets/ai4bharat/IndicSentiment",
+    "download_url": "https://huggingface.co/datasets/ai4bharat/IndicSentiment/tree/dc8f3f66886531c6897fedffca1e938a68fc5013",
+    "license": "unspecified",
+    "license_url": null,
+    "size_record_count": null,
+    "format": "See versioned distribution file list; not independently validated",
+    "language_script": "Urdu Arabic script (font unspecified)",
+    "collection_method": "translations of English reviews; exact translation pipeline not established",
+    "annotation_quality_notes": "No independent annotation audit performed.",
+    "known_limitations": "Urdu in card language list; no license established. Full Urdu file not downloaded.",
+    "pii_toxicity_notes": "Not independently screened. Treat public text, usernames and audio as potentially sensitive; no PII-free claim.",
+    "redistribution_status": "not_established",
+    "citation_bibtex": "@misc{indic-sentiment-ur,\n  title = {IndicSentiment — Urdu},\n  howpublished = {\\url{https://huggingface.co/datasets/ai4bharat/IndicSentiment}},\n  note = {Source accessed 2026-11-17; publisher metadata citation, not an invented paper citation}\n}",
+    "date_accessed": "2026-11-17",
+    "link_check": {
+      "status": "ok",
+      "scope": "source metadata only; download and license URL checks tracked separately",
+      "date": "2026-11-17"
+    },
+    "verification_status": "unverified",
+    "hosted": false,
+    "local_path": null,
+    "version": "dc8f3f66886531c6897fedffca1e938a68fc5013",
+    "verification_evidence": {
+      "metadata_url": "https://huggingface.co/api/datasets/ai4bharat/IndicSentiment",
+      "metadata_sha256": "2d636ccfe4b1d7b08aae2903236a52206d5057b7ebcc32b05152fa403a41357e",
+      "card_url": "https://huggingface.co/datasets/ai4bharat/IndicSentiment/blob/dc8f3f66886531c6897fedffca1e938a68fc5013/README.md",
+      "card_sha256": "cb2a4719f4d8fe6d0b1d8edae442511f474e0455a2a9bedd48d83b0eab185a00",
+      "data_downloaded": false
+    }
+  },
+  {
+    "id": "xlsum-ur",
+    "name": "XL-Sum — Urdu",
+    "category_task": "news / summarization",
+    "original_source_url": "https://huggingface.co/datasets/csebuetnlp/xlsum",
+    "download_url": "https://huggingface.co/datasets/csebuetnlp/xlsum/tree/30fece425f9a3866e04321773ca7a80056d55ca6",
+    "license": "CC-BY-NC-SA-4.0",
+    "license_url": "https://huggingface.co/datasets/csebuetnlp/xlsum/blob/30fece425f9a3866e04321773ca7a80056d55ca6/README.md#licensing-information",
+    "size_record_count": {
+      "value": 84581,
+      "unit": "article-summary pairs",
+      "basis": "source_reported",
+      "scope": "Urdu train+validation+test; card table"
+    },
+    "format": "See versioned distribution file list; not independently validated",
+    "language_script": "Urdu Arabic script (font unspecified)",
+    "collection_method": "BBC article-summary extraction",
+    "annotation_quality_notes": "No independent annotation audit performed.",
+    "known_limitations": "NC and research-only source conditions; news copyright remains with original holders.",
+    "pii_toxicity_notes": "Not independently screened. Treat public text, usernames and audio as potentially sensitive; no PII-free claim.",
+    "redistribution_status": "excluded_by_policy",
+    "citation_bibtex": "@misc{xlsum-ur,\n  title = {XL-Sum — Urdu},\n  howpublished = {\\url{https://huggingface.co/datasets/csebuetnlp/xlsum}},\n  note = {Source accessed 2026-11-17; publisher metadata citation, not an invented paper citation}\n}",
+    "date_accessed": "2026-11-17",
+    "link_check": {
+      "status": "ok",
+      "scope": "source metadata only; download and license URL checks tracked separately",
+      "date": "2026-11-17"
+    },
+    "verification_status": "unverified",
+    "hosted": false,
+    "local_path": null,
+    "version": "30fece425f9a3866e04321773ca7a80056d55ca6",
+    "verification_evidence": {
+      "metadata_url": "https://huggingface.co/api/datasets/csebuetnlp/xlsum",
+      "metadata_sha256": "d51f76d66b9e00ca3edad4ffaa25fc3cd88e24aaeba4b29b7281ddc758884319",
+      "card_url": "https://huggingface.co/datasets/csebuetnlp/xlsum/blob/30fece425f9a3866e04321773ca7a80056d55ca6/README.md",
+      "card_sha256": "f5bdeceb4f9ff09dd36df6456817bbc99cac67b6f68c377cb5f3fadac8aba77e",
+      "data_downloaded": false
+    }
+  },
+  {
+    "id": "makhzan",
+    "name": "Makhzan",
+    "category_task": "edited text corpus",
+    "original_source_url": "https://github.com/zeerakahmed/makhzan",
+    "download_url": "https://github.com/zeerakahmed/makhzan",
+    "license": "unspecified",
+    "license_url": "https://github.com/zeerakahmed/makhzan#license",
+    "size_record_count": {
+      "value": 6.26,
+      "unit": "million words",
+      "basis": "source_reported",
+      "scope": "repository README"
+    },
+    "format": "annotated text; see source",
+    "language_script": "Urdu Arabic script (font unspecified)",
+    "collection_method": "selected edited publications; cleaning and structural markup",
+    "annotation_quality_notes": "No independent annotation audit performed.",
+    "known_limitations": "Raw-text republication explicitly disallowed. No raw files downloaded.",
+    "pii_toxicity_notes": "Not independently screened. Treat public text, usernames and audio as potentially sensitive; no PII-free claim.",
+    "redistribution_status": "prohibited_raw_republication",
+    "citation_bibtex": "@misc{makhzan,\n  title = {Makhzan},\n  howpublished = {\\url{https://github.com/zeerakahmed/makhzan}},\n  note = {Source accessed 2026-11-17; publisher metadata citation, not an invented paper citation}\n}",
+    "date_accessed": "2026-11-17",
+    "link_check": {
+      "status": "ok",
+      "scope": "source metadata only; download and license URL checks tracked separately",
+      "date": "2026-11-17"
+    },
+    "verification_status": "unverified",
+    "hosted": false,
+    "local_path": null,
+    "version": null,
+    "verification_evidence": {
+      "source_metadata_sha256": "40da2908bb2e23f79465f4bd0d448d602891aaee34ec5f1432388e1592ac4e1b",
+      "data_downloaded": false
+    }
+  },
+  {
+    "id": "dakshina-ur",
+    "name": "Dakshina — Urdu",
+    "category_task": "vocabulary / transliteration / sentences",
+    "original_source_url": "https://github.com/google-research-datasets/dakshina",
+    "download_url": "https://storage.googleapis.com/gresearch/dakshina/dakshina_dataset_v1.0.tar",
+    "license": "CC-BY-SA-4.0",
+    "license_url": "https://github.com/google-research-datasets/dakshina#license",
+    "size_record_count": {
+      "value": 25000,
+      "unit": "native-script training word types",
+      "basis": "source_reported",
+      "scope": "Urdu training lexicon; romanization pairs can exceed word types"
+    },
+    "format": "TSV / TXT / GZIP within TAR",
+    "language_script": "Urdu Arabic and Roman (Latin)",
+    "collection_method": "human romanization of Wikipedia-derived words and sentences",
+    "annotation_quality_notes": "Upstream attestation counts and round-trip checks; no local native review.",
+    "known_limitations": "Word types differ from romanization pair counts; Wikipedia domain bias; not a dictionary of English meanings.",
+    "pii_toxicity_notes": "Not independently screened. Treat public text, usernames and audio as potentially sensitive; no PII-free claim.",
+    "redistribution_status": "explicitly_permitted",
+    "citation_bibtex": "@misc{dakshina-ur,\n  title = {Dakshina — Urdu},\n  howpublished = {\\url{https://github.com/google-research-datasets/dakshina}},\n  note = {Source accessed 2026-11-17; publisher metadata citation, not an invented paper citation}\n}",
+    "date_accessed": "2026-11-17",
+    "link_check": {
+      "status": "ok",
+      "scope": "source metadata only; download and license URL checks tracked separately",
+      "date": "2026-11-17"
+    },
+    "verification_status": "unverified",
+    "hosted": false,
+    "local_path": null,
+    "version": "1.0",
+    "verification_evidence": {
+      "data_downloaded": false,
+      "note": "Official page inspected; data not independently checked."
+    }
+  },
+  {
+    "id": "ud-urdu-udtb",
+    "name": "UD Urdu UDTB",
+    "category_task": "POS / tokenization / morphology / dependency parsing",
+    "original_source_url": "https://github.com/UniversalDependencies/UD_Urdu-UDTB",
+    "download_url": "https://github.com/UniversalDependencies/UD_Urdu-UDTB",
+    "license": "CC-BY-NC-SA-4.0",
+    "license_url": "https://github.com/UniversalDependencies/UD_Urdu-UDTB/blob/master/LICENSE.txt",
+    "size_record_count": null,
+    "format": "CoNLL-U",
+    "language_script": "Urdu Arabic script (font unspecified)",
+    "collection_method": "automatic conversion from annotated Urdu Dependency Treebank",
+    "annotation_quality_notes": "No independent annotation audit performed.",
+    "known_limitations": "Automatic conversion can introduce errors; NC license excludes hosting.",
+    "pii_toxicity_notes": "Not independently screened. Treat public text, usernames and audio as potentially sensitive; no PII-free claim.",
+    "redistribution_status": "excluded_by_policy",
+    "citation_bibtex": "@misc{ud-urdu-udtb,\n  title = {UD Urdu UDTB},\n  howpublished = {\\url{https://github.com/UniversalDependencies/UD_Urdu-UDTB}},\n  note = {Source accessed 2026-11-17; publisher metadata citation, not an invented paper citation}\n}",
+    "date_accessed": "2026-11-17",
+    "link_check": {
+      "status": "ok",
+      "scope": "source metadata only; download and license URL checks tracked separately",
+      "date": "2026-11-17"
+    },
+    "verification_status": "unverified",
+    "hosted": false,
+    "local_path": null,
+    "version": null,
+    "verification_evidence": {
+      "data_downloaded": false,
+      "note": "Official page inspected; data not independently checked."
+    }
+  },
+  {
+    "id": "uci-roman-urdu",
+    "name": "Roman Urdu Data Set",
+    "category_task": "Roman Urdu / sentiment",
+    "original_source_url": "https://archive.ics.uci.edu/dataset/458/roman+urdu+data+set",
+    "download_url": "https://archive.ics.uci.edu/static/public/458/roman+urdu+data+set.zip",
+    "license": "CC-BY-4.0",
+    "license_url": "https://archive.ics.uci.edu/dataset/458/roman+urdu+data+set#license",
+    "size_record_count": {
+      "value": 20229,
+      "unit": "parsed data rows",
+      "basis": "locally_counted",
+      "scope": "complete archive member; no header; unmodified labels",
+      "splits": {}
+    },
+    "format": "CSV",
+    "language_script": "Roman Urdu (Latin)",
+    "collection_method": "collected reviews/comments; annotation details require paper review",
+    "annotation_quality_notes": "1 out-of-domain label row(s); raw values retained in source; no corrections inferred.",
+    "known_limitations": "Complete download and row counts checked; annotation/privacy/collection-rights review incomplete. One Neative label and 7 nonempty extra-column values; actual 20229 rows versus rounded source-reported 20000.",
+    "pii_toxicity_notes": "Not independently screened. Treat public text, usernames and audio as potentially sensitive; no PII-free claim.",
+    "redistribution_status": "explicitly_permitted",
+    "citation_bibtex": "@misc{uci-roman-urdu,\n  title = {Roman Urdu Data Set},\n  howpublished = {\\url{https://archive.ics.uci.edu/dataset/458/roman+urdu+data+set}},\n  note = {Source accessed 2026-11-17; publisher metadata citation, not an invented paper citation}\n}",
+    "date_accessed": "2026-11-17",
+    "link_check": {
+      "status": "ok",
+      "scope": "source metadata only; download and license URL checks tracked separately",
+      "date": "2026-11-17"
+    },
+    "verification_status": "pending_review",
+    "hosted": false,
+    "local_path": null,
+    "version": null,
+    "verification_evidence": {
+      "data_downloaded": false,
+      "note": "Official page inspected; data not independently checked.",
+      "archive": {
+        "id": "458",
+        "url": "https://archive.ics.uci.edu/static/public/458/roman+urdu+data+set.zip",
+        "bytes": 1628491,
+        "sha256": "78e7cd1d7b0dc8e960a52c9151fc3114c70a3809111d3421581bbad931a6f5a8",
+        "members": [
+          {
+            "name": "Roman Urdu DataSet.csv",
+            "size": 1628349
+          }
+        ]
+      },
+      "member": "Roman Urdu DataSet.csv",
+      "member_sha256": "d9b54d3685b6ef691cb4a2cc0783fc189dcfa0560cca9afec1099b015c798c7c",
+      "encoding": "UTF-8 (BOM accepted)",
+      "records": 20229,
+      "row_width_counts": {
+        "3": 20229
+      },
+      "label_counts": {
+        "Positive": 6013,
+        "Neutral": 8929,
+        "Negative": 5286,
+        "Neative": 1
+      },
+      "out_of_domain_labels": 1,
+      "unexpected_third_column_rows": 7,
+      "status": "pending_review",
+      "raw_hosted": false
+    }
+  },
+  {
+    "id": "uci-rusad",
+    "name": "Roman Urdu Sentiment Analysis Dataset (RUSAD)",
+    "category_task": "Roman Urdu / sentiment",
+    "original_source_url": "https://archive.ics.uci.edu/dataset/854/roman+urdu+sentiment+analysis+dataset+(rusad)",
+    "download_url": "https://archive.ics.uci.edu/static/public/854/roman+urdu+sentiment+analysis+dataset+(rusad).zip",
+    "license": "CC-BY-4.0",
+    "license_url": "https://archive.ics.uci.edu/dataset/854/roman+urdu+sentiment+analysis+dataset+(rusad)#license",
+    "size_record_count": {
+      "value": 11000,
+      "unit": "parsed data rows",
+      "basis": "locally_counted",
+      "scope": "complete archive member; no header; unmodified labels",
+      "splits": {}
+    },
+    "format": "TSV",
+    "language_script": "Roman Urdu (Latin)",
+    "collection_method": "collected reviews/comments; annotation details require paper review",
+    "annotation_quality_notes": "1 out-of-domain label row(s); raw values retained in source; no corrections inferred.",
+    "known_limitations": "Complete download and row counts checked; annotation/privacy/collection-rights review incomplete. One blank label among 11000 rows; no correction fabricated.",
+    "pii_toxicity_notes": "Not independently screened. Treat public text, usernames and audio as potentially sensitive; no PII-free claim.",
+    "redistribution_status": "explicitly_permitted",
+    "citation_bibtex": "@misc{uci-rusad,\n  title = {Roman Urdu Sentiment Analysis Dataset (RUSAD)},\n  howpublished = {\\url{https://archive.ics.uci.edu/dataset/854/roman+urdu+sentiment+analysis+dataset+(rusad)}},\n  note = {Source accessed 2026-11-17; publisher metadata citation, not an invented paper citation}\n}",
+    "date_accessed": "2026-11-17",
+    "link_check": {
+      "status": "ok",
+      "scope": "source metadata only; download and license URL checks tracked separately",
+      "date": "2026-11-17"
+    },
+    "verification_status": "pending_review",
+    "hosted": false,
+    "local_path": null,
+    "version": null,
+    "verification_evidence": {
+      "data_downloaded": false,
+      "note": "Official page inspected; data not independently checked.",
+      "archive": {
+        "id": "854",
+        "url": "https://archive.ics.uci.edu/static/public/854/roman+urdu+sentiment+analysis+dataset+(rusad).zip",
+        "bytes": 563166,
+        "sha256": "4fe3618d9353abe27fb94414f2741b8ed634a4467cec056be4a10732ec9a0be5",
+        "members": [
+          {
+            "name": "Dataset 11000 Reviews.tsv",
+            "size": 1412124
+          }
+        ]
+      },
+      "member": "Dataset 11000 Reviews.tsv",
+      "member_sha256": "da1241192b8a39f68a8482e890120fd2fbc03aab3ae1617ee4ccd168671a4e9e",
+      "encoding": "UTF-8 (BOM accepted)",
+      "records": 11000,
+      "row_width_counts": {
+        "2": 11000
+      },
+      "label_counts": {
+        "neg": 5300,
+        " ": 1,
+        "pos": 5699
+      },
+      "out_of_domain_labels": 1,
+      "unexpected_third_column_rows": 0,
+      "status": "pending_review",
+      "raw_hosted": false
+    }
+  },
+  {
+    "id": "tatoeba-ur",
+    "name": "Tatoeba — Urdu sentences and translation links",
+    "category_task": "sentences / parallel translation",
+    "original_source_url": "https://tatoeba.org/en/downloads",
+    "download_url": "https://tatoeba.org/en/downloads",
+    "license": "CC-BY-2.0-FR",
+    "license_url": "https://en.wiki.tatoeba.org/articles/show/using-the-tatoeba-corpus",
+    "size_record_count": null,
+    "format": "TSV compressed exports",
+    "language_script": "Urdu Arabic script (font unspecified)",
+    "collection_method": "community contributed sentences and linked translations",
+    "annotation_quality_notes": "No independent annotation audit performed.",
+    "known_limitations": "Requires sentence attribution and careful link joins. Text and audio licensing differ; CC0 availability is language-dependent.",
+    "pii_toxicity_notes": "Not independently screened. Treat public text, usernames and audio as potentially sensitive; no PII-free claim.",
+    "redistribution_status": "explicitly_permitted",
+    "citation_bibtex": "@misc{tatoeba-ur,\n  title = {Tatoeba — Urdu sentences and translation links},\n  howpublished = {\\url{https://tatoeba.org/en/downloads}},\n  note = {Source accessed 2026-11-17; publisher metadata citation, not an invented paper citation}\n}",
+    "date_accessed": "2026-11-17",
+    "link_check": {
+      "status": "ok",
+      "scope": "source metadata only; download and license URL checks tracked separately",
+      "date": "2026-11-17"
+    },
+    "verification_status": "unverified",
+    "hosted": false,
+    "local_path": null,
+    "version": null,
+    "verification_evidence": {
+      "data_downloaded": false,
+      "note": "Official page inspected; data not independently checked."
+    }
+  },
+  {
+    "id": "wikipedia-ur",
+    "name": "Urdu Wikipedia dumps",
+    "category_task": "encyclopedic corpus / documents",
+    "original_source_url": "https://dumps.wikimedia.org/urwiki/",
+    "download_url": "https://dumps.wikimedia.org/urwiki/latest/",
+    "license": "unspecified",
+    "license_url": null,
+    "size_record_count": null,
+    "format": "compressed XML dumps",
+    "language_script": "Urdu Arabic script (font unspecified)",
+    "collection_method": "community editing",
+    "annotation_quality_notes": "No independent annotation audit performed.",
+    "known_limitations": "Shell GET returned 403; web fetch inspected index. Dump version, contributor attribution and content-specific terms need checking.",
+    "pii_toxicity_notes": "Not independently screened. Treat public text, usernames and audio as potentially sensitive; no PII-free claim.",
+    "redistribution_status": "not_established",
+    "citation_bibtex": "@misc{wikipedia-ur,\n  title = {Urdu Wikipedia dumps},\n  howpublished = {\\url{https://dumps.wikimedia.org/urwiki/}},\n  note = {Source accessed 2026-11-17; publisher metadata citation, not an invented paper citation}\n}",
+    "date_accessed": "2026-11-17",
+    "link_check": {
+      "status": "partial",
+      "scope": "source metadata only; download and license URL checks tracked separately",
+      "date": "2026-11-17"
+    },
+    "verification_status": "unverified",
+    "hosted": false,
+    "local_path": null,
+    "version": null,
+    "verification_evidence": {
+      "data_downloaded": false,
+      "note": "Official page inspected; data not independently checked."
+    }
+  },
+  {
+    "id": "commonvoice-27-ur",
+    "name": "Common Voice Scripted Speech 27.0 — Urdu",
+    "category_task": "ASR / speech",
+    "original_source_url": "https://mozilladatacollective.com/datasets/cmu5x1w3400cyo107st8cgsoq",
+    "download_url": null,
+    "license": "CC0-1.0",
+    "license_url": "https://mozilladatacollective.com/datasets/cmu5x1w3400cyo107st8cgsoq",
+    "size_record_count": null,
+    "format": "MP3 / metadata",
+    "language_script": "Urdu Arabic script (font unspecified)",
+    "collection_method": "crowd read speech and validation",
+    "annotation_quality_notes": "No independent annotation audit performed.",
+    "known_limitations": "Official search/page evidence only; shell GET 403. Current access/download conditions not checked. No request for permissions made.",
+    "pii_toxicity_notes": "Not independently screened. Treat public text, usernames and audio as potentially sensitive; no PII-free claim.",
+    "redistribution_status": "not_established",
+    "citation_bibtex": "@misc{commonvoice-27-ur,\n  title = {Common Voice Scripted Speech 27.0 — Urdu},\n  howpublished = {\\url{https://mozilladatacollective.com/datasets/cmu5x1w3400cyo107st8cgsoq}},\n  note = {Source accessed 2026-11-17; publisher metadata citation, not an invented paper citation}\n}",
+    "date_accessed": "2026-11-17",
+    "link_check": {
+      "status": "partial",
+      "scope": "source metadata only; download and license URL checks tracked separately",
+      "date": "2026-11-17"
+    },
+    "verification_status": "unverified",
+    "hosted": false,
+    "local_path": null,
+    "version": "27.0",
+    "verification_evidence": {
+      "data_downloaded": false,
+      "note": "Official page inspected; data not independently checked."
+    }
+  },
+  {
+    "id": "fasttext-ur",
+    "name": "fastText Common Crawl/Wikipedia — Urdu vectors",
+    "category_task": "pretrained embeddings (catalog only)",
+    "original_source_url": "https://fasttext.cc/docs/en/crawl-vectors.html",
+    "download_url": null,
+    "license": "CC-BY-SA-3.0",
+    "license_url": "https://fasttext.cc/docs/en/crawl-vectors.html#license",
+    "size_record_count": null,
+    "format": "binary / text vectors",
+    "language_script": "Urdu Arabic script (font unspecified)",
+    "collection_method": "pretrained on Common Crawl and Wikipedia; no training done here",
+    "annotation_quality_notes": "No independent annotation audit performed.",
+    "known_limitations": "Not a raw language dataset. Shell GET 403; official web search inspected license and Urdu availability. Do not host pretrained artifacts.",
+    "pii_toxicity_notes": "Not independently screened. Treat public text, usernames and audio as potentially sensitive; no PII-free claim.",
+    "redistribution_status": "catalog_only_by_scope",
+    "citation_bibtex": "@misc{fasttext-ur,\n  title = {fastText Common Crawl/Wikipedia — Urdu vectors},\n  howpublished = {\\url{https://fasttext.cc/docs/en/crawl-vectors.html}},\n  note = {Source accessed 2026-11-17; publisher metadata citation, not an invented paper citation}\n}",
+    "date_accessed": "2026-11-17",
+    "link_check": {
+      "status": "partial",
+      "scope": "source metadata only; download and license URL checks tracked separately",
+      "date": "2026-11-17"
+    },
+    "verification_status": "unverified",
+    "hosted": false,
+    "local_path": null,
+    "version": null,
+    "verification_evidence": {
+      "data_downloaded": false,
+      "note": "Official page inspected; data not independently checked."
+    }
+  },
+  {
+    "id": "ldc-arl-urdu",
+    "name": "ARL Urdu Speech Database, Training Data",
+    "category_task": "ASR / speaker metadata",
+    "original_source_url": "https://catalog.ldc.upenn.edu/LDC2007S03",
+    "download_url": null,
+    "license": "unspecified",
+    "license_url": "https://catalog.ldc.upenn.edu/LDC2007S03",
+    "size_record_count": {
+      "value": 200,
+      "unit": "speakers",
+      "basis": "source_reported",
+      "scope": "training database description"
+    },
+    "format": "PCM speech / transcripts",
+    "language_script": "Urdu Arabic script (font unspecified)",
+    "collection_method": "recorded native Urdu speakers",
+    "annotation_quality_notes": "No independent annotation audit performed.",
+    "known_limitations": "LDC agreement required; catalog-only. No licensed files downloaded.",
+    "pii_toxicity_notes": "Not independently screened. Treat public text, usernames and audio as potentially sensitive; no PII-free claim.",
+    "redistribution_status": "restricted_terms",
+    "citation_bibtex": "@misc{ldc-arl-urdu,\n  title = {ARL Urdu Speech Database, Training Data},\n  howpublished = {\\url{https://catalog.ldc.upenn.edu/LDC2007S03}},\n  note = {Source accessed 2026-11-17; publisher metadata citation, not an invented paper citation}\n}",
+    "date_accessed": "2026-11-17",
+    "link_check": {
+      "status": "ok",
+      "scope": "source metadata only; download and license URL checks tracked separately",
+      "date": "2026-11-17"
+    },
+    "verification_status": "unverified",
+    "hosted": false,
+    "local_path": null,
+    "version": null,
+    "verification_evidence": {
+      "data_downloaded": false,
+      "note": "Official page inspected; data not independently checked."
+    }
+  },
+  {
+    "id": "ldc-camio",
+    "name": "CAMIO Transcription Languages",
+    "category_task": "printed OCR / document layout",
+    "original_source_url": "https://catalog.ldc.upenn.edu/LDC2022T07",
+    "download_url": null,
+    "license": "unspecified",
+    "license_url": "https://catalog.ldc.upenn.edu/LDC2022T07",
+    "size_record_count": null,
+    "format": "images / XML annotations",
+    "language_script": "Urdu Arabic script (font unspecified)",
+    "collection_method": "web collection and human annotations",
+    "annotation_quality_notes": "No independent annotation audit performed.",
+    "known_limitations": "Includes Urdu among 13 languages. Reading order and line boxes; LDC agreement required. No Urdu-specific complete count verified.",
+    "pii_toxicity_notes": "Not independently screened. Treat public text, usernames and audio as potentially sensitive; no PII-free claim.",
+    "redistribution_status": "restricted_terms",
+    "citation_bibtex": "@misc{ldc-camio,\n  title = {CAMIO Transcription Languages},\n  howpublished = {\\url{https://catalog.ldc.upenn.edu/LDC2022T07}},\n  note = {Source accessed 2026-11-17; publisher metadata citation, not an invented paper citation}\n}",
+    "date_accessed": "2026-11-17",
+    "link_check": {
+      "status": "ok",
+      "scope": "source metadata only; download and license URL checks tracked separately",
+      "date": "2026-11-17"
+    },
+    "verification_status": "unverified",
+    "hosted": false,
+    "local_path": null,
+    "version": null,
+    "verification_evidence": {
+      "data_downloaded": false,
+      "note": "Official page inspected; data not independently checked."
+    }
+  },
+  {
+    "id": "iiit-urdu-ocr",
+    "name": "IIIT-Urdu OCR",
+    "category_task": "printed Nastaliq OCR",
+    "original_source_url": "https://ilocr.iiit.ac.in/dataset/38/",
+    "download_url": "https://ilocr.iiit.ac.in/dataset/38/",
+    "license": "unspecified",
+    "license_url": null,
+    "size_record_count": {
+      "value": 1610,
+      "unit": "text-line images",
+      "basis": "source_reported",
+      "scope": "official dataset page"
+    },
+    "format": "images / transcriptions; exact distribution not checked",
+    "language_script": "Urdu Nastaliq",
+    "collection_method": "document text lines with corresponding annotations",
+    "annotation_quality_notes": "No independent annotation audit performed.",
+    "known_limitations": "License/redistribution not established. No images downloaded.",
+    "pii_toxicity_notes": "Not independently screened. Treat public text, usernames and audio as potentially sensitive; no PII-free claim.",
+    "redistribution_status": "not_established",
+    "citation_bibtex": "@misc{iiit-urdu-ocr,\n  title = {IIIT-Urdu OCR},\n  howpublished = {\\url{https://ilocr.iiit.ac.in/dataset/38/}},\n  note = {Source accessed 2026-11-17; publisher metadata citation, not an invented paper citation}\n}",
+    "date_accessed": "2026-11-17",
+    "link_check": {
+      "status": "ok",
+      "scope": "source metadata only; download and license URL checks tracked separately",
+      "date": "2026-11-17"
+    },
+    "verification_status": "unverified",
+    "hosted": false,
+    "local_path": null,
+    "version": null,
+    "verification_evidence": {
+      "data_downloaded": false,
+      "note": "Official page inspected; data not independently checked."
+    }
+  }
+]
