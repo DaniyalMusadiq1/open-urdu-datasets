@@ -53,7 +53,10 @@
       "const": "CC-BY-SA-4.0"
     },
     "review_status": {
-      "const": "unreviewed"
+      "enum": [
+        "unreviewed",
+        "verified"
+      ]
     },
     "duplicate_source_occurrences": {
       "type": "integer",

@@ -52,16 +52,11 @@
     "email_like": 1
   },
   "retained_by_type_split": {
-    "native_sentence/train": 470397,
-    "native_sentence/validation": 25207,
-    "romanization_pair/dev": 10424,
-    "romanization_pair/test": 10517,
-    "romanization_pair/train": 106260
+    "native_sentence/train": 150000
   },
-  "retained_records": 622805,
+  "retained_records": 150000,
   "whitespace_delimited_tokens_by_type": {
-    "native_sentence": 8948752,
-    "romanization_pair": 127201
+    "native_sentence": 2935498
   },
   "human_reviewed_records": 0,
   "shards": [
@@ -88,110 +83,6 @@
       "sha256": "af92bb022a5903e52b674f5be724632cee3cc84f61b6b520cb7290e9dafd67a0",
       "kind": "native_sentence",
       "split": "train"
-    },
-    {
-      "path": "data/native_sentence-train-0004.jsonl.gz",
-      "records": 50000,
-      "bytes": 5971853,
-      "sha256": "3a7ee5eb84618f55f86e7e147aa17dd03532b5462fad2ba0793288f93f18e46f",
-      "kind": "native_sentence",
-      "split": "train"
-    },
-    {
-      "path": "data/native_sentence-train-0005.jsonl.gz",
-      "records": 50000,
-      "bytes": 5326950,
-      "sha256": "53ddd427f083f1c2f435ceb7896ee7a88c965020a0f927892f5937a022b5a523",
-      "kind": "native_sentence",
-      "split": "train"
-    },
-    {
-      "path": "data/native_sentence-train-0006.jsonl.gz",
-      "records": 50000,
-      "bytes": 5501947,
-      "sha256": "ec98a02db136232cc7e0227496eae524eff6a6c76d5649b385c0b430fb6837c5",
-      "kind": "native_sentence",
-      "split": "train"
-    },
-    {
-      "path": "data/native_sentence-train-0007.jsonl.gz",
-      "records": 50000,
-      "bytes": 5466151,
-      "sha256": "944925f3d49573745efd84d7a719797a6a72979374e83afbb416722ede7b0c87",
-      "kind": "native_sentence",
-      "split": "train"
-    },
-    {
-      "path": "data/native_sentence-train-0008.jsonl.gz",
-      "records": 50000,
-      "bytes": 5884324,
-      "sha256": "88b7044044a01a8eb8779a700378b7e0215bb07aab6cfc5acb69664f08a38890",
-      "kind": "native_sentence",
-      "split": "train"
-    },
-    {
-      "path": "data/native_sentence-train-0009.jsonl.gz",
-      "records": 50000,
-      "bytes": 5921021,
-      "sha256": "cbac6457e5936d5b45e4918eeebe5e41b100fc991a2412b46ec7c97176a270ae",
-      "kind": "native_sentence",
-      "split": "train"
-    },
-    {
-      "path": "data/native_sentence-train-0010.jsonl.gz",
-      "records": 20397,
-      "bytes": 2455163,
-      "sha256": "5f4b711819a4a3628e2c0ffd0baba54ecb4dcf2dcd2aef98b54ee50391e0f2dc",
-      "kind": "native_sentence",
-      "split": "train"
-    },
-    {
-      "path": "data/native_sentence-validation-0001.jsonl.gz",
-      "records": 25207,
-      "bytes": 2893580,
-      "sha256": "2e4b7213625483a10c084341f516184c2f530bffd6cdaee3342cacf1ecef3f2a",
-      "kind": "native_sentence",
-      "split": "validation"
-    },
-    {
-      "path": "data/romanization_pair-dev-0001.jsonl.gz",
-      "records": 10424,
-      "bytes": 566216,
-      "sha256": "cfbe7b80518d76a49f7c7cf7c9ab0f9560450791c69be6ab9450783c3bd0e153",
-      "kind": "romanization_pair",
-      "split": "dev"
-    },
-    {
-      "path": "data/romanization_pair-test-0001.jsonl.gz",
-      "records": 10517,
-      "bytes": 570696,
-      "sha256": "5cd9c1bacb1f3e10f03ecc7a819653b5c0998252d9cc32863faba195b0e39b92",
-      "kind": "romanization_pair",
-      "split": "test"
-    },
-    {
-      "path": "data/romanization_pair-train-0001.jsonl.gz",
-      "records": 50000,
-      "bytes": 2672156,
-      "sha256": "89e7a0d36a75a80ecda540776b1d890c9f520392d5b01b40b183e51a6b411624",
-      "kind": "romanization_pair",
-      "split": "train"
-    },
-    {
-      "path": "data/romanization_pair-train-0002.jsonl.gz",
-      "records": 50000,
-      "bytes": 2669905,
-      "sha256": "af0d24845d12772ca85c41bd036c5780d0fc064d238f8dc532cbcfd0d0af583f",
-      "kind": "romanization_pair",
-      "split": "train"
-    },
-    {
-      "path": "data/romanization_pair-train-0003.jsonl.gz",
-      "records": 6260,
-      "bytes": 336593,
-      "sha256": "fc0ba38fc35a377fdcd03206facf089c0a970f189456121a81fe7afefa9477a6",
-      "kind": "romanization_pair",
-      "split": "train"
     }
   ],
   "notes": [
@@ -199,6 +90,9 @@
     "Exact duplicates removed globally within each record type; first source retained.",
     "Validation processed before training to retain cross-split duplicates in validation.",
     "Contact/credential-like pattern filtering is limited triage, not a privacy guarantee.",
-    "Word counts are whitespace-delimited tokens, not model tokens or unique words."
-  ]
+    "Word counts are whitespace-delimited tokens, not model tokens or unique words.",
+    "Only the first three native training shards are published (150000 records). The other 13 full-build shards are absent; full-build-manifest.json is historical build metadata, not an available-data claim."
+  ],
+  "publication_status": "partial",
+  "full_build_manifest": "full-build-manifest.json"
 }

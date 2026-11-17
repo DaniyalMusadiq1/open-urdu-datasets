@@ -2,7 +2,7 @@ name: Bulk data validation
 on:
   pull_request:
   push:
-    branches: [main, data/million-word-urdu]
+    branches: [main]
 permissions:
   contents: read
 jobs:

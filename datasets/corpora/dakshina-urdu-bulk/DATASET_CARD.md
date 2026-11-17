@@ -10,15 +10,13 @@ pretty_name: Dakshina Urdu native text and word romanizations, deduplicated
 
 # Dakshina Urdu native text and word romanizations
 
-**622,805 real, technically validated, locally unreviewed records** from explicitly licensed publisher files. This is not millions of records. Native text contains **8,948,752 whitespace-delimited tokens** (not model tokens, unique words or native-reviewed words).
+**150,000 published native training records**, containing **2,935,498 whitespace-delimited tokens**, in three compressed files (17,762,005 bytes). All are locally unreviewed.
 
-| Record type | Split | Retained records |
+Only the first three training files of a previous 16-file build were uploaded. The other 13 files, including all bulk romanization and validation records, are absent. `manifest.json` counts the published subset; `full-build-manifest.json` preserves the earlier build metadata and must not be treated as available data.
+
+| Record type | Split | Published records |
 |---|---|---:|
-| native_sentence | train | 470,397 |
-| native_sentence | validation | 25,207 |
-| romanization_pair | dev | 10,424 |
-| romanization_pair | test | 10,517 |
-| romanization_pair | train | 106,260 |
+| native_sentence | train | 150,000 |
 
 ## Fields and provenance
 
@@ -26,7 +24,7 @@ pretty_name: Dakshina Urdu native text and word romanizations, deduplicated
 
 ## Quality and limitations
 
-Source candidates: 533,027 publisher-included native text rows and 127,201 romanization pairs. Removed 37,422 exact duplicate native rows, including 10,975 duplicates across train/validation; one email-like row was excluded. Retained native text: 495,604 units. Shards: 16; compressed total 63,998,560 bytes; largest 6,037,940 bytes. Every shard is below 20 MB and GitHub's 100 MB file limit. No Git LFS.
+The published subset retains the earlier importer's exact deduplication and contact-pattern filtering. Whole-build source counts and exclusion totals are historical metadata; they are not subset counts. All three published files match their recorded SHA-256 digests.
 
 The corpus is Wikipedia-domain text, not representative conversation or colloquial Urdu. Arabic-script filtering is not a guarantee of Urdu identity. Units may include headings/fragments, non-Urdu quotations, offensive or sensitive topics, historical/public names and errors. Contact-pattern screening cannot prove PII absence; no human toxicity/copyright/linguistic audit is claimed. No private records are intentionally included. All records remain `review_status: unreviewed`; source human attestations are not local native review.
 

@@ -11,4 +11,6 @@
 
 - Verified scoped Belebele publisher evaluation files, added five attributed Urdu–English evaluation passage pairs, and recorded UCI label/column anomalies without changing source data. Local suite now has 13 passing tests; no human language review is claimed.
 
-- Merged PR #1 as requested; added a deduplicated Dakshina Urdu corpus of 622,805 records and 8,948,752 native whitespace tokens, preserving source provenance and unreviewed status. Added stream validation, pattern triage, exact content identity and bulk-loading tools.
+- Merged PR #1 as requested; prepared a full Dakshina build, of which only three shards were uploaded, preserving source provenance and unreviewed status. Added stream validation, pattern triage, exact content identity and bulk-loading tools.
+
+- Audited the partial upload: corrected all published counts to 150,000 native training records and 2,935,498 whitespace tokens; preserved full-build metadata separately. Renamed the human-review status to `verified` without promoting unreviewed records.

@@ -2,7 +2,7 @@
 
 ## Outcome
 
-28 upstream resources: 2 technically verified scoped datasets, 2 pending review, 24 unverified (includes one catalog-only embeddings resource). The target of 25 verified datasets is unmet. PR #1 was merged into main at 527f9bf251e1eea529c8f1cb949906ade6ce5be6 under the maintainer’s explicit merge request. Two separately scoped CC-BY-SA-4.0 samples are hosted: 25 vocabulary records and 5 Urdu–English evaluation passage pairs. They are not independent additions to the discovery count. All 30 hosted sample records and all 622,805 bulk records are locally unreviewed. The 25-word sample overlaps the bulk lexicon, so these counts must not be summed as unique data. Human-verified record count: 0. No v0.1.0 tag or release.
+28 upstream resources: 2 technically verified scoped datasets, 2 pending review, 24 unverified (includes one catalog-only embeddings resource). The target of 25 verified datasets is unmet. PR #1 was merged into main at 527f9bf251e1eea529c8f1cb949906ade6ce5be6 under the maintainer’s explicit merge request. Two separately scoped CC-BY-SA-4.0 samples are hosted: 25 vocabulary records and 5 Urdu–English evaluation passage pairs. They are not independent additions to the discovery count. All 30 hosted sample records and all 150,000 published bulk records are locally unreviewed. The 25-word sample overlaps the bulk lexicon, so these counts must not be summed as unique data. Human-verified record count: 0. No v0.1.0 tag or release.
 
 ## Data verification actually performed
 
@@ -52,12 +52,10 @@ Labels describe publisher claims and do not clear every underlying document. The
 | ODC-By-1.0 | 2 |
 | unspecified | 10 |
 
-## Large-corpus verification update
+## Bulk publication audit, 2026-11-17
 
-Complete official Dakshina archive: 2,008,340,480 bytes, SHA-256 `83530bec211893d9df429298f42e63c350c25ad56f9f5172f85edb0575ee5b03`. This supersedes the initial range-only archive scope for the new bulk addition, not the historical sample retrieval method. Only named Urdu native-text and lexicon components are audited; other languages/components are not promoted as verified.
+The earlier branch reported a 622,805-record, 16-file local build. Only three files were uploaded. The published subset contains 150,000 native training records, 2,935,498 whitespace-delimited tokens and 17,762,005 compressed bytes. All three files match the earlier manifest's SHA-256 digests. No bulk romanization or validation files are available.
 
-Retained 622,805 records: 495,604 native text units and 127,201 romanization word pairs. Native whitespace-delimited tokens: 8,948,752. Exact native duplicate rows removed: 37,422, including 10,975 cross-split occurrences; validation was processed first to retain shared strings there. One email-like row was excluded; only a source coordinate, hash and reason are retained in the exclusion audit. Filtering is limited triage, not proof of PII absence.
+The original build manifest is preserved as `full-build-manifest.json`; the active manifest and catalog now count only the published subset. Whole-archive hashes and source statistics are evidence inherited from the previous build, not a claim that the complete archive was re-downloaded during this audit. Streaming validation checks every published record against schema, identity, duplicates, contact patterns, counts and checksums. Human-reviewed records remain zero. Link-check and native-review gaps still block v0.1.0.
 
-The 16 compressed shards total 63,998,560 bytes; largest 6,037,940 bytes, below both browser upload and GitHub file limits. They retain exact publisher text, original article/revision URLs for native units, source member/line, archive/member hashes, license and unreviewed status. The 25-record vocabulary sample overlaps the full lexicon; no unique-total claim is made by summing samples and corpus. Human-reviewed records remain zero. Dataset license is CC-BY-SA-4.0; original authors/contributors and changes are documented per dataset.
-
-Validation streams every record through its schema, content identity, duplicate rules, retained filter checks, and independently recounts words and rows. The bulk manifest records input flags, source counts, named members and every shard digest. All 622,805 local records passed the full streaming schema/identity/filter/count validation. Remote bytes are checked separately after upload before merging the bulk PR. No v0.1.0 release is made while verification and native-review gaps persist.
+The review status name `human_verified` has been replaced by `verified` in record schemas. This means recorded human review; technical catalog verification remains a separate field. No unreviewed record was promoted.

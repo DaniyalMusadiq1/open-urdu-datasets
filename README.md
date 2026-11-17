@@ -2,7 +2,7 @@
 
 A community Urdu and Roman Urdu dataset hub with provenance, license tracking and reproducible quality tools.
 
-**Unreleased draft.** 622,805 bulk records containing 8,948,752 native whitespace-delimited tokens, plus overlapping demonstration samples. 28 upstream discovery entries (including one embeddings resource), 2 technically verified scoped datasets, 2 pending-review datasets, 24 unverified resources, and two separately scoped hosted samples (25 vocabulary records + 5 evaluation passage pairs) awaiting local native-speaker review. The target of 25 verified datasets is not met. No v0.1.0 release has been published.
+**Unreleased draft.** 150,000 published bulk records containing 2,935,498 native whitespace-delimited tokens, plus overlapping demonstration samples. 28 upstream discovery entries (including one embeddings resource), 2 technically verified scoped datasets, 2 pending-review datasets, 24 unverified resources, and two separately scoped hosted samples (25 vocabulary records + 5 evaluation passage pairs) awaiting local native-speaker review. The target of 25 verified datasets is not met. No v0.1.0 release has been published.
 
 [اردو تعارف — unreviewed](README.ur.md) · [Contributing](CONTRIBUTING.md) · [Licensing and removal](docs/LICENSE_POLICY.md) · [Coverage gaps](docs/COVERAGE.md)
 
@@ -33,7 +33,7 @@ The sample's complete upstream lexicon member was downloaded from the official a
 | IndicSentiment — Urdu | sentiment / translated text | Urdu Arabic script (font unspecified) | unknown | See versioned distribution file list; not independently validated | unspecified | [source](https://huggingface.co/datasets/ai4bharat/IndicSentiment) | unverified; full data link-only |
 | XL-Sum — Urdu | news / summarization | Urdu Arabic script (font unspecified) | 84581 article-summary pairs (source_reported) | See versioned distribution file list; not independently validated | CC-BY-NC-SA-4.0 | [source](https://huggingface.co/datasets/csebuetnlp/xlsum) | unverified; full data link-only |
 | Makhzan | edited text corpus | Urdu Arabic script (font unspecified) | 6.26 million words (source_reported) | annotated text; see source | unspecified | [source](https://github.com/zeerakahmed/makhzan) | unverified; full data link-only |
-| Dakshina — Urdu native text and word romanizations (scoped) | native text corpus / vocabulary / transliteration | Urdu Arabic and Roman (Latin) | 622805 deduplicated native units and word pairs (locally_counted) | JSONL.GZ | CC-BY-SA-4.0 | [source](https://github.com/google-research-datasets/dakshina) | verified; scoped data hosted |
+| Dakshina — Urdu native text (published subset) | native text corpus | Urdu Arabic script | 150000 deduplicated native text units (locally_counted) | JSONL.GZ | CC-BY-SA-4.0 | [source](https://github.com/google-research-datasets/dakshina) | verified; scoped data hosted |
 | UD Urdu UDTB | POS / tokenization / morphology / dependency parsing | Urdu Arabic script (font unspecified) | unknown | CoNLL-U | CC-BY-NC-SA-4.0 | [source](https://github.com/UniversalDependencies/UD_Urdu-UDTB) | unverified; full data link-only |
 | Roman Urdu Data Set | Roman Urdu / sentiment | Roman Urdu (Latin) | 20229 parsed data rows (locally_counted) | CSV | CC-BY-4.0 | [source](https://archive.ics.uci.edu/dataset/458/roman+urdu+data+set) | pending_review; full data link-only |
 | Roman Urdu Sentiment Analysis Dataset (RUSAD) | Roman Urdu / sentiment | Roman Urdu (Latin) | 11000 parsed data rows (locally_counted) | TSV | CC-BY-4.0 | [source](https://archive.ics.uci.edu/dataset/854/roman+urdu+sentiment+analysis+dataset+(rusad)) | pending_review; full data link-only |
@@ -49,14 +49,11 @@ Machine-readable [JSON](catalog/datasets.json) and [typed CSV](catalog/datasets.
 
 ## Large hosted Urdu corpus
 
-**622,805 deduplicated records**, containing **8,948,752 whitespace-delimited tokens in native text**:
+**150,000 deduplicated native training records**, containing **2,935,498 whitespace-delimited tokens** in three compressed JSONL.GZ files (17,762,005 bytes).
 
-- 495,604 native Urdu text units.
-- 127,201 Urdu/Roman Urdu word pairs, with source attestations.
-- 16 compressed JSONL.GZ shards, 63,998,560 bytes total; largest 6,037,940 bytes. No LFS.
-- CC BY-SA 4.0, original article/revision provenance for native text, source member/line/hash for every record, and `review_status: unreviewed` throughout.
+This is a partial publication: 13 of the 16 files listed in the earlier full build were never uploaded. Bulk romanization pairs and the validation split are not hosted. The historical 622,805-record build is recorded separately in `full-build-manifest.json`; `manifest.json` describes only available files. Do not count missing records or tokens as published data.
 
-This is millions of **words**, not millions of records. Source duplicates were removed rather than used to inflate the count. The 25-word demonstration sample overlaps the full lexicon and must not be counted as new unique data.
+CC BY-SA 4.0 and original article/revision provenance are preserved. Every record remains `review_status: unreviewed`.
 
 [Dataset card](datasets/corpora/dakshina-urdu-bulk/DATASET_CARD.md) · [source/license attribution](datasets/corpora/dakshina-urdu-bulk/SOURCES.md) · [data shards](datasets/corpora/dakshina-urdu-bulk/data) · [manifest and counts](datasets/corpora/dakshina-urdu-bulk/manifest.json) · [streaming example](examples/bulk_loading.py)
 

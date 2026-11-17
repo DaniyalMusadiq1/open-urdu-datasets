@@ -32,3 +32,9 @@ The examples load the catalog and both hosted samples and do not fetch remote da
 Run `python examples/bulk_loading.py` to stream an example from each local compressed shard. `python scripts/validate_bulk.py` checks every bulk record against the JSON schema, source-preserving content identity, duplicate constraints, filter rules, counts and checksums. This is separate from the small sample checks. The bulk workflow runs it on GitHub.
 
 To reproduce, download the official Dakshina v1.0 archive linked in the dataset source card, then run `python scripts/import_dakshina_bulk.py ARCHIVE NEW_OUTPUT NEW_WORK.sqlite`. The importer requires the pinned complete-archive SHA-256 and refuses existing outputs. No source scraping, normalization, model generation or training is performed.
+
+## Maintainer workflow and review status
+
+Apply authorized maintenance directly on `main`; do not create task branches unless the maintainer requests one. Run the applicable validations before pushing.
+
+Record review statuses are `unreviewed` and `verified` (formerly `human_verified`). Set `verified` only after an identified human reviewer confirms the specific records; record reviewer, date and reviewed scope in the dataset documentation. Source attestations and automated checks alone do not establish human review. Catalog `verification_status` describes technical source/data verification separately.

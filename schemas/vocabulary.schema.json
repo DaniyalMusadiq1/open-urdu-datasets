@@ -76,7 +76,7 @@
     "review_status": {
       "enum": [
         "unreviewed",
-        "human_verified"
+        "verified"
       ]
     },
     "attestations": {

@@ -1,0 +1,204 @@
+{
+  "source": {
+    "url": "https://storage.googleapis.com/gresearch/dakshina/dakshina_dataset_v1.0.tar",
+    "sha256": "83530bec211893d9df429298f42e63c350c25ad56f9f5172f85edb0575ee5b03",
+    "bytes": 2008340480,
+    "version": "1.0"
+  },
+  "date_accessed": "2026-11-17",
+  "members": [
+    {
+      "member": "dakshina_dataset_v1.0/ur/native_script_wikipedia/ur.wiki-full.urls.tsv.gz",
+      "bytes": 30087592,
+      "sha256": "beb79c3f3b65da43509a47170010d7b66a2a53ff6de9dd1f6e307c009a640d8a"
+    },
+    {
+      "member": "dakshina_dataset_v1.0/ur/native_script_wikipedia/ur.wiki-filt.valid.text.sorted.tsv.gz",
+      "bytes": 1568712,
+      "sha256": "d2a44f227ac88384d746df007ebe4614f371d5877071e87246941c73ccea7dea"
+    },
+    {
+      "member": "dakshina_dataset_v1.0/ur/native_script_wikipedia/ur.wiki-filt.train.text.sorted.tsv.gz",
+      "bytes": 29533940,
+      "sha256": "0654bba881a24a07b7582b743919392162873b3cf80561e4a462ef9a12e67d0b"
+    },
+    {
+      "member": "dakshina_dataset_v1.0/ur/lexicons/ur.translit.sampled.train.tsv",
+      "bytes": 2185405,
+      "sha256": "41f4f4109e60813f578a70a75b19189acb907e800a862401b7205f6f4a51e7f2"
+    },
+    {
+      "member": "dakshina_dataset_v1.0/ur/lexicons/ur.translit.sampled.dev.tsv",
+      "bytes": 213745,
+      "sha256": "5ad67a8f4a2bdecd69c50cdd522880c6b4f5da2e35f5f29930b699bae7eb1f71"
+    },
+    {
+      "member": "dakshina_dataset_v1.0/ur/lexicons/ur.translit.sampled.test.tsv",
+      "bytes": 216098,
+      "sha256": "c57a804a5f7bf0e51486c0a8258ec41ed62ebc4612aed741e0f3bff47d703fd8"
+    }
+  ],
+  "source_counts": {
+    "attribution_pages": 749871,
+    "raw_native_rows": 825474,
+    "candidate_native_sentence": 533027,
+    "upstream_excluded_native_rows": 292447,
+    "duplicate_rows_native_sentence": 37422,
+    "cross_split_duplicates_native_sentence": 10975,
+    "excluded_rows": 1,
+    "candidate_romanization_pair": 127201
+  },
+  "exclusion_rule_hits": {
+    "email_like": 1
+  },
+  "retained_by_type_split": {
+    "native_sentence/train": 470397,
+    "native_sentence/validation": 25207,
+    "romanization_pair/dev": 10424,
+    "romanization_pair/test": 10517,
+    "romanization_pair/train": 106260
+  },
+  "retained_records": 622805,
+  "whitespace_delimited_tokens_by_type": {
+    "native_sentence": 8948752,
+    "romanization_pair": 127201
+  },
+  "human_reviewed_records": 0,
+  "shards": [
+    {
+      "path": "data/native_sentence-train-0001.jsonl.gz",
+      "records": 50000,
+      "bytes": 5808298,
+      "sha256": "3c3d70331cbf060fcef9955ccdd4677b1dcafe3d6f01cca06025c306946bf328",
+      "kind": "native_sentence",
+      "split": "train"
+    },
+    {
+      "path": "data/native_sentence-train-0002.jsonl.gz",
+      "records": 50000,
+      "bytes": 5915767,
+      "sha256": "894fc934aa88b936955c4786f8407e75313eebc24a5132c3eab271ff0c9bd8ab",
+      "kind": "native_sentence",
+      "split": "train"
+    },
+    {
+      "path": "data/native_sentence-train-0003.jsonl.gz",
+      "records": 50000,
+      "bytes": 6037940,
+      "sha256": "af92bb022a5903e52b674f5be724632cee3cc84f61b6b520cb7290e9dafd67a0",
+      "kind": "native_sentence",
+      "split": "train"
+    },
+    {
+      "path": "data/native_sentence-train-0004.jsonl.gz",
+      "records": 50000,
+      "bytes": 5971853,
+      "sha256": "3a7ee5eb84618f55f86e7e147aa17dd03532b5462fad2ba0793288f93f18e46f",
+      "kind": "native_sentence",
+      "split": "train"
+    },
+    {
+      "path": "data/native_sentence-train-0005.jsonl.gz",
+      "records": 50000,
+      "bytes": 5326950,
+      "sha256": "53ddd427f083f1c2f435ceb7896ee7a88c965020a0f927892f5937a022b5a523",
+      "kind": "native_sentence",
+      "split": "train"
+    },
+    {
+      "path": "data/native_sentence-train-0006.jsonl.gz",
+      "records": 50000,
+      "bytes": 5501947,
+      "sha256": "ec98a02db136232cc7e0227496eae524eff6a6c76d5649b385c0b430fb6837c5",
+      "kind": "native_sentence",
+      "split": "train"
+    },
+    {
+      "path": "data/native_sentence-train-0007.jsonl.gz",
+      "records": 50000,
+      "bytes": 5466151,
+      "sha256": "944925f3d49573745efd84d7a719797a6a72979374e83afbb416722ede7b0c87",
+      "kind": "native_sentence",
+      "split": "train"
+    },
+    {
+      "path": "data/native_sentence-train-0008.jsonl.gz",
+      "records": 50000,
+      "bytes": 5884324,
+      "sha256": "88b7044044a01a8eb8779a700378b7e0215bb07aab6cfc5acb69664f08a38890",
+      "kind": "native_sentence",
+      "split": "train"
+    },
+    {
+      "path": "data/native_sentence-train-0009.jsonl.gz",
+      "records": 50000,
+      "bytes": 5921021,
+      "sha256": "cbac6457e5936d5b45e4918eeebe5e41b100fc991a2412b46ec7c97176a270ae",
+      "kind": "native_sentence",
+      "split": "train"
+    },
+    {
+      "path": "data/native_sentence-train-0010.jsonl.gz",
+      "records": 20397,
+      "bytes": 2455163,
+      "sha256": "5f4b711819a4a3628e2c0ffd0baba54ecb4dcf2dcd2aef98b54ee50391e0f2dc",
+      "kind": "native_sentence",
+      "split": "train"
+    },
+    {
+      "path": "data/native_sentence-validation-0001.jsonl.gz",
+      "records": 25207,
+      "bytes": 2893580,
+      "sha256": "2e4b7213625483a10c084341f516184c2f530bffd6cdaee3342cacf1ecef3f2a",
+      "kind": "native_sentence",
+      "split": "validation"
+    },
+    {
+      "path": "data/romanization_pair-dev-0001.jsonl.gz",
+      "records": 10424,
+      "bytes": 566216,
+      "sha256": "cfbe7b80518d76a49f7c7cf7c9ab0f9560450791c69be6ab9450783c3bd0e153",
+      "kind": "romanization_pair",
+      "split": "dev"
+    },
+    {
+      "path": "data/romanization_pair-test-0001.jsonl.gz",
+      "records": 10517,
+      "bytes": 570696,
+      "sha256": "5cd9c1bacb1f3e10f03ecc7a819653b5c0998252d9cc32863faba195b0e39b92",
+      "kind": "romanization_pair",
+      "split": "test"
+    },
+    {
+      "path": "data/romanization_pair-train-0001.jsonl.gz",
+      "records": 50000,
+      "bytes": 2672156,
+      "sha256": "89e7a0d36a75a80ecda540776b1d890c9f520392d5b01b40b183e51a6b411624",
+      "kind": "romanization_pair",
+      "split": "train"
+    },
+    {
+      "path": "data/romanization_pair-train-0002.jsonl.gz",
+      "records": 50000,
+      "bytes": 2669905,
+      "sha256": "af0d24845d12772ca85c41bd036c5780d0fc064d238f8dc532cbcfd0d0af583f",
+      "kind": "romanization_pair",
+      "split": "train"
+    },
+    {
+      "path": "data/romanization_pair-train-0003.jsonl.gz",
+      "records": 6260,
+      "bytes": 336593,
+      "sha256": "fc0ba38fc35a377fdcd03206facf089c0a970f189456121a81fe7afefa9477a6",
+      "kind": "romanization_pair",
+      "split": "train"
+    }
+  ],
+  "notes": [
+    "Text copied without local Unicode normalization or translation.",
+    "Exact duplicates removed globally within each record type; first source retained.",
+    "Validation processed before training to retain cross-split duplicates in validation.",
+    "Contact/credential-like pattern filtering is limited triage, not a privacy guarantee.",
+    "Word counts are whitespace-delimited tokens, not model tokens or unique words."
+  ]
+}

@@ -708,30 +708,26 @@
   },
   {
     "id": "dakshina-ur",
-    "name": "Dakshina — Urdu native text and word romanizations (scoped)",
-    "category_task": "native text corpus / vocabulary / transliteration",
+    "name": "Dakshina — Urdu native text (published subset)",
+    "category_task": "native text corpus",
     "original_source_url": "https://github.com/google-research-datasets/dakshina",
     "download_url": "https://storage.googleapis.com/gresearch/dakshina/dakshina_dataset_v1.0.tar",
     "license": "CC-BY-SA-4.0",
     "license_url": "https://github.com/google-research-datasets/dakshina#license",
     "size_record_count": {
-      "value": 622805,
-      "unit": "deduplicated native units and word pairs",
+      "value": 150000,
+      "unit": "deduplicated native text units",
       "basis": "locally_counted",
-      "scope": "495604 native text units + 127201 romanization pairs; not unique independent sentences across corpora",
+      "scope": "First three native training shards only; 13 full-build shards are not published",
       "splits": {
-        "native_sentence/train": 470397,
-        "native_sentence/validation": 25207,
-        "romanization_pair/dev": 10424,
-        "romanization_pair/test": 10517,
-        "romanization_pair/train": 106260
+        "native_sentence/train": 150000
       }
     },
     "format": "JSONL.GZ",
-    "language_script": "Urdu Arabic and Roman (Latin)",
+    "language_script": "Urdu Arabic script",
     "collection_method": "publisher Wikipedia extraction plus human-attested word romanizations; local exact deduplication and contact-pattern filtering",
     "annotation_quality_notes": "Technical/source/license checks only. All records locally unreviewed. Upstream human attestations retained; no native-review substitution.",
-    "known_limitations": "Scoped Urdu native and lexical components; no claim about other archive components. 8948752 native whitespace tokens; Wikipedia/domain/script bias; source/near-duplicate and toxicity limitations in dataset card.",
+    "known_limitations": "Partial publication: 3 of 16 full-build shards; 2935498 native whitespace tokens; no bulk romanization pairs or validation split hosted. Wikipedia/domain/script bias and toxicity limitations apply.",
     "pii_toxicity_notes": "Not independently screened. Treat public text, usernames and audio as potentially sensitive; no PII-free claim.",
     "redistribution_status": "explicitly_permitted",
     "citation_bibtex": "@misc{dakshina-ur,\n  title = {Dakshina — Urdu},\n  howpublished = {\\url{https://github.com/google-research-datasets/dakshina}},\n  note = {Source accessed 2026-11-17; publisher metadata citation, not an invented paper citation}\n}",
@@ -750,10 +746,10 @@
       "data_sha256": "83530bec211893d9df429298f42e63c350c25ad56f9f5172f85edb0575ee5b03",
       "archive_bytes": 2008340480,
       "output_manifest": "datasets/corpora/dakshina-urdu-bulk/manifest.json",
-      "retained_records": 622805,
-      "native_whitespace_tokens": 8948752,
+      "retained_records": 150000,
+      "native_whitespace_tokens": 2935498,
       "human_reviewed_records": 0,
-      "scope": "named Urdu native text and lexicon components only"
+      "scope": "Three published native training shards only; full-build metadata retained separately"
     }
   },
   {
