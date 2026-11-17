@@ -25,4 +25,4 @@ Use `urdu-data convert input.jsonl new.csv` to create a typed CSV: every cell is
 
 `urdu-data normalize input.jsonl new.jsonl --field urdu --nfc` preserves source fields and adds an audit. See [normalization policy](NORMALIZATION.md). Fixtures in tests are synthetic Unicode sequences or English tokens, not Urdu language data.
 
-The examples use the catalog and do not fetch remote data or execute remote dataset scripts. Dataset-specific loading examples belong in dataset cards once records are cleared for hosting.
+The examples load the catalog and both hosted samples and do not fetch remote data or execute remote dataset scripts. Dataset-specific loading examples belong in dataset cards once records are cleared for hosting.

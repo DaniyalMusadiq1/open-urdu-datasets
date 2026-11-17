@@ -86,15 +86,24 @@
     "original_source_url": "https://huggingface.co/datasets/facebook/belebele",
     "download_url": "https://huggingface.co/datasets/facebook/belebele/tree/7899cdfa4e1e0d733fd77c848e2c273cb1d32be2",
     "license": "CC-BY-SA-4.0",
-    "license_url": "https://huggingface.co/datasets/facebook/belebele/blob/7899cdfa4e1e0d733fd77c848e2c273cb1d32be2/README.md#licensing-information",
-    "size_record_count": null,
+    "license_url": "https://github.com/facebookresearch/belebele/blob/main/LICENSE_CC-BY-SA4.0",
+    "size_record_count": {
+      "value": 1800,
+      "unit": "Urdu question rows across two script variants",
+      "basis": "locally_counted",
+      "scope": "900 urd_Arab + 900 urd_Latn at pinned version; same underlying 900 questions, not independent examples",
+      "splits": {
+        "urd_Arab": 900,
+        "urd_Latn": 900
+      }
+    },
     "format": "JSONL",
     "language_script": "Urdu Arabic and Roman (Latin)",
-    "collection_method": "human-authored questions and translations",
-    "annotation_quality_notes": "No independent annotation audit performed.",
-    "known_limitations": "Urdu Arabic and Romanized variants; passage rights and training-mixture licenses differ.",
+    "collection_method": "publisher human-authored questions and translations; Romanized variant process not independently audited",
+    "annotation_quality_notes": "All 900 publisher question IDs and answer IDs align across English and both Urdu variants; no local native-speaker correctness review.",
+    "known_limitations": "Technical/source/license verification of explicitly scoped Urdu Arabic/Latin evaluation files, aligned to English; not a native annotation audit. Evaluation-only; no training or model-selection validation. FLORES passages overlap other benchmarks.",
     "pii_toxicity_notes": "Not independently screened. Treat public text, usernames and audio as potentially sensitive; no PII-free claim.",
-    "redistribution_status": "not_established",
+    "redistribution_status": "explicitly_permitted",
     "citation_bibtex": "@misc{belebele-ur,\n  title = {Belebele — Urdu Arabic and Latin scripts},\n  howpublished = {\\url{https://huggingface.co/datasets/facebook/belebele}},\n  note = {Source accessed 2026-11-17; publisher metadata citation, not an invented paper citation}\n}",
     "date_accessed": "2026-11-17",
     "link_check": {
@@ -102,7 +111,7 @@
       "scope": "source metadata only; download and license URL checks tracked separately",
       "date": "2026-11-17"
     },
-    "verification_status": "unverified",
+    "verification_status": "verified",
     "hosted": false,
     "local_path": null,
     "version": "7899cdfa4e1e0d733fd77c848e2c273cb1d32be2",
@@ -111,7 +120,48 @@
       "metadata_sha256": "94288e1594b5610a62bda949a5477d450c23f6e5f5c29f514cfd6a023ef7de24",
       "card_url": "https://huggingface.co/datasets/facebook/belebele/blob/7899cdfa4e1e0d733fd77c848e2c273cb1d32be2/README.md",
       "card_sha256": "311c1a2dc30595eb6c7788c0c20548ea00169eef93dc5b0436c7ccdacaf84231",
-      "data_downloaded": false
+      "data_downloaded": true,
+      "scope": "complete eng_Latn, urd_Arab and urd_Latn JSONL at the pinned publisher revision; other languages not checked",
+      "version": "7899cdfa4e1e0d733fd77c848e2c273cb1d32be2",
+      "files": {
+        "eng_Latn": {
+          "url": "https://huggingface.co/datasets/facebook/belebele/resolve/7899cdfa4e1e0d733fd77c848e2c273cb1d32be2/data/eng_Latn.jsonl",
+          "bytes": 836071,
+          "sha256": "15af884c2b5994fdc71199e79d553a1864b08ce1b31894aa87f6be925a064a31",
+          "records": 900
+        },
+        "urd_Arab": {
+          "url": "https://huggingface.co/datasets/facebook/belebele/resolve/7899cdfa4e1e0d733fd77c848e2c273cb1d32be2/data/urd_Arab.jsonl",
+          "bytes": 3075650,
+          "sha256": "68aa20692ec92883e0b1cfa8e4a720da1c02a773305fe6334472505152276c22",
+          "records": 900
+        },
+        "urd_Latn": {
+          "url": "https://huggingface.co/datasets/facebook/belebele/resolve/7899cdfa4e1e0d733fd77c848e2c273cb1d32be2/data/urd_Latn.jsonl",
+          "bytes": 965677,
+          "sha256": "19028cfb8e439fb66c23b6685aedf404e2a026a5586327bb096ec3ce7627fedd",
+          "records": 900
+        }
+      },
+      "aligned_question_ids": 900,
+      "checks": [
+        "UTF-8",
+        "JSONL field/type validation",
+        "dialect IDs",
+        "answer-ID domain",
+        "unique source-link+question-number IDs",
+        "all cross-language IDs and answer IDs align"
+      ],
+      "aggregate_sha256": "78a482f631bb4179efe18086f428eeb78634b70013764d6e4233dd1ca305e6ae",
+      "aggregate_order": [
+        "eng_Latn",
+        "urd_Arab",
+        "urd_Latn"
+      ],
+      "license_url": "https://github.com/facebookresearch/belebele/blob/main/LICENSE_CC-BY-SA4.0",
+      "license_sha256": "1a6412be305196953f3217ce64b4a11c502107efd0910bde13f5c654e740e86d",
+      "human_reviewed_records": 0,
+      "data_sha256": "78a482f631bb4179efe18086f428eeb78634b70013764d6e4233dd1ca305e6ae"
     }
   },
   {
@@ -730,20 +780,21 @@
     "name": "Roman Urdu Data Set",
     "category_task": "Roman Urdu / sentiment",
     "original_source_url": "https://archive.ics.uci.edu/dataset/458/roman+urdu+data+set",
-    "download_url": "https://archive.ics.uci.edu/dataset/458/roman+urdu+data+set",
+    "download_url": "https://archive.ics.uci.edu/static/public/458/roman+urdu+data+set.zip",
     "license": "CC-BY-4.0",
     "license_url": "https://archive.ics.uci.edu/dataset/458/roman+urdu+data+set#license",
     "size_record_count": {
-      "value": 20000,
-      "unit": "records",
-      "basis": "source_reported",
-      "scope": "UCI metadata; rounded values may differ from downloaded file counts"
+      "value": 20229,
+      "unit": "parsed data rows",
+      "basis": "locally_counted",
+      "scope": "complete archive member; no header; unmodified labels",
+      "splits": {}
     },
-    "format": "review-label text; exact downloadable file not validated",
+    "format": "CSV",
     "language_script": "Roman Urdu (Latin)",
     "collection_method": "collected reviews/comments; annotation details require paper review",
-    "annotation_quality_notes": "No independent annotation audit performed.",
-    "known_limitations": "UCI license page checked; original collection permissions, privacy and annotation agreement not independently audited.",
+    "annotation_quality_notes": "1 out-of-domain label row(s); raw values retained in source; no corrections inferred.",
+    "known_limitations": "Complete download and row counts checked; annotation/privacy/collection-rights review incomplete. One Neative label and 7 nonempty extra-column values; actual 20229 rows versus rounded source-reported 20000.",
     "pii_toxicity_notes": "Not independently screened. Treat public text, usernames and audio as potentially sensitive; no PII-free claim.",
     "redistribution_status": "explicitly_permitted",
     "citation_bibtex": "@misc{uci-roman-urdu,\n  title = {Roman Urdu Data Set},\n  howpublished = {\\url{https://archive.ics.uci.edu/dataset/458/roman+urdu+data+set}},\n  note = {Source accessed 2026-11-17; publisher metadata citation, not an invented paper citation}\n}",
@@ -753,13 +804,42 @@
       "scope": "source metadata only; download and license URL checks tracked separately",
       "date": "2026-11-17"
     },
-    "verification_status": "unverified",
+    "verification_status": "pending_review",
     "hosted": false,
     "local_path": null,
     "version": null,
     "verification_evidence": {
       "data_downloaded": false,
-      "note": "Official page inspected; data not independently checked."
+      "note": "Official page inspected; data not independently checked.",
+      "archive": {
+        "id": "458",
+        "url": "https://archive.ics.uci.edu/static/public/458/roman+urdu+data+set.zip",
+        "bytes": 1628491,
+        "sha256": "78e7cd1d7b0dc8e960a52c9151fc3114c70a3809111d3421581bbad931a6f5a8",
+        "members": [
+          {
+            "name": "Roman Urdu DataSet.csv",
+            "size": 1628349
+          }
+        ]
+      },
+      "member": "Roman Urdu DataSet.csv",
+      "member_sha256": "d9b54d3685b6ef691cb4a2cc0783fc189dcfa0560cca9afec1099b015c798c7c",
+      "encoding": "UTF-8 (BOM accepted)",
+      "records": 20229,
+      "row_width_counts": {
+        "3": 20229
+      },
+      "label_counts": {
+        "Positive": 6013,
+        "Neutral": 8929,
+        "Negative": 5286,
+        "Neative": 1
+      },
+      "out_of_domain_labels": 1,
+      "unexpected_third_column_rows": 7,
+      "status": "pending_review",
+      "raw_hosted": false
     }
   },
   {
@@ -767,20 +847,21 @@
     "name": "Roman Urdu Sentiment Analysis Dataset (RUSAD)",
     "category_task": "Roman Urdu / sentiment",
     "original_source_url": "https://archive.ics.uci.edu/dataset/854/roman+urdu+sentiment+analysis+dataset+(rusad)",
-    "download_url": "https://archive.ics.uci.edu/dataset/854/roman+urdu+sentiment+analysis+dataset+(rusad)",
+    "download_url": "https://archive.ics.uci.edu/static/public/854/roman+urdu+sentiment+analysis+dataset+(rusad).zip",
     "license": "CC-BY-4.0",
     "license_url": "https://archive.ics.uci.edu/dataset/854/roman+urdu+sentiment+analysis+dataset+(rusad)#license",
     "size_record_count": {
       "value": 11000,
-      "unit": "records",
-      "basis": "source_reported",
-      "scope": "UCI metadata; rounded values may differ from downloaded file counts"
+      "unit": "parsed data rows",
+      "basis": "locally_counted",
+      "scope": "complete archive member; no header; unmodified labels",
+      "splits": {}
     },
-    "format": "review-label text; exact downloadable file not validated",
+    "format": "TSV",
     "language_script": "Roman Urdu (Latin)",
     "collection_method": "collected reviews/comments; annotation details require paper review",
-    "annotation_quality_notes": "No independent annotation audit performed.",
-    "known_limitations": "UCI license page checked; original collection permissions, privacy and annotation agreement not independently audited.",
+    "annotation_quality_notes": "1 out-of-domain label row(s); raw values retained in source; no corrections inferred.",
+    "known_limitations": "Complete download and row counts checked; annotation/privacy/collection-rights review incomplete. One blank label among 11000 rows; no correction fabricated.",
     "pii_toxicity_notes": "Not independently screened. Treat public text, usernames and audio as potentially sensitive; no PII-free claim.",
     "redistribution_status": "explicitly_permitted",
     "citation_bibtex": "@misc{uci-rusad,\n  title = {Roman Urdu Sentiment Analysis Dataset (RUSAD)},\n  howpublished = {\\url{https://archive.ics.uci.edu/dataset/854/roman+urdu+sentiment+analysis+dataset+(rusad)}},\n  note = {Source accessed 2026-11-17; publisher metadata citation, not an invented paper citation}\n}",
@@ -790,13 +871,41 @@
       "scope": "source metadata only; download and license URL checks tracked separately",
       "date": "2026-11-17"
     },
-    "verification_status": "unverified",
+    "verification_status": "pending_review",
     "hosted": false,
     "local_path": null,
     "version": null,
     "verification_evidence": {
       "data_downloaded": false,
-      "note": "Official page inspected; data not independently checked."
+      "note": "Official page inspected; data not independently checked.",
+      "archive": {
+        "id": "854",
+        "url": "https://archive.ics.uci.edu/static/public/854/roman+urdu+sentiment+analysis+dataset+(rusad).zip",
+        "bytes": 563166,
+        "sha256": "4fe3618d9353abe27fb94414f2741b8ed634a4467cec056be4a10732ec9a0be5",
+        "members": [
+          {
+            "name": "Dataset 11000 Reviews.tsv",
+            "size": 1412124
+          }
+        ]
+      },
+      "member": "Dataset 11000 Reviews.tsv",
+      "member_sha256": "da1241192b8a39f68a8482e890120fd2fbc03aab3ae1617ee4ccd168671a4e9e",
+      "encoding": "UTF-8 (BOM accepted)",
+      "records": 11000,
+      "row_width_counts": {
+        "2": 11000
+      },
+      "label_counts": {
+        "neg": 5300,
+        " ": 1,
+        "pos": 5699
+      },
+      "out_of_domain_labels": 1,
+      "unexpected_third_column_rows": 0,
+      "status": "pending_review",
+      "raw_hosted": false
     }
   },
   {

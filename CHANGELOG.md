@@ -8,3 +8,5 @@
 - v0.1.0 has not been tagged or released.
 
 - Applied approved README and tooling updates; 10 local tests, lint, schema/checksum validation and catalog examples passed. Dataset verification and native-review gaps remain.
+
+- Verified scoped Belebele publisher evaluation files, added five attributed Urdu–English evaluation passage pairs, and recorded UCI label/column anomalies without changing source data. Local suite now has 13 passing tests; no human language review is claimed.

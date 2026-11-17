@@ -1,6 +1,6 @@
 # Coverage and research gaps
 
-The draft contains 28 discovery entries, including one embeddings resource. It does not meet the target of 25 fully verified datasets. No upstream full dataset has been marked verified. A derived sample is tracked separately so it cannot inflate independent-dataset counts.
+The draft contains 28 discovery entries, including one embeddings resource. It does not meet the target of 25 fully verified datasets. One explicitly scoped publisher evaluation distribution (Belebele Urdu Arabic/Latin, aligned to English) is technically verified; no native annotation review is implied. Two derived samples are tracked separately so it cannot inflate independent-dataset counts.
 
 ## Sources inspected
 
@@ -31,4 +31,4 @@ Related languages are optional and are not counted as Urdu: Dakshina includes Si
 
 ## Next contributions
 
-Resolve source-specific downloads and license texts; independently count and checksum explicitly scoped distributions; review PII/toxicity and attribution; then promote status with evidence. Prioritize a native Urdu reviewer for romanizations, spellings and the Urdu README. English glosses/POS/examples need reviewed contributions with explicit licensing; they remain null in the vocabulary sample. Urdu–English pairs remain a separate unmet hosting task; no translated pairs are invented to fill it.
+Resolve source-specific downloads and license texts; independently count and checksum explicitly scoped distributions; review PII/toxicity and attribution; then promote status with evidence. Prioritize a native Urdu reviewer for romanizations, spellings and the Urdu README. English glosses/POS/examples need reviewed contributions with explicit licensing; they remain null in the vocabulary sample. Five Urdu–English publisher evaluation passage pairs are now hosted, with unreviewed/evaluation-only flags; general translation corpora still need independent verification. No translated pairs are invented.

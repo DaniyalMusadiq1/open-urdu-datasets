@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "urdu",
+    "english",
+    "source",
+    "license",
+    "review_status",
+    "usage"
+  ],
+  "properties": {
+    "urdu": {
+      "type": "string",
+      "minLength": 1
+    },
+    "english": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "original_page",
+        "question_number",
+        "version",
+        "english",
+        "urdu"
+      ],
+      "properties": {
+        "original_page": {
+          "type": "string",
+          "format": "uri"
+        },
+        "question_number": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "version": {
+          "type": "string"
+        },
+        "english": {
+          "type": "object",
+          "required": [
+            "url",
+            "line",
+            "sha256"
+          ],
+          "properties": {
+            "url": {
+              "type": "string",
+              "format": "uri"
+            },
+            "line": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          },
+          "additionalProperties": false
+        },
+        "urdu": {
+          "type": "object",
+          "required": [
+            "url",
+            "line",
+            "sha256"
+          ],
+          "properties": {
+            "url": {
+              "type": "string",
+              "format": "uri"
+            },
+            "line": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "license": {
+      "const": "CC-BY-SA-4.0"
+    },
+    "review_status": {
+      "enum": [
+        "unreviewed",
+        "human_verified"
+      ]
+    },
+    "usage": {
+      "const": "evaluation_only"
+    }
+  },
+  "additionalProperties": false
+}

@@ -13,7 +13,6 @@ def main():
     errors = validate(entries, schema)
     if errors:
         raise ValueError(errors)
-    vocab = json.loads((ROOT / "schemas/vocabulary.schema.json").read_text(encoding="utf-8"))
     count = 0
     for entry in entries:
         if entry["license"] != "CC-BY-SA-4.0" or not entry["hosted"]:
@@ -24,12 +23,19 @@ def main():
         if not folder.resolve().is_relative_to(ROOT.resolve()):
             raise ValueError("unsafe path")
         verify_checksums(folder / "checksums.sha256")
-        data_path = folder / "data/vocabulary.jsonl"
+        if entry["id"] == "dakshina-ur-sample":
+            filename, schema_name = "vocabulary.jsonl", "vocabulary.schema.json"
+        elif entry["id"] == "belebele-ur-en-eval-sample":
+            filename, schema_name = "pairs.jsonl", "evaluation-pair.schema.json"
+        else:
+            raise ValueError("unsupported hosted sample type")
+        sample_schema = json.loads((ROOT / "schemas" / schema_name).read_text(encoding="utf-8"))
+        data_path = folder / "data" / filename
         if sha256(data_path) != entry["verification_evidence"]["data_sha256"]:
             raise ValueError("sample hash mismatch")
         rows = read_records(data_path)
-        if validate(rows, vocab):
-            raise ValueError("vocabulary schema failed")
+        if validate(rows, sample_schema):
+            raise ValueError("sample schema failed")
         if len(rows) != entry["size_record_count"]["value"]:
             raise ValueError("sample count mismatch")
         if any(row["review_status"] != "unreviewed" for row in rows):
