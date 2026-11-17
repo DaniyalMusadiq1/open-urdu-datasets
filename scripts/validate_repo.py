@@ -20,6 +20,7 @@ def main():
     if decode_csv_cells(read_records(ROOT / "catalog/datasets.csv")) != rows:
         raise ValueError("catalog CSV differs from JSON")
     hosted = []
+    bulk_files = 0
     for row in rows:
         if (row["verification_status"] == "verified"
                 and not row["verification_evidence"].get("data_sha256")):
@@ -38,6 +39,7 @@ def main():
                 raise ValueError(f"missing {required}")
         verify_checksums(path / "checksums.sha256")
         hosted.extend(path.glob("data/*.jsonl"))
+        bulk_files += len(list(path.glob("data/*.jsonl.gz")))
     record_count = 0
     vocab_schema = json.loads((ROOT / "schemas/vocabulary.schema.json").read_text(encoding="utf-8"))
     for path in hosted:
@@ -51,9 +53,11 @@ def main():
             if path.is_file() and "__pycache__" not in path.parts:
                 if path.stat().st_size >= 100_000_000:
                     raise ValueError(f"file too large: {path}")
-                path.read_text(encoding="utf-8")
-    print(json.dumps({"catalog_entries": len(rows), "hosted_files": len(hosted),
-                      "hosted_records": record_count, "errors": 0}))
+                if path.suffix != ".gz":
+                    path.read_text(encoding="utf-8")
+    print(json.dumps({"catalog_entries": len(rows), "plain_jsonl_files_checked": len(hosted),
+                      "plain_jsonl_records_checked": record_count,
+                      "bulk_files_for_validate_bulk": bulk_files, "errors": 0}))
 
 
 if __name__ == "__main__":

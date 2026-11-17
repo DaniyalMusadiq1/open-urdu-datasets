@@ -26,3 +26,9 @@ Use `urdu-data convert input.jsonl new.csv` to create a typed CSV: every cell is
 `urdu-data normalize input.jsonl new.jsonl --field urdu --nfc` preserves source fields and adds an audit. See [normalization policy](NORMALIZATION.md). Fixtures in tests are synthetic Unicode sequences or English tokens, not Urdu language data.
 
 The examples load the catalog and both hosted samples and do not fetch remote data or execute remote dataset scripts. Dataset-specific loading examples belong in dataset cards once records are cleared for hosting.
+
+## Bulk corpus
+
+Run `python examples/bulk_loading.py` to stream an example from each local compressed shard. `python scripts/validate_bulk.py` checks every bulk record against the JSON schema, source-preserving content identity, duplicate constraints, filter rules, counts and checksums. This is separate from the small sample checks. The bulk workflow runs it on GitHub.
+
+To reproduce, download the official Dakshina v1.0 archive linked in the dataset source card, then run `python scripts/import_dakshina_bulk.py ARCHIVE NEW_OUTPUT NEW_WORK.sqlite`. The importer requires the pinned complete-archive SHA-256 and refuses existing outputs. No source scraping, normalization, model generation or training is performed.

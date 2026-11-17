@@ -1,6 +1,6 @@
 # Coverage and research gaps
 
-The draft contains 28 discovery entries, including one embeddings resource. It does not meet the target of 25 fully verified datasets. One explicitly scoped publisher evaluation distribution (Belebele Urdu Arabic/Latin, aligned to English) is technically verified; no native annotation review is implied. Two derived samples are tracked separately so it cannot inflate independent-dataset counts.
+The draft contains 28 discovery entries, including one embeddings resource. It does not meet the target of 25 fully verified datasets. Two explicitly scoped distributions are technically verified: Belebele Urdu Arabic/Latin aligned to English, and Dakshina Urdu native text/word romanizations; no native annotation review is implied. Two derived samples are tracked separately so it cannot inflate independent-dataset counts.
 
 ## Sources inspected
 
@@ -32,3 +32,7 @@ Related languages are optional and are not counted as Urdu: Dakshina includes Si
 ## Next contributions
 
 Resolve source-specific downloads and license texts; independently count and checksum explicitly scoped distributions; review PII/toxicity and attribution; then promote status with evidence. Prioritize a native Urdu reviewer for romanizations, spellings and the Urdu README. English glosses/POS/examples need reviewed contributions with explicit licensing; they remain null in the vocabulary sample. Five Urdu–English publisher evaluation passage pairs are now hosted, with unreviewed/evaluation-only flags; general translation corpora still need independent verification. No translated pairs are invented.
+
+## Scale and rejected high-volume shortcuts
+
+The bulk addition contains 622,805 deduplicated records and 8,948,752 native whitespace-delimited tokens. It is not millions of records. Full archive bytes, member hashes, article/revision citations and output manifests were checked. All language records remain locally unreviewed. UrMonoCorp's official page (https://ufal.mff.cuni.cz/node/998) advertises 5.4 million sentences but limits use to non-commercial research; its raw text was excluded under project policy. Wikipedia's 20231101 Urdu publisher subset metadata reports 200,154 articles, not millions of articles; it was not imported here. Large web and mixed-license instruction corpora were not copied to satisfy a numerical target.

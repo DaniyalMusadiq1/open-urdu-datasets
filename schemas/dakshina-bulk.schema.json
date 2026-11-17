@@ -1,0 +1,208 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "id",
+    "record_type",
+    "split",
+    "text",
+    "roman",
+    "attestations",
+    "license",
+    "review_status",
+    "duplicate_source_occurrences",
+    "source"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "record_type": {
+      "enum": [
+        "native_sentence",
+        "romanization_pair"
+      ]
+    },
+    "split": {
+      "enum": [
+        "train",
+        "validation",
+        "dev",
+        "test"
+      ]
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "roman": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "attestations": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1
+    },
+    "license": {
+      "const": "CC-BY-SA-4.0"
+    },
+    "review_status": {
+      "const": "unreviewed"
+    },
+    "duplicate_source_occurrences": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "archive_url",
+        "archive_sha256",
+        "member",
+        "member_sha256",
+        "line",
+        "page_id",
+        "revision_id",
+        "page_url",
+        "revision_url",
+        "section_index",
+        "string_index",
+        "sentence_index",
+        "input_frequency"
+      ],
+      "properties": {
+        "archive_url": {
+          "const": "https://storage.googleapis.com/gresearch/dakshina/dakshina_dataset_v1.0.tar"
+        },
+        "archive_sha256": {
+          "const": "83530bec211893d9df429298f42e63c350c25ad56f9f5172f85edb0575ee5b03"
+        },
+        "member": {
+          "type": "string",
+          "pattern": "^dakshina_dataset_v1[.]0/ur/"
+        },
+        "member_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "line": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "page_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "revision_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "page_url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^https?://ur[.]wikipedia[.]org/\\S+$"
+        },
+        "revision_url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^https?://ur[.]wikipedia[.]org/\\S+$"
+        },
+        "section_index": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "string_index": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "sentence_index": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "input_frequency": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "native_sentence"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "roman": {
+            "type": "null"
+          },
+          "attestations": {
+            "type": "null"
+          },
+          "source": {
+            "properties": {
+              "page_id": {
+                "type": "string",
+                "pattern": "^[0-9]+$"
+              },
+              "revision_id": {
+                "type": "string",
+                "pattern": "^[0-9]+$"
+              },
+              "page_url": {
+                "type": "string"
+              },
+              "revision_url": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "roman": {
+            "type": "string",
+            "minLength": 1
+          },
+          "attestations": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      }
+    }
+  ]
+}

@@ -2,15 +2,15 @@
 
 A community Urdu and Roman Urdu dataset hub with provenance, license tracking and reproducible quality tools.
 
-**Unreleased draft.** 28 upstream discovery entries (including one embeddings resource), 1 technically verified scoped dataset, 2 pending-review datasets, 25 unverified resources, and two separately scoped hosted samples (25 vocabulary records + 5 evaluation passage pairs) awaiting local native-speaker review. The target of 25 verified datasets is not met. No v0.1.0 release has been published.
+**Unreleased draft.** 622,805 bulk records containing 8,948,752 native whitespace-delimited tokens, plus overlapping demonstration samples. 28 upstream discovery entries (including one embeddings resource), 2 technically verified scoped datasets, 2 pending-review datasets, 24 unverified resources, and two separately scoped hosted samples (25 vocabulary records + 5 evaluation passage pairs) awaiting local native-speaker review. The target of 25 verified datasets is not met. No v0.1.0 release has been published.
 
 [اردو تعارف — unreviewed](README.ur.md) · [Contributing](CONTRIBUTING.md) · [Licensing and removal](docs/LICENSE_POLICY.md) · [Coverage gaps](docs/COVERAGE.md)
 
 ## Verification and counts
 
-An accessible source page is not data verification. Belebele’s scoped Urdu Arabic/Latin evaluation files are technically verified against the publisher version and explicit dataset license; 2 UCI downloads remain `pending_review` due to label/column anomalies, and 25 resources remain `unverified`. “Verified” does not mean native annotation review. Counts below identify source-reported versus locally-counted values, may overlap and must not be summed as unique records. Both derived samples are excluded from independent-dataset counts.
+An accessible source page is not data verification. Dakshina’s named Urdu native-text/lexicon components and Belebele’s scoped Urdu Arabic/Latin evaluation files are technically verified against the publisher version and explicit dataset license; 2 UCI downloads remain `pending_review` due to label/column anomalies, and 24 resources remain `unverified`. “Verified” does not mean native annotation review. Counts below identify source-reported versus locally-counted values, may overlap and must not be summed as unique records. Both derived samples are excluded from independent-dataset counts.
 
-The sample's complete upstream lexicon member was downloaded from the official archive: 106,260 romanization rows, 25,000 distinct native-script words. Its SHA-256 is recorded in SOURCES.md. The complete archive was not downloaded or hashed. Structure, provenance, count and sample checksum checks passed; every sample record remains `review_status: unreviewed`. English meanings, POS and examples are null, not generated.
+The sample's complete upstream lexicon member was downloaded from the official archive: 106,260 romanization rows, 25,000 distinct native-script words. Its SHA-256 is recorded in SOURCES.md. The original small sample used a byte-range retrieval; the bulk addition now has the complete official archive downloaded and SHA-256 checked. Structure, provenance, count and sample checksum checks passed; every sample record remains `review_status: unreviewed`. English meanings, POS and examples are null, not generated.
 
 ## Catalog
 
@@ -33,7 +33,7 @@ The sample's complete upstream lexicon member was downloaded from the official a
 | IndicSentiment — Urdu | sentiment / translated text | Urdu Arabic script (font unspecified) | unknown | See versioned distribution file list; not independently validated | unspecified | [source](https://huggingface.co/datasets/ai4bharat/IndicSentiment) | unverified; full data link-only |
 | XL-Sum — Urdu | news / summarization | Urdu Arabic script (font unspecified) | 84581 article-summary pairs (source_reported) | See versioned distribution file list; not independently validated | CC-BY-NC-SA-4.0 | [source](https://huggingface.co/datasets/csebuetnlp/xlsum) | unverified; full data link-only |
 | Makhzan | edited text corpus | Urdu Arabic script (font unspecified) | 6.26 million words (source_reported) | annotated text; see source | unspecified | [source](https://github.com/zeerakahmed/makhzan) | unverified; full data link-only |
-| Dakshina — Urdu | vocabulary / transliteration / sentences | Urdu Arabic and Roman (Latin) | 25000 native-script training word types (source_reported) | TSV / TXT / GZIP within TAR | CC-BY-SA-4.0 | [source](https://github.com/google-research-datasets/dakshina) | unverified; full data link-only |
+| Dakshina — Urdu native text and word romanizations (scoped) | native text corpus / vocabulary / transliteration | Urdu Arabic and Roman (Latin) | 622805 deduplicated native units and word pairs (locally_counted) | JSONL.GZ | CC-BY-SA-4.0 | [source](https://github.com/google-research-datasets/dakshina) | verified; scoped data hosted |
 | UD Urdu UDTB | POS / tokenization / morphology / dependency parsing | Urdu Arabic script (font unspecified) | unknown | CoNLL-U | CC-BY-NC-SA-4.0 | [source](https://github.com/UniversalDependencies/UD_Urdu-UDTB) | unverified; full data link-only |
 | Roman Urdu Data Set | Roman Urdu / sentiment | Roman Urdu (Latin) | 20229 parsed data rows (locally_counted) | CSV | CC-BY-4.0 | [source](https://archive.ics.uci.edu/dataset/458/roman+urdu+data+set) | pending_review; full data link-only |
 | Roman Urdu Sentiment Analysis Dataset (RUSAD) | Roman Urdu / sentiment | Roman Urdu (Latin) | 11000 parsed data rows (locally_counted) | TSV | CC-BY-4.0 | [source](https://archive.ics.uci.edu/dataset/854/roman+urdu+sentiment+analysis+dataset+(rusad)) | pending_review; full data link-only |
@@ -46,6 +46,19 @@ The sample's complete upstream lexicon member was downloaded from the official a
 | IIIT-Urdu OCR | printed Nastaliq OCR | Urdu Nastaliq | 1610 text-line images (source_reported) | images / transcriptions; exact distribution not checked | unspecified | [source](https://ilocr.iiit.ac.in/dataset/38/) | unverified; full data link-only |
 
 Machine-readable [JSON](catalog/datasets.json) and [typed CSV](catalog/datasets.csv) contain per-entry evidence and nullable unknowns. [Derived samples](catalog/hosted-samples.json) have a separate manifest so they do not inflate the upstream target.
+
+## Large hosted Urdu corpus
+
+**622,805 deduplicated records**, containing **8,948,752 whitespace-delimited tokens in native text**:
+
+- 495,604 native Urdu text units.
+- 127,201 Urdu/Roman Urdu word pairs, with source attestations.
+- 16 compressed JSONL.GZ shards, 63,998,560 bytes total; largest 6,037,940 bytes. No LFS.
+- CC BY-SA 4.0, original article/revision provenance for native text, source member/line/hash for every record, and `review_status: unreviewed` throughout.
+
+This is millions of **words**, not millions of records. Source duplicates were removed rather than used to inflate the count. The 25-word demonstration sample overlaps the full lexicon and must not be counted as new unique data.
+
+[Dataset card](datasets/corpora/dakshina-urdu-bulk/DATASET_CARD.md) · [source/license attribution](datasets/corpora/dakshina-urdu-bulk/SOURCES.md) · [data shards](datasets/corpora/dakshina-urdu-bulk/data) · [manifest and counts](datasets/corpora/dakshina-urdu-bulk/manifest.json) · [streaming example](examples/bulk_loading.py)
 
 ## Hosted samples
 
@@ -71,6 +84,6 @@ Loading examples: [plain Python](examples/plain_python.py), [pandas](examples/pa
 
 ## Rights, ethics and current limits
 
-Code and original documentation are MIT. Each dataset retains its own license; the hosted samples are CC BY-SA 4.0 with attribution and share-alike requirements. No Makhzan raw text, NC/research-only corpus, restricted source text, secrets or private records are intentionally included. Web-corpus packaging licenses do not clear all original-content rights. See the license policy for the hosting allowlist and removal process.
+Code and original documentation are MIT. Each dataset retains its own license; the hosted corpus and samples are CC BY-SA 4.0 with attribution and share-alike requirements. No Makhzan raw text, NC/research-only corpus, restricted source text, secrets or private records are intentionally included. Web-corpus packaging licenses do not clear all original-content rights. See the license policy for the hosting allowlist and removal process.
 
 No model training or unauthorized source scraping is performed. Native-speaker review is needed for the Urdu introduction, sample spellings, romanizations and future glosses. Five licensed evaluation-only Urdu–English passage pairs are hosted; broader translation coverage remains incomplete. Many task categories remain discovery gaps. Local tests, lint, schema validation and examples pass after the approved fixes. Unresolved link checks and incomplete dataset verification remain release blockers; see [the verification report](docs/VERIFICATION_REPORT.md). Source metadata is not language validation.
