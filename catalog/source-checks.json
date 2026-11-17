@@ -1,0 +1,120 @@
+{
+  "date": "2026-11-17",
+  "checks": [
+    {
+      "id": "ud-license",
+      "url": "https://raw.githubusercontent.com/UniversalDependencies/UD_Urdu-UDTB/master/LICENSE.txt",
+      "status": 200,
+      "final_url": "https://raw.githubusercontent.com/UniversalDependencies/UD_Urdu-UDTB/master/LICENSE.txt",
+      "sha256": "1bb3ff5207731c9fcbdbe64d82afbfe9d721582510d777f0f5ce5f258c36fde4",
+      "bytes": 247
+    },
+    {
+      "id": "dakshina-license",
+      "url": "https://creativecommons.org/licenses/by-sa/4.0/legalcode.txt",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "wiki-dumps",
+      "url": "https://dumps.wikimedia.org/urwiki/",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "common-voice",
+      "url": "https://mozilladatacollective.com/datasets/cmu5x1w3400cyo107st8cgsoq",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "fasttext",
+      "url": "https://fasttext.cc/docs/en/crawl-vectors.html",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "ldc-arl",
+      "url": "https://catalog.ldc.upenn.edu/LDC2007S03",
+      "status": 200,
+      "final_url": "https://catalog.ldc.upenn.edu/LDC2007S03",
+      "sha256": "138164a2739ef5ee902fb2107e0946591734c2ab7f2da29ba0c22c331ee5c1af",
+      "bytes": 21645
+    },
+    {
+      "id": "ldc-camio",
+      "url": "https://catalog.ldc.upenn.edu/LDC2022T07",
+      "status": 200,
+      "final_url": "https://catalog.ldc.upenn.edu/LDC2022T07",
+      "sha256": "5196f210fddaeaf9fe6b540f99e3730db066cdb1a4daa38eaa2cff4b7b19f851",
+      "bytes": 25742
+    },
+    {
+      "id": "iiit-ocr",
+      "url": "https://ilocr.iiit.ac.in/dataset/38/",
+      "status": 200,
+      "final_url": "https://ilocr.iiit.ac.in/dataset/38/",
+      "sha256": "192208b9cd830ee1f78f25ef23cbf152dea6660b76cce6390a14855e08aad453",
+      "bytes": 107241
+    },
+    {
+      "id": "awesome-urdu",
+      "url": "https://raw.githubusercontent.com/urduhack/awesome-urdu/master/README.md",
+      "status": 200,
+      "final_url": "https://raw.githubusercontent.com/urduhack/awesome-urdu/master/README.md",
+      "sha256": "c9154a95d8ff15e878d9d03f62cf09fb09b36353892a1a184a30d61166b02a70",
+      "bytes": 14166
+    },
+    {
+      "id": "xnli-official",
+      "url": "https://raw.githubusercontent.com/facebookresearch/XNLI/main/README.md",
+      "status": 200,
+      "final_url": "https://raw.githubusercontent.com/facebookresearch/XNLI/main/README.md",
+      "sha256": "4e86be59f176e08b11ef31b1a1224f068aa52fa10d283fca0890b1a4e2b87612",
+      "bytes": 4546
+    },
+    {
+      "id": "xnli-license",
+      "url": "https://raw.githubusercontent.com/facebookresearch/XNLI/main/LICENSE",
+      "status": 200,
+      "final_url": "https://raw.githubusercontent.com/facebookresearch/XNLI/main/LICENSE",
+      "sha256": "1d8ca66080a2701508a70be4ddad4be28c509bcc3397a682fb8edf767fdd7a00",
+      "bytes": 19332
+    },
+    {
+      "id": "belebele-official",
+      "url": "https://raw.githubusercontent.com/facebookresearch/belebele/main/README.md",
+      "status": 200,
+      "final_url": "https://raw.githubusercontent.com/facebookresearch/belebele/main/README.md",
+      "sha256": "f7a9aead9af9056c96837eeb8eafa301ec37a4512e52520f1c3d7903b69ce145",
+      "bytes": 15476
+    },
+    {
+      "id": "uci458-page",
+      "url": "https://archive.ics.uci.edu/dataset/458/roman+urdu+data+set",
+      "status": 200,
+      "final_url": "https://archive.ics.uci.edu/dataset/458/roman+urdu+data+set",
+      "sha256": "31f3688f2a17b75fc43dda85eee439392e296132cb085f62cdbf3fb81695b59d",
+      "bytes": 75659
+    },
+    {
+      "id": "uci854-page",
+      "url": "https://archive.ics.uci.edu/dataset/854/roman+urdu+sentiment+analysis+dataset+(rusad)",
+      "status": 200,
+      "final_url": "https://archive.ics.uci.edu/dataset/854/roman+urdu+sentiment+analysis+dataset+(rusad)",
+      "sha256": "5b941391b74e505b055e0d4c26b07cc7f9304dbaf5edc394a7b846ba5478c8fa",
+      "bytes": 84522
+    }
+  ],
+  "scope": "metadata HTTP GET results; not data download validation",
+  "web_only_checks": [
+    {
+      "url": "https://dumps.wikimedia.org/urwiki/",
+      "result": "index inspected through web fetch; shell 403"
+    },
+    {
+      "url": "https://mozilladatacollective.com/datasets/cmu5x1w3400cyo107st8cgsoq",
+      "result": "official search result inspected; shell 403"
+    },
+    {
+      "url": "https://fasttext.cc/docs/en/crawl-vectors.html",
+      "result": "official web result inspected; shell 403"
+    }
+  ]
+}

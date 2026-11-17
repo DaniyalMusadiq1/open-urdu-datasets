@@ -1,0 +1,15 @@
+{
+  "url": "https://storage.googleapis.com/gresearch/dakshina/dakshina_dataset_v1.0.tar",
+  "etag": "\"a560868b1d6702602c4ea4e83794fa26\"",
+  "range": [
+    1831772672,
+    1833958076
+  ],
+  "member": "dakshina_dataset_v1.0/ur/lexicons/ur.translit.sampled.train.tsv",
+  "bytes": 2185405,
+  "sha256": "41f4f4109e60813f578a70a75b19189acb907e800a862401b7205f6f4a51e7f2",
+  "records": 106260,
+  "distinct_word_types": 25000,
+  "sample_records": 25,
+  "reviewed_records": 0
+}

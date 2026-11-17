@@ -1,0 +1,19 @@
+name: Dataset suggestion
+description: Propose a dataset with provenance and license evidence
+body:
+  - type: textarea
+    id: source
+    attributes:
+      label: Original source, version, language and task
+    validations:
+      required: true
+  - type: textarea
+    id: license
+    attributes:
+      label: Dataset license URL and redistribution evidence
+    validations:
+      required: true
+  - type: textarea
+    id: risks
+    attributes:
+      label: Collection, annotation, size source, limitations and privacy risks

@@ -1,0 +1,21 @@
+name: Link checks
+on:
+  workflow_dispatch:
+  pull_request:
+    paths: ['catalog/**', '.github/workflows/links.yml']
+  schedule:
+    - cron: '17 6 * * 1'
+permissions:
+  contents: read
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -e .
+      - name: Check sources, download locations and license URLs
+        run: urdu-data links catalog/datasets.json
