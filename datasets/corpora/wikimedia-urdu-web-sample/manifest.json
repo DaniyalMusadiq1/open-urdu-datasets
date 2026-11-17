@@ -1,0 +1,40 @@
+{
+  "documents": 3,
+  "whitespace_tokens": 14777,
+  "human_reviewed_records": 0,
+  "date_accessed": "2026-11-17",
+  "data_sha256": "5320be185d8689972be950324a23f594c7e89348ae3cc8cbc7e7da9a2d030dda",
+  "crawl": {
+    "recursive": false,
+    "max_pages": 3,
+    "delay_seconds": 2,
+    "user_agent": "OpenUrduDatasets/0.0 (https://github.com/DaniyalMusadiq1/open-urdu-datasets)",
+    "pages": [
+      {
+        "url": "https://ur.wikisource.org/wiki/قواعد_تذکیر_و_تانیث",
+        "final_url": "https://ur.wikisource.org/wiki/%D9%82%D9%88%D8%A7%D8%B9%D8%AF_%D8%AA%D8%B0%DA%A9%DB%8C%D8%B1_%D9%88_%D8%AA%D8%A7%D9%86%DB%8C%D8%AB",
+        "robots_allowed": true,
+        "response_sha256": "a05a2dbbebaf3ee67ba5029306d660557e25738afd68e119c095399073f25a1d",
+        "revision_id": 2225
+      },
+      {
+        "url": "https://ur.wikisource.org/wiki/دیوان_غالب/غزلیات/ردیف_ے",
+        "final_url": "https://ur.wikisource.org/wiki/%D8%AF%DB%8C%D9%88%D8%A7%D9%86_%D8%BA%D8%A7%D9%84%D8%A8/%D8%BA%D8%B2%D9%84%DB%8C%D8%A7%D8%AA/%D8%B1%D8%AF%DB%8C%D9%81_%DB%92",
+        "robots_allowed": true,
+        "response_sha256": "506ad161518daf807bd2f24ea94842e4123305c70caab33c1ce01a591636b199",
+        "revision_id": 142
+      },
+      {
+        "url": "https://ur.wikipedia.org/wiki/اردو_قواعد",
+        "final_url": "https://ur.wikipedia.org/wiki/%D8%A7%D8%B1%D8%AF%D9%88_%D9%82%D9%88%D8%A7%D8%B9%D8%AF",
+        "robots_allowed": true,
+        "response_sha256": "71c5dbdc865b376be6e06380f6ba39a6eaea9075b33dc9a8e2846ecad64eeb6f",
+        "revision_id": 9575501
+      }
+    ]
+  },
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "terms_url": "https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use",
+  "data_path": "data/documents.jsonl.gz",
+  "document_units": "whole source pages, not independent sentences"
+}

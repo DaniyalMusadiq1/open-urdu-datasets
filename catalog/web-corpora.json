@@ -1,0 +1,13 @@
+[
+  {
+    "id": "wikimedia-urdu-web-sample",
+    "local_path": "datasets/corpora/wikimedia-urdu-web-sample",
+    "license": "CC-BY-SA-4.0",
+    "hosted": true,
+    "documents": 3,
+    "whitespace_tokens": 14777,
+    "verification_status": "pending_review",
+    "review_status": "unreviewed",
+    "scope": "Small overlapping web sample; separate from upstream discovery targets and uploaded books"
+  }
+]

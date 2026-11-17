@@ -14,3 +14,5 @@
 - Merged PR #1 as requested; prepared a full Dakshina build, of which only three shards were uploaded, preserving source provenance and unreviewed status. Added stream validation, pattern triage, exact content identity and bulk-loading tools.
 
 - Audited the partial upload: corrected all published counts to 150,000 native training records and 2,935,498 whitespace tokens; preserved full-build metadata separately. Renamed the human-review status to `verified` without promoting unreviewed records.
+
+- Inspected three supplied book archives without publishing their raw files; recorded source/rights/OCR limits. Added a bounded robots-aware Wikimedia crawl and a 3-document, 14,777-token CC-BY-SA-4.0 web sample with revision attribution and offline validation. All records remain unreviewed.

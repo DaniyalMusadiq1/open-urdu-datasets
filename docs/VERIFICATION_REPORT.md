@@ -59,3 +59,9 @@ The earlier branch reported a 622,805-record, 16-file local build. Only three fi
 The original build manifest is preserved as `full-build-manifest.json`; the active manifest and catalog now count only the published subset. Whole-archive hashes and source statistics are evidence inherited from the previous build, not a claim that the complete archive was re-downloaded during this audit. Streaming validation checks every published record against schema, identity, duplicates, contact patterns, counts and checksums. Human-reviewed records remain zero. Link-check and native-review gaps still block v0.1.0.
 
 The review status name `human_verified` has been replaced by `verified` in record schemas. This means recorded human review; technical catalog verification remains a separate field. No unreviewed record was promoted.
+
+## Uploaded-book and web intake, 2026-11-17
+
+Three uploaded archives were inventoried and hashed. The 226-page Ghalib PDF has no text layer. The 172-page Urdu Grammar PDF's sampled text layer contains scanning/library watermarks; usable book OCR remains outstanding. Qawaed includes a supplied UTF-8 transcription of 112 nonempty lines and 2,005 whitespace tokens, plus PDF and DOCX alternatives. Public Domain Mark is present only for Qawaed; raw editions/transcriptions are held for rights review. No uploader emails, torrent files or original book files were republished.
+
+A separate live crawl collected three licensed Wikimedia content pages with robots checks, revision IDs, original-response hashes, attribution and deterministic compressed output: 14,777 whitespace tokens. The entire page is the record unit; no sentence count or additional human verification is claimed. It overlaps the uploaded Qawaed work and possibly other existing corpora. The data is tracked in catalog/web-corpora.json separately from the upstream target. Offline validation checks document hashes, source evidence, counts and file checksums.

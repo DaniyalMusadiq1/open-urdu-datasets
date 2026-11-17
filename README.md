@@ -47,6 +47,12 @@ The sample's complete upstream lexicon member was downloaded from the official a
 
 Machine-readable [JSON](catalog/datasets.json) and [typed CSV](catalog/datasets.csv) contain per-entry evidence and nullable unknowns. [Derived samples](catalog/hosted-samples.json) have a separate manifest so they do not inflate the upstream target.
 
+## Books and a bounded web collection
+
+The three supplied book archives were inspected; member/archive hashes, extraction counts and rights decisions are in [book intake](catalog/upload-intake.json) and [the intake report](docs/BOOK_AND_WEB_INTAKE.md). Raw uploaded books are not publicly hosted while edition/transcription rights remain unresolved. The Ghalib scan and Urdu Grammar need OCR; Qawaed has an existing 2,005-token Unicode transcription.
+
+A separate [Wikimedia Urdu web sample](datasets/corpora/wikimedia-urdu-web-sample/DATASET_CARD.md) contains **3 whole-page documents / 14,777 whitespace-delimited tokens** from Urdu Wikisource and Urdu Wikipedia, with CC BY-SA 4.0 attribution, revision provenance, robots evidence and checksums. All three remain unreviewed. These pages can overlap existing corpora and do not increase the 28-resource discovery count or establish a unique combined total. [Collection manifest](catalog/web-corpora.json).
+
 ## Large hosted Urdu corpus
 
 **150,000 deduplicated native training records**, containing **2,935,498 whitespace-delimited tokens** in three compressed JSONL.GZ files (17,762,005 bytes).

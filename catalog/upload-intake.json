@@ -1,0 +1,92 @@
+{
+  "date_inspected": "2026-11-17",
+  "raw_files_published": false,
+  "items": [
+    {
+      "id": "DeewanEGhalibNuskhaHamidAliKhan",
+      "uploaded_name": "DeewanEGhalibNuskhaHamidAliKhan.zip",
+      "archive_sha256": "000bade8f68624296dae4227ef4a67cb9f2df2777ef70692a6754b0b77c0d10b",
+      "title": "Deewan E Ghalib Nuskha Hamid Ali Khan",
+      "creator_as_supplied": "Hamid Ali Khan",
+      "source_url": "https://archive.org/details/DeewanEGhalibNuskhaHamidAliKhan",
+      "source_rights_marker": null,
+      "verification_status": "pending_review",
+      "review_status": "unreviewed",
+      "hosted": false,
+      "members": [
+        {
+          "name": "Deewan e Ghalib Nuskha Hamid Ali Khan.pdf",
+          "bytes": 28448940,
+          "sha256": "ac9d672aa2034d1438be4c71662e97dddc6a1a08976e4b3d33a7ab83ec929282",
+          "pages": 226,
+          "extracted_characters": 0,
+          "pages_with_text": 0,
+          "extraction_note": "Image-only PDF. OCR needed."
+        }
+      ],
+      "publication_decision": "Hold raw files: no license statement found in supplied metadata; identify edition and reuse permission before public hosting."
+    },
+    {
+      "id": "qawaed-tazkeer-o-tanees",
+      "uploaded_name": "qawaed-tazkeer-o-tanees.zip",
+      "archive_sha256": "ffd1519b619a768476c1dfe83adf7c32ee30e448d299665d0e2182ea270a7096",
+      "title": "Qawaed Tazkeer O Tanees",
+      "creator_as_supplied": "Jalil Hasan Jalil Manakpuri",
+      "source_url": "https://archive.org/details/qawaed-tazkeer-o-tanees",
+      "source_rights_marker": "http://creativecommons.org/publicdomain/mark/1.0/",
+      "verification_status": "pending_review",
+      "review_status": "unreviewed",
+      "hosted": false,
+      "members": [
+        {
+          "name": "Qawaed Tazkeer o Tanees.pdf",
+          "bytes": 1722281,
+          "sha256": "8d327ffafadab4906ded9bfe7bc16de407f83a9e3e1257df031fca82447421e1",
+          "pages": 14,
+          "extracted_characters": 8699,
+          "pages_with_text": 14
+        },
+        {
+          "name": "Qawaed Tazkeer o Tanees.docx",
+          "bytes": 972450,
+          "sha256": "8d09ad49b2ec2110f907f06b70013dfac13525d5314fc7d371a6d48ee4cc544a"
+        },
+        {
+          "name": "Qawaed Tazkeer o Tanees.txt",
+          "bytes": 17239,
+          "sha256": "b4435e6fcb50d14262fd63c826e36886bf7ec7a738d8d4b75e3638dcdf499d5e",
+          "encoding": "UTF-8",
+          "characters": 9762,
+          "nonempty_lines": 112,
+          "whitespace_tokens": 2005,
+          "extraction_note": "Existing supplied Unicode transcription; no OCR or AI text generation performed."
+        }
+      ],
+      "publication_decision": "Hold raw files pending edition/transcription rights review. Public Domain Mark is a source assertion, not a new license. A separately licensed Wikisource edition can be collected with its own provenance."
+    },
+    {
+      "id": "urdu-grammar",
+      "uploaded_name": "urdu-grammar.zip",
+      "archive_sha256": "b426918bcbb83bd48daeed040d4543a71851c91d31e72aefcfccbb1eda642ab9",
+      "title": "Urdu Grammar",
+      "creator_as_supplied": "Muhammad Yusuf Mujahid",
+      "source_url": "https://archive.org/details/urdu-grammar",
+      "source_rights_marker": null,
+      "verification_status": "pending_review",
+      "review_status": "unreviewed",
+      "hosted": false,
+      "members": [
+        {
+          "name": "Urdu Grammar.pdf",
+          "bytes": 22136526,
+          "sha256": "fe99fcebd9ccc96860111ff5270950eee6c26849882cf1d80372a67c3eac565b",
+          "pages": 172,
+          "extracted_characters": 8372,
+          "pages_with_text": 172,
+          "extraction_note": "Sampled PDF text layer contains scanning/library watermarks, not usable book transcription. OCR needed."
+        }
+      ],
+      "publication_decision": "Hold raw files: no license statement found in supplied metadata; identify edition and reuse permission before public hosting."
+    }
+  ]
+}
