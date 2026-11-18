@@ -13,6 +13,8 @@ FILES = (
     "datasets/corpora/dakshina-urdu-bulk/manifest.json",
 )
 PREFIX = "github-sync"
+BULK_ROOT = Path("datasets/corpora/dakshina-urdu-bulk")
+BULK_REMOTE = "corpora/dakshina-urdu-bulk"
 
 
 def main():
@@ -39,6 +41,18 @@ def main():
     operations.append(CommitOperationAdd(
         path_in_repo=f"{PREFIX}/sync-manifest.json",
         path_or_fileobj=(json.dumps(manifest, indent=2) + "\n").encode("utf-8")))
+    bulk_manifest = json.loads((BULK_ROOT / "manifest.json").read_text(encoding="utf-8"))
+    bulk_files = ["DATASET_CARD.md", "SOURCES.md", "LICENSE", "manifest.json",
+                  "checksums.sha256"] + [item["path"] for item in bulk_manifest["shards"]]
+    for filename in bulk_files:
+        local = BULK_ROOT / filename
+        payload = local.read_bytes()
+        for item in bulk_manifest["shards"]:
+            if item["path"] == filename:
+                if hashlib.sha256(payload).hexdigest() != item["sha256"]:
+                    raise RuntimeError("Local corpus hash mismatch: " + filename)
+        operations.append(CommitOperationAdd(
+            path_in_repo=f"{BULK_REMOTE}/{filename}", path_or_fileobj=payload))
     api = HfApi(token=token)
     api.repo_info(repo_id=repo_id, repo_type="dataset")
     result = api.create_commit(repo_id=repo_id, repo_type="dataset",
@@ -52,8 +66,18 @@ def main():
     remote = json.loads(Path(remote_path).read_text(encoding="utf-8"))
     if remote != manifest:
         raise RuntimeError("remote sync manifest does not match the uploaded content")
+    for item in bulk_manifest["shards"]:
+        remote_file = hf_hub_download(
+            repo_id=repo_id, repo_type="dataset",
+            filename=f'{BULK_REMOTE}/{item["path"]}',
+            revision=result.oid, token=token)
+        with Path(remote_file).open("rb") as stream:
+            actual = hashlib.file_digest(stream, "sha256").hexdigest()
+        if actual != item["sha256"]:
+            raise RuntimeError("Remote corpus hash mismatch: " + item["path"])
     print(json.dumps({"hf_repo": repo_id, "hf_revision": result.oid,
                       "github_sha": sha, "synced_metadata_files": len(entries),
+                      "mirrored_existing_records": bulk_manifest["retained_records"],
                       "published_new_corpus_records": 0}))
 
 
