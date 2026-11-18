@@ -1,24 +1,26 @@
 """Verify the UCI Roman Urdu release's counts, identity, provenance, and hashes."""
 import gzip
 import hashlib
+import argparse
 import json
 import unicodedata
 from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-FOLDER = ROOT / "datasets/classification/uci-roman-urdu-sentiment"
+DEFAULT_FOLDER = ROOT / "datasets/classification/uci-roman-urdu-sentiment"
 
 
-def main():
-    manifest = json.loads((FOLDER / "manifest.json").read_text(encoding="utf-8"))
+def main(folder=DEFAULT_FOLDER):
+    folder = Path(folder)
+    manifest = json.loads((folder / "manifest.json").read_text(encoding="utf-8"))
     seen = set()
     labels = Counter()
     count = tokens = 0
     shard_records = Counter()
     shard_tokens = Counter()
     for shard in manifest["shards"]:
-        path = FOLDER / shard["path"]
+        path = folder / shard["path"]
         payload = path.read_bytes()
         if hashlib.sha256(payload).hexdigest() != shard["sha256"]:
             raise ValueError("shard checksum mismatch")
@@ -70,4 +72,6 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--folder", default=str(DEFAULT_FOLDER))
+    main(parser.parse_args().folder)

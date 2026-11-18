@@ -253,5 +253,8 @@
     "huggingface_repo": "Daniyal643/open-urdu-datasets",
     "huggingface_revision": "73caa5ddc89042a85e08530ec0db0b7ead373fdb",
     "remote_sha256_verification": "all release files matched local hashes"
-  }
+  },
+  "existing_corpus_exclusions": [
+    "datasets/classification/uci-roman-urdu-sentiment"
+  ]
 }

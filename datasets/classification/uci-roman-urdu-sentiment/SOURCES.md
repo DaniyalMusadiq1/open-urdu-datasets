@@ -19,9 +19,13 @@ Rebuild from the original archives:
 ```sh
 python scripts/import_uci_roman_urdu.py \
   --uci458 path/to/uci458.zip --uci854 path/to/uci854.zip \
-  --out datasets/classification/uci-roman-urdu-sentiment
-python scripts/validate_uci_roman_urdu.py
+  --out /tmp/uci-roman-urdu-sentiment
+python scripts/validate_uci_roman_urdu.py --folder /tmp/uci-roman-urdu-sentiment
 ```
+
+The command writes to a new temporary directory and leaves the published
+release untouched. It excludes that same release path from its global
+deduplication scan so a rebuild does not reject every row as its own duplicate.
 
 The importer fails closed on archive/member checksum drift. It preserves
 source text and valid source labels, removes malformed/out-of-domain/short

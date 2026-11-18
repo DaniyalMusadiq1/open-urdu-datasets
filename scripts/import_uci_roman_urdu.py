@@ -118,13 +118,15 @@ def read_source(source_id, archive):
 
 def published_text_hashes(root, excluded):
     """Collect hashes of published text fields before cross-source deduplication."""
+    excluded = [Path(path).resolve() for path in excluded]
     hashes = set()
     seen_records = 0
     paths = sorted(glob.glob(str(root / "**/*.jsonl"), recursive=True)
                    + glob.glob(str(root / "**/*.jsonl.gz"), recursive=True))
     for name in paths:
         path = Path(name)
-        if path.resolve() == excluded.resolve():
+        if any(path.resolve() == folder or folder in path.resolve().parents
+               for folder in excluded):
             continue
         opener = gzip.open if path.suffix == ".gz" else open
         with opener(path, "rt", encoding="utf-8") as stream:
@@ -141,7 +143,8 @@ def published_text_hashes(root, excluded):
     return hashes, seen_records
 
 
-def build(archives, out, existing_root=Path("datasets"), shard_records=1000):
+def build(archives, out, existing_root=Path("datasets"), shard_records=1000,
+          excluded_existing=(Path("datasets/classification/uci-roman-urdu-sentiment"),)):
     out = Path(out)
     if out.exists():
         raise FileExistsError(out)
@@ -152,7 +155,8 @@ def build(archives, out, existing_root=Path("datasets"), shard_records=1000):
         rows, result = read_source(source_id, Path(archive))
         all_rows.extend(rows)
         source_results[source_id] = result
-    existing_hashes, existing_records_scanned = published_text_hashes(existing_root, out)
+    excluded_existing = list(dict.fromkeys([*excluded_existing, out]))
+    existing_hashes, existing_records_scanned = published_text_hashes(existing_root, excluded_existing)
     new_seen = set()
     unique_rows, cross_source_duplicates = [], 0
     existing_duplicates = 0
@@ -196,6 +200,7 @@ def build(archives, out, existing_root=Path("datasets"), shard_records=1000):
         "existing_published_exact_duplicates_removed": existing_duplicates,
         "existing_published_records_scanned": existing_records_scanned,
         "existing_published_text_field_hashes_scanned": len(existing_hashes),
+        "existing_corpus_exclusions": [str(path) for path in excluded_existing],
         "deduplication": "SHA-256 of NFC-normalized text with repeated whitespace collapsed; exact only",
         "pii_screening": "Email, phone-like, URL and @handle patterns rejected as triage; not a privacy guarantee",
         "shards": shards,
@@ -213,9 +218,12 @@ def main():
     parser.add_argument("--out", required=True)
     parser.add_argument("--existing-root", default="datasets")
     parser.add_argument("--shard-records", type=int, default=1000)
+    parser.add_argument("--exclude-existing-path", action="append", default=[])
     args = parser.parse_args()
+    exclusions = [Path("datasets/classification/uci-roman-urdu-sentiment"),
+                  *[Path(path) for path in args.exclude_existing_path]]
     print(json.dumps(build({"458": args.uci458, "854": args.uci854}, args.out,
-                           Path(args.existing_root), args.shard_records), indent=2))
+                           Path(args.existing_root), args.shard_records, exclusions), indent=2))
 
 
 if __name__ == "__main__":
