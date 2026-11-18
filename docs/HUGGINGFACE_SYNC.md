@@ -20,6 +20,6 @@ files before reporting counts and the immutable revision. No native-speaker
 verification is implied.
 
 This is automatic synchronization of reviewed repository files, **not**
-automatic ingestion of arbitrary web/books/news/speech data. The 200B-token
-long-range target remains pending; public accessibility alone is not permission
+automatic ingestion of arbitrary web/books/news/speech data. The 200M-token
+phase milestone and 1.3B overall target remain pending; public accessibility alone is not permission
 to republish.

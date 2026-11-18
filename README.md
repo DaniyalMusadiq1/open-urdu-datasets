@@ -8,10 +8,11 @@ A community Urdu and Roman Urdu dataset hub with provenance, license tracking an
 
 ## Corpus expansion target
 
-**Long-range target: 200,000,000,000 whitespace-delimited tokens, not records.**
+**Overall target: 1,300,000,000 whitespace-delimited tokens. Current phase milestone: 200,000,000 tokens.**
 The measured total across the three separately tracked hosted corpora is
-**183,472 records / 4,765,116 tokens** (0.0024% of target); **199,995,234,884
-tokens remain**. Counts are whitespace-delimited and not model-token counts.
+**183,472 records / 4,765,116 tokens**. That is **2.38% of this phase’s
+milestone**, with **195,234,884 tokens remaining** for the phase; **1,295,234,884
+tokens remain** for the overall target. Counts are whitespace-delimited and not model-token counts.
 Exact-text deduplication removes NFC/whitespace-equivalent matches only; semantic
 and near-duplicate overlap may remain. All Wikisource pages are unreviewed and
 native-speaker review remains pending (0 reviewed records). See [expansion

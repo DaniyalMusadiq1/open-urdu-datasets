@@ -2,15 +2,17 @@
 
 ## Target and current progress
 
-**Long-range target: 200,000,000,000 whitespace-delimited tokens.** The three
+**Phase milestone: 200,000,000 whitespace-delimited tokens. Overall target:
+1,300,000,000 whitespace-delimited tokens.** The three
 separately tracked, hosted corpora total **183,472 records / 4,765,116 tokens**:
 
 - Dakshina Urdu native-text subset: 150,000 records / 2,935,498 tokens.
 - UCI Roman Urdu sentiment task corpus: 27,106 records / 528,943 tokens.
 - Urdu Wikisource `PD-old` pages: 6,366 records / 1,300,675 tokens.
 
-That is about **0.0024%** of the target, with **199,995,234,884 tokens
-remaining**. These are whitespace-delimited counts, not model-token counts.
+That is **2.38% of this phase milestone**, with **195,234,884 tokens remaining
+for the phase**. The overall target is **0.37% complete**, with **1,295,234,884
+tokens remaining**. These are whitespace-delimited counts, not model-token counts.
 The goal is not complete, and these sources do not represent all Urdu books or
 publicly accessible data. Native-speaker review is pending; human-verified
 records: **0**.
