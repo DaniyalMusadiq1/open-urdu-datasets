@@ -1,16 +1,11 @@
-# Corpus expansion status
+# Large corpus release status
 
-## Targets and publication state
+This page records the current published bulk corpus. It is an inventory of data and validation evidence, not a data-quality certification.
 
-- Phase milestone: **1,000,000,000 whitespace-delimited tokens — achieved (100.69%).**
-- Overall project target: **1,300,000,000 whitespace-delimited tokens.**
-- Published corpus total: **2,217,970 records / 1,006,902,795 whitespace-delimited tokens.**
-- Remaining to overall target: **293,097,205 whitespace-delimited tokens.**
-- Hugging Face dataset: [Daniyal643/open-urdu-datasets](https://huggingface.co/datasets/Daniyal643/open-urdu-datasets)
-- Verified corpus release revision: `1585f7eae6416f6fe5ee8a05e1a2c2731ccd13da`.
-- Native Urdu human-verified records: **0**; review remains pending.
-
-Counts are whitespace-delimited units, not model-token counts. GitHub Actions completed the build, validation, upload and remote hash verification. The file-level release manifest records exact source hashes and output checksums.
+- Published total: **2,217,970 records / 1,006,902,795 whitespace-delimited tokens**
+- Dataset: [Daniyal643/open-urdu-datasets](https://huggingface.co/datasets/Daniyal643/open-urdu-datasets)
+- Native Urdu human-verified records: **0**; review remains pending
+- Counts are whitespace-delimited, not model-token counts
 
 | Source | Records | Whitespace tokens | License |
 | --- | ---: | ---: | --- |
@@ -24,19 +19,10 @@ Counts are whitespace-delimited units, not model-token counts. GitHub Actions co
 | AI4Bharat Sangraha verified Urdu, data-6 | 187,528 | 113,357,092 | CC BY 4.0 declared upstream |
 | AI4Bharat Sangraha verified Urdu, data-7 | 187,639 | 114,927,282 | CC BY 4.0 declared upstream |
 
-## Source filters and limits
+The published corpus also includes the earlier Dakshina, UCI Roman Urdu and Wikisource releases listed in the [processed-corpora registry](../catalog/processed-corpora.json). Source cards and manifests define each subset's provenance and transformations.
 
-The Wikipedia source is the pinned official 2026-11-01 Urdu Wikipedia export. The release preserves page, revision and history links; applies documented rights and language filters; and strips MediaWiki markup. See the [Wikipedia card](../datasets/corpora/urwiki-articles/DATASET_CARD.md).
+## Quality and limits
 
-The Sangraha additions use the pinned upstream revision `654c02de6fa4cff1e3ade4e5c9242bedc7ad7629` and files `verified/urd/data-0.parquet` through `data-7.parquet`. The upstream dataset card declares CC BY 4.0. Some source rows lack original page URLs or creator names; see each release manifest and source notes. Arabic-script and Urdu-language filters are automated routing, not native-speaker verification.
+The Sangraha inputs use pinned upstream files. Their upstream dataset card declares CC BY 4.0. Automated Arabic-script and Urdu language-identification filters are routing checks, not native-speaker verification. Some upstream rows do not expose original page URLs or creator names.
 
-Exact duplicate checks use SHA-256 over NFC-normalized text after whitespace collapse. Semantic or near-duplicate overlap may remain. Contact-pattern filters are triage only and do not prove that text contains no personal information. No text is represented as human-verified.
-
-## Reproducing the additions
-
-```sh
-python -m pip install -e '.[ingest]'
-python scripts/build_phase2_release.py
-```
-
-The build downloads pinned inputs and checks their SHA-256 before import, runs per-source validators and performs a cross-corpus exact-duplicate audit. CI publishes generated records and manifests to Hugging Face and checks remote file hashes.
+Exact duplicate checks use SHA-256 over NFC-normalized text after whitespace collapse. Near-duplicate, quoted and semantically overlapping text may remain. Contact-pattern filters are triage, not a privacy guarantee. Review the license, attribution fields, card and manifest before reuse.

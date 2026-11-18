@@ -84,7 +84,7 @@
     "source_level_license": "CC-BY-4.0 declared by upstream dataset card",
     "verification_status": "published; all release file hashes verified on Hugging Face",
     "huggingface_revision": "1585f7eae6416f6fe5ee8a05e1a2c2731ccd13da",
-    "remote_manifest_path": "corpora/sangraha-verified-urdu-data-0/manifest.json",
+    "remote_manifest_path": "corpora/sangraha-verified-urdu/manifest.json",
     "remote_hashes_verified": true
   },
   {

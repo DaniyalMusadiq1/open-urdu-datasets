@@ -13,6 +13,9 @@ FILES = (
     "catalog/datasets.csv",
     "catalog/processed-corpora.json",
     "datasets/corpora/dakshina-urdu-bulk/manifest.json",
+    "datasets/HUGGINGFACE_README.md",
+    "docs/DATA_ARCHITECTURE.md",
+    "docs/LICENSE_POLICY.md",
 )
 PREFIX = "github-sync"
 BULK_ROOT = Path("datasets/corpora/dakshina-urdu-bulk")
@@ -51,6 +54,10 @@ def main():
                         "bytes": len(data)})
         operations.append(CommitOperationAdd(
             path_in_repo=f"{PREFIX}/{filename}", path_or_fileobj=data))
+        if filename == "datasets/HUGGINGFACE_README.md":
+            # Publish the repository's actual dataset card at the Hub root.
+            operations.append(CommitOperationAdd(
+                path_in_repo="README.md", path_or_fileobj=data))
     manifest = {"source_repository": "DaniyalMusadiq1/open-urdu-datasets",
                 "github_commit": sha, "files": entries,
                 "scope": "metadata_and_validated_corpora"}
@@ -153,6 +160,24 @@ def main():
     remote = json.loads(Path(remote_path).read_text(encoding="utf-8"))
     if remote != manifest:
         raise RuntimeError("remote sync manifest does not match the uploaded content")
+    for entry in entries:
+        remote_file = hf_hub_download(
+            repo_id=repo_id, repo_type="dataset",
+            filename=f"{PREFIX}/{entry['path']}",
+            revision=result.oid, token=token)
+        with Path(remote_file).open("rb") as stream:
+            remote_hash = hashlib.file_digest(stream, "sha256").hexdigest()
+        if remote_hash != entry["sha256"]:
+            raise RuntimeError("Remote metadata hash mismatch: " + entry["path"])
+    hf_readme_path = hf_hub_download(
+        repo_id=repo_id, repo_type="dataset", filename="README.md",
+        revision=result.oid, token=token)
+    with Path("datasets/HUGGINGFACE_README.md").open("rb") as stream:
+        local_hf_readme_hash = hashlib.file_digest(stream, "sha256").hexdigest()
+    with Path(hf_readme_path).open("rb") as stream:
+        remote_hf_readme_hash = hashlib.file_digest(stream, "sha256").hexdigest()
+    if local_hf_readme_hash != remote_hf_readme_hash:
+        raise RuntimeError("Hugging Face root dataset card hash mismatch")
     for item in bulk_manifest["shards"]:
         remote_file = hf_hub_download(
             repo_id=repo_id, repo_type="dataset",

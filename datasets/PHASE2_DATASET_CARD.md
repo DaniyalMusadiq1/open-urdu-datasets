@@ -1,13 +1,11 @@
-# 1B Urdu corpus release
+# Published Urdu corpus overview
 
-- Phase milestone: **1,000,000,000 whitespace-delimited tokens — achieved (100.69%)**
-- Overall target: **1,300,000,000 tokens**; **293,097,205 tokens remain**
-- Published corpus: **2,217,970 records / 1,006,902,795 whitespace-delimited tokens**
-- Hugging Face: [Daniyal643/open-urdu-datasets](https://huggingface.co/datasets/Daniyal643/open-urdu-datasets)
-- Corpus release revision: `1585f7eae6416f6fe5ee8a05e1a2c2731ccd13da`
-- Human/native-speaker verified records: **0**; all records remain unreviewed
-- Sources: pinned Urdu Wikipedia dump and eight pinned AI4Bharat Sangraha verified Urdu shards
-- Licensing: per source; Wikipedia CC BY-SA 4.0; Sangraha upstream declares CC BY 4.0
-- Deduplication: exact NFC-normalized, whitespace-collapsed text only; semantic overlap may remain
+This release combines separately loadable Urdu corpora from Urdu Wikipedia and AI4Bharat Sangraha with previously published Dakshina, UCI Roman Urdu and Urdu Wikisource datasets.
 
-Counts are whitespace-delimited and are not model-token counts. The Sangraha source rows may lack original page URLs and creator names. Automated language filters and the upstream “verified” label are not native-speaker verification. Consult source cards, manifests, checksums and attribution requirements before reuse.
+- Total: **2,217,970 records / 1,006,902,795 whitespace-delimited tokens**
+- Native-speaker verified records: **0**; review remains pending
+- Formats: source-specific UTF-8 JSONL.GZ shards
+- Licenses: source-specific; see each `LICENSE` and `SOURCES.md`
+- Dataset configuration names and loading instructions: see the repository-root Hugging Face card
+
+The aggregate count is not a promise of semantic uniqueness. Exact duplicate text was checked after NFC normalization and whitespace collapse; near duplicates and quoted passages may remain. The upstream Sangraha “verified” label and automated language filters do not count as human review. Consult the per-source cards, manifests and checksums before using or redistributing files.

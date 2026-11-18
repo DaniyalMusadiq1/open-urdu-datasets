@@ -1,120 +1,78 @@
-# open-urdu-datasets
+# Open Urdu Datasets
 
-A community Urdu and Roman Urdu dataset hub with provenance, license tracking and reproducible quality tools.
+A source-aware collection of Urdu and Roman Urdu datasets with clear provenance, license notes, reusable files and validation tools.
 
-**Published corpus: 2,217,970 records / 1,006,902,795 whitespace-delimited tokens.** The 1B phase milestone has been reached and the release was uploaded to Hugging Face with remote file hashes verified at revision `1585f7eae6416f6fe5ee8a05e1a2c2731ccd13da`. Native Urdu review remains pending; human-verified records: 0. This is not a model-token count or a claim that all Urdu text is complete.
+**Published corpus:** 2,217,970 records and 1,006,902,795 whitespace-delimited tokens. This count is a text-size measure, not a model-token count. Native-speaker verified records: **0**. Records that have not received native-speaker review are labeled `unreviewed`.
 
-[اردو تعارف — unreviewed](README.ur.md) · [Contributing](CONTRIBUTING.md) · [Licensing and removal](docs/LICENSE_POLICY.md) · [Coverage gaps](docs/COVERAGE.md)
+[Browse the dataset on Hugging Face](https://huggingface.co/datasets/Daniyal643/open-urdu-datasets) · [Browse the catalog](CATALOG.md) · [How the data is organized](docs/DATA_ARCHITECTURE.md) · [Contribute](CONTRIBUTING.md) · [Licensing and removal](docs/LICENSE_POLICY.md)
 
-## Corpus expansion target
+## What is here
 
-**Overall target: 1,300,000,000 whitespace-delimited tokens. Current phase milestone: 1,000,000,000 tokens — achieved at 100.69%.** The published corpus contains **2,217,970 records / 1,006,902,795 whitespace-delimited tokens**. The remaining distance to the overall target is **293,097,205 tokens**. Counts are whitespace-delimited, not model-token counts.
+The collection keeps each source separate so its schema, license, attribution and quality notes travel with the data.
 
-The release contains **543,011 Urdu Wikipedia records / 96,417,163 tokens** and eight pinned **AI4Bharat Sangraha verified Urdu** shards. The corpus was published to [Hugging Face](https://huggingface.co/datasets/Daniyal643/open-urdu-datasets) at revision `1585f7eae6416f6fe5ee8a05e1a2c2731ccd13da`; release verification completed successfully. See the source cards, manifests and checksums for file-level provenance and licensing.
+| Collection | Records | Whitespace tokens | License | Record review |
+| --- | ---: | ---: | --- | --- |
+| Urdu Wikipedia articles | 543,011 | 96,417,163 | CC BY-SA 4.0 | Unreviewed |
+| AI4Bharat Sangraha verified Urdu, data-0–7 | 1,491,487 | 905,720,516 | CC BY 4.0 declared upstream | Unreviewed |
+| Dakshina Urdu native text (published subset) | 150,000 | 2,935,498 | CC BY-SA 4.0 | Unreviewed |
+| UCI Roman Urdu sentiment sources | 27,106 | 528,943 | CC BY 4.0 | Pending review |
+| Urdu Wikisource pages tagged PD-old | 6,366 | 1,300,675 | CC BY-SA 4.0 compilation | Unreviewed |
 
-Exact duplicate detection uses SHA-256 over NFC-normalized text after whitespace collapse. Semantic, quotation and near-duplicate overlap may remain. Language filters and the Sangraha upstream “verified” label are not native-speaker review. All records remain unreviewed; human-verified count is **0**. The project target is 1.3B tokens; the 1B phase is achieved. Public access alone does not grant redistribution rights; source-specific licenses and attribution must be followed.
+The aggregate is deduplicated using exact text identity checks. It does not mean the sources are semantically unique: quotations, alternate editions and near duplicates may remain. Read each dataset card before use. Licenses and attribution rules apply separately to each source.
 
-## Verification and counts
+## Load a dataset
 
-An accessible source page is not data verification. Dakshina’s named Urdu native-text/lexicon components and Belebele’s scoped Urdu Arabic/Latin evaluation files are technically verified against the publisher version and explicit dataset license; 2 UCI downloads remain `pending_review` due to label/column anomalies, and 24 resources remain `unverified`. “Verified” does not mean native annotation review. Counts below identify source-reported versus locally-counted values, may overlap and must not be summed as unique records. Both derived samples are excluded from independent-dataset counts.
+Install the Hugging Face Datasets library:
 
-The sample's complete upstream lexicon member was downloaded from the official archive: 106,260 romanization rows, 25,000 distinct native-script words. Its SHA-256 is recorded in SOURCES.md. The original small sample used a byte-range retrieval; the bulk addition now has the complete official archive downloaded and SHA-256 checked. Structure, provenance, count and sample checksum checks passed; every sample record remains `review_status: unreviewed`. English meanings, POS and examples are null, not generated.
-
-## Catalog
-
-| Dataset | Category/task | Language/script | Records or size | Format | License | Source | Status |
-|---|---|---|---|---|---|---|---|
-| XNLI — Urdu | NLI / evaluation | Urdu Arabic script (font unspecified) | 400202 records (source_reported) | See versioned distribution file list; not independently validated | CC-BY-NC-4.0 | [source](https://huggingface.co/datasets/facebook/xnli) | unverified; full data link-only |
-| FLORES-200 — Urdu | translation / evaluation | Urdu Arabic script (font unspecified) | unknown | See versioned distribution file list; not independently validated | CC-BY-SA-4.0 | [source](https://huggingface.co/datasets/facebook/flores) | unverified; full data link-only |
-| Belebele — Urdu Arabic and Latin scripts | QA / reading comprehension / evaluation | Urdu Arabic and Roman (Latin) | 1800 Urdu question rows across two script variants (locally_counted) | JSONL | CC-BY-SA-4.0 | [source](https://huggingface.co/datasets/facebook/belebele) | verified; full data link-only |
-| SIB-200 — Urdu | text classification / evaluation | Urdu Arabic script (font unspecified) | unknown | TSV | CC-BY-SA-4.0 | [source](https://huggingface.co/datasets/Davlan/sib200) | unverified; full data link-only |
-| WikiANN — Urdu | NER | Urdu Arabic script (font unspecified) | 22000 records (source_reported) | See versioned distribution file list; not independently validated | unspecified | [source](https://huggingface.co/datasets/unimelb-nlp/wikiann) | unverified; full data link-only |
-| OPUS-100 — English–Urdu | parallel translation | Urdu Arabic script (font unspecified) | 757913 records (source_reported) | See versioned distribution file list; not independently validated | unspecified | [source](https://huggingface.co/datasets/Helsinki-NLP/opus-100) | unverified; full data link-only |
-| FLEURS — Urdu Pakistan | ASR / speech evaluation | Urdu Arabic script (font unspecified) | 2675 records (source_reported) | TSV / WAV archives / Parquet | CC-BY-4.0 | [source](https://huggingface.co/datasets/google/fleurs) | unverified; full data link-only |
-| mC4 — Urdu | web corpus | Urdu Arabic script (font unspecified) | unknown | See versioned distribution file list; not independently validated | ODC-By-1.0 | [source](https://huggingface.co/datasets/allenai/c4) | unverified; full data link-only |
-| NLLB mined bitext — Urdu | parallel translation | Urdu Arabic script (font unspecified) | unknown | See versioned distribution file list; not independently validated | ODC-By-1.0 | [source](https://huggingface.co/datasets/allenai/nllb) | unverified; full data link-only |
-| OSCAR 23.01 — Urdu | web corpus | Urdu Arabic script (font unspecified) | 887004 documents (source_reported) | See versioned distribution file list; not independently validated | CC0-1.0 | [source](https://huggingface.co/datasets/oscar-corpus/OSCAR-2301) | unverified; full data link-only |
-| CC-100 — Urdu | web corpus | Urdu Arabic script (font unspecified) | unknown | See versioned distribution file list; not independently validated | unspecified | [source](https://huggingface.co/datasets/statmt/cc100) | unverified; full data link-only |
-| Glot500 — Urdu | multilingual corpus | Urdu Arabic script (font unspecified) | unknown | See versioned distribution file list; not independently validated | unspecified | [source](https://huggingface.co/datasets/cis-lmu/Glot500) | unverified; full data link-only |
-| Aya Dataset — Urdu | instruction / conversation | Urdu Arabic script (font unspecified) | unknown | See versioned distribution file list; not independently validated | Apache-2.0 | [source](https://huggingface.co/datasets/CohereLabs/aya_dataset) | unverified; full data link-only |
-| Aya Collection — Urdu | instruction / conversation | Urdu Arabic script (font unspecified) | 4458535 records (source_reported) | See versioned distribution file list; not independently validated | Apache-2.0 | [source](https://huggingface.co/datasets/CohereLabs/aya_collection_language_split) | unverified; full data link-only |
-| IndicSentiment — Urdu | sentiment / translated text | Urdu Arabic script (font unspecified) | unknown | See versioned distribution file list; not independently validated | unspecified | [source](https://huggingface.co/datasets/ai4bharat/IndicSentiment) | unverified; full data link-only |
-| XL-Sum — Urdu | news / summarization | Urdu Arabic script (font unspecified) | 84581 article-summary pairs (source_reported) | See versioned distribution file list; not independently validated | CC-BY-NC-SA-4.0 | [source](https://huggingface.co/datasets/csebuetnlp/xlsum) | unverified; full data link-only |
-| Makhzan | edited text corpus | Urdu Arabic script (font unspecified) | 6.26 million words (source_reported) | annotated text; see source | unspecified | [source](https://github.com/zeerakahmed/makhzan) | unverified; full data link-only |
-| Dakshina — Urdu native text (published subset) | native text corpus | Urdu Arabic script | 150000 deduplicated native text units (locally_counted) | JSONL.GZ | CC-BY-SA-4.0 | [source](https://github.com/google-research-datasets/dakshina) | verified; scoped data hosted |
-| UD Urdu UDTB | POS / tokenization / morphology / dependency parsing | Urdu Arabic script (font unspecified) | unknown | CoNLL-U | CC-BY-NC-SA-4.0 | [source](https://github.com/UniversalDependencies/UD_Urdu-UDTB) | unverified; full data link-only |
-| Roman Urdu Data Set | Roman Urdu / sentiment | Roman Urdu (Latin) | 20229 parsed data rows (locally_counted) | CSV | CC-BY-4.0 | [source](https://archive.ics.uci.edu/dataset/458/roman+urdu+data+set) | pending_review; full data link-only |
-| Roman Urdu Sentiment Analysis Dataset (RUSAD) | Roman Urdu / sentiment | Roman Urdu (Latin) | 11000 parsed data rows (locally_counted) | TSV | CC-BY-4.0 | [source](https://archive.ics.uci.edu/dataset/854/roman+urdu+sentiment+analysis+dataset+(rusad)) | pending_review; full data link-only |
-| Tatoeba — Urdu sentences and translation links | sentences / parallel translation | Urdu Arabic script (font unspecified) | unknown | TSV compressed exports | CC-BY-2.0-FR | [source](https://tatoeba.org/en/downloads) | unverified; full data link-only |
-| Urdu Wikipedia dumps | encyclopedic corpus / documents | Urdu Arabic script (font unspecified) | unknown | compressed XML dumps | unspecified | [source](https://dumps.wikimedia.org/urwiki/) | unverified; full data link-only |
-| Common Voice Scripted Speech 27.0 — Urdu | ASR / speech | Urdu Arabic script (font unspecified) | unknown | MP3 / metadata | CC0-1.0 | [source](https://mozilladatacollective.com/datasets/cmu5x1w3400cyo107st8cgsoq) | unverified; full data link-only |
-| fastText Common Crawl/Wikipedia — Urdu vectors | pretrained embeddings (catalog only) | Urdu Arabic script (font unspecified) | unknown | binary / text vectors | CC-BY-SA-3.0 | [source](https://fasttext.cc/docs/en/crawl-vectors.html) | unverified; full data link-only |
-| ARL Urdu Speech Database, Training Data | ASR / speaker metadata | Urdu Arabic script (font unspecified) | 200 speakers (source_reported) | PCM speech / transcripts | unspecified | [source](https://catalog.ldc.upenn.edu/LDC2007S03) | unverified; full data link-only |
-| CAMIO Transcription Languages | printed OCR / document layout | Urdu Arabic script (font unspecified) | unknown | images / XML annotations | unspecified | [source](https://catalog.ldc.upenn.edu/LDC2022T07) | unverified; full data link-only |
-| IIIT-Urdu OCR | printed Nastaliq OCR | Urdu Nastaliq | 1610 text-line images (source_reported) | images / transcriptions; exact distribution not checked | unspecified | [source](https://ilocr.iiit.ac.in/dataset/38/) | unverified; full data link-only |
-
-Machine-readable [JSON](catalog/datasets.json) and [typed CSV](catalog/datasets.csv) contain per-entry evidence and nullable unknowns. [Derived samples](catalog/hosted-samples.json) have a separate manifest so they do not inflate the upstream target.
-
-## Books and a bounded web collection
-
-The three supplied book archives were inspected; member/archive hashes, extraction counts and rights decisions are in [book intake](catalog/upload-intake.json) and [the intake report](docs/BOOK_AND_WEB_INTAKE.md). Raw uploaded books are not publicly hosted while edition/transcription rights remain unresolved. The Ghalib scan and Urdu Grammar need OCR; Qawaed has an existing 2,005-token Unicode transcription.
-
-A separate [Wikimedia Urdu web sample](datasets/corpora/wikimedia-urdu-web-sample/DATASET_CARD.md) contains **3 whole-page documents / 14,777 whitespace-delimited tokens** from Urdu Wikisource and Urdu Wikipedia, with CC BY-SA 4.0 attribution, revision provenance, robots evidence and checksums. All three remain unreviewed. These pages can overlap existing corpora and do not increase the 28-resource discovery count or establish a unique combined total. [Collection manifest](catalog/web-corpora.json).
-
-## Large hosted Urdu corpus
-
-**150,000 deduplicated native training records**, containing **2,935,498 whitespace-delimited tokens** in three compressed JSONL.GZ files (17,762,005 bytes).
-
-This is a partial publication: 13 of the 16 files listed in the earlier full build were never uploaded. Bulk romanization pairs and the validation split are not hosted. The historical 622,805-record build is recorded separately in `full-build-manifest.json`; `manifest.json` describes only available files. Do not count missing records or tokens as published data.
-
-CC BY-SA 4.0 and original article/revision provenance are preserved. Every record remains `review_status: unreviewed`.
-
-[Dataset card](datasets/corpora/dakshina-urdu-bulk/DATASET_CARD.md) · [source/license attribution](datasets/corpora/dakshina-urdu-bulk/SOURCES.md) · [data shards](datasets/corpora/dakshina-urdu-bulk/data) · [manifest and counts](datasets/corpora/dakshina-urdu-bulk/manifest.json) · [streaming example](examples/bulk_loading.py)
-
-## Hosted samples
-
-[Dataset card](datasets/vocabulary/dakshina-urdu-sample/DATASET_CARD.md) · [Source and attribution](datasets/vocabulary/dakshina-urdu-sample/SOURCES.md) · [Data](datasets/vocabulary/dakshina-urdu-sample/data/vocabulary.jsonl)
-
-```python
-import json
-from pathlib import Path
-path = Path('datasets/vocabulary/dakshina-urdu-sample/data/vocabulary.jsonl')
-rows = [json.loads(line) for line in path.read_text(encoding='utf-8').splitlines()]
-assert len(rows) == 25
+```bash
+python -m pip install "datasets>=3,<5"
 ```
 
-[Urdu–English evaluation pairs: dataset card](datasets/translation/belebele-urdu-english-eval-sample/DATASET_CARD.md) · [source attribution](datasets/translation/belebele-urdu-english-eval-sample/SOURCES.md) · [five paired passages](datasets/translation/belebele-urdu-english-eval-sample/data/pairs.jsonl). These are copied publisher evaluation passages, joined by source IDs; no translations were generated. Every pair is locally unreviewed and evaluation-only. Do not use these held-out passages for training or model-selection validation.
+Each published corpus has its own configuration because fields and labels differ by source. For example, stream the Sangraha corpus:
 
-[Verification evidence](catalog/data-verification.json) records complete publisher-file hashes, counts and checks. Belebele’s 1,800 Urdu script-variant rows cover 900 underlying questions, not 1,800 independent examples. Human-reviewed record count remains zero.
+```python
+from datasets import load_dataset
 
-## Tools and examples
+rows = load_dataset(
+    "Daniyal643/open-urdu-datasets",
+    "sangraha-verified-urdu",
+    split="train",
+    streaming=True,
+)
 
-### New Roman Urdu release
+for row in rows.take(3):
+    print(row["text"], row["review_status"])
+```
 
-The repository and Hugging Face dataset now include a filtered, provenance-tracked
-release of the UCI Roman Urdu sentiment datasets: 27,106 mechanically accepted
-records and 528,943 whitespace-delimited tokens. Exact duplicate and contact-pattern
-filters are documented in the [dataset card](datasets/classification/uci-roman-urdu-sentiment/DATASET_CARD.md).
-All records remain **unreviewed**; native-speaker and label verification are pending.
-This task dataset is not a general-domain Roman Urdu corpus and its two source label
-schemes must be kept distinct.
+Other configurations are `urdu-wikipedia`, `dakshina-urdu-native-text`, `roman-urdu-sentiment`, and `urwikisource-pd-old`. The [Hugging Face dataset card](https://huggingface.co/datasets/Daniyal643/open-urdu-datasets) lists each configuration, its files and its license. Use a pinned Hugging Face revision when you need a reproducible snapshot.
 
-### Urdu Wikisource public-domain-tagged transcriptions
+Small local examples are available too: the [25-record Dakshina vocabulary sample](datasets/vocabulary/dakshina-urdu-sample/) and the [five-pair Belebele evaluation sample](datasets/translation/belebele-urdu-english-eval-sample/). The Belebele sample is evaluation-only; do not train or select models with it. These derived examples are not part of the published corpus total.
 
-The repository and Hugging Face dataset include 6,366 page-level transcriptions
-from the 2026-11-01 Urdu Wikisource dump, filtered to pages carrying its explicit
-`PD-old` tag and deduplicated exactly against existing repository text fields.
-The dump's main namespace contained 11,980 pages. The release has 1,300,675
-whitespace-delimited tokens. Page revision IDs and links are retained; all text
-remains unreviewed. The official source dump hash, rights filter, exclusions and
-file hashes are recorded in the [dataset card and manifest](datasets/corpora/urwikisource-pd-old/DATASET_CARD.md).
+Run the local examples with:
 
-Python 3.10+; see [development commands](docs/DEVELOPMENT.md). Tools validate UTF-8/schema/required fields, find duplicates, convert typed CSV/JSON/JSONL, generate stats, check links and verify checksums. [Normalization](docs/NORMALIZATION.md) is opt-in, preserves original text and logs applied changes; joiners, diacritics and Heh Doachashmee are retained.
+```bash
+python -m pip install -e ".[examples]"
+python examples/plain_python.py
+```
 
-Loading examples: [plain Python](examples/plain_python.py), [pandas](examples/pandas_example.py), [Hugging Face Datasets](examples/huggingface_example.py). These examples load the local catalog and both hosted samples and do not download remote corpora or execute remote scripts.
+## In this repository
 
-## Rights, ethics and current limits
+- `catalog/datasets.json` is the canonical machine-readable source inventory; `catalog/datasets.csv` is its typed, generated counterpart.
+- `catalog/processed-corpora.json` records the published subsets and counts.
+- `datasets/` holds dataset cards, source and license records, schemas, and small or locally hosted releases.
+- `src/`, `scripts/`, and `tests/` contain reusable readers, importers, validators and checks.
+- The large Wikipedia and Sangraha releases are hosted on Hugging Face. Their source pins, filters, manifests and checksums travel with the release.
 
-Code and original documentation are MIT. Each dataset retains its own license; the hosted corpus and samples are CC BY-SA 4.0 with attribution and share-alike requirements. No Makhzan raw text, NC/research-only corpus, restricted source text, secrets or private records are intentionally included. Web-corpus packaging licenses do not clear all original-content rights. See the license policy for the hosting allowlist and removal process.
+See [data architecture](docs/DATA_ARCHITECTURE.md), [catalog definitions](CATALOG.md), [development guide](docs/DEVELOPMENT.md), and [coverage gaps](docs/COVERAGE.md).
 
-No model training or unauthorized source scraping is performed. Native-speaker review is needed for the Urdu introduction, sample spellings, romanizations and future glosses. Five licensed evaluation-only Urdu–English passage pairs are hosted; broader translation coverage remains incomplete. Many task categories remain discovery gaps. Local tests, lint, schema validation and examples pass after the approved fixes. Unresolved link checks and incomplete dataset verification remain release blockers; see [the verification report](docs/VERIFICATION_REPORT.md). Source metadata is not language validation.
+## Data quality
+
+The catalog distinguishes technical source/file checks from review of Urdu content. A `verified` catalog status means the stated source and files passed the listed technical checks; it does **not** mean the Urdu was reviewed by a native speaker. Upstream labels such as “verified” are not this project's human review.
+
+Exact duplicate checks use SHA-256 over NFC-normalized text after whitespace collapse. This does not remove semantic or near-duplicate text. Automated language identification, script filters and contact-pattern screening have stated limits and are not guarantees of linguistic accuracy, safety or privacy.
+
+## Contribute
+
+Check [CONTRIBUTING.md](CONTRIBUTING.md) and the [dataset card template](docs/DATASET_CARD_TEMPLATE.md) before adding a source. Include its original license, immutable source reference, source hashes, record schema, transformation steps and validation evidence. Do not mark text as human reviewed without actual human review.
+
+The English README is maintained as the primary guide. [The Urdu introduction](README.ur.md) is still marked unreviewed.
