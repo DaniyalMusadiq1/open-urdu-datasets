@@ -1,7 +1,7 @@
 """Verify the UCI Roman Urdu release's counts, identity, provenance, and hashes."""
+import argparse
 import gzip
 import hashlib
-import argparse
 import json
 import unicodedata
 from collections import Counter
