@@ -1,0 +1,41 @@
+name: Sync GitHub dataset metadata to Hugging Face
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: huggingface-sync-main
+  cancel-in-progress: false
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install validation and publishing dependencies
+        run: python -m pip install -e '.[dev]' 'huggingface_hub>=0.26,<2'
+      - name: Validate repository and existing bulk data
+        run: |
+          python scripts/validate_repo.py
+          python scripts/validate_bulk.py
+          python scripts/validate_web.py
+      - name: Check Hugging Face secret
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          if [ -z "$HF_TOKEN" ]; then
+            echo "::error::Set HF_TOKEN as a GitHub Actions repository secret to enable automatic Hugging Face sync."
+            exit 1
+          fi
+      - name: Sync validated repository metadata
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_REPO_ID: Daniyal643/open-urdu-datasets
+          GITHUB_SHA: ${{ github.sha }}
+        run: python scripts/sync_huggingface.py
