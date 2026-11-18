@@ -8,6 +8,7 @@ import tempfile
 from pathlib import Path
 from urdu_data.phase2 import accept, dedup_digest
 
+
 def validate(folder):
     folder = Path(folder)
     manifest = json.loads((folder / "manifest.json").read_text(encoding="utf-8"))
@@ -55,6 +56,7 @@ def _validate_shards(folder, manifest, db):
     if total != manifest["record_count"] or tokens != manifest["whitespace_delimited_tokens"]:
         raise ValueError("manifest counts differ")
     return {"records": total, "whitespace_delimited_tokens": tokens, "errors": 0}
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
