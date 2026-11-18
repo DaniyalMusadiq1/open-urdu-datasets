@@ -1,6 +1,7 @@
 import json
-from urdu_data.phase2 import accept, build
+
 from scripts.phase2_validate import validate
+from urdu_data.phase2 import accept, build
 
 
 def row(text="یہ ایک اردو عبارت ہے جس میں کافی الفاظ موجود ہیں اور متن مکمل ہے"):

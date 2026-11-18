@@ -105,7 +105,7 @@ def build(source, output, *, max_records_per_shard=50000):
                     if handle:
                         handle.close()
                     name = f"part-{len(shards):05d}.jsonl.gz"
-                    handle = gzip.open(staging / name, "wt", encoding="utf-8", newline="\n")
+                    handle = gzip.open(staging / name, "wt", encoding="utf-8", newline="\n")  # noqa: SIM115
                     shards.append({"path": name, "records": 0, "tokens": 0})
                     shard_count = 0
                 clean = {k: row[k] for k in ("text", "category", "script", "license",
