@@ -1,5 +1,5 @@
 {
-  "status": "published_candidate",
+  "status": "published",
   "dataset": "UCI Roman Urdu sentiment datasets 458 and 854",
   "license": "CC-BY-4.0",
   "record_count": 27106,
@@ -247,5 +247,11 @@
       "bytes": 10500,
       "sha256": "4d2f9516aaf99fff58b7fed95118c907df0dd9110004361e41ffc9053dfbbf41"
     }
-  ]
+  ],
+  "publication": {
+    "github_commit": "e9884eca4eae704f1567a3df4990ea3a0bbae8d6",
+    "huggingface_repo": "Daniyal643/open-urdu-datasets",
+    "huggingface_revision": "73caa5ddc89042a85e08530ec0db0b7ead373fdb",
+    "remote_sha256_verification": "all release files matched local hashes"
+  }
 }

@@ -173,11 +173,11 @@ def build(archives, out, existing_root=Path("datasets"), shard_records=1000):
         rows = unique_rows[start:start + shard_records]
         relative = f"data/train-{shard_no:04d}.jsonl.gz"
         data_path = out / relative
-        with data_path.open("wb") as raw_output:
-            with gzip.GzipFile(fileobj=raw_output, mode="wb", filename="", mtime=0) as zipped:
-                with io.TextIOWrapper(zipped, encoding="utf-8", newline="\n") as stream:
-                    for row in rows:
-                        stream.write(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n")
+        with (data_path.open("wb") as raw_output,
+              gzip.GzipFile(fileobj=raw_output, mode="wb", filename="", mtime=0) as zipped,
+              io.TextIOWrapper(zipped, encoding="utf-8", newline="\n") as stream):
+            for row in rows:
+                stream.write(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n")
         payload = data_path.read_bytes()
         shards.append({"path": relative, "records": len(rows),
                        "tokens": sum(r["token_count_whitespace"] for r in rows),

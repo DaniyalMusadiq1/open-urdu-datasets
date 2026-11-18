@@ -8,8 +8,12 @@
     "whitespace_tokens": 528943,
     "human_verified_records": 0,
     "review_status": "unreviewed",
-    "sources": ["UCI 458", "UCI 854 (RUSAD)"],
+    "sources": [
+      "UCI 458",
+      "UCI 854 (RUSAD)"
+    ],
     "source_level_license": "Declared by each UCI dataset page",
-    "verification_status": "mechanically_validated; human review pending"
+    "verification_status": "published; Hugging Face shard hashes verified",
+    "huggingface_revision": "73caa5ddc89042a85e08530ec0db0b7ead373fdb"
   }
 ]
