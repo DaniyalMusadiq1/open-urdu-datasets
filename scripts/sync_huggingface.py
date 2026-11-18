@@ -48,9 +48,9 @@ def main():
         local = BULK_ROOT / filename
         payload = local.read_bytes()
         for item in bulk_manifest["shards"]:
-            if item["path"] == filename:
-                if hashlib.sha256(payload).hexdigest() != item["sha256"]:
-                    raise RuntimeError("Local corpus hash mismatch: " + filename)
+            if (item["path"] == filename
+                    and hashlib.sha256(payload).hexdigest() != item["sha256"]):
+                raise RuntimeError("Local corpus hash mismatch: " + filename)
         operations.append(CommitOperationAdd(
             path_in_repo=f"{BULK_REMOTE}/{filename}", path_or_fileobj=payload))
     api = HfApi(token=token)
