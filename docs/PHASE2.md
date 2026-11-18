@@ -1,5 +1,11 @@
 # Phase 2 — rights-cleared Urdu bulk ingestion (preparation)
 
+**Step 1 milestone: 200,000,000 published whitespace-delimited tokens.**
+Published baseline is 2,935,498 tokens; the milestone gap is **197,064,502 tokens**.
+Do not report this milestone achieved until actual hosted shards and remote hashes
+are verified. This is a milestone, not an assertion of data availability.
+
+
 **Target:** 1,400,000,000 whitespace-delimited tokens (not records).
 **Published baseline:** 150,000 Dakshina native-text records / 2,935,498 whitespace-delimited tokens.
 **Gap:** 1,397,064,502 tokens. No Phase 2 shards are published as of this commit.
@@ -31,7 +37,10 @@ python -m pytest tests/test_phase2.py
 
 Output is a new directory with JSONL.GZ shards, SHA-256 checksums and
 `manifest.json` with **local_unpublished** status. Existing output is never
-overwritten. Deduplication is exact original-text SHA-256 across input records.
+overwritten. Deduplication uses NFC normalization and whitespace collapse for SHA-256 keys,
+while preserving original source text. This removes identical and whitespace-equivalent
+records within a run, not semantic paraphrases or near-duplicates. SQLite stores
+dedup keys on disk for large runs; validator keys are also disk-backed.
 Whitespace token counts are not model-token counts. Script-ratio heuristics are
 not reliable Urdu language identification; Roman Urdu can include English.
 The contact-pattern filter is limited triage, not a PII guarantee. Add language
