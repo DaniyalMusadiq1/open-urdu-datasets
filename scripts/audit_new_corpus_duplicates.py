@@ -1,6 +1,6 @@
 """Report exact text collisions across processed corpora added in this phase."""
-import gzip
 import argparse
+import gzip
 import hashlib
 import json
 import os

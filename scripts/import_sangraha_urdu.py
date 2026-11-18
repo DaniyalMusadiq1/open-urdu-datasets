@@ -25,17 +25,20 @@ if int(np.__version__.split(".", maxsplit=1)[0]) >= 2:
 
     np.array = _numpy2_compat_array
 
-import fasttext  # noqa: E402
-import pyarrow.parquet as pq  # noqa: E402
+import fasttext
+import pyarrow.parquet as pq
 
 SOURCE_REPO = "ai4bharat/sangraha"
 SOURCE_REVISION = "8b813c3f62d37b2fa174d68c31e8b35ae2fe85e8"
+EXPANSION_REVISION = "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629"
 SOURCE_PATH = "verified/urd/data-0.parquet"
 SOURCE_SHA256 = "0220cd62b7dde5d12fa52c6c40f47f7e06df3e7ccb659576488fd8a83b110d48"
 SOURCE_FILES = {
     "verified/urd/data-0.parquet": SOURCE_SHA256,
     "verified/urd/data-1.parquet": "41d73f33b6efc3124cfce6b36f825510ea125fdbbe7761d17911319f1cb08125",
 }
+for _shard_number in range(2, 27):
+    SOURCE_FILES[f"verified/urd/data-{_shard_number}.parquet"] = None
 LID_MODEL_SHA256 = "8f3472cfe8738a7b6099e8e999c3cbfae0dcd15696aac7d7738a8039db603e83"
 EMAIL = re.compile(r"(?i)[\w.+-]+@[\w.-]+\.[a-z]{2,}")
 
@@ -90,13 +93,17 @@ def write_shard(out, index, batch):
 
 def build(parquet, lid_model, out, existing_root=Path("datasets"),
           shard_records=3000, min_lid_confidence=0.70, classify_chars=5000,
-          source_path=SOURCE_PATH):
+          source_path=SOURCE_PATH, source_revision=SOURCE_REVISION,
+          source_sha256=None):
     parquet, lid_model, out = Path(parquet), Path(lid_model), Path(out)
     if out.exists():
         raise FileExistsError(out)
-    source_sha = SOURCE_FILES.get(source_path)
-    if not source_sha:
+    expected_source_sha = SOURCE_FILES.get(source_path)
+    if source_path not in SOURCE_FILES:
         raise ValueError("source file must be a pinned verified/urd shard")
+    source_sha = source_sha256 or sha256(parquet)
+    if expected_source_sha and source_sha != expected_source_sha:
+        raise ValueError("Sangraha Parquet SHA-256 mismatch")
     if sha256(parquet) != source_sha:
         raise ValueError("Sangraha Parquet SHA-256 mismatch")
     if sha256(lid_model) != LID_MODEL_SHA256:
@@ -146,7 +153,7 @@ def build(parquet, lid_model, out, existing_root=Path("datasets"),
                 "id": identity,
                 "text": text,
                 "source_dataset": SOURCE_REPO,
-                "source_revision": SOURCE_REVISION,
+                "source_revision": source_revision,
                 "source_file": source_path,
                 "source_doc_id": str(row.get("doc_id") or ""),
                 "source_type": str(row.get("type") or "unknown"),
@@ -175,7 +182,7 @@ def build(parquet, lid_model, out, existing_root=Path("datasets"),
         "status": "local_unpublished",
         "source": {"repository": SOURCE_REPO,
                    "url": "https://huggingface.co/datasets/ai4bharat/sangraha",
-                   "revision": SOURCE_REVISION, "file": source_path,
+                   "revision": source_revision, "file": source_path,
                    "file_sha256": source_sha, "declared_license": "CC-BY-4.0"},
         "record_count": len(new_seen),
         "whitespace_delimited_tokens": total_tokens,
@@ -210,10 +217,14 @@ def main():
     parser.add_argument("--shard-records", type=int, default=3000)
     parser.add_argument("--min-lid-confidence", type=float, default=0.70)
     parser.add_argument("--source-path", choices=sorted(SOURCE_FILES), default=SOURCE_PATH)
+    parser.add_argument("--source-revision", default=SOURCE_REVISION)
+    parser.add_argument("--source-sha256")
     args = parser.parse_args()
     print(json.dumps(build(args.parquet, args.lid_model, args.out,
                            Path(args.existing_root), args.shard_records,
-                           args.min_lid_confidence, source_path=args.source_path), indent=2))
+                           args.min_lid_confidence, source_path=args.source_path,
+                           source_revision=args.source_revision,
+                           source_sha256=args.source_sha256), indent=2))
 
 
 if __name__ == "__main__":

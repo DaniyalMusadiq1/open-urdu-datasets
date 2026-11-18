@@ -1,6 +1,6 @@
 """Sync validated GitHub metadata to HF; never claim unhosted shards are published."""
-import hashlib
 import argparse
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -93,10 +93,22 @@ def main():
         operations.append(CommitOperationAdd(
             path_in_repo=f"{WIKISOURCE_REMOTE}/{filename}", path_or_fileobj=payload))
     new_releases = []
+    metadata_release_docs = []
+    if args.metadata_only:
+        for root in sorted(Path("datasets/corpora").glob("sangraha-verified-urdu-data-*")):
+            for filename in ("DATASET_CARD.md", "SOURCES.md", "LICENSE"):
+                local = root / filename
+                if local.is_file():
+                    payload = local.read_bytes()
+                    operations.append(CommitOperationAdd(
+                        path_in_repo=f"corpora/{root.name}/{filename}", path_or_fileobj=payload))
+                    metadata_release_docs.append((root, filename))
     release_specs = [] if args.metadata_only else [
         (URWIKI_ROOT, URWIKI_REMOTE),
         (SANGRAHA_ROOT, SANGRAHA_REMOTE),
         (SANGRAHA1_ROOT, SANGRAHA1_REMOTE),
+        *((path, f"corpora/{path.name}") for path in sorted(
+            RELEASE_ROOT.glob("sangraha-verified-urdu-data-[2-7]"))),
     ]
     for root, remote in release_specs:
         release_manifest = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
@@ -188,7 +200,8 @@ def main():
                "published_wikisource_records": wikisource_manifest["record_count"],
                "published_wikisource_tokens": wikisource_manifest["whitespace_delimited_tokens"],
                "verified_new_corpus_files": sum(len(item["files"]) for item in new_releases),
-               "metadata_only": args.metadata_only}
+               "metadata_only": args.metadata_only,
+               "metadata_release_docs": len(metadata_release_docs)}
     if new_releases:
         summary.update({
             "published_urwiki_records": new_releases[0]["manifest"]["record_count"],
@@ -198,6 +211,10 @@ def main():
             "published_sangraha_shard_1_records": new_releases[2]["manifest"]["record_count"],
             "published_sangraha_shard_1_tokens": new_releases[2]["manifest"]["whitespace_delimited_tokens"],
         })
+        for release in new_releases[3:]:
+            number = release["manifest"]["source"]["file"].rsplit("-", 1)[-1].split(".", 1)[0]
+            summary[f"published_sangraha_shard_{number}_records"] = release["manifest"]["record_count"]
+            summary[f"published_sangraha_shard_{number}_tokens"] = release["manifest"]["whitespace_delimited_tokens"]
     print(json.dumps(summary))
 
 
