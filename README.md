@@ -6,6 +6,17 @@ A community Urdu and Roman Urdu dataset hub with provenance, license tracking an
 
 [اردو تعارف — unreviewed](README.ur.md) · [Contributing](CONTRIBUTING.md) · [Licensing and removal](docs/LICENSE_POLICY.md) · [Coverage gaps](docs/COVERAGE.md)
 
+## Phase 2 expansion target (preparation only)
+
+**Target: 1,400,000,000 whitespace-delimited tokens, not records.** The published
+bulk baseline remains **150,000 records / 2,935,498 tokens (0.21% of target)**;
+**1,397,064,502 tokens remain**. No new Phase 2 records or shards have been
+published. Human native-speaker verification remains pending (0 reviewed records).
+The rights-gated offline ingestion, checksum validation and opt-in Hugging Face
+publishing preparation are documented in [Phase 2](docs/PHASE2.md) and the
+[planned dataset card](datasets/PHASE2_DATASET_CARD.md). These scripts do not
+constitute a completed large-scale crawl or a claim of linguistic correctness.
+
 ## Verification and counts
 
 An accessible source page is not data verification. Dakshina’s named Urdu native-text/lexicon components and Belebele’s scoped Urdu Arabic/Latin evaluation files are technically verified against the publisher version and explicit dataset license; 2 UCI downloads remain `pending_review` due to label/column anomalies, and 24 resources remain `unverified`. “Verified” does not mean native annotation review. Counts below identify source-reported versus locally-counted values, may overlap and must not be summed as unique records. Both derived samples are excluded from independent-dataset counts.
