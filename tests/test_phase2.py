@@ -16,6 +16,18 @@ def test_fail_closed():
     english = {**value, "text": "Only English text for this record is provided"}
     assert accept(english) == "script_mismatch"
 
+def test_canonical_duplicates(tmp_path):
+    source = tmp_path / "input.jsonl"
+    a = row("یہ ایک اردو عبارت ہے جس میں کافی الفاظ موجود ہیں اور متن مکمل ہے")
+    b = row("یہ  ایک اردو عبارت ہے جس میں کافی الفاظ موجود ہیں اور متن مکمل ہے")
+    source.write_text("\n".join(json.dumps(r, ensure_ascii=False) for r in [a, b]) + "\n",
+                      encoding="utf-8")
+    result = build(source, tmp_path / "out")
+    assert result["record_count"] == 1
+    assert result["rejected"]["exact_duplicate"] == 1
+    assert validate(tmp_path / "out")["records"] == 1
+
+
 def test_build_validate(tmp_path):
     source = tmp_path / "input.jsonl"
     source.write_text("\n".join(json.dumps(r, ensure_ascii=False) for r in
