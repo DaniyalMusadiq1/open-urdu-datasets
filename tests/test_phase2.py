@@ -13,7 +13,8 @@ def test_fail_closed():
     assert accept(value) is None
     assert accept({**value, "license": "CC-BY-NC-4.0"}) == "license_not_allowlisted"
     assert accept({**value, "redistribution_cleared": False}) == "rights_not_cleared"
-    assert accept({**value, "text": "Only English text for this record is provided"}) == "script_mismatch"
+    english = {**value, "text": "Only English text for this record is provided"}
+    assert accept(english) == "script_mismatch"
 
 def test_build_validate(tmp_path):
     source = tmp_path / "input.jsonl"
