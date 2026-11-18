@@ -4,6 +4,7 @@ import hashlib
 import json
 import re
 import sqlite3
+import unicodedata
 from pathlib import Path
 
 ALLOWED = {"CC0-1.0", "CC-BY-4.0", "CC-BY-3.0", "CC-BY-SA-4.0",
@@ -14,6 +15,15 @@ CONTACT = re.compile(r"(?i)(?:[\w.+-]+@[\w.-]+\.[a-z]{2,}|(?:\+?\d[\d\s().-]{8,}
 CATEGORIES = {"news", "books", "wikipedia", "web", "conversation", "roman_urdu",
               "speech_transcript"}
 SCRIPTS = {"urdu_arabic", "roman_urdu"}
+
+
+def canonical_text(value):
+    """Canonical dedup key; preserve original text in output."""
+    return " ".join(unicodedata.normalize("NFC", value).split())
+
+
+def dedup_digest(value):
+    return digest(canonical_text(value))
 
 
 def digest(value):
@@ -85,7 +95,7 @@ def build(source, output, *, max_records_per_shard=50000):
                     rejected[reason] = rejected.get(reason, 0) + 1
                     continue
                 # Exact dedup across all categories; no unsubstantiated near-dedup claim.
-                identity = digest(row["text"])
+                identity = dedup_digest(row["text"])
                 try:
                     db.execute("INSERT INTO seen VALUES (?)", (identity,))
                 except sqlite3.IntegrityError:
@@ -129,7 +139,7 @@ def build(source, output, *, max_records_per_shard=50000):
         manifest = {"status": "local_unpublished", "record_count": total,
                     "whitespace_delimited_tokens": tokens, "human_verified_records": 0,
                     "categories": counts, "rejected": rejected, "shards": shards,
-                    "deduplication": "exact original text SHA-256",
+                    "deduplication": "NFC and whitespace-canonicalized text SHA-256",
                     "source_file_sha256": source_hash.hexdigest()}
         (staging / "manifest.json").write_text(
             json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
