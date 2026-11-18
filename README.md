@@ -2,16 +2,18 @@
 
 A community Urdu and Roman Urdu dataset hub with provenance, license tracking and reproducible quality tools.
 
-**Unreleased draft.** 150,000 published bulk records containing 2,935,498 native whitespace-delimited tokens, plus overlapping demonstration samples. 28 upstream discovery entries (including one embeddings resource), 2 technically verified scoped datasets, 2 pending-review datasets, 24 unverified resources, and two separately scoped hosted samples (25 vocabulary records + 5 evaluation passage pairs) awaiting local native-speaker review. The target of 25 verified datasets is not met. No v0.1.0 release has been published.
+**Unreleased draft.** Published data includes 150,000 Dakshina native-text records (2,935,498 whitespace-delimited tokens) and a separate UCI Roman Urdu sentiment release (27,106 records; 528,943 tokens). Exact duplicate checks found no text overlap with the existing published dataset files. Human/native-speaker verification remains pending. No v0.1.0 release has been published.
 
 [اردو تعارف — unreviewed](README.ur.md) · [Contributing](CONTRIBUTING.md) · [Licensing and removal](docs/LICENSE_POLICY.md) · [Coverage gaps](docs/COVERAGE.md)
 
 ## Phase 2 expansion target (preparation only)
 
-**Target: 1,400,000,000 whitespace-delimited tokens, not records.** The published
-bulk baseline remains **150,000 records / 2,935,498 tokens (0.21% of target)**;
-**1,397,064,502 tokens remain**. No new Phase 2 records or shards have been
-published. Human native-speaker verification remains pending (0 reviewed records).
+**Target: 1,400,000,000 whitespace-delimited tokens, not records.** Across
+published corpora, the measured baseline is **177,106 records / 3,464,441 tokens**
+(0.25% of target); **1,396,535,559 tokens remain**. The UCI Roman Urdu release
+adds 27,106 exact-deduplicated records and 528,943 tokens, kept separate from
+the Dakshina native-text corpus. Human native-speaker verification remains
+pending (0 reviewed records).
 The rights-gated offline ingestion, checksum validation and opt-in Hugging Face
 publishing preparation are documented in [Phase 2](docs/PHASE2.md) and the
 [planned dataset card](datasets/PHASE2_DATASET_CARD.md). These scripts do not
@@ -91,6 +93,16 @@ assert len(rows) == 25
 [Verification evidence](catalog/data-verification.json) records complete publisher-file hashes, counts and checks. Belebele’s 1,800 Urdu script-variant rows cover 900 underlying questions, not 1,800 independent examples. Human-reviewed record count remains zero.
 
 ## Tools and examples
+
+### New Roman Urdu release
+
+The repository and Hugging Face dataset now include a filtered, provenance-tracked
+release of the UCI Roman Urdu sentiment datasets: 27,106 mechanically accepted
+records and 528,943 whitespace-delimited tokens. Exact duplicate and contact-pattern
+filters are documented in the [dataset card](datasets/classification/uci-roman-urdu-sentiment/DATASET_CARD.md).
+All records remain **unreviewed**; native-speaker and label verification are pending.
+This task dataset is not a general-domain Roman Urdu corpus and its two source label
+schemes must be kept distinct.
 
 Python 3.10+; see [development commands](docs/DEVELOPMENT.md). Tools validate UTF-8/schema/required fields, find duplicates, convert typed CSV/JSON/JSONL, generate stats, check links and verify checksums. [Normalization](docs/NORMALIZATION.md) is opt-in, preserves original text and logs applied changes; joiners, diacritics and Heh Doachashmee are retained.
 

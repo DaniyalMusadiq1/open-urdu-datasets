@@ -1,14 +1,17 @@
 # Phase 2 — rights-cleared Urdu bulk ingestion (preparation)
 
 **Step 1 milestone: 200,000,000 published whitespace-delimited tokens.**
-Published baseline is 2,935,498 tokens; the milestone gap is **197,064,502 tokens**.
+The published baseline across separately tracked corpora is 3,464,441 tokens;
+the milestone gap is **196,535,559 tokens**. This includes 528,943 tokens from
+the separately licensed and deduplicated UCI Roman Urdu sentiment release.
 Do not report this milestone achieved until actual hosted shards and remote hashes
 are verified. This is a milestone, not an assertion of data availability.
 
 
 **Target:** 1,400,000,000 whitespace-delimited tokens (not records).
-**Published baseline:** 150,000 Dakshina native-text records / 2,935,498 whitespace-delimited tokens.
-**Gap:** 1,397,064,502 tokens. No Phase 2 shards are published as of this commit.
+**Published baseline:** 150,000 Dakshina native-text records / 2,935,498 tokens,
+plus 27,106 UCI Roman Urdu sentiment records / 528,943 tokens (3,464,441 total).
+**Gap:** 1,396,535,559 tokens. No bulk Phase 2 shards are published as of this commit.
 **Human-reviewed records:** 0. Native Urdu review remains pending.
 
 ## Source intake

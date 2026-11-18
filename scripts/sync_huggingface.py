@@ -10,11 +10,14 @@ FILES = (
     "datasets/PHASE2_DATASET_CARD.md",
     "catalog/datasets.json",
     "catalog/datasets.csv",
+    "catalog/processed-corpora.json",
     "datasets/corpora/dakshina-urdu-bulk/manifest.json",
 )
 PREFIX = "github-sync"
 BULK_ROOT = Path("datasets/corpora/dakshina-urdu-bulk")
 BULK_REMOTE = "corpora/dakshina-urdu-bulk"
+UCI_ROOT = Path("datasets/classification/uci-roman-urdu-sentiment")
+UCI_REMOTE = "classification/uci-roman-urdu-sentiment"
 
 
 def main():
@@ -53,6 +56,17 @@ def main():
                 raise RuntimeError("Local corpus hash mismatch: " + filename)
         operations.append(CommitOperationAdd(
             path_in_repo=f"{BULK_REMOTE}/{filename}", path_or_fileobj=payload))
+    uci_files = ["DATASET_CARD.md", "SOURCES.md", "LICENSE", "manifest.json",
+                 "checksums.sha256"]
+    uci_manifest = json.loads((UCI_ROOT / "manifest.json").read_text(encoding="utf-8"))
+    uci_files.extend(item["path"] for item in uci_manifest["shards"])
+    for filename in uci_files:
+        local = UCI_ROOT / filename
+        if not local.is_file():
+            raise RuntimeError("Missing UCI release file: " + filename)
+        payload = local.read_bytes()
+        operations.append(CommitOperationAdd(
+            path_in_repo=f"{UCI_REMOTE}/{filename}", path_or_fileobj=payload))
     api = HfApi(token=token)
     api.repo_info(repo_id=repo_id, repo_type="dataset")
     result = api.create_commit(repo_id=repo_id, repo_type="dataset",
@@ -75,10 +89,21 @@ def main():
             actual = hashlib.file_digest(stream, "sha256").hexdigest()
         if actual != item["sha256"]:
             raise RuntimeError("Remote corpus hash mismatch: " + item["path"])
+    for filename in uci_files:
+        remote_file = hf_hub_download(
+            repo_id=repo_id, repo_type="dataset", filename=f"{UCI_REMOTE}/{filename}",
+            revision=result.oid, token=token)
+        with (UCI_ROOT / filename).open("rb") as stream:
+            local_hash = hashlib.file_digest(stream, "sha256").hexdigest()
+        with Path(remote_file).open("rb") as stream:
+            remote_hash = hashlib.file_digest(stream, "sha256").hexdigest()
+        if local_hash != remote_hash:
+            raise RuntimeError("Remote UCI file hash mismatch: " + filename)
     print(json.dumps({"hf_repo": repo_id, "hf_revision": result.oid,
                       "github_sha": sha, "synced_metadata_files": len(entries),
                       "mirrored_existing_records": bulk_manifest["retained_records"],
-                      "published_new_corpus_records": 0}))
+                      "published_new_corpus_records": uci_manifest["record_count"],
+                      "published_new_corpus_tokens": uci_manifest["whitespace_delimited_tokens"]}))
 
 
 if __name__ == "__main__":

@@ -1,0 +1,13 @@
+The source datasets in this release are identified by UCI as licensed under
+the Creative Commons Attribution 4.0 International License (CC BY 4.0).
+
+License text: https://creativecommons.org/licenses/by/4.0/legalcode
+
+Attribution:
+- Zareen Sharf, Roman Urdu Data Set, UCI, DOI 10.24432/C58325.
+- Khawar Mehmood, Daryl Essam, and Muhammad Kamran Malik, Roman Urdu
+  Sentiment Analysis Dataset (RUSAD), UCI, DOI 10.24432/C59046.
+
+Changes made in this release: malformed rows, undocumented labels, short
+snippets, contact-pattern matches, and exact duplicate texts were excluded;
+source text and valid source labels were otherwise preserved.

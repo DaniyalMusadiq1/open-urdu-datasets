@@ -1,0 +1,15 @@
+[
+  {
+    "id": "uci-roman-urdu-sentiment",
+    "local_path": "datasets/classification/uci-roman-urdu-sentiment",
+    "license": "CC-BY-4.0",
+    "hosted": true,
+    "records": 27106,
+    "whitespace_tokens": 528943,
+    "human_verified_records": 0,
+    "review_status": "unreviewed",
+    "sources": ["UCI 458", "UCI 854 (RUSAD)"],
+    "source_level_license": "Declared by each UCI dataset page",
+    "verification_status": "mechanically_validated; human review pending"
+  }
+]

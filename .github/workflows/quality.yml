@@ -17,6 +17,7 @@ jobs:
       - run: python -m ruff check src tests scripts examples
       - run: python -m pytest
       - run: python scripts/validate_repo.py
+      - run: python scripts/validate_uci_roman_urdu.py
       - run: python examples/plain_python.py
       - run: python examples/pandas_example.py
       - run: python examples/huggingface_example.py
