@@ -1150,5 +1150,128 @@
       "data_downloaded": false,
       "note": "Official page inspected; data not independently checked."
     }
+  },
+  {
+    "id": "urwiki-articles",
+    "name": "Urdu Wikipedia articles (recovered subset)",
+    "category_task": "Wikipedia corpus",
+    "original_source_url": "https://dumps.wikimedia.org/urwiki/20261101/urwiki-20261101-pages-articles.xml.bz2",
+    "download_url": "https://huggingface.co/datasets/Daniyal643/open-urdu-datasets/tree/main/corpora/urwiki-articles",
+    "license": "CC-BY-SA-4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "size_record_count": {
+      "value": 384011,
+      "unit": "records",
+      "basis": "locally_counted",
+      "scope": "Processed release at datasets/corpora/urwiki-articles; token count in phase manifest"
+    },
+    "format": "Deterministic sharded JSON Lines in gzip files",
+    "language_script": "Urdu Arabic script; source-specific mechanical filtering",
+    "collection_method": "Pinned public export/Parquet shard, conservative extraction, language and rights filters, exact text deduplication",
+    "annotation_quality_notes": "No native-speaker review performed; every record remains unreviewed.",
+    "known_limitations": "Recovered subset; 53 unavailable intermediate shard files are excluded. Whitespace token count: 54721873. Exact deduplication does not remove semantic overlap.",
+    "pii_toxicity_notes": "Contact-pattern filtering is triage only, not a privacy guarantee. Review before use.",
+    "redistribution_status": "source_license_declared; comply with per-record license and attribution fields",
+    "citation_bibtex": "@misc{urwiki-articles,\n  title = {Urdu Wikipedia articles (recovered subset)},\n  howpublished = {\\url{https://dumps.wikimedia.org/urwiki/20261101/urwiki-20261101-pages-articles.xml.bz2}},\n  note = {Pinned source; processed release manifest: datasets/corpora/urwiki-articles/manifest.json}\n}",
+    "date_accessed": "2026-11-18",
+    "link_check": {
+      "status": "partial",
+      "scope": "Source, license declaration and pinned release metadata reviewed; record-level human review pending",
+      "date": "2026-11-18"
+    },
+    "verification_status": "pending_review",
+    "hosted": false,
+    "local_path": "datasets/corpora/urwiki-articles",
+    "version": "2026-11-01",
+    "verification_evidence": {
+      "source_sha256": "5cf02a04981c9efe8698ad880b09ca74e6404513a3c7cdb4eea9291ab8e52d0d",
+      "locally_counted_records": 384011,
+      "whitespace_delimited_tokens": 54721873,
+      "mechanical_integrity": "pending_CI",
+      "native_urdu_review": "pending",
+      "generated_manifest_path": "corpora/urwiki-articles/manifest.json"
+    }
+  },
+  {
+    "id": "sangraha-verified-urdu-0",
+    "name": "AI4Bharat Sangraha verified Urdu, data-0",
+    "category_task": "Urdu text corpus",
+    "original_source_url": "https://huggingface.co/datasets/ai4bharat/sangraha",
+    "download_url": "https://huggingface.co/datasets/Daniyal643/open-urdu-datasets/tree/main/corpora/sangraha-verified-urdu",
+    "license": "CC-BY-4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "size_record_count": {
+      "value": 187767,
+      "unit": "records",
+      "basis": "locally_counted",
+      "scope": "Processed release at datasets/corpora/sangraha-verified-urdu; token count in phase manifest"
+    },
+    "format": "Deterministic sharded JSON Lines in gzip files",
+    "language_script": "Urdu Arabic script; source-specific mechanical filtering",
+    "collection_method": "Pinned public export/Parquet shard, conservative extraction, language and rights filters, exact text deduplication",
+    "annotation_quality_notes": "No native-speaker review performed; every record remains unreviewed.",
+    "known_limitations": "Source rows do not expose original page URLs or creator names. Whitespace token count: 114197395. Exact deduplication does not remove semantic overlap.",
+    "pii_toxicity_notes": "Contact-pattern filtering is triage only, not a privacy guarantee. Review before use.",
+    "redistribution_status": "source_license_declared; comply with per-record license and attribution fields",
+    "citation_bibtex": "@misc{sangraha-verified-urdu-0,\n  title = {AI4Bharat Sangraha verified Urdu, data-0},\n  howpublished = {\\url{https://huggingface.co/datasets/ai4bharat/sangraha}},\n  note = {Pinned source; processed release manifest: datasets/corpora/sangraha-verified-urdu/manifest.json}\n}",
+    "date_accessed": "2026-11-18",
+    "link_check": {
+      "status": "partial",
+      "scope": "Source, license declaration and pinned release metadata reviewed; record-level human review pending",
+      "date": "2026-11-18"
+    },
+    "verification_status": "pending_review",
+    "hosted": false,
+    "local_path": "datasets/corpora/sangraha-verified-urdu",
+    "version": "8b813c3f62d37b2fa174d68c31e8b35ae2fe85e8",
+    "verification_evidence": {
+      "source_sha256": "0220cd62b7dde5d12fa52c6c40f47f7e06df3e7ccb659576488fd8a83b110d48",
+      "locally_counted_records": 187767,
+      "whitespace_delimited_tokens": 114197395,
+      "mechanical_integrity": "pending_CI",
+      "native_urdu_review": "pending",
+      "generated_manifest_path": "corpora/sangraha-verified-urdu/manifest.json"
+    }
+  },
+  {
+    "id": "sangraha-verified-urdu-1",
+    "name": "AI4Bharat Sangraha verified Urdu, data-1",
+    "category_task": "Urdu text corpus",
+    "original_source_url": "https://huggingface.co/datasets/ai4bharat/sangraha",
+    "download_url": "https://huggingface.co/datasets/Daniyal643/open-urdu-datasets/tree/main/corpora/sangraha-verified-urdu-data-1",
+    "license": "CC-BY-4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "size_record_count": {
+      "value": 187578,
+      "unit": "records",
+      "basis": "locally_counted",
+      "scope": "Processed release at datasets/corpora/sangraha-verified-urdu-data-1; token count in phase manifest"
+    },
+    "format": "Deterministic sharded JSON Lines in gzip files",
+    "language_script": "Urdu Arabic script; source-specific mechanical filtering",
+    "collection_method": "Pinned public export/Parquet shard, conservative extraction, language and rights filters, exact text deduplication",
+    "annotation_quality_notes": "No native-speaker review performed; every record remains unreviewed.",
+    "known_limitations": "Source rows do not expose original page URLs or creator names. Whitespace token count: 113895936. Exact deduplication does not remove semantic overlap.",
+    "pii_toxicity_notes": "Contact-pattern filtering is triage only, not a privacy guarantee. Review before use.",
+    "redistribution_status": "source_license_declared; comply with per-record license and attribution fields",
+    "citation_bibtex": "@misc{sangraha-verified-urdu-1,\n  title = {AI4Bharat Sangraha verified Urdu, data-1},\n  howpublished = {\\url{https://huggingface.co/datasets/ai4bharat/sangraha}},\n  note = {Pinned source; processed release manifest: datasets/corpora/sangraha-verified-urdu-data-1/manifest.json}\n}",
+    "date_accessed": "2026-11-18",
+    "link_check": {
+      "status": "partial",
+      "scope": "Source, license declaration and pinned release metadata reviewed; record-level human review pending",
+      "date": "2026-11-18"
+    },
+    "verification_status": "pending_review",
+    "hosted": false,
+    "local_path": "datasets/corpora/sangraha-verified-urdu-data-1",
+    "version": "8b813c3f62d37b2fa174d68c31e8b35ae2fe85e8",
+    "verification_evidence": {
+      "source_sha256": "41d73f33b6efc3124cfce6b36f825510ea125fdbbe7761d17911319f1cb08125",
+      "locally_counted_records": 187578,
+      "whitespace_delimited_tokens": 113895936,
+      "mechanical_integrity": "pending_CI",
+      "native_urdu_review": "pending",
+      "generated_manifest_path": "corpora/sangraha-verified-urdu-data-1/manifest.json"
+    }
   }
 ]

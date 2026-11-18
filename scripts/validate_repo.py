@@ -31,6 +31,15 @@ def main():
             raise ValueError("hosting license gate failed")
         if row["verification_status"] == "unverified":
             raise ValueError("unverified data must not be hosted")
+        if row["local_path"] is None:
+            evidence = row["verification_evidence"]
+            if (not row["download_url"]
+                    or evidence.get("remote_hashes_verified") is not True
+                    or not evidence.get("remote_dataset_repo")
+                    or not evidence.get("remote_revision")
+                    or not evidence.get("remote_manifest_path")):
+                raise ValueError("remote-hosted data lacks verified revision/manifest evidence")
+            continue
         path = ROOT / row["local_path"]
         if not path.resolve().is_relative_to(ROOT.resolve()):
             raise ValueError("dataset path escapes repository")

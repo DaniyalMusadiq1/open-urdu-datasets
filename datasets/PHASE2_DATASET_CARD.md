@@ -1,16 +1,18 @@
-# Urdu corpus expansion — current status
+# Phase 2 Urdu corpus status
 
 - Phase milestone: 200,000,000 whitespace-delimited tokens
 - Overall target: 1,300,000,000 whitespace-delimited tokens
-- Current separately tracked hosted corpora: 183,472 records / 4,765,116 tokens
-- Phase remaining: 195,234,884 whitespace-delimited tokens
-- Overall remaining: 1,295,234,884 whitespace-delimited tokens
-- Included sources: Dakshina Urdu native text, UCI Roman Urdu sentiment, and Urdu Wikisource `PD-old` transcriptions
+- Current published corpus: 183,472 records / 4,765,116 whitespace tokens
+- Validated release candidate: 913,295 records / 324,510,494 whitespace tokens
+- Candidate combined total after publication: 1,096,767 records / 329,275,610 whitespace tokens
+- Phase milestone progress after publication: 164.64%
+- Overall target remaining after publication: 970,724,390 whitespace tokens
 - Human/native-speaker verified records: 0; review remains pending
-- Licensing: source-specific; see each corpus card and license notice
-- Deduplication: exact NFC-normalized, whitespace-collapsed text only; semantic and near-duplicate overlap may remain
-- Quality: reproducible source hashes, per-record provenance, deterministic shards, checksums and mechanical filters; no human linguistic verification
+- New candidate sources: pinned Urdu Wikipedia dump and two pinned AI4Bharat Sangraha verified Urdu shards
+- Licensing: per-source; Urdu Wikipedia CC BY-SA 4.0; Sangraha card declares CC BY 4.0
+- Deduplication: exact NFC-normalized, whitespace-collapsed text only; semantic overlap may remain
 
-Only the 6,366 Wikisource pages carrying an explicit `{{PD-old}}` tag in the pinned 2026-11-01 export were retained for that source. See the [dataset card](corpora/urwikisource-pd-old/DATASET_CARD.md), [manifest](corpora/urwikisource-pd-old/manifest.json), and [source/license information](corpora/urwikisource-pd-old/SOURCES.md).
-
-The 200M phase milestone and 1.3B overall target are not achieved. Public access alone is not permission to republish. Future materials require source-specific redistribution evidence, provenance, deduplication, and quality review. No completeness claim is made for online books or internet data. The count is whitespace-delimited and not a model-token estimate.
+Counts are whitespace-delimited and are not model-token counts. The Sangraha
+source rows include document IDs and type labels but lack original page URLs and
+creator names. Automated language filters are not human verification. The
+200M milestone is counted only after upload and remote hash verification.

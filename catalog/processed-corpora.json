@@ -31,5 +31,53 @@
     "source_level_license": "Declared by each UCI dataset page",
     "verification_status": "published; Hugging Face shard hashes verified",
     "huggingface_revision": "73caa5ddc89042a85e08530ec0db0b7ead373fdb"
+  },
+  {
+    "id": "urwiki-articles",
+    "local_path": "datasets/corpora/urwiki-articles",
+    "license": "CC-BY-SA-4.0",
+    "hosted": false,
+    "records": 384011,
+    "whitespace_tokens": 54721873,
+    "human_verified_records": 0,
+    "review_status": "unreviewed",
+    "sources": [
+      "https://dumps.wikimedia.org/urwiki/20261101/urwiki-20261101-pages-articles.xml.bz2"
+    ],
+    "source_level_license": "CC-BY-SA-4.0",
+    "verification_status": "local validation complete; publication and remote hashes pending",
+    "huggingface_revision": null
+  },
+  {
+    "id": "sangraha-verified-urdu-0",
+    "local_path": "datasets/corpora/sangraha-verified-urdu",
+    "license": "CC-BY-4.0",
+    "hosted": false,
+    "records": 187767,
+    "whitespace_tokens": 114197395,
+    "human_verified_records": 0,
+    "review_status": "unreviewed",
+    "sources": [
+      "https://huggingface.co/datasets/ai4bharat/sangraha"
+    ],
+    "source_level_license": "CC-BY-4.0",
+    "verification_status": "local validation complete; publication and remote hashes pending",
+    "huggingface_revision": null
+  },
+  {
+    "id": "sangraha-verified-urdu-1",
+    "local_path": "datasets/corpora/sangraha-verified-urdu-data-1",
+    "license": "CC-BY-4.0",
+    "hosted": false,
+    "records": 187578,
+    "whitespace_tokens": 113895936,
+    "human_verified_records": 0,
+    "review_status": "unreviewed",
+    "sources": [
+      "https://huggingface.co/datasets/ai4bharat/sangraha"
+    ],
+    "source_level_license": "CC-BY-4.0",
+    "verification_status": "local validation complete; publication and remote hashes pending",
+    "huggingface_revision": null
   }
 ]

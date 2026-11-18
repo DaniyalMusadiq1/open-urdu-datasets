@@ -1,5 +1,6 @@
 """Sync validated GitHub metadata to HF; never claim unhosted shards are published."""
 import hashlib
+import argparse
 import json
 import os
 from pathlib import Path
@@ -20,9 +21,20 @@ UCI_ROOT = Path("datasets/classification/uci-roman-urdu-sentiment")
 UCI_REMOTE = "classification/uci-roman-urdu-sentiment"
 WIKISOURCE_ROOT = Path("datasets/corpora/urwikisource-pd-old")
 WIKISOURCE_REMOTE = "corpora/urwikisource-pd-old"
+RELEASE_ROOT = Path(os.environ.get("PHASE2_RELEASE_ROOT", "datasets/corpora"))
+URWIKI_ROOT = RELEASE_ROOT / "urwiki-articles"
+URWIKI_REMOTE = "corpora/urwiki-articles"
+SANGRAHA_ROOT = RELEASE_ROOT / "sangraha-verified-urdu"
+SANGRAHA_REMOTE = "corpora/sangraha-verified-urdu"
+SANGRAHA1_ROOT = RELEASE_ROOT / "sangraha-verified-urdu-data-1"
+SANGRAHA1_REMOTE = "corpora/sangraha-verified-urdu-data-1"
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--metadata-only", action="store_true",
+                        help="mirror updated catalog/docs after a corpus release")
+    args = parser.parse_args()
     token = os.environ.get("HF_TOKEN")
     repo_id = os.environ.get("HF_REPO_ID", "Daniyal643/open-urdu-datasets")
     sha = os.environ.get("GITHUB_SHA")
@@ -41,11 +53,7 @@ def main():
             path_in_repo=f"{PREFIX}/{filename}", path_or_fileobj=data))
     manifest = {"source_repository": "DaniyalMusadiq1/open-urdu-datasets",
                 "github_commit": sha, "files": entries,
-                "scope": "metadata_mirror_only",
-                "warning": "No new corpus shards published by this sync"}
-    operations.append(CommitOperationAdd(
-        path_in_repo=f"{PREFIX}/sync-manifest.json",
-        path_or_fileobj=(json.dumps(manifest, indent=2) + "\n").encode("utf-8")))
+                "scope": "metadata_and_validated_corpora"}
     bulk_manifest = json.loads((BULK_ROOT / "manifest.json").read_text(encoding="utf-8"))
     bulk_files = ["DATASET_CARD.md", "SOURCES.md", "LICENSE", "manifest.json",
                   "checksums.sha256"] + [item["path"] for item in bulk_manifest["shards"]]
@@ -84,6 +92,40 @@ def main():
                 raise RuntimeError("Local Wikisource shard hash mismatch: " + filename)
         operations.append(CommitOperationAdd(
             path_in_repo=f"{WIKISOURCE_REMOTE}/{filename}", path_or_fileobj=payload))
+    new_releases = []
+    release_specs = [] if args.metadata_only else [
+        (URWIKI_ROOT, URWIKI_REMOTE),
+        (SANGRAHA_ROOT, SANGRAHA_REMOTE),
+        (SANGRAHA1_ROOT, SANGRAHA1_REMOTE),
+    ]
+    for root, remote in release_specs:
+        release_manifest = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
+        release_manifest["status"] = "published"
+        release_manifest["published_from_github_commit"] = sha
+        (root / "manifest.json").write_text(
+            json.dumps(release_manifest, indent=2) + "\n", encoding="utf-8")
+        release_files = ["DATASET_CARD.md", "SOURCES.md", "LICENSE", "manifest.json",
+                         "checksums.sha256"] + [item["path"] for item in release_manifest["shards"]]
+        for filename in release_files:
+            local = root / filename
+            if not local.is_file():
+                raise RuntimeError("Missing corpus release file: " + str(local))
+            payload = local.read_bytes()
+            shard = next((item for item in release_manifest["shards"]
+                          if item["path"] == filename), None)
+            if shard and hashlib.sha256(payload).hexdigest() != shard["sha256"]:
+                raise RuntimeError("Local corpus hash mismatch: " + filename)
+            operations.append(CommitOperationAdd(
+                path_in_repo=f"{remote}/{filename}", path_or_fileobj=payload))
+        new_releases.append({"root": root, "remote": remote,
+                             "files": release_files, "manifest": release_manifest})
+    manifest["corpora"] = [
+        {"path": str(item["root"]), "records": item["manifest"]["record_count"],
+         "whitespace_delimited_tokens": item["manifest"]["whitespace_delimited_tokens"],
+         "files": item["files"]} for item in new_releases]
+    operations.append(CommitOperationAdd(
+        path_in_repo=f"{PREFIX}/sync-manifest.json",
+        path_or_fileobj=(json.dumps(manifest, indent=2) + "\n").encode("utf-8")))
     api = HfApi(token=token)
     api.repo_info(repo_id=repo_id, repo_type="dataset")
     result = api.create_commit(repo_id=repo_id, repo_type="dataset",
@@ -126,14 +168,37 @@ def main():
             remote_hash = hashlib.file_digest(stream, "sha256").hexdigest()
         if local_hash != remote_hash:
             raise RuntimeError("Remote Wikisource file hash mismatch: " + filename)
-    print(json.dumps({"hf_repo": repo_id, "hf_revision": result.oid,
-                      "github_sha": sha, "synced_metadata_files": len(entries),
-                      "mirrored_existing_records": bulk_manifest["retained_records"],
-                      "published_new_corpus_records": uci_manifest["record_count"],
-                      "published_new_corpus_tokens": uci_manifest["whitespace_delimited_tokens"],
-                      "published_wikisource_records": wikisource_manifest["record_count"],
-                      "published_wikisource_tokens": wikisource_manifest["whitespace_delimited_tokens"],
-                      "verified_wikisource_files": len(wikisource_files)}))
+    for release in new_releases:
+        for filename in release["files"]:
+            local = release["root"] / filename
+            remote_file = hf_hub_download(
+                repo_id=repo_id, repo_type="dataset",
+                filename=f'{release["remote"]}/{filename}', revision=result.oid, token=token)
+            with local.open("rb") as stream:
+                local_hash = hashlib.file_digest(stream, "sha256").hexdigest()
+            with Path(remote_file).open("rb") as stream:
+                remote_hash = hashlib.file_digest(stream, "sha256").hexdigest()
+            if local_hash != remote_hash:
+                raise RuntimeError("Remote new corpus file hash mismatch: " + filename)
+    summary = {"hf_repo": repo_id, "hf_revision": result.oid,
+               "github_sha": sha, "synced_metadata_files": len(entries),
+               "mirrored_existing_records": bulk_manifest["retained_records"],
+               "published_new_corpus_records": uci_manifest["record_count"],
+               "published_new_corpus_tokens": uci_manifest["whitespace_delimited_tokens"],
+               "published_wikisource_records": wikisource_manifest["record_count"],
+               "published_wikisource_tokens": wikisource_manifest["whitespace_delimited_tokens"],
+               "verified_new_corpus_files": sum(len(item["files"]) for item in new_releases),
+               "metadata_only": args.metadata_only}
+    if new_releases:
+        summary.update({
+            "published_urwiki_records": new_releases[0]["manifest"]["record_count"],
+            "published_urwiki_tokens": new_releases[0]["manifest"]["whitespace_delimited_tokens"],
+            "published_sangraha_records": new_releases[1]["manifest"]["record_count"],
+            "published_sangraha_tokens": new_releases[1]["manifest"]["whitespace_delimited_tokens"],
+            "published_sangraha_shard_1_records": new_releases[2]["manifest"]["record_count"],
+            "published_sangraha_shard_1_tokens": new_releases[2]["manifest"]["whitespace_delimited_tokens"],
+        })
+    print(json.dumps(summary))
 
 
 if __name__ == "__main__":

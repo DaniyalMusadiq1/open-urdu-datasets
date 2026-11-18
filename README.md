@@ -2,21 +2,18 @@
 
 A community Urdu and Roman Urdu dataset hub with provenance, license tracking and reproducible quality tools.
 
-**Unreleased draft.** Published data includes 150,000 Dakshina native-text records (2,935,498 whitespace-delimited tokens), a separate UCI Roman Urdu sentiment release (27,106 records; 528,943 tokens), and 6,366 Urdu Wikisource `PD-old` page transcriptions (1,300,675 tokens). Human/native-speaker verification remains pending. No v0.1.0 release has been published.
+**Unreleased draft.** Current published data totals 183,472 records / 4,765,116 whitespace-delimited tokens. A validated release candidate contains 913,295 records / 324,510,494 tokens across Urdu Wikipedia and two pinned AI4Bharat Sangraha verified Urdu shards. This repository contains the pinned build and validation pipeline; its CI job publishes the generated data to Hugging Face and verifies remote file hashes. The published count changes only after those checks pass. Native Urdu review remains pending; human-verified records: 0. No v0.1.0 release has been published.
 
 [اردو تعارف — unreviewed](README.ur.md) · [Contributing](CONTRIBUTING.md) · [Licensing and removal](docs/LICENSE_POLICY.md) · [Coverage gaps](docs/COVERAGE.md)
 
 ## Corpus expansion target
 
 **Overall target: 1,300,000,000 whitespace-delimited tokens. Current phase milestone: 200,000,000 tokens.**
-The measured total across the three separately tracked hosted corpora is
-**183,472 records / 4,765,116 tokens**. That is **2.38% of this phase’s
-milestone**, with **195,234,884 tokens remaining** for the phase; **1,295,234,884
-tokens remain** for the overall target. Counts are whitespace-delimited and not model-token counts.
-Exact-text deduplication removes NFC/whitespace-equivalent matches only; semantic
-and near-duplicate overlap may remain. All Wikisource pages are unreviewed and
-native-speaker review remains pending (0 reviewed records). See [expansion
-status](docs/PHASE2.md) and the [current corpus card](datasets/PHASE2_DATASET_CARD.md).
+The currently published corpora remain at **183,472 records / 4,765,116 tokens** until the release candidate has completed GitHub and Hugging Face publication checks. The staged, independently counted addition is **913,295 records / 324,510,494 tokens**. These are whitespace-delimited counts, not model-token counts.
+
+The release candidate combines **537,950 Urdu Wikipedia records / 96,417,163 tokens** from the full pinned 2026-11-01 dump and two **AI4Bharat Sangraha verified Urdu** shards: 187,767 / 114,197,395 and 187,578 / 113,895,936. Each source has its own license and attribution rules. See the per-corpus cards and manifests. The CI release job rebuilds the full pinned Wikipedia dump and publishes its generated manifest and checksums alongside the data.
+
+Exact duplicate detection uses SHA-256 over NFC-normalized text after whitespace collapse. An audit found no exact text collisions among the staged additions or currently stored corpus records. Semantic, quotation, and near-duplicate overlap may remain. Language filters and the Sangraha upstream “verified” label are not native-speaker review. All new records remain unreviewed; human-verified count is **0**. The 200M phase milestone is **not counted as achieved until publication and remote hash verification succeed**. Public access alone does not grant redistribution rights; only source-specific open-license declarations are included here.
 
 ## Verification and counts
 
