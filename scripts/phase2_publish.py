@@ -5,6 +5,7 @@ import os
 from pathlib import Path
 from phase2_validate import validate
 
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("folder")
@@ -23,6 +24,7 @@ def main():
                       folder_path=str(folder), path_in_repo="phase2")
     print(json.dumps({"uploaded_to": args.repo_id, "local_validation": summary,
                       "note": "Check remote file hashes before counting as published"}))
+
 
 if __name__ == "__main__":
     main()
