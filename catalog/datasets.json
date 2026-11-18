@@ -1171,7 +1171,7 @@
     "annotation_quality_notes": "No native-speaker review performed; every record remains unreviewed.",
     "known_limitations": "Whitespace token count: 96417163. Exact deduplication does not remove semantic overlap. Human review pending.",
     "pii_toxicity_notes": "Contact-pattern filtering is triage only, not a privacy guarantee. Review before use.",
-    "redistribution_status": "source_license_declared; comply with per-record license and attribution fields",
+    "redistribution_status": "explicitly_permitted",
     "citation_bibtex": "@misc{urwiki-articles,\n  title = {Urdu Wikipedia articles (recovered subset)},\n  howpublished = {\\url{https://dumps.wikimedia.org/urwiki/20261101/urwiki-20261101-pages-articles.xml.bz2}},\n  note = {Pinned source; processed release manifest: datasets/corpora/urwiki-articles/manifest.json}\n}",
     "date_accessed": "2026-11-18",
     "link_check": {
@@ -1189,7 +1189,10 @@
       "native_urdu_review": "pending",
       "published_revision": "1585f7eae6416f6fe5ee8a05e1a2c2731ccd13da",
       "remote_hashes_verified": true,
-      "generated_manifest_path": "corpora/urwiki-articles/manifest.json"
+      "generated_manifest_path": "corpora/urwiki-articles/manifest.json",
+      "remote_dataset_repo": "Daniyal643/open-urdu-datasets",
+      "remote_revision": "1585f7eae6416f6fe5ee8a05e1a2c2731ccd13da",
+      "remote_manifest_path": "corpora/urwiki-articles/manifest.json"
     }
   },
   {
@@ -1212,7 +1215,7 @@
     "annotation_quality_notes": "No native-speaker review performed; every record remains unreviewed.",
     "known_limitations": "Source may omit original page URLs and creator names. Whitespace token count: 114197395. Exact deduplication does not remove semantic overlap. Human review pending.",
     "pii_toxicity_notes": "Contact-pattern filtering is triage only, not a privacy guarantee. Review before use.",
-    "redistribution_status": "source_license_declared; comply with per-record license and attribution fields",
+    "redistribution_status": "explicitly_permitted",
     "citation_bibtex": "@misc{sangraha-verified-urdu-0,\n  title = {AI4Bharat Sangraha verified Urdu, data-0},\n  howpublished = {\\url{https://huggingface.co/datasets/ai4bharat/sangraha}},\n  note = {Pinned source; processed release manifest: datasets/corpora/sangraha-verified-urdu/manifest.json}\n}",
     "date_accessed": "2026-11-18",
     "link_check": {
@@ -1233,7 +1236,10 @@
       "native_urdu_review": "pending",
       "published_revision": "1585f7eae6416f6fe5ee8a05e1a2c2731ccd13da",
       "remote_hashes_verified": true,
-      "generated_manifest_path": "corpora/sangraha-verified-urdu-data-0/manifest.json"
+      "generated_manifest_path": "corpora/sangraha-verified-urdu-data-0/manifest.json",
+      "remote_dataset_repo": "Daniyal643/open-urdu-datasets",
+      "remote_revision": "1585f7eae6416f6fe5ee8a05e1a2c2731ccd13da",
+      "remote_manifest_path": "corpora/sangraha-verified-urdu-data-0/manifest.json"
     }
   },
   {
@@ -1256,7 +1262,7 @@
     "annotation_quality_notes": "No native-speaker review performed; every record remains unreviewed.",
     "known_limitations": "Source may omit original page URLs and creator names. Whitespace token count: 113895936. Exact deduplication does not remove semantic overlap. Human review pending.",
     "pii_toxicity_notes": "Contact-pattern filtering is triage only, not a privacy guarantee. Review before use.",
-    "redistribution_status": "source_license_declared; comply with per-record license and attribution fields",
+    "redistribution_status": "explicitly_permitted",
     "citation_bibtex": "@misc{sangraha-verified-urdu-1,\n  title = {AI4Bharat Sangraha verified Urdu, data-1},\n  howpublished = {\\url{https://huggingface.co/datasets/ai4bharat/sangraha}},\n  note = {Pinned source; processed release manifest: datasets/corpora/sangraha-verified-urdu-data-1/manifest.json}\n}",
     "date_accessed": "2026-11-18",
     "link_check": {
@@ -1277,7 +1283,10 @@
       "native_urdu_review": "pending",
       "published_revision": "1585f7eae6416f6fe5ee8a05e1a2c2731ccd13da",
       "remote_hashes_verified": true,
-      "generated_manifest_path": "corpora/sangraha-verified-urdu-data-1/manifest.json"
+      "generated_manifest_path": "corpora/sangraha-verified-urdu-data-1/manifest.json",
+      "remote_dataset_repo": "Daniyal643/open-urdu-datasets",
+      "remote_revision": "1585f7eae6416f6fe5ee8a05e1a2c2731ccd13da",
+      "remote_manifest_path": "corpora/sangraha-verified-urdu-data-1/manifest.json"
     }
   },
   {
@@ -1300,7 +1309,7 @@
     "annotation_quality_notes": "No native-speaker review performed; every record remains unreviewed.",
     "known_limitations": "Source may omit original page URLs and creator names. Whitespace token count: 114148226. Exact deduplication does not remove semantic overlap. Human review pending.",
     "pii_toxicity_notes": "Contact-pattern filtering is triage only, not a privacy guarantee. Review before use.",
-    "redistribution_status": "source_license_declared; comply with per-record license and attribution fields",
+    "redistribution_status": "explicitly_permitted",
     "citation_bibtex": "@misc{sangraha-verified-urdu-2,\n  title = {AI4Bharat Sangraha verified Urdu, data-2},\n  howpublished = {\\url{https://huggingface.co/datasets/ai4bharat/sangraha}},\n  note = {Pinned source; processed release manifest: datasets/corpora/sangraha-verified-urdu-data-2/manifest.json}\n}",
     "date_accessed": "2026-11-18",
     "link_check": {
@@ -1321,7 +1330,10 @@
       "native_urdu_review": "pending",
       "published_revision": "1585f7eae6416f6fe5ee8a05e1a2c2731ccd13da",
       "remote_hashes_verified": true,
-      "generated_manifest_path": "corpora/sangraha-verified-urdu-data-2/manifest.json"
+      "generated_manifest_path": "corpora/sangraha-verified-urdu-data-2/manifest.json",
+      "remote_dataset_repo": "Daniyal643/open-urdu-datasets",
+      "remote_revision": "1585f7eae6416f6fe5ee8a05e1a2c2731ccd13da",
+      "remote_manifest_path": "corpora/sangraha-verified-urdu-data-2/manifest.json"
     }
   },
   {
@@ -1344,7 +1356,7 @@
     "annotation_quality_notes": "No native-speaker review performed; every record remains unreviewed.",
     "known_limitations": "Source may omit original page URLs and creator names. Whitespace token count: 113690963. Exact deduplication does not remove semantic overlap. Human review pending.",
     "pii_toxicity_notes": "Contact-pattern filtering is triage only, not a privacy guarantee. Review before use.",
-    "redistribution_status": "source_license_declared; comply with per-record license and attribution fields",
+    "redistribution_status": "explicitly_permitted",
     "citation_bibtex": "@misc{sangraha-verified-urdu-3,\n  title = {AI4Bharat Sangraha verified Urdu, data-3},\n  howpublished = {\\url{https://huggingface.co/datasets/ai4bharat/sangraha}},\n  note = {Pinned source; processed release manifest: datasets/corpora/sangraha-verified-urdu-data-3/manifest.json}\n}",
     "date_accessed": "2026-11-18",
     "link_check": {
@@ -1365,7 +1377,10 @@
       "native_urdu_review": "pending",
       "published_revision": "1585f7eae6416f6fe5ee8a05e1a2c2731ccd13da",
       "remote_hashes_verified": true,
-      "generated_manifest_path": "corpora/sangraha-verified-urdu-data-3/manifest.json"
+      "generated_manifest_path": "corpora/sangraha-verified-urdu-data-3/manifest.json",
+      "remote_dataset_repo": "Daniyal643/open-urdu-datasets",
+      "remote_revision": "1585f7eae6416f6fe5ee8a05e1a2c2731ccd13da",
+      "remote_manifest_path": "corpora/sangraha-verified-urdu-data-3/manifest.json"
     }
   },
   {
@@ -1388,7 +1403,7 @@
     "annotation_quality_notes": "No native-speaker review performed; every record remains unreviewed.",
     "known_limitations": "Source may omit original page URLs and creator names. Whitespace token count: 107933097. Exact deduplication does not remove semantic overlap. Human review pending.",
     "pii_toxicity_notes": "Contact-pattern filtering is triage only, not a privacy guarantee. Review before use.",
-    "redistribution_status": "source_license_declared; comply with per-record license and attribution fields",
+    "redistribution_status": "explicitly_permitted",
     "citation_bibtex": "@misc{sangraha-verified-urdu-4,\n  title = {AI4Bharat Sangraha verified Urdu, data-4},\n  howpublished = {\\url{https://huggingface.co/datasets/ai4bharat/sangraha}},\n  note = {Pinned source; processed release manifest: datasets/corpora/sangraha-verified-urdu-data-4/manifest.json}\n}",
     "date_accessed": "2026-11-18",
     "link_check": {
@@ -1409,7 +1424,10 @@
       "native_urdu_review": "pending",
       "published_revision": "1585f7eae6416f6fe5ee8a05e1a2c2731ccd13da",
       "remote_hashes_verified": true,
-      "generated_manifest_path": "corpora/sangraha-verified-urdu-data-4/manifest.json"
+      "generated_manifest_path": "corpora/sangraha-verified-urdu-data-4/manifest.json",
+      "remote_dataset_repo": "Daniyal643/open-urdu-datasets",
+      "remote_revision": "1585f7eae6416f6fe5ee8a05e1a2c2731ccd13da",
+      "remote_manifest_path": "corpora/sangraha-verified-urdu-data-4/manifest.json"
     }
   },
   {
@@ -1432,7 +1450,7 @@
     "annotation_quality_notes": "No native-speaker review performed; every record remains unreviewed.",
     "known_limitations": "Source may omit original page URLs and creator names. Whitespace token count: 113570525. Exact deduplication does not remove semantic overlap. Human review pending.",
     "pii_toxicity_notes": "Contact-pattern filtering is triage only, not a privacy guarantee. Review before use.",
-    "redistribution_status": "source_license_declared; comply with per-record license and attribution fields",
+    "redistribution_status": "explicitly_permitted",
     "citation_bibtex": "@misc{sangraha-verified-urdu-5,\n  title = {AI4Bharat Sangraha verified Urdu, data-5},\n  howpublished = {\\url{https://huggingface.co/datasets/ai4bharat/sangraha}},\n  note = {Pinned source; processed release manifest: datasets/corpora/sangraha-verified-urdu-data-5/manifest.json}\n}",
     "date_accessed": "2026-11-18",
     "link_check": {
@@ -1453,7 +1471,10 @@
       "native_urdu_review": "pending",
       "published_revision": "1585f7eae6416f6fe5ee8a05e1a2c2731ccd13da",
       "remote_hashes_verified": true,
-      "generated_manifest_path": "corpora/sangraha-verified-urdu-data-5/manifest.json"
+      "generated_manifest_path": "corpora/sangraha-verified-urdu-data-5/manifest.json",
+      "remote_dataset_repo": "Daniyal643/open-urdu-datasets",
+      "remote_revision": "1585f7eae6416f6fe5ee8a05e1a2c2731ccd13da",
+      "remote_manifest_path": "corpora/sangraha-verified-urdu-data-5/manifest.json"
     }
   },
   {
@@ -1476,7 +1497,7 @@
     "annotation_quality_notes": "No native-speaker review performed; every record remains unreviewed.",
     "known_limitations": "Source may omit original page URLs and creator names. Whitespace token count: 113357092. Exact deduplication does not remove semantic overlap. Human review pending.",
     "pii_toxicity_notes": "Contact-pattern filtering is triage only, not a privacy guarantee. Review before use.",
-    "redistribution_status": "source_license_declared; comply with per-record license and attribution fields",
+    "redistribution_status": "explicitly_permitted",
     "citation_bibtex": "@misc{sangraha-verified-urdu-6,\n  title = {AI4Bharat Sangraha verified Urdu, data-6},\n  howpublished = {\\url{https://huggingface.co/datasets/ai4bharat/sangraha}},\n  note = {Pinned source; processed release manifest: datasets/corpora/sangraha-verified-urdu-data-6/manifest.json}\n}",
     "date_accessed": "2026-11-18",
     "link_check": {
@@ -1497,7 +1518,10 @@
       "native_urdu_review": "pending",
       "published_revision": "1585f7eae6416f6fe5ee8a05e1a2c2731ccd13da",
       "remote_hashes_verified": true,
-      "generated_manifest_path": "corpora/sangraha-verified-urdu-data-6/manifest.json"
+      "generated_manifest_path": "corpora/sangraha-verified-urdu-data-6/manifest.json",
+      "remote_dataset_repo": "Daniyal643/open-urdu-datasets",
+      "remote_revision": "1585f7eae6416f6fe5ee8a05e1a2c2731ccd13da",
+      "remote_manifest_path": "corpora/sangraha-verified-urdu-data-6/manifest.json"
     }
   },
   {
@@ -1520,7 +1544,7 @@
     "annotation_quality_notes": "No native-speaker review performed; every record remains unreviewed.",
     "known_limitations": "Source may omit original page URLs and creator names. Whitespace token count: 114927282. Exact deduplication does not remove semantic overlap. Human review pending.",
     "pii_toxicity_notes": "Contact-pattern filtering is triage only, not a privacy guarantee. Review before use.",
-    "redistribution_status": "source_license_declared; comply with per-record license and attribution fields",
+    "redistribution_status": "explicitly_permitted",
     "citation_bibtex": "@misc{sangraha-verified-urdu-7,\n  title = {AI4Bharat Sangraha verified Urdu, data-7},\n  howpublished = {\\url{https://huggingface.co/datasets/ai4bharat/sangraha}},\n  note = {Pinned source; processed release manifest: datasets/corpora/sangraha-verified-urdu-data-7/manifest.json}\n}",
     "date_accessed": "2026-11-18",
     "link_check": {
@@ -1541,7 +1565,10 @@
       "native_urdu_review": "pending",
       "published_revision": "1585f7eae6416f6fe5ee8a05e1a2c2731ccd13da",
       "remote_hashes_verified": true,
-      "generated_manifest_path": "corpora/sangraha-verified-urdu-data-7/manifest.json"
+      "generated_manifest_path": "corpora/sangraha-verified-urdu-data-7/manifest.json",
+      "remote_dataset_repo": "Daniyal643/open-urdu-datasets",
+      "remote_revision": "1585f7eae6416f6fe5ee8a05e1a2c2731ccd13da",
+      "remote_manifest_path": "corpora/sangraha-verified-urdu-data-7/manifest.json"
     }
   }
 ]
