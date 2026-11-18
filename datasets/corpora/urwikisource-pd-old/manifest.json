@@ -1,5 +1,6 @@
 {
   "status": "published",
+  "huggingface_revision": "2b7ad48159bc7edcd47a9f639730c6a3d3ed3e65",
   "source": {
     "url": "https://dumps.wikimedia.org/other/mediawiki_content_current/urwikisource/2026-11-01/xml/bzip2/urwikisource-2026-11-01-p1p13930.xml.bz2",
     "sha256": "91d115f44f561366acdeead2d83f7e4b2426c77d527abe0eb1f124fd5c56cb60",

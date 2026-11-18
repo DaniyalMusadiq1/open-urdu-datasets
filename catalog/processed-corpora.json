@@ -12,7 +12,8 @@
       "Urdu Wikisource monthly dump 2026-11-01"
     ],
     "source_level_license": "Explicit PD-old Wikisource page tag; original works remain public domain",
-    "verification_status": "published; Hugging Face file hashes pending sync"
+    "verification_status": "published; all release file hashes verified on Hugging Face",
+    "huggingface_revision": "2b7ad48159bc7edcd47a9f639730c6a3d3ed3e65"
   },
   {
     "id": "uci-roman-urdu-sentiment",
