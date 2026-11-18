@@ -74,7 +74,7 @@ def build(source, output, *, max_records_per_shard=50000):
     shard_count = 0
     try:
         with source.open("r", encoding="utf-8") as stream:
-            for line_no, line in enumerate(stream, 1):
+            for line in stream:
                 try:
                     row = json.loads(line)
                 except (ValueError, TypeError):
@@ -95,9 +95,6 @@ def build(source, output, *, max_records_per_shard=50000):
                     if handle:
                         handle.close()
                     name = f"part-{len(shards):05d}.jsonl.gz"
-                    handle = gzip.open(staging / name, "wt", encoding="utf-8", newline="\n",
-                                       compresslevel=6, mtime=None) if False else None
-                    # gzip.open has no mtime parameter; use stable records, not a deterministic gzip claim.
                     handle = gzip.open(staging / name, "wt", encoding="utf-8", newline="\n")
                     shards.append({"path": name, "records": 0, "tokens": 0})
                     shard_count = 0
@@ -125,11 +122,15 @@ def build(source, output, *, max_records_per_shard=50000):
             data = (staging / shard["path"]).read_bytes()
             shard["sha256"] = hashlib.sha256(data).hexdigest()
             shard["bytes"] = len(data)
+        source_hash = hashlib.sha256()
+        with source.open("rb") as source_stream:
+            for block in iter(lambda: source_stream.read(1024 * 1024), b""):
+                source_hash.update(block)
         manifest = {"status": "local_unpublished", "record_count": total,
                     "whitespace_delimited_tokens": tokens, "human_verified_records": 0,
                     "categories": counts, "rejected": rejected, "shards": shards,
                     "deduplication": "exact original text SHA-256",
-                    "source_file_sha256": hashlib.sha256(source.read_bytes()).hexdigest()}
+                    "source_file_sha256": source_hash.hexdigest()}
         (staging / "manifest.json").write_text(
             json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         (staging / "checksums.sha256").write_text(
