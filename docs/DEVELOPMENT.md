@@ -33,6 +33,8 @@ Run `python examples/bulk_loading.py` to stream an example from each local compr
 
 To reproduce, download the official Dakshina v1.0 archive linked in the dataset source card, then run `python scripts/import_dakshina_bulk.py ARCHIVE NEW_OUTPUT NEW_WORK.sqlite`. The importer requires the pinned complete-archive SHA-256 and refuses existing outputs. No source scraping, normalization, model generation or training is performed.
 
+For Urdu Wikisource, install `python -m pip install -e '.[wikimedia]'`, download the pinned monthly dump from the URL in its manifest, and run `python scripts/import_urwikisource_pd_old.py DUMP.xml.bz2 NEW_OUTPUT`. It accepts only explicit `PD-old` main-namespace pages, removes exact duplicates against existing repository JSONL text fields, and preserves page revision provenance. Run `python scripts/validate_urwikisource_pd_old.py NEW_OUTPUT` to verify its record counts and shard hashes.
+
 ## Maintainer workflow and review status
 
 Apply authorized maintenance directly on `main`; do not create task branches unless the maintainer requests one. Run the applicable validations before pushing.

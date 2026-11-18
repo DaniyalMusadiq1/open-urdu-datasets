@@ -2,22 +2,20 @@
 
 A community Urdu and Roman Urdu dataset hub with provenance, license tracking and reproducible quality tools.
 
-**Unreleased draft.** Published data includes 150,000 Dakshina native-text records (2,935,498 whitespace-delimited tokens) and a separate UCI Roman Urdu sentiment release (27,106 records; 528,943 tokens). Exact duplicate checks found no text overlap with the existing published dataset files. Human/native-speaker verification remains pending. No v0.1.0 release has been published.
+**Unreleased draft.** Published data includes 150,000 Dakshina native-text records (2,935,498 whitespace-delimited tokens), a separate UCI Roman Urdu sentiment release (27,106 records; 528,943 tokens), and 6,366 Urdu Wikisource `PD-old` page transcriptions (1,300,675 tokens). Human/native-speaker verification remains pending. No v0.1.0 release has been published.
 
 [اردو تعارف — unreviewed](README.ur.md) · [Contributing](CONTRIBUTING.md) · [Licensing and removal](docs/LICENSE_POLICY.md) · [Coverage gaps](docs/COVERAGE.md)
 
-## Phase 2 expansion target (preparation only)
+## Corpus expansion target
 
-**Target: 1,400,000,000 whitespace-delimited tokens, not records.** Across
-published corpora, the measured baseline is **177,106 records / 3,464,441 tokens**
-(0.25% of target); **1,396,535,559 tokens remain**. The UCI Roman Urdu release
-adds 27,106 exact-deduplicated records and 528,943 tokens, kept separate from
-the Dakshina native-text corpus. Human native-speaker verification remains
-pending (0 reviewed records).
-The rights-gated offline ingestion, checksum validation and opt-in Hugging Face
-publishing preparation are documented in [Phase 2](docs/PHASE2.md) and the
-[planned dataset card](datasets/PHASE2_DATASET_CARD.md). These scripts do not
-constitute a completed large-scale crawl or a claim of linguistic correctness.
+**Long-range target: 200,000,000,000 whitespace-delimited tokens, not records.**
+The measured total across the three separately tracked hosted corpora is
+**183,472 records / 4,765,116 tokens** (0.0024% of target); **199,995,234,884
+tokens remain**. Counts are whitespace-delimited and not model-token counts.
+Exact-text deduplication removes NFC/whitespace-equivalent matches only; semantic
+and near-duplicate overlap may remain. All Wikisource pages are unreviewed and
+native-speaker review remains pending (0 reviewed records). See [expansion
+status](docs/PHASE2.md) and the [current corpus card](datasets/PHASE2_DATASET_CARD.md).
 
 ## Verification and counts
 
@@ -103,6 +101,16 @@ filters are documented in the [dataset card](datasets/classification/uci-roman-u
 All records remain **unreviewed**; native-speaker and label verification are pending.
 This task dataset is not a general-domain Roman Urdu corpus and its two source label
 schemes must be kept distinct.
+
+### Urdu Wikisource public-domain-tagged transcriptions
+
+The repository and Hugging Face dataset include 6,366 page-level transcriptions
+from the 2026-11-01 Urdu Wikisource dump, filtered to pages carrying its explicit
+`PD-old` tag and deduplicated exactly against existing repository text fields.
+The dump's main namespace contained 11,980 pages. The release has 1,300,675
+whitespace-delimited tokens. Page revision IDs and links are retained; all text
+remains unreviewed. The official source dump hash, rights filter, exclusions and
+file hashes are recorded in the [dataset card and manifest](datasets/corpora/urwikisource-pd-old/DATASET_CARD.md).
 
 Python 3.10+; see [development commands](docs/DEVELOPMENT.md). Tools validate UTF-8/schema/required fields, find duplicates, convert typed CSV/JSON/JSONL, generate stats, check links and verify checksums. [Normalization](docs/NORMALIZATION.md) is opt-in, preserves original text and logs applied changes; joiners, diacritics and Heh Doachashmee are retained.
 

@@ -18,6 +18,7 @@ jobs:
       - run: python -m pytest
       - run: python scripts/validate_repo.py
       - run: python scripts/validate_uci_roman_urdu.py
+      - run: python scripts/validate_urwikisource_pd_old.py datasets/corpora/urwikisource-pd-old
       - run: python examples/plain_python.py
       - run: python examples/pandas_example.py
       - run: python examples/huggingface_example.py

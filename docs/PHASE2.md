@@ -1,76 +1,59 @@
-# Phase 2 — rights-cleared Urdu bulk ingestion (preparation)
+# Corpus expansion status
 
-**Step 1 milestone: 200,000,000 published whitespace-delimited tokens.**
-The published baseline across separately tracked corpora is 3,464,441 tokens;
-the milestone gap is **196,535,559 tokens**. This includes 528,943 tokens from
-the separately licensed and deduplicated UCI Roman Urdu sentiment release.
-Do not report this milestone achieved until actual hosted shards and remote hashes
-are verified. This is a milestone, not an assertion of data availability.
+## Target and current progress
 
+**Long-range target: 200,000,000,000 whitespace-delimited tokens.** The three
+separately tracked, hosted corpora total **183,472 records / 4,765,116 tokens**:
 
-**Target:** 1,400,000,000 whitespace-delimited tokens (not records).
-**Published baseline:** 150,000 Dakshina native-text records / 2,935,498 tokens,
-plus 27,106 UCI Roman Urdu sentiment records / 528,943 tokens (3,464,441 total).
-**Gap:** 1,396,535,559 tokens. No bulk Phase 2 shards are published as of this commit.
-**Human-reviewed records:** 0. Native Urdu review remains pending.
+- Dakshina Urdu native-text subset: 150,000 records / 2,935,498 tokens.
+- UCI Roman Urdu sentiment task corpus: 27,106 records / 528,943 tokens.
+- Urdu Wikisource `PD-old` pages: 6,366 records / 1,300,675 tokens.
 
-## Source intake
+That is about **0.0024%** of the target, with **199,995,234,884 tokens
+remaining**. These are whitespace-delimited counts, not model-token counts.
+The goal is not complete, and these sources do not represent all Urdu books or
+publicly accessible data. Native-speaker review is pending; human-verified
+records: **0**.
 
-Sources are not approved by category or website alone. Each input record must carry:
-`text`, `category` (news/books/wikipedia/web/conversation/roman_urdu/speech_transcript),
-`script` (urdu_arabic/roman_urdu), `license`, `source_url`, `source_version`,
-`rights_evidence_url`, `document_id`, `revision`, and `redistribution_cleared: true`.
-The rights clearance flag must be supplied only after an independent human source-specific
-rights audit. The pipeline cannot verify legal rights from that flag.
+## Intake and deduplication
 
-Allowed SPDX IDs in this initial gate: CC0-1.0, CC-BY-3.0, CC-BY-4.0,
-CC-BY-SA-3.0, CC-BY-SA-4.0, ODC-By-1.0. Other versions require explicit review
-and code changes. ODC-By may not cover underlying source text; do not use it
-without confirming rights for the actual records. Source URLs and rights evidence
-must use HTTPS. Use actual revision/version identifiers; never invent them.
+Public availability by itself does not grant redistribution rights. Each source
+must have source-specific evidence that permits redistribution. The Wikisource
+addition was limited to main-namespace pages carrying the explicit `{{PD-old}}`
+tag in the pinned monthly export. Other public-domain tags and pages without an
+explicit clear tag were excluded. Source page, revision, timestamp, export hash,
+license and record-level review status are preserved.
 
-## Local commands
+Exact duplicate detection uses SHA-256 over NFC-normalized text after whitespace
+collapse. This removes exact and whitespace-equivalent text; it does not detect
+near duplicates, alternate editions, quotations, or paraphrases. The new batch
+was scanned against text fields in current repository JSONL and JSONL.GZ files.
+Automated script-ratio and contact-pattern filters are triage only and cannot
+prove Urdu language identity or absence of personal data.
 
-```sh
-python -m pip install -e '.[dev]'
-python scripts/phase2_ingest.py input.jsonl phase2-output
-python scripts/phase2_validate.py phase2-output
-python -m pytest tests/test_phase2.py
-```
-
-Output is a new directory with JSONL.GZ shards, SHA-256 checksums and
-`manifest.json` with **local_unpublished** status. Existing output is never
-overwritten. Deduplication uses NFC normalization and whitespace collapse for SHA-256 keys,
-while preserving original source text. This removes identical and whitespace-equivalent
-records within a run, not semantic paraphrases or near-duplicates. SQLite stores
-dedup keys on disk for large runs; validator keys are also disk-backed.
-Whitespace token counts are not model-token counts. Script-ratio heuristics are
-not reliable Urdu language identification; Roman Urdu can include English.
-The contact-pattern filter is limited triage, not a PII guarantee. Add language
-classification, near-duplicate detection, safety sampling, corpus-specific
-license review and independent quality audits before production-scale ingest.
-Do not label heuristic-passing text linguistically verified.
-
-## Hugging Face publication — separate explicit action
-
-Install `huggingface_hub` in the publishing environment. The uploader
-requires an existing HF dataset repository, `HF_TOKEN` and explicit
-`--confirm-upload`:
+## Reproducing the Wikisource addition
 
 ```sh
-python scripts/phase2_publish.py phase2-output --repo-id ORG/DATASET --confirm-upload
+python -m pip install -e '.[wikimedia]'
+python scripts/import_urwikisource_pd_old.py DUMP.xml.bz2 OUTPUT_DIR
+python scripts/validate_urwikisource_pd_old.py OUTPUT_DIR
 ```
 
-This command is **not** run by CI. Do not put tokens in Git or logs. It uploads
-into the `phase2/` prefix, then reports the local validated count. Before
-changing published totals, independently list remote files, compare each remote
-SHA-256, record immutable repository revision and attribution/license notices,
-and reconcile the publication manifest. Do not count an attempted upload.
+The importer checks a pinned official dump SHA-256 and refuses to overwrite an
+existing output directory. It extracts MediaWiki markup while preserving the
+source text and makes no linguistic corrections. The release manifest lists
+record rejects, shard counts and hashes.
 
-## Known gaps
+## Publishing and future intake
 
-No new licensed source has been ingested or published. Existing Dakshina
-historical build shards are not assumed present. No rights clearance for
-news, books, speech or conversational sources is implied by this scaffolding.
-This initial pipeline is preparation, not a billion-token crawler, verified
-language classifier, comprehensive deduplicator, or a native review process.
+For GitHub publication, add the rights-cleared files and metadata to `main`.
+GitHub Actions validates the repo and mirrors the approved release to the
+existing Hugging Face dataset; it verifies each remote file hash and reports the
+immutable revision. Do not increase published counts unless that sync succeeds.
+The sync uses the configured `HF_TOKEN` secret and must never expose it.
+
+Future source batches need rights evidence, provenance, exact and near-duplicate
+checks, source-specific quality review, privacy review, checksums and a clear
+review status before inclusion. Human/native-speaker review must remain marked
+pending until a reviewer completes it. No data should be fabricated or
+misrepresented to reach a numeric target.

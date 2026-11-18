@@ -25,6 +25,7 @@ jobs:
           python scripts/validate_repo.py
           python scripts/validate_bulk.py
           python scripts/validate_web.py
+          python scripts/validate_urwikisource_pd_old.py datasets/corpora/urwikisource-pd-old
       - name: Check Hugging Face secret
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}

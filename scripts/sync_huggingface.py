@@ -18,6 +18,8 @@ BULK_ROOT = Path("datasets/corpora/dakshina-urdu-bulk")
 BULK_REMOTE = "corpora/dakshina-urdu-bulk"
 UCI_ROOT = Path("datasets/classification/uci-roman-urdu-sentiment")
 UCI_REMOTE = "classification/uci-roman-urdu-sentiment"
+WIKISOURCE_ROOT = Path("datasets/corpora/urwikisource-pd-old")
+WIKISOURCE_REMOTE = "corpora/urwikisource-pd-old"
 
 
 def main():
@@ -67,6 +69,21 @@ def main():
         payload = local.read_bytes()
         operations.append(CommitOperationAdd(
             path_in_repo=f"{UCI_REMOTE}/{filename}", path_or_fileobj=payload))
+    wikisource_manifest = json.loads(
+        (WIKISOURCE_ROOT / "manifest.json").read_text(encoding="utf-8"))
+    wikisource_files = ["DATASET_CARD.md", "SOURCES.md", "LICENSE", "manifest.json",
+                        "checksums.sha256"] + [item["path"] for item in wikisource_manifest["shards"]]
+    for filename in wikisource_files:
+        local = WIKISOURCE_ROOT / filename
+        if not local.is_file():
+            raise RuntimeError("Missing Wikisource release file: " + filename)
+        payload = local.read_bytes()
+        for item in wikisource_manifest["shards"]:
+            if (item["path"] == filename
+                    and hashlib.sha256(payload).hexdigest() != item["sha256"]):
+                raise RuntimeError("Local Wikisource shard hash mismatch: " + filename)
+        operations.append(CommitOperationAdd(
+            path_in_repo=f"{WIKISOURCE_REMOTE}/{filename}", path_or_fileobj=payload))
     api = HfApi(token=token)
     api.repo_info(repo_id=repo_id, repo_type="dataset")
     result = api.create_commit(repo_id=repo_id, repo_type="dataset",
@@ -99,11 +116,24 @@ def main():
             remote_hash = hashlib.file_digest(stream, "sha256").hexdigest()
         if local_hash != remote_hash:
             raise RuntimeError("Remote UCI file hash mismatch: " + filename)
+    for filename in wikisource_files:
+        remote_file = hf_hub_download(
+            repo_id=repo_id, repo_type="dataset",
+            filename=f"{WIKISOURCE_REMOTE}/{filename}", revision=result.oid, token=token)
+        with (WIKISOURCE_ROOT / filename).open("rb") as stream:
+            local_hash = hashlib.file_digest(stream, "sha256").hexdigest()
+        with Path(remote_file).open("rb") as stream:
+            remote_hash = hashlib.file_digest(stream, "sha256").hexdigest()
+        if local_hash != remote_hash:
+            raise RuntimeError("Remote Wikisource file hash mismatch: " + filename)
     print(json.dumps({"hf_repo": repo_id, "hf_revision": result.oid,
                       "github_sha": sha, "synced_metadata_files": len(entries),
                       "mirrored_existing_records": bulk_manifest["retained_records"],
                       "published_new_corpus_records": uci_manifest["record_count"],
-                      "published_new_corpus_tokens": uci_manifest["whitespace_delimited_tokens"]}))
+                      "published_new_corpus_tokens": uci_manifest["whitespace_delimited_tokens"],
+                      "published_wikisource_records": wikisource_manifest["record_count"],
+                      "published_wikisource_tokens": wikisource_manifest["whitespace_delimited_tokens"],
+                      "verified_wikisource_files": len(wikisource_files)}))
 
 
 if __name__ == "__main__":

@@ -1,18 +1,14 @@
-# Phase 2 corpus — planned, not published
+# Urdu corpus expansion — current status
 
-- Target: 1,400,000,000 whitespace-delimited tokens
-- New Phase 2 published records: **0**
-- New Phase 2 published tokens: **0**
-- Existing independently tracked Dakshina bulk: 150,000 records, 2,935,498 tokens
-- Separate UCI Roman Urdu task corpus: 27,106 records, 528,943 tokens; kept outside Phase 2 bulk
-- Human review: pending; no verified Phase 2 records
-- Data: none published in this phase
-- License: per-record, not a blanket corpus license
-- Provenance: source URL, source version, document ID, revision, rights evidence URL
-- Quality: fail-closed rights gate, exact dedup, script heuristics, corrupt-text triage,
-  SHA-256 shard checks; no human linguistic verification
-- Intended categories: news, books, Wikipedia, web, conversation, Roman Urdu,
-  speech transcripts. No coverage claim until independently audited files exist.
-- Distribution target: https://huggingface.co/datasets/Daniyal643/open-urdu-datasets
-- Limitations: potential PII, near duplicates, mislabeled Urdu, source-rights
-  ambiguities and language errors require additional audit.
+- Long-range target: 200,000,000,000 whitespace-delimited tokens
+- Current separately tracked hosted corpora: 183,472 records / 4,765,116 tokens
+- Remaining: 199,995,234,884 whitespace-delimited tokens
+- Included sources: Dakshina Urdu native text, UCI Roman Urdu sentiment, and Urdu Wikisource `PD-old` transcriptions
+- Human/native-speaker verified records: 0; review remains pending
+- Licensing: source-specific; see each corpus card and license notice
+- Deduplication: exact NFC-normalized, whitespace-collapsed text only; semantic and near-duplicate overlap may remain
+- Quality: reproducible source hashes, per-record provenance, deterministic shards, checksums and mechanical filters; no human linguistic verification
+
+Only the 6,366 Wikisource pages carrying an explicit `{{PD-old}}` tag in the pinned 2026-11-01 export were retained for that source. See the [dataset card](corpora/urwikisource-pd-old/DATASET_CARD.md), [manifest](corpora/urwikisource-pd-old/manifest.json), and [source/license information](corpora/urwikisource-pd-old/SOURCES.md).
+
+The long-range target is not achieved. Public access alone is not permission to republish. Future materials require source-specific redistribution evidence, provenance, deduplication, and quality review. No completeness claim is made for online books or internet data. The count is whitespace-delimited and not a model-token estimate.

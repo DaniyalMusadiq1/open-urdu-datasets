@@ -12,6 +12,7 @@ dependencies = ["jsonschema[format-nongpl]>=4.22,<5"]
 
 [project.optional-dependencies]
 web = ["lxml>=5,<7"]
+wikimedia = ["mwparserfromhell>=0.6,<0.8"]
 dev = ["pytest>=8,<10", "ruff>=0.11,<1"]
 examples = ["pandas>=2,<4", "datasets>=3,<5"]
 

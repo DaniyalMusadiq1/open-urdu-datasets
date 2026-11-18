@@ -1,0 +1,258 @@
+{
+  "status": "published",
+  "source": {
+    "url": "https://dumps.wikimedia.org/other/mediawiki_content_current/urwikisource/2026-11-01/xml/bzip2/urwikisource-2026-11-01-p1p13930.xml.bz2",
+    "sha256": "91d115f44f561366acdeead2d83f7e4b2426c77d527abe0eb1f124fd5c56cb60",
+    "snapshot_date": "2026-11-01",
+    "pages_in_dump_main_namespace": 11980
+  },
+  "rights_filter": "Only main-namespace revisions containing the explicit {{PD-old}} tag; worldwide public-domain tag per Wikisource copyright policy",
+  "record_count": 6366,
+  "whitespace_delimited_tokens": 1300675,
+  "human_verified_records": 0,
+  "review_status": "unreviewed",
+  "counts": {
+    "main_namespace_pages": 11980,
+    "explicit_pd_old_pages": 6371
+  },
+  "rejected": {
+    "missing_explicit_pd_old": 5586,
+    "short_or_empty_after_extraction": 21,
+    "exact_duplicate_new_source": 5,
+    "contact_pattern_triage": 2
+  },
+  "existing_published_records_scanned": 177140,
+  "existing_published_text_field_hashes_scanned": 354015,
+  "existing_corpus_exclusions": [
+    "datasets/corpora/urwikisource-pd-old"
+  ],
+  "deduplication": "Exact SHA-256 of NFC-normalized text after whitespace collapse; exact record matches only",
+  "text_extraction": "mwparserfromhell strip_code(normalize=True, collapse=True); blank lines removed; original Unicode text not corrected or translated",
+  "pii_screening": "Email, phone-like, URL and @handle patterns rejected as triage only; not a privacy guarantee",
+  "shards": [
+    {
+      "path": "data/pages-0001.jsonl.gz",
+      "records": 200,
+      "tokens": 27256,
+      "bytes": 88391,
+      "sha256": "a8aaa275b6c2f7b6f8945ed90d795199ce3e62ade17b7364bfe4fb600c766626"
+    },
+    {
+      "path": "data/pages-0002.jsonl.gz",
+      "records": 200,
+      "tokens": 23407,
+      "bytes": 80416,
+      "sha256": "df22932cfe7a9af95f3b3508afac23cff5d6803d2d5fbca0b3a148af09184267"
+    },
+    {
+      "path": "data/pages-0003.jsonl.gz",
+      "records": 200,
+      "tokens": 27058,
+      "bytes": 87741,
+      "sha256": "070a9f587c0f9987fab7ac1899856989bb29cd049f967c5a614c0905e5355ebf"
+    },
+    {
+      "path": "data/pages-0004.jsonl.gz",
+      "records": 200,
+      "tokens": 130245,
+      "bytes": 318329,
+      "sha256": "5127d8fea7dfc45057a2a9e0af5436abc3fce87990b4eafa14c7735350b6bcb0"
+    },
+    {
+      "path": "data/pages-0005.jsonl.gz",
+      "records": 200,
+      "tokens": 32897,
+      "bytes": 98885,
+      "sha256": "4f77bb52e557a7c872deb30df8c3e5ccd8b63eee9b6a3a85921aa854591bc250"
+    },
+    {
+      "path": "data/pages-0006.jsonl.gz",
+      "records": 200,
+      "tokens": 29645,
+      "bytes": 92734,
+      "sha256": "2438fb4246de85ce0decd47b38d3e8343f713f8d8ffde44098e1dd4559f216c7"
+    },
+    {
+      "path": "data/pages-0007.jsonl.gz",
+      "records": 200,
+      "tokens": 29441,
+      "bytes": 94235,
+      "sha256": "a8d905635124ee6648ced33dcb40dadf9417b82f09e2bc4090e0cca53df23c54"
+    },
+    {
+      "path": "data/pages-0008.jsonl.gz",
+      "records": 200,
+      "tokens": 25859,
+      "bytes": 89326,
+      "sha256": "337471fb6eec61d3321e23e3a7f05975cd7f11dc758b2cf3b6be531999eb8b6f"
+    },
+    {
+      "path": "data/pages-0009.jsonl.gz",
+      "records": 200,
+      "tokens": 28882,
+      "bytes": 96988,
+      "sha256": "8dff25c143574131c10374cc26d9394dfe94842fb0170e424212dd43103e8da0"
+    },
+    {
+      "path": "data/pages-0010.jsonl.gz",
+      "records": 200,
+      "tokens": 23842,
+      "bytes": 79630,
+      "sha256": "d19f85155ad493a3b4bf9c498bf04e5330e64695f0ce905f7931f9a25a8b5a62"
+    },
+    {
+      "path": "data/pages-0011.jsonl.gz",
+      "records": 200,
+      "tokens": 22925,
+      "bytes": 79016,
+      "sha256": "909fb2f9c10e682e22f474e3f79a0f89b40dc5a9dbbbf2a4ba41f23dc8406d0f"
+    },
+    {
+      "path": "data/pages-0012.jsonl.gz",
+      "records": 200,
+      "tokens": 25294,
+      "bytes": 84086,
+      "sha256": "8afdeb8a9caa196636bf4a2931db9e03d475f83f9f4fb1b527a84f7b2a6f9f59"
+    },
+    {
+      "path": "data/pages-0013.jsonl.gz",
+      "records": 200,
+      "tokens": 30744,
+      "bytes": 96072,
+      "sha256": "314fa8b24397f8006ed57a98e40ca14448257590908c41eb2429294881f4a032"
+    },
+    {
+      "path": "data/pages-0014.jsonl.gz",
+      "records": 200,
+      "tokens": 24455,
+      "bytes": 80294,
+      "sha256": "68c8496e745c7d0d96cde55f5649a19e7af0c4d3884cbc9919fe68aaafb1dbcc"
+    },
+    {
+      "path": "data/pages-0015.jsonl.gz",
+      "records": 200,
+      "tokens": 39015,
+      "bytes": 112528,
+      "sha256": "551cc163aa7fb603bbbb21173f237a9cf4b69cb0f46793560f57e83d5a964baa"
+    },
+    {
+      "path": "data/pages-0016.jsonl.gz",
+      "records": 200,
+      "tokens": 33523,
+      "bytes": 100809,
+      "sha256": "55de6b59200dc0f0618115da828e7afd760422a5028dd3a20f3768bbfe4e6a51"
+    },
+    {
+      "path": "data/pages-0017.jsonl.gz",
+      "records": 200,
+      "tokens": 22488,
+      "bytes": 77768,
+      "sha256": "4ae18f5b88a1fa2f8a2fa25c6cfcfeee6ebe287aad41f390a53bb67325322063"
+    },
+    {
+      "path": "data/pages-0018.jsonl.gz",
+      "records": 200,
+      "tokens": 115257,
+      "bytes": 280366,
+      "sha256": "b69cf23e60ce190726772cb1c13d4e0aea9bf96a5ad815420418e4fd0b8c0d69"
+    },
+    {
+      "path": "data/pages-0019.jsonl.gz",
+      "records": 200,
+      "tokens": 19599,
+      "bytes": 70363,
+      "sha256": "1636fedc619cd449ff388adddd158a6082ff1ca7b0dcb4b2bc3807d1455804f3"
+    },
+    {
+      "path": "data/pages-0020.jsonl.gz",
+      "records": 200,
+      "tokens": 27837,
+      "bytes": 89708,
+      "sha256": "12306de33134a0fc7adf347979436d08dbf8c70440e53d36e3faf72c38e2f46c"
+    },
+    {
+      "path": "data/pages-0021.jsonl.gz",
+      "records": 200,
+      "tokens": 27156,
+      "bytes": 88646,
+      "sha256": "f4baf2d997afb600bf4ff2e473b09639b43f80673fd9a5be374853e16b52e444"
+    },
+    {
+      "path": "data/pages-0022.jsonl.gz",
+      "records": 200,
+      "tokens": 28546,
+      "bytes": 90857,
+      "sha256": "7792c1dff21185f460f9a29bf935ea89c5d5eaa5af22bbde099238983a4800bd"
+    },
+    {
+      "path": "data/pages-0023.jsonl.gz",
+      "records": 200,
+      "tokens": 35751,
+      "bytes": 101302,
+      "sha256": "e4c2085294d566e3ef4932c6393d3ffe299c62b44da54e085f759cde9d2da1b3"
+    },
+    {
+      "path": "data/pages-0024.jsonl.gz",
+      "records": 200,
+      "tokens": 29442,
+      "bytes": 93718,
+      "sha256": "63a8480837200ba0896f5b6c9a0ae0a1e53eca54a9b0e0011306a90ff1297692"
+    },
+    {
+      "path": "data/pages-0025.jsonl.gz",
+      "records": 200,
+      "tokens": 36048,
+      "bytes": 106767,
+      "sha256": "a41cf0726457c0f5d440cefad8f6e69db85833e32f92faa2b7522c73cb0f03de"
+    },
+    {
+      "path": "data/pages-0026.jsonl.gz",
+      "records": 200,
+      "tokens": 37620,
+      "bytes": 111445,
+      "sha256": "78fad8527fce195097c9fd3f211644f03da8ef6762db5cbaa9ef6d9eb15b05a2"
+    },
+    {
+      "path": "data/pages-0027.jsonl.gz",
+      "records": 200,
+      "tokens": 19806,
+      "bytes": 71847,
+      "sha256": "054498a8c855973ca85e9408df37e0329d98595938664bc095f53d1d8080a55c"
+    },
+    {
+      "path": "data/pages-0028.jsonl.gz",
+      "records": 200,
+      "tokens": 27605,
+      "bytes": 89355,
+      "sha256": "e47e2080ecfb7883beae73cdb595ec5fae8d91c1fd5159825c948563dbde0ef5"
+    },
+    {
+      "path": "data/pages-0029.jsonl.gz",
+      "records": 200,
+      "tokens": 225640,
+      "bytes": 519173,
+      "sha256": "6b632c657e92d66b324b6b35e244d2bff1fde2cee844a21941acff59d297ac89"
+    },
+    {
+      "path": "data/pages-0030.jsonl.gz",
+      "records": 200,
+      "tokens": 30400,
+      "bytes": 93894,
+      "sha256": "5de7403471909d662b7c87d437da90c94df5cb44c151e5a351e42a7aa651dc1a"
+    },
+    {
+      "path": "data/pages-0031.jsonl.gz",
+      "records": 200,
+      "tokens": 40397,
+      "bytes": 119879,
+      "sha256": "0de255e0c9eb3d92bf3447449c938a5f1516407a00671359f324f5c1225e768f"
+    },
+    {
+      "path": "data/pages-0032.jsonl.gz",
+      "records": 166,
+      "tokens": 22595,
+      "bytes": 73375,
+      "sha256": "839391a8a129b119e7b008c55b8315737cf6f758eb0f17ba4e6c723b921cb718"
+    }
+  ]
+}

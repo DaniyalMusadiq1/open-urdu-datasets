@@ -1,5 +1,20 @@
 [
   {
+    "id": "urwikisource-pd-old",
+    "local_path": "datasets/corpora/urwikisource-pd-old",
+    "license": "CC-BY-SA-4.0",
+    "hosted": true,
+    "records": 6366,
+    "whitespace_tokens": 1300675,
+    "human_verified_records": 0,
+    "review_status": "unreviewed",
+    "sources": [
+      "Urdu Wikisource monthly dump 2026-11-01"
+    ],
+    "source_level_license": "Explicit PD-old Wikisource page tag; original works remain public domain",
+    "verification_status": "published; Hugging Face file hashes pending sync"
+  },
+  {
     "id": "uci-roman-urdu-sentiment",
     "local_path": "datasets/classification/uci-roman-urdu-sentiment",
     "license": "CC-BY-4.0",
