@@ -1,5 +1,22 @@
 [
   {
+    "id": "dakshina-urdu-bulk",
+    "local_path": "datasets/corpora/dakshina-urdu-bulk",
+    "license": "CC-BY-SA-4.0",
+    "hosted": true,
+    "records": 150000,
+    "whitespace_tokens": 2935498,
+    "human_verified_records": 0,
+    "review_status": "unreviewed",
+    "sources": [
+      "Google Dakshina Urdu native text"
+    ],
+    "source_level_license": "CC-BY-SA-4.0",
+    "verification_status": "published; release file hashes verified on Hugging Face",
+    "huggingface_revision": "1585f7eae6416f6fe5ee8a05e1a2c2731ccd13da",
+    "remote_hashes_verified": true
+  },
+  {
     "id": "urwikisource-pd-old",
     "local_path": "datasets/corpora/urwikisource-pd-old",
     "license": "CC-BY-SA-4.0",
@@ -34,50 +51,180 @@
   },
   {
     "id": "urwiki-articles",
-    "local_path": "datasets/corpora/urwiki-articles",
+    "local_path": null,
     "license": "CC-BY-SA-4.0",
-    "hosted": false,
-    "records": 384011,
-    "whitespace_tokens": 54721873,
+    "hosted": true,
+    "records": 543011,
+    "whitespace_tokens": 96417163,
     "human_verified_records": 0,
     "review_status": "unreviewed",
     "sources": [
-      "https://dumps.wikimedia.org/urwiki/20261101/urwiki-20261101-pages-articles.xml.bz2"
+      "Urdu Wikipedia dump 2026-11-01"
     ],
     "source_level_license": "CC-BY-SA-4.0",
-    "verification_status": "local validation complete; publication and remote hashes pending",
-    "huggingface_revision": null
+    "verification_status": "published; all release file hashes verified on Hugging Face",
+    "huggingface_revision": "1585f7eae6416f6fe5ee8a05e1a2c2731ccd13da",
+    "remote_manifest_path": "corpora/urwiki-articles/manifest.json",
+    "remote_hashes_verified": true
   },
   {
     "id": "sangraha-verified-urdu-0",
-    "local_path": "datasets/corpora/sangraha-verified-urdu",
+    "local_path": null,
     "license": "CC-BY-4.0",
-    "hosted": false,
+    "hosted": true,
     "records": 187767,
     "whitespace_tokens": 114197395,
     "human_verified_records": 0,
     "review_status": "unreviewed",
     "sources": [
-      "https://huggingface.co/datasets/ai4bharat/sangraha"
+      "https://huggingface.co/datasets/ai4bharat/sangraha",
+      "verified/urd/data-0.parquet"
     ],
-    "source_level_license": "CC-BY-4.0",
-    "verification_status": "local validation complete; publication and remote hashes pending",
-    "huggingface_revision": null
+    "source_revision": "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629",
+    "source_level_license": "CC-BY-4.0 declared by upstream dataset card",
+    "verification_status": "published; all release file hashes verified on Hugging Face",
+    "huggingface_revision": "1585f7eae6416f6fe5ee8a05e1a2c2731ccd13da",
+    "remote_manifest_path": "corpora/sangraha-verified-urdu-data-0/manifest.json",
+    "remote_hashes_verified": true
   },
   {
     "id": "sangraha-verified-urdu-1",
-    "local_path": "datasets/corpora/sangraha-verified-urdu-data-1",
+    "local_path": null,
     "license": "CC-BY-4.0",
-    "hosted": false,
+    "hosted": true,
     "records": 187578,
     "whitespace_tokens": 113895936,
     "human_verified_records": 0,
     "review_status": "unreviewed",
     "sources": [
-      "https://huggingface.co/datasets/ai4bharat/sangraha"
+      "https://huggingface.co/datasets/ai4bharat/sangraha",
+      "verified/urd/data-1.parquet"
     ],
-    "source_level_license": "CC-BY-4.0",
-    "verification_status": "local validation complete; publication and remote hashes pending",
-    "huggingface_revision": null
+    "source_revision": "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629",
+    "source_level_license": "CC-BY-4.0 declared by upstream dataset card",
+    "verification_status": "published; all release file hashes verified on Hugging Face",
+    "huggingface_revision": "1585f7eae6416f6fe5ee8a05e1a2c2731ccd13da",
+    "remote_manifest_path": "corpora/sangraha-verified-urdu-data-1/manifest.json",
+    "remote_hashes_verified": true
+  },
+  {
+    "id": "sangraha-verified-urdu-2",
+    "local_path": null,
+    "license": "CC-BY-4.0",
+    "hosted": true,
+    "records": 187694,
+    "whitespace_tokens": 114148226,
+    "human_verified_records": 0,
+    "review_status": "unreviewed",
+    "sources": [
+      "https://huggingface.co/datasets/ai4bharat/sangraha",
+      "verified/urd/data-2.parquet"
+    ],
+    "source_revision": "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629",
+    "source_level_license": "CC-BY-4.0 declared by upstream dataset card",
+    "verification_status": "published; all release file hashes verified on Hugging Face",
+    "huggingface_revision": "1585f7eae6416f6fe5ee8a05e1a2c2731ccd13da",
+    "remote_manifest_path": "corpora/sangraha-verified-urdu-data-2/manifest.json",
+    "remote_hashes_verified": true
+  },
+  {
+    "id": "sangraha-verified-urdu-3",
+    "local_path": null,
+    "license": "CC-BY-4.0",
+    "hosted": true,
+    "records": 187541,
+    "whitespace_tokens": 113690963,
+    "human_verified_records": 0,
+    "review_status": "unreviewed",
+    "sources": [
+      "https://huggingface.co/datasets/ai4bharat/sangraha",
+      "verified/urd/data-3.parquet"
+    ],
+    "source_revision": "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629",
+    "source_level_license": "CC-BY-4.0 declared by upstream dataset card",
+    "verification_status": "published; all release file hashes verified on Hugging Face",
+    "huggingface_revision": "1585f7eae6416f6fe5ee8a05e1a2c2731ccd13da",
+    "remote_manifest_path": "corpora/sangraha-verified-urdu-data-3/manifest.json",
+    "remote_hashes_verified": true
+  },
+  {
+    "id": "sangraha-verified-urdu-4",
+    "local_path": null,
+    "license": "CC-BY-4.0",
+    "hosted": true,
+    "records": 178367,
+    "whitespace_tokens": 107933097,
+    "human_verified_records": 0,
+    "review_status": "unreviewed",
+    "sources": [
+      "https://huggingface.co/datasets/ai4bharat/sangraha",
+      "verified/urd/data-4.parquet"
+    ],
+    "source_revision": "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629",
+    "source_level_license": "CC-BY-4.0 declared by upstream dataset card",
+    "verification_status": "published; all release file hashes verified on Hugging Face",
+    "huggingface_revision": "1585f7eae6416f6fe5ee8a05e1a2c2731ccd13da",
+    "remote_manifest_path": "corpora/sangraha-verified-urdu-data-4/manifest.json",
+    "remote_hashes_verified": true
+  },
+  {
+    "id": "sangraha-verified-urdu-5",
+    "local_path": null,
+    "license": "CC-BY-4.0",
+    "hosted": true,
+    "records": 187373,
+    "whitespace_tokens": 113570525,
+    "human_verified_records": 0,
+    "review_status": "unreviewed",
+    "sources": [
+      "https://huggingface.co/datasets/ai4bharat/sangraha",
+      "verified/urd/data-5.parquet"
+    ],
+    "source_revision": "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629",
+    "source_level_license": "CC-BY-4.0 declared by upstream dataset card",
+    "verification_status": "published; all release file hashes verified on Hugging Face",
+    "huggingface_revision": "1585f7eae6416f6fe5ee8a05e1a2c2731ccd13da",
+    "remote_manifest_path": "corpora/sangraha-verified-urdu-data-5/manifest.json",
+    "remote_hashes_verified": true
+  },
+  {
+    "id": "sangraha-verified-urdu-6",
+    "local_path": null,
+    "license": "CC-BY-4.0",
+    "hosted": true,
+    "records": 187528,
+    "whitespace_tokens": 113357092,
+    "human_verified_records": 0,
+    "review_status": "unreviewed",
+    "sources": [
+      "https://huggingface.co/datasets/ai4bharat/sangraha",
+      "verified/urd/data-6.parquet"
+    ],
+    "source_revision": "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629",
+    "source_level_license": "CC-BY-4.0 declared by upstream dataset card",
+    "verification_status": "published; all release file hashes verified on Hugging Face",
+    "huggingface_revision": "1585f7eae6416f6fe5ee8a05e1a2c2731ccd13da",
+    "remote_manifest_path": "corpora/sangraha-verified-urdu-data-6/manifest.json",
+    "remote_hashes_verified": true
+  },
+  {
+    "id": "sangraha-verified-urdu-7",
+    "local_path": null,
+    "license": "CC-BY-4.0",
+    "hosted": true,
+    "records": 187639,
+    "whitespace_tokens": 114927282,
+    "human_verified_records": 0,
+    "review_status": "unreviewed",
+    "sources": [
+      "https://huggingface.co/datasets/ai4bharat/sangraha",
+      "verified/urd/data-7.parquet"
+    ],
+    "source_revision": "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629",
+    "source_level_license": "CC-BY-4.0 declared by upstream dataset card",
+    "verification_status": "published; all release file hashes verified on Hugging Face",
+    "huggingface_revision": "1585f7eae6416f6fe5ee8a05e1a2c2731ccd13da",
+    "remote_manifest_path": "corpora/sangraha-verified-urdu-data-7/manifest.json",
+    "remote_hashes_verified": true
   }
 ]

@@ -1,0 +1,8 @@
+The upstream AI4Bharat Sangraha dataset card declares CC BY 4.0 for this dataset:
+https://creativecommons.org/licenses/by/4.0/ . Attribute AI4Bharat Sangraha,
+retain the revision, source-file, document ID, and type information provided
+with each record, and consult the upstream card for terms and attribution.
+
+This notice reports the upstream dataset license declaration. It does not
+identify the original author or source URL for each row; those fields were not
+present in the included Parquet records.

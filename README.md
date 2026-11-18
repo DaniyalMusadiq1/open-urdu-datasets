@@ -2,18 +2,17 @@
 
 A community Urdu and Roman Urdu dataset hub with provenance, license tracking and reproducible quality tools.
 
-**Unreleased draft.** Current published data totals 183,472 records / 4,765,116 whitespace-delimited tokens. A validated release candidate contains 913,295 records / 324,510,494 tokens across Urdu Wikipedia and two pinned AI4Bharat Sangraha verified Urdu shards. This repository contains the pinned build and validation pipeline; its CI job publishes the generated data to Hugging Face and verifies remote file hashes. The published count changes only after those checks pass. Native Urdu review remains pending; human-verified records: 0. No v0.1.0 release has been published.
+**Published corpus: 2,217,970 records / 1,006,902,795 whitespace-delimited tokens.** The 1B phase milestone has been reached and the release was uploaded to Hugging Face with remote file hashes verified at revision `1585f7eae6416f6fe5ee8a05e1a2c2731ccd13da`. Native Urdu review remains pending; human-verified records: 0. This is not a model-token count or a claim that all Urdu text is complete.
 
 [اردو تعارف — unreviewed](README.ur.md) · [Contributing](CONTRIBUTING.md) · [Licensing and removal](docs/LICENSE_POLICY.md) · [Coverage gaps](docs/COVERAGE.md)
 
 ## Corpus expansion target
 
-**Overall target: 1,300,000,000 whitespace-delimited tokens. Current phase milestone: 200,000,000 tokens.**
-The currently published corpora remain at **183,472 records / 4,765,116 tokens** until the release candidate has completed GitHub and Hugging Face publication checks. The staged, independently counted addition is **913,295 records / 324,510,494 tokens**. These are whitespace-delimited counts, not model-token counts.
+**Overall target: 1,300,000,000 whitespace-delimited tokens. Current phase milestone: 1,000,000,000 tokens — achieved at 100.69%.** The published corpus contains **2,217,970 records / 1,006,902,795 whitespace-delimited tokens**. The remaining distance to the overall target is **293,097,205 tokens**. Counts are whitespace-delimited, not model-token counts.
 
-The release candidate combines **537,950 Urdu Wikipedia records / 96,417,163 tokens** from the full pinned 2026-11-01 dump and two **AI4Bharat Sangraha verified Urdu** shards: 187,767 / 114,197,395 and 187,578 / 113,895,936. Each source has its own license and attribution rules. See the per-corpus cards and manifests. The CI release job rebuilds the full pinned Wikipedia dump and publishes its generated manifest and checksums alongside the data.
+The release contains **543,011 Urdu Wikipedia records / 96,417,163 tokens** and eight pinned **AI4Bharat Sangraha verified Urdu** shards. The corpus was published to [Hugging Face](https://huggingface.co/datasets/Daniyal643/open-urdu-datasets) at revision `1585f7eae6416f6fe5ee8a05e1a2c2731ccd13da`; release verification completed successfully. See the source cards, manifests and checksums for file-level provenance and licensing.
 
-Exact duplicate detection uses SHA-256 over NFC-normalized text after whitespace collapse. An audit found no exact text collisions among the staged additions or currently stored corpus records. Semantic, quotation, and near-duplicate overlap may remain. Language filters and the Sangraha upstream “verified” label are not native-speaker review. All new records remain unreviewed; human-verified count is **0**. The 200M phase milestone is **not counted as achieved until publication and remote hash verification succeed**. Public access alone does not grant redistribution rights; only source-specific open-license declarations are included here.
+Exact duplicate detection uses SHA-256 over NFC-normalized text after whitespace collapse. Semantic, quotation and near-duplicate overlap may remain. Language filters and the Sangraha upstream “verified” label are not native-speaker review. All records remain unreviewed; human-verified count is **0**. The project target is 1.3B tokens; the 1B phase is achieved. Public access alone does not grant redistribution rights; source-specific licenses and attribution must be followed.
 
 ## Verification and counts
 

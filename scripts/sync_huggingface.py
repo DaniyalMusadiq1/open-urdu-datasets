@@ -95,7 +95,9 @@ def main():
     new_releases = []
     metadata_release_docs = []
     if args.metadata_only:
-        for root in sorted(Path("datasets/corpora").glob("sangraha-verified-urdu-data-*")):
+        metadata_roots = [Path("datasets/corpora/sangraha-verified-urdu")]
+        metadata_roots.extend(sorted(Path("datasets/corpora").glob("sangraha-verified-urdu-data-*")))
+        for root in metadata_roots:
             for filename in ("DATASET_CARD.md", "SOURCES.md", "LICENSE"):
                 local = root / filename
                 if local.is_file():
@@ -192,6 +194,17 @@ def main():
                 remote_hash = hashlib.file_digest(stream, "sha256").hexdigest()
             if local_hash != remote_hash:
                 raise RuntimeError("Remote new corpus file hash mismatch: " + filename)
+    for root, filename in metadata_release_docs:
+        remote_file = hf_hub_download(
+            repo_id=repo_id, repo_type="dataset",
+            filename=f"corpora/{root.name}/{filename}",
+            revision=result.oid, token=token)
+        with (root / filename).open("rb") as stream:
+            local_hash = hashlib.file_digest(stream, "sha256").hexdigest()
+        with Path(remote_file).open("rb") as stream:
+            remote_hash = hashlib.file_digest(stream, "sha256").hexdigest()
+        if local_hash != remote_hash:
+            raise RuntimeError("Remote metadata file hash mismatch: " + str(root / filename))
     summary = {"hf_repo": repo_id, "hf_revision": result.oid,
                "github_sha": sha, "synced_metadata_files": len(entries),
                "mirrored_existing_records": bulk_manifest["retained_records"],
