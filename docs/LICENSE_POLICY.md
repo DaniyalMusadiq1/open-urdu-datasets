@@ -2,6 +2,12 @@
 
 Code and original documentation are MIT. Each dataset retains its own license; MIT does not license third-party data.
 
+## Klam core collection
+
+The Klam core is built only from original content, contributor submissions with explicit permission, or public-domain works whose status is verified for the exact work and edition. Previously published third-party corpus packages remain separate reference material and are not inputs to the Klam core. Do not import another dataset into Klam.
+
+Original and contributor-submitted text must have explicit redistribution permission under CC BY 4.0. Public-domain records keep their public-domain status and require exact rights evidence and attribution. Record the basis, evidence, source version, and attribution in `datasets/klam/sources.json`; a maintainer must approve each source before its records can enter a release. If rights are unclear, exclude the text until they are resolved.
+
 ## Hosting decision
 
 1. Identify the original publisher and version. Public download availability is not redistribution permission.
