@@ -1,0 +1,294 @@
+{
+  "schema_version": "1.0",
+  "policy": "Only sources marked approved and download_enabled true are fetched. Every record remains under its source license; this registry does not relicense content.",
+  "sources": [
+    {
+      "source_id": "sangraha-verified-urdu",
+      "title": "AI4Bharat Sangraha verified Urdu",
+      "status": "approved",
+      "download_enabled": true,
+      "source_url": "https://huggingface.co/datasets/ai4bharat/sangraha",
+      "source_version": "Two immutable revisions: data-0 and data-1 use 8b813c3f62d37b2fa174d68c31e8b35ae2fe85e8; data-2 through data-26 use 654c02de6fa4cff1e3ade4e5c9242bedc7ad7629.",
+      "license": "CC-BY-4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "rights_evidence_url": "https://huggingface.co/datasets/ai4bharat/sangraha/tree/654c02de6fa4cff1e3ade4e5c9242bedc7ad7629/verified/urd",
+      "expected_processed_records": null,
+      "upstream_verified_urdu_tokens": 3658100000,
+      "notes": "Upstream token statistic only; final Klam record count is determined after filtering and deduplication.",
+      "files": [
+        {
+          "filename": "data-0.parquet",
+          "url": "https://huggingface.co/datasets/ai4bharat/sangraha/resolve/8b813c3f62d37b2fa174d68c31e8b35ae2fe85e8/verified/urd/data-0.parquet?download=true",
+          "revision": "8b813c3f62d37b2fa174d68c31e8b35ae2fe85e8",
+          "sha256": "0220cd62b7dde5d12fa52c6c40f47f7e06df3e7ccb659576488fd8a83b110d48"
+        },
+        {
+          "filename": "data-1.parquet",
+          "url": "https://huggingface.co/datasets/ai4bharat/sangraha/resolve/8b813c3f62d37b2fa174d68c31e8b35ae2fe85e8/verified/urd/data-1.parquet?download=true",
+          "revision": "8b813c3f62d37b2fa174d68c31e8b35ae2fe85e8",
+          "sha256": "41d73f33b6efc3124cfce6b36f825510ea125fdbbe7761d17911319f1cb08125"
+        },
+        {
+          "filename": "data-2.parquet",
+          "url": "https://huggingface.co/datasets/ai4bharat/sangraha/resolve/654c02de6fa4cff1e3ade4e5c9242bedc7ad7629/verified/urd/data-2.parquet?download=true",
+          "revision": "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629",
+          "sha256": null
+        },
+        {
+          "filename": "data-3.parquet",
+          "url": "https://huggingface.co/datasets/ai4bharat/sangraha/resolve/654c02de6fa4cff1e3ade4e5c9242bedc7ad7629/verified/urd/data-3.parquet?download=true",
+          "revision": "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629",
+          "sha256": null
+        },
+        {
+          "filename": "data-4.parquet",
+          "url": "https://huggingface.co/datasets/ai4bharat/sangraha/resolve/654c02de6fa4cff1e3ade4e5c9242bedc7ad7629/verified/urd/data-4.parquet?download=true",
+          "revision": "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629",
+          "sha256": null
+        },
+        {
+          "filename": "data-5.parquet",
+          "url": "https://huggingface.co/datasets/ai4bharat/sangraha/resolve/654c02de6fa4cff1e3ade4e5c9242bedc7ad7629/verified/urd/data-5.parquet?download=true",
+          "revision": "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629",
+          "sha256": null
+        },
+        {
+          "filename": "data-6.parquet",
+          "url": "https://huggingface.co/datasets/ai4bharat/sangraha/resolve/654c02de6fa4cff1e3ade4e5c9242bedc7ad7629/verified/urd/data-6.parquet?download=true",
+          "revision": "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629",
+          "sha256": null
+        },
+        {
+          "filename": "data-7.parquet",
+          "url": "https://huggingface.co/datasets/ai4bharat/sangraha/resolve/654c02de6fa4cff1e3ade4e5c9242bedc7ad7629/verified/urd/data-7.parquet?download=true",
+          "revision": "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629",
+          "sha256": null
+        },
+        {
+          "filename": "data-8.parquet",
+          "url": "https://huggingface.co/datasets/ai4bharat/sangraha/resolve/654c02de6fa4cff1e3ade4e5c9242bedc7ad7629/verified/urd/data-8.parquet?download=true",
+          "revision": "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629",
+          "sha256": null
+        },
+        {
+          "filename": "data-9.parquet",
+          "url": "https://huggingface.co/datasets/ai4bharat/sangraha/resolve/654c02de6fa4cff1e3ade4e5c9242bedc7ad7629/verified/urd/data-9.parquet?download=true",
+          "revision": "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629",
+          "sha256": null
+        },
+        {
+          "filename": "data-10.parquet",
+          "url": "https://huggingface.co/datasets/ai4bharat/sangraha/resolve/654c02de6fa4cff1e3ade4e5c9242bedc7ad7629/verified/urd/data-10.parquet?download=true",
+          "revision": "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629",
+          "sha256": null
+        },
+        {
+          "filename": "data-11.parquet",
+          "url": "https://huggingface.co/datasets/ai4bharat/sangraha/resolve/654c02de6fa4cff1e3ade4e5c9242bedc7ad7629/verified/urd/data-11.parquet?download=true",
+          "revision": "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629",
+          "sha256": null
+        },
+        {
+          "filename": "data-12.parquet",
+          "url": "https://huggingface.co/datasets/ai4bharat/sangraha/resolve/654c02de6fa4cff1e3ade4e5c9242bedc7ad7629/verified/urd/data-12.parquet?download=true",
+          "revision": "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629",
+          "sha256": null
+        },
+        {
+          "filename": "data-13.parquet",
+          "url": "https://huggingface.co/datasets/ai4bharat/sangraha/resolve/654c02de6fa4cff1e3ade4e5c9242bedc7ad7629/verified/urd/data-13.parquet?download=true",
+          "revision": "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629",
+          "sha256": null
+        },
+        {
+          "filename": "data-14.parquet",
+          "url": "https://huggingface.co/datasets/ai4bharat/sangraha/resolve/654c02de6fa4cff1e3ade4e5c9242bedc7ad7629/verified/urd/data-14.parquet?download=true",
+          "revision": "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629",
+          "sha256": null
+        },
+        {
+          "filename": "data-15.parquet",
+          "url": "https://huggingface.co/datasets/ai4bharat/sangraha/resolve/654c02de6fa4cff1e3ade4e5c9242bedc7ad7629/verified/urd/data-15.parquet?download=true",
+          "revision": "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629",
+          "sha256": null
+        },
+        {
+          "filename": "data-16.parquet",
+          "url": "https://huggingface.co/datasets/ai4bharat/sangraha/resolve/654c02de6fa4cff1e3ade4e5c9242bedc7ad7629/verified/urd/data-16.parquet?download=true",
+          "revision": "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629",
+          "sha256": null
+        },
+        {
+          "filename": "data-17.parquet",
+          "url": "https://huggingface.co/datasets/ai4bharat/sangraha/resolve/654c02de6fa4cff1e3ade4e5c9242bedc7ad7629/verified/urd/data-17.parquet?download=true",
+          "revision": "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629",
+          "sha256": null
+        },
+        {
+          "filename": "data-18.parquet",
+          "url": "https://huggingface.co/datasets/ai4bharat/sangraha/resolve/654c02de6fa4cff1e3ade4e5c9242bedc7ad7629/verified/urd/data-18.parquet?download=true",
+          "revision": "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629",
+          "sha256": null
+        },
+        {
+          "filename": "data-19.parquet",
+          "url": "https://huggingface.co/datasets/ai4bharat/sangraha/resolve/654c02de6fa4cff1e3ade4e5c9242bedc7ad7629/verified/urd/data-19.parquet?download=true",
+          "revision": "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629",
+          "sha256": null
+        },
+        {
+          "filename": "data-20.parquet",
+          "url": "https://huggingface.co/datasets/ai4bharat/sangraha/resolve/654c02de6fa4cff1e3ade4e5c9242bedc7ad7629/verified/urd/data-20.parquet?download=true",
+          "revision": "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629",
+          "sha256": null
+        },
+        {
+          "filename": "data-21.parquet",
+          "url": "https://huggingface.co/datasets/ai4bharat/sangraha/resolve/654c02de6fa4cff1e3ade4e5c9242bedc7ad7629/verified/urd/data-21.parquet?download=true",
+          "revision": "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629",
+          "sha256": null
+        },
+        {
+          "filename": "data-22.parquet",
+          "url": "https://huggingface.co/datasets/ai4bharat/sangraha/resolve/654c02de6fa4cff1e3ade4e5c9242bedc7ad7629/verified/urd/data-22.parquet?download=true",
+          "revision": "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629",
+          "sha256": null
+        },
+        {
+          "filename": "data-23.parquet",
+          "url": "https://huggingface.co/datasets/ai4bharat/sangraha/resolve/654c02de6fa4cff1e3ade4e5c9242bedc7ad7629/verified/urd/data-23.parquet?download=true",
+          "revision": "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629",
+          "sha256": null
+        },
+        {
+          "filename": "data-24.parquet",
+          "url": "https://huggingface.co/datasets/ai4bharat/sangraha/resolve/654c02de6fa4cff1e3ade4e5c9242bedc7ad7629/verified/urd/data-24.parquet?download=true",
+          "revision": "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629",
+          "sha256": null
+        },
+        {
+          "filename": "data-25.parquet",
+          "url": "https://huggingface.co/datasets/ai4bharat/sangraha/resolve/654c02de6fa4cff1e3ade4e5c9242bedc7ad7629/verified/urd/data-25.parquet?download=true",
+          "revision": "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629",
+          "sha256": null
+        },
+        {
+          "filename": "data-26.parquet",
+          "url": "https://huggingface.co/datasets/ai4bharat/sangraha/resolve/654c02de6fa4cff1e3ade4e5c9242bedc7ad7629/verified/urd/data-26.parquet?download=true",
+          "revision": "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629",
+          "sha256": null
+        }
+      ]
+    },
+    {
+      "source_id": "dakshina-urdu-bulk",
+      "title": "Google Dakshina Urdu",
+      "status": "approved",
+      "download_enabled": true,
+      "source_url": "https://github.com/google-research-datasets/dakshina",
+      "source_version": "Dakshina v1.0 archive SHA-256 83530bec211893d9df429298f42e63c350c25ad56f9f5172f85edb0575ee5b03",
+      "license": "CC-BY-SA-4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "rights_evidence_url": "https://github.com/google-research-datasets/dakshina#license",
+      "expected_processed_records": 150000,
+      "notes": "Expected count is the current repository's processed release count, not a count generated by this fetch script.",
+      "files": [
+        {
+          "filename": "dakshina_dataset_v1.0.tar",
+          "url": "https://storage.googleapis.com/gresearch/dakshina/dakshina_dataset_v1.0.tar",
+          "sha256": "83530bec211893d9df429298f42e63c350c25ad56f9f5172f85edb0575ee5b03"
+        }
+      ]
+    },
+    {
+      "source_id": "urwiki-articles",
+      "title": "Urdu Wikipedia articles",
+      "status": "approved",
+      "download_enabled": true,
+      "source_url": "https://dumps.wikimedia.org/urwiki/20261101/",
+      "source_version": "Wikimedia dump 2026-11-01; SHA-256 pinned in the current Phase 2 importer",
+      "license": "CC-BY-SA-4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "rights_evidence_url": "https://foundation.wikimedia.org/wiki/Terms_of_Use/en",
+      "expected_processed_records": 543011,
+      "notes": "Expected count is the current repository's processed release count. Retain page/revision attribution and applicable share-alike terms.",
+      "files": [
+        {
+          "filename": "urwiki-20261101-pages-articles.xml.bz2",
+          "url": "https://dumps.wikimedia.org/urwiki/20261101/urwiki-20261101-pages-articles.xml.bz2",
+          "sha256": "5cf02a04981c9efe8698ad880b09ca74e6404513a3c7cdb4eea9291ab8e52d0d"
+        }
+      ]
+    },
+    {
+      "source_id": "uci-roman-urdu-sentiment",
+      "title": "UCI Roman Urdu Data Set and RUSAD",
+      "status": "approved",
+      "download_enabled": false,
+      "source_url": "https://archive.ics.uci.edu/",
+      "source_version": "UCI 458 and 854 archive digests recorded in the checked-in processed-corpora manifests.",
+      "license": "CC-BY-4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "rights_evidence_url": "https://archive.ics.uci.edu/dataset/458/roman+urdu+data+set#license",
+      "expected_processed_records": 27106,
+      "notes": "Already processed in the project. Keep each row's UCI dataset ID and exact source URL. A separate raw-fetch adapter is not part of Stage A.",
+      "files": []
+    },
+    {
+      "source_id": "urwikisource-pd-old",
+      "title": "Urdu Wikisource works tagged PD-old",
+      "status": "approved",
+      "download_enabled": false,
+      "source_url": "https://ur.wikisource.org/",
+      "source_version": "Wikimedia dump 2026-11-01; hash and page revisions recorded in the processed corpus.",
+      "license": "CC-BY-SA-4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "rights_evidence_url": "https://en.wikisource.org/wiki/WS:CT",
+      "expected_processed_records": 6366,
+      "notes": "Already processed. The exact PD-old-tagged underlying works remain public domain; retain the transcription/compilation attribution and license.",
+      "files": []
+    },
+    {
+      "source_id": "ghalib-kulliyat-cc0",
+      "title": "Kulliyat-e-Ghalib CC0 transcription",
+      "status": "approved",
+      "download_enabled": false,
+      "source_url": "https://github.com/saadatm/ghalib",
+      "source_version": "03fcabc61d8b00dc7415aeaddc009957688e4f8c",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "rights_evidence_url": "https://github.com/saadatm/ghalib/blob/03fcabc61d8b00dc7415aeaddc009957688e4f8c/README.md#license",
+      "expected_processed_records": 307,
+      "notes": "Already processed as the current public Klam starter; all records remain unreviewed.",
+      "files": []
+    },
+    {
+      "source_id": "makhzan-raw",
+      "title": "Maḵẖzan Urdu text corpus",
+      "status": "excluded",
+      "download_enabled": false,
+      "source_url": "https://github.com/zeerakahmed/makhzan",
+      "source_version": "Current repository terms must be rechecked before any future change.",
+      "license": "CUSTOM-NO-RAW-REDISTRIBUTION",
+      "license_url": "https://github.com/zeerakahmed/makhzan",
+      "rights_evidence_url": "https://github.com/zeerakahmed/makhzan#license",
+      "expected_processed_records": null,
+      "notes": "Do not download or redistribute raw text. Publisher states files are under standard copyright and raw-text republication is not permitted without rights-holder permission.",
+      "files": []
+    },
+    {
+      "source_id": "aya-urdu-subset",
+      "title": "CohereLabs Aya Dataset / Collection Urdu subset",
+      "status": "candidate",
+      "download_enabled": false,
+      "source_url": "https://huggingface.co/datasets/CohereLabs/aya_dataset",
+      "source_version": "Pin an immutable dataset revision only after subset and component audit.",
+      "license": "Apache-2.0 (dataset-card claim; verify underlying components)",
+      "license_url": "https://www.apache.org/licenses/LICENSE-2.0",
+      "rights_evidence_url": "https://huggingface.co/datasets/CohereLabs/aya_dataset",
+      "expected_processed_records": null,
+      "notes": "Candidate only. Verify Urdu row count, component licenses, source attribution, and whether intended subsets are human-authored or translated before ingestion.",
+      "files": []
+    }
+  ]
+}
