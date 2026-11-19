@@ -1,3 +1,4 @@
+# ruff: noqa: I001
 """Synthetic software fixtures; no language examples are added to Klam."""
 import hashlib
 import json
