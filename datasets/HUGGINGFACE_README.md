@@ -36,9 +36,32 @@ configs:
 
 # Open Urdu Datasets
 
-This Hub repository contains separate, source-aware configurations. Select one corpus at a time; each configuration preserves its own fields and source meaning. This is a mixed-license repository, so the license is stated per corpus below and in each folder's `LICENSE` and `SOURCES.md` files. See the [quick-start and export guide](https://github.com/DaniyalMusadiq1/open-urdu-datasets/blob/main/docs/QUICKSTART.md) for streaming, JSONL, Parquet, Pandas and CSV examples.
+## Start with one dataset
 
-## Available configurations
+The default collection is **Sangraha Urdu**: 1,491,487 records in one consistent format. To load it, you do not need to choose a configuration:
+
+```bash
+python -m pip install "datasets>=3,<5"
+```
+
+```python
+from datasets import load_dataset
+
+rows = load_dataset(
+    "Daniyal643/open-urdu-datasets",
+    split="train",
+    streaming=True,
+)
+
+for row in rows.take(3):
+    print(row["text"])
+```
+
+The source declares **CC BY 4.0**. The release has source details, manifests, record counts, and checksums. **The text has not been reviewed by native Urdu speakers**; records are marked `unreviewed`. Automated checks do not certify linguistic correctness or safety. See the [quick-start and export guide](https://github.com/DaniyalMusadiq1/open-urdu-datasets/blob/main/docs/QUICKSTART.md).
+
+## Optional datasets
+
+Other collections serve different tasks and have their own formats and licenses. Use them only when needed. This Hub repository is mixed-license; each collection's license is stated below and in its `LICENSE` and `SOURCES.md` files.
 
 | Configuration | Records | Whitespace tokens | License | Dataset card |
 | --- | ---: | ---: | --- | --- |
@@ -48,36 +71,10 @@ This Hub repository contains separate, source-aware configurations. Select one c
 | `roman-urdu-sentiment` | 27,106 | 528,943 | CC BY 4.0 | [card](classification/uci-roman-urdu-sentiment/DATASET_CARD.md) |
 | `urwikisource-pd-old` | 6,366 | 1,300,675 | CC BY-SA 4.0 compilation | [card](corpora/urwikisource-pd-old/DATASET_CARD.md) |
 
-The counts above describe the currently published files. The project-wide corpus total is 2,217,970 records and 1,006,902,795 whitespace-delimited tokens. These are whitespace counts, not model-token counts. Native-speaker verified records: **0**. Text remains unreviewed unless a record says otherwise.
+Counts describe published files. Project-wide totals count records across collections and are not unique text totals. Native-speaker verified records: **0**.
 
-## Load and stream
+## Source and license
 
-Install `datasets`:
+Keep attribution and follow the license for the collection you use. The Sangraha upstream card declares CC BY 4.0. The word “verified” in its source name does not mean this project has completed local human review.
 
-```bash
-python -m pip install "datasets>=3,<5"
-```
-
-Then load a configuration by name:
-
-```python
-from datasets import load_dataset
-
-rows = load_dataset(
-    "Daniyal643/open-urdu-datasets",
-    "sangraha-verified-urdu",
-    split="train",
-    streaming=True,
-)
-
-for row in rows.take(3):
-    print(row["text"], row["review_status"])
-```
-
-For repeatable work, pin the repository to a commit revision and record that revision in your own experiment metadata. The file-level source revisions and SHA-256 values are recorded in each release manifest. Hugging Face's automatically generated Parquet view is available on the [conversion branch](https://huggingface.co/datasets/Daniyal643/open-urdu-datasets/tree/refs%2Fconvert%2Fparquet); the versioned JSONL.GZ releases and manifests remain the project's source files.
-
-## License and use
-
-This repository does not have one universal content license. Retain the original attribution and comply with the license for the configuration you use. Sangraha's upstream card declares CC BY 4.0. The corpus “verified” label and automated language filters are not local human review.
-
-Exact duplicate checks use NFC-normalized text after whitespace collapse; they do not remove semantic, quotation or near-duplicate overlap. Contact-pattern checks are triage and do not establish that data contains no personal information. See each dataset card, `manifest.json`, and `checksums.sha256` before redistribution.
+Exact duplicate checks use NFC-normalized text after whitespace collapse; they do not remove semantic, quotation, or near-duplicate overlap. Contact-pattern checks are triage and do not establish that data contains no personal information. See each dataset card, `manifest.json`, and `checksums.sha256` before redistribution. For repeatable work, record the dataset revision and source information.
