@@ -1,4 +1,6 @@
-# Published Urdu corpus overview
+# Legacy third-party corpus releases (not Klam)
+
+This card documents previously published source-specific collections. They are not part of the new original-source Klam dataset, which is still in preparation.
 
 This release combines separately loadable Urdu corpora from Urdu Wikipedia and AI4Bharat Sangraha with previously published Dakshina, UCI Roman Urdu and Urdu Wikisource datasets.
 
