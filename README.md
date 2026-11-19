@@ -4,7 +4,7 @@ A source-aware collection of Urdu and Roman Urdu datasets with clear provenance,
 
 **Published corpus:** 2,217,970 records and 1,006,902,795 whitespace-delimited tokens. This count is a text-size measure, not a model-token count. Native-speaker verified records: **0**. Records that have not received native-speaker review are labeled `unreviewed`.
 
-[Browse the dataset on Hugging Face](https://huggingface.co/datasets/Daniyal643/open-urdu-datasets) · [Browse the catalog](CATALOG.md) · [How the data is organized](docs/DATA_ARCHITECTURE.md) · [Contribute](CONTRIBUTING.md) · [Licensing and removal](docs/LICENSE_POLICY.md)
+[Browse the dataset on Hugging Face](https://huggingface.co/datasets/Daniyal643/open-urdu-datasets) · [Quick start and export formats](docs/QUICKSTART.md) · [Browse the catalog](CATALOG.md) · [How the data is organized](docs/DATA_ARCHITECTURE.md) · [Contribute](CONTRIBUTING.md) · [Licensing and removal](docs/LICENSE_POLICY.md)
 
 ## What is here
 
@@ -57,6 +57,7 @@ python examples/plain_python.py
 
 ## In this repository
 
+- Start with [the quick-start guide](docs/QUICKSTART.md) for streaming, local JSONL export, Parquet, Pandas and CSV examples.
 - `catalog/datasets.json` is the canonical machine-readable source inventory; `catalog/datasets.csv` is its typed, generated counterpart.
 - `catalog/processed-corpora.json` records the published subsets and counts.
 - `datasets/` holds dataset cards, source and license records, schemas, and small or locally hosted releases.
