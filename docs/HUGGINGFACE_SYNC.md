@@ -12,7 +12,7 @@ The large Urdu Wikipedia and Sangraha releases are rebuilt from pinned inputs in
 
 ## Publishing and verification
 
-A normal push to `main` rebuilds and validates the pinned large releases, publishes them, and verifies output hashes. A commit whose message contains `[hf-sync-metadata]` runs the metadata-only path and skips the large corpus rebuild. That path validates the catalog, syncs the root dataset card and selected metadata, then compares the remote metadata files against local SHA-256 hashes.
+A normal push to `main` rebuilds and validates the pinned large releases, publishes them, and verifies output hashes. A commit whose message contains `[hf-sync-metadata]` runs the metadata-only path and skips the large corpus rebuild. That path validates the catalog, syncs the root dataset card, published Wikipedia and Sangraha release cards, and selected metadata, then compares the remote metadata files against local SHA-256 hashes.
 
 **One-time maintainer setup:** Create a Hugging Face token with write access to this dataset. In GitHub repository Settings > Secrets and variables > Actions, set the repository secret `HF_TOKEN`. Never commit or paste the token. The dataset repository must already exist. The workflow uses a concurrency group to prevent overlapping sync runs.
 
