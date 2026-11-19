@@ -1,8 +1,8 @@
-# Quick start
+# Klam quick start
 
-The simplest option is the default **Sangraha Urdu** collection: **1,491,487 records**.
+Klam is one Urdu dataset with a consistent format. The current release contains about **2.2 million records**.
 
-## Load a few rows
+## Load the data
 
 Install Hugging Face Datasets:
 
@@ -10,7 +10,7 @@ Install Hugging Face Datasets:
 python -m pip install "datasets>=3,<5"
 ```
 
-Load and stream the default collection:
+Load and stream Klam:
 
 ```python
 from datasets import load_dataset
@@ -23,10 +23,10 @@ data = load_dataset(
 
 for row in data.take(3):
     print(row["text"])
-    print(row["review_status"])  # "unreviewed"
+    print(row["task"], row["script"])
 ```
 
-Streaming reads a few rows at a time. Remove `streaming=True` if you want to download the full collection.
+Streaming reads a few rows at a time. Remove `streaming=True` to download the full release.
 
 ## Save a small JSONL sample
 
@@ -41,18 +41,16 @@ data = load_dataset(
     streaming=True,
 )
 
-with open("urdu-sample.jsonl", "w", encoding="utf-8") as output:
+with open("klam-sample.jsonl", "w", encoding="utf-8") as output:
     for row in islice(data, 1000):
         output.write(json.dumps(row, ensure_ascii=False) + "\n")
 ```
 
-Change `1000` to save a different number of rows. Exporting the full collection takes more time and disk space.
+## Reuse and review
 
-## License and review status
+- Use `text` for the content. `task` distinguishes general text, Roman Urdu sentiment, and romanization records.
+- Each record includes `license`, `license_url`, and `attribution`. Klam includes different source licenses, so follow the license attached to each record you use.
+- `source` and `source_version` preserve traceability. The release's `sources.json` stores full source manifests, so you only need to track the Klam release revision in your project.
+- **Native-speaker review has not happened; records remain `unreviewed`.** Automated checks do not prove linguistic correctness or guarantee the absence of personal information.
 
-- The source declares **CC BY 4.0**. Follow its attribution terms.
-- Keep the source and review metadata when reusing records.
-- **Native-speaker review has not happened; records are marked `unreviewed`.** Automated checks do not confirm linguistic correctness or guarantee that the data contains no personal information.
-- For reproducible work, record the dataset revision you used.
-
-See the [dataset card](https://huggingface.co/datasets/Daniyal643/open-urdu-datasets) for source details and limitations. Other task-specific collections are optional and listed in the [catalog](../CATALOG.md).
+See the [Klam dataset card](https://huggingface.co/datasets/Daniyal643/open-urdu-datasets) for the field list and release details.
