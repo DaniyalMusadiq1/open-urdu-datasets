@@ -116,7 +116,7 @@ def main():
     release_specs = [] if args.metadata_only else [
         (URWIKI_ROOT, URWIKI_REMOTE),
         (SANGRAHA_ROOT, SANGRAHA_REMOTE),
-        (SANGRAHA1_ROOT, SANGRAHA_REMOTE),
+        (SANGRAHA1_ROOT, SANGRAHA1_REMOTE),
         *((path, f"corpora/{path.name}") for path in sorted(
             RELEASE_ROOT.glob("sangraha-verified-urdu-data-[2-7]"))),
     ]
