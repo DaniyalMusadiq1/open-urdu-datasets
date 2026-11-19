@@ -116,11 +116,13 @@ def main():
     release_specs = [] if args.metadata_only else [
         (URWIKI_ROOT, URWIKI_REMOTE),
         (SANGRAHA_ROOT, SANGRAHA_REMOTE),
-        (SANGRAHA1_ROOT, SANGRAHA1_REMOTE),
+        (SANGRAHA1_ROOT, SANGRAHA_REMOTE),
         *((path, f"corpora/{path.name}") for path in sorted(
             RELEASE_ROOT.glob("sangraha-verified-urdu-data-[2-7]"))),
-        (RELEASE_ROOT / "klam", "klam"),
     ]
+    klam_root = RELEASE_ROOT / "klam-original"
+    if not args.metadata_only and (klam_root / "manifest.json").is_file():
+        release_specs.append((klam_root, "klam-original"))
     for root, remote in release_specs:
         release_manifest = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
         release_manifest["status"] = "published"
@@ -254,7 +256,7 @@ def main():
             "published_sangraha_shard_1_tokens": new_releases[2]["manifest"]["whitespace_delimited_tokens"],
         })
         for release in new_releases[3:]:
-            if release["root"].name == "klam":
+            if release["root"].name == "klam-original":
                 summary["published_klam_records"] = release["manifest"]["record_count"]
                 summary["published_klam_tokens"] = release["manifest"]["whitespace_delimited_tokens"]
                 continue
