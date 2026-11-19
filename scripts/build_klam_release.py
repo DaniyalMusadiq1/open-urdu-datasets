@@ -1,147 +1,106 @@
-"""Build the single, normalized Klam release from approved hosted corpora."""
+"""Build Klam only from rights-cleared Klam-originated records."""
 import argparse
 import gzip
 import hashlib
 import io
 import json
+import unicodedata
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+INPUT_ROOT = ROOT / "datasets/klam"
+SOURCE_REGISTRY = INPUT_ROOT / "sources.json"
+RECORD_ROOT = INPUT_ROOT / "records"
 SHARD_RECORDS = 50_000
-LICENSE_URLS = {
-    "CC-BY-4.0": "https://creativecommons.org/licenses/by/4.0/",
-    "CC-BY-SA-4.0": "https://creativecommons.org/licenses/by-sa/4.0/",
-}
-SOURCES = {
-    "urdu-wikipedia": {
-        "root": "urwiki-articles",
-        "display": "Urdu Wikipedia contributors",
-        "license": "CC-BY-SA-4.0",
-        "source_url": "https://dumps.wikimedia.org/urwiki/",
-    },
-    "sangraha-urdu": {
-        "root": "sangraha-verified-urdu",
-        "display": "AI4Bharat Sangraha",
-        "license": "CC-BY-4.0",
-        "source_url": "https://huggingface.co/datasets/ai4bharat/sangraha",
-    },
-    "dakshina-urdu": {
-        "root": "datasets/corpora/dakshina-urdu-bulk",
-        "display": "Google Research Dakshina",
-        "license": "CC-BY-SA-4.0",
-        "source_url": "https://github.com/google-research-datasets/dakshina",
-    },
-    "roman-urdu-sentiment": {
-        "root": "datasets/classification/uci-roman-urdu-sentiment",
-        "display": "UCI Roman Urdu datasets",
-        "license": "CC-BY-4.0",
-        "source_url": "https://archive.ics.uci.edu/",
-    },
-    "urdu-wikisource": {
-        "root": "datasets/corpora/urwikisource-pd-old",
-        "display": "Urdu Wikisource contributors",
-        "license": "CC-BY-SA-4.0",
-        "source_url": "https://ur.wikisource.org/",
-    },
-}
+CC_BY_4 = "https://creativecommons.org/licenses/by/4.0/"
 
 
-def digest(path):
-    with Path(path).open("rb") as stream:
-        return hashlib.file_digest(stream, "sha256").hexdigest()
+def sha256_bytes(value):
+    return hashlib.sha256(value).hexdigest()
 
 
-def stable_source_id(value):
-    return hashlib.sha256(value.encode("utf-8")).hexdigest()
+def canonical(text):
+    return " ".join(unicodedata.normalize("NFC", text).split())
 
 
-def source_roots(release_root):
-    roots = [
-        ("urdu-wikipedia", release_root / "urwiki-articles"),
-        ("sangraha-urdu", release_root / "sangraha-verified-urdu"),
-    ]
-    roots.extend(("sangraha-urdu", path) for path in sorted(
-        release_root.glob("sangraha-verified-urdu-data-*")))
-    roots.extend([
-        ("dakshina-urdu", ROOT / SOURCES["dakshina-urdu"]["root"]),
-        ("roman-urdu-sentiment", ROOT / SOURCES["roman-urdu-sentiment"]["root"]),
-        ("urdu-wikisource", ROOT / SOURCES["urdu-wikisource"]["root"]),
-    ])
-    return roots
+def read_sources():
+    registry = json.loads(SOURCE_REGISTRY.read_text(encoding="utf-8"))
+    entries = registry.get("sources")
+    if not isinstance(entries, list):
+        raise ValueError("Klam source registry must contain a sources list")
+    sources = {}
+    for source in entries:
+        source_id = source.get("source_id")
+        if not source_id or source_id in sources:
+            raise ValueError("Klam source IDs must be present and unique")
+        if source.get("rights_status") != "approved":
+            raise ValueError(f"{source_id}: source rights have not been approved")
+        if source.get("rights_basis") not in {
+            "original", "contributor_permission", "public_domain"
+        }:
+            raise ValueError(f"{source_id}: unsupported rights_basis")
+        if not source.get("source_version") or not source.get("rights_evidence_url"):
+            raise ValueError(f"{source_id}: version and rights evidence are required")
+        if not source.get("attribution"):
+            raise ValueError(f"{source_id}: attribution text is required")
+        if source["rights_basis"] in {"original", "contributor_permission"}:
+            if source.get("license") != "CC-BY-4.0" or source.get("license_url") != CC_BY_4:
+                raise ValueError(f"{source_id}: original/submitted text must use CC BY 4.0")
+            if source.get("permission_evidence_recorded") is not True:
+                raise ValueError(f"{source_id}: permission record is missing")
+        elif source.get("license") != "Public-Domain":
+            raise ValueError(f"{source_id}: public-domain source must be labeled Public-Domain")
+        sources[source_id] = source
+    return registry, sources
 
 
-def record_attribution(source_key, row, profile):
+def normalize_row(row, sources):
     source_id = row.get("source_id")
-    if source_key == "roman-urdu-sentiment" and source_id == "UCI-458":
-        return ("Zareen Sharf, Roman Urdu Data Set, UCI Machine Learning Repository, "
-                "DOI 10.24432/C58325 — " + row["license"] + " — "
-                "https://doi.org/10.24432/C58325")
-    if source_key == "roman-urdu-sentiment" and source_id == "UCI-854":
-        return ("Khawar Mehmood, Daryl Essam, and Muhammad Kamran Malik, RUSAD, "
-                "UCI Machine Learning Repository, DOI 10.24432/C59046 — "
-                + row["license"] + " — https://doi.org/10.24432/C59046")
-    urls = []
-    for key in ("revision_url", "page_url"):
-        value = row.get(key)
-        if isinstance(value, str) and value.startswith("https://"):
-            urls.append(value)
-    nested = row.get("source")
-    if isinstance(nested, dict):
-        for key in ("revision_url", "page_url", "archive_url"):
-            value = nested.get(key)
-            if isinstance(value, str) and value.startswith("https://"):
-                urls.append(value)
-    doi = row.get("source_doi")
-    if isinstance(doi, str) and doi:
-        urls.append("https://doi.org/" + doi)
-    for key in ("source_url", "history_url"):
-        value = row.get(key)
-        if isinstance(value, str) and value.startswith("https://"):
-            urls.append(value)
-    if profile.get("source_url"):
-        urls.append(profile["source_url"])
-    link = next(iter(dict.fromkeys(urls)), "")
-    return profile["display"] + " — " + row["license"] + ((" — " + link) if link else "")
-
-
-def normalized_record(source_key, version, row, profile):
-    if not isinstance(row, dict) or not isinstance(row.get("text"), str) or not row["text"]:
-        raise ValueError(f"{source_key}: every record must contain nonempty text")
-    license_name = row.get("license")
-    if license_name != profile["license"] or license_name not in LICENSE_URLS:
-        raise ValueError(f"{source_key}: unexpected or missing record license")
-    review_status = row.get("review_status")
-    if review_status not in {"unreviewed", "verified", "human_reviewed"}:
-        raise ValueError(f"{source_key}: missing review status")
-    original_id = str(row.get("id", ""))
-    if not original_id:
-        raise ValueError(f"{source_key}: record ID is missing")
-    if "sentiment" in row:
-        task, label = "sentiment_classification", str(row["sentiment"])
-    elif row.get("record_type") == "romanization_pair":
-        task, label = "romanization", ""
-    else:
-        task, label = "text", ""
-    roman = row.get("roman")
-    split = row.get("split")
-    metadata = {key: value for key, value in row.items() if key not in {"text"}}
+    source = sources.get(source_id)
+    if source is None:
+        raise ValueError(f"record refers to an unapproved source: {source_id!r}")
+    text = row.get("text")
+    if not isinstance(text, str) or not text.strip():
+        raise ValueError("record text must be a nonempty string")
+    record_id = row.get("source_record_id")
+    if not isinstance(record_id, str) or not record_id.strip():
+        raise ValueError("source_record_id must be a stable, nonempty string")
+    script = row.get("script")
+    if script not in {"Arabic", "Latin", "Mixed"}:
+        raise ValueError(f"invalid script for {record_id}: {script!r}")
+    task = row.get("task")
+    if not isinstance(task, str) or not task.strip():
+        raise ValueError(f"task is required for {record_id}")
+    review_status = row.get("review_status", "unreviewed")
+    if review_status not in {"unreviewed", "human_reviewed"}:
+        raise ValueError(f"invalid review_status for {record_id}")
+    reviewer_id = row.get("reviewer_id", "")
+    review_date = row.get("review_date", "")
+    review_scope = row.get("review_scope", "")
+    if review_status == "human_reviewed" and not all((reviewer_id, review_date, review_scope)):
+        raise ValueError(f"human-reviewed record lacks review evidence: {record_id}")
+    digest_input = source_id + "\0" + record_id + "\0" + canonical(text)
     return {
-        "id": stable_source_id(source_key + "\0" + original_id),
-        "text": row["text"],
+        "id": sha256_bytes(digest_input.encode("utf-8")),
+        "text": text,
         "language": "ur",
-        "script": "Latin" if source_key == "roman-urdu-sentiment" else "Arabic",
+        "script": script,
         "task": task,
-        "label": label,
-        "roman": roman if isinstance(roman, str) else "",
-        "split": split if isinstance(split, str) else "",
-        "source": source_key,
-        "source_version": version,
-        "license": license_name,
-        "license_url": LICENSE_URLS[license_name],
+        "label": str(row.get("label") or ""),
+        "split": str(row.get("split") or ""),
+        "source_id": source_id,
+        "source_version": source["source_version"],
+        "source_record_id": record_id,
+        "source_locator": str(row.get("source_locator") or ""),
+        "rights_basis": source["rights_basis"],
+        "license": source["license"],
+        "license_url": source.get("license_url", ""),
+        "rights_evidence_url": source["rights_evidence_url"],
+        "attribution": source["attribution"],
         "review_status": review_status,
-        "attribution": record_attribution(source_key, row, profile),
-        "word_count": str(len(row["text"].split())),
-        "metadata_json": json.dumps(metadata, ensure_ascii=False, sort_keys=True, separators=(",", ":")),
+        "reviewer_id": reviewer_id,
+        "review_date": review_date,
+        "review_scope": review_scope,
     }
 
 
@@ -158,121 +117,112 @@ def write_shard(output, index, rows):
         "path": relative,
         "records": len(rows),
         "bytes": len(payload),
-        "sha256": hashlib.sha256(payload).hexdigest(),
+        "sha256": sha256_bytes(payload),
     }
 
 
-def build(output, release_root):
-    output, release_root = Path(output), Path(release_root)
+def build(output):
+    output = Path(output)
     if output.exists():
         raise FileExistsError(output)
+    registry, sources = read_sources()
+    files = sorted(RECORD_ROOT.glob("*.jsonl"))
+    if not sources or not files:
+        return {
+            "ready": False,
+            "reason": "No approved Klam-originated or contributor-permissioned records are available.",
+            "records": 0,
+        }
+    rows_by_id = set()
+    texts = set()
+    input_files = []
     output.mkdir(parents=True)
     (output / "data").mkdir()
-    sources = []
     shards = []
     batch = []
-    total_records = total_words = human_reviewed = 0
-    seen_ids = set()
-    for source_key, root in source_roots(release_root):
-        profile = SOURCES[source_key]
-        manifest_path = root / "manifest.json"
-        if not manifest_path.is_file():
-            raise FileNotFoundError(f"{source_key}: missing {manifest_path}")
-        manifest_bytes = manifest_path.read_bytes()
-        source_manifest = json.loads(manifest_bytes)
-        version = hashlib.sha256(manifest_bytes).hexdigest()[:16]
-        source_record_count = source_manifest.get("record_count", source_manifest.get("retained_records"))
-        files = sorted((root / "data").glob("*.jsonl")) + sorted((root / "data").glob("*.jsonl.gz"))
-        if not files:
-            raise ValueError(f"{source_key}: no published JSONL records found in {root / 'data'}")
-        source_rows = 0
-        for path in files:
-            opener = gzip.open if path.suffix == ".gz" else open
-            with opener(path, "rt", encoding="utf-8") as stream:
-                for line_number, line in enumerate(stream, 1):
-                    row = json.loads(line)
-                    record = normalized_record(source_key, version, row, profile)
-                    if record["id"] in seen_ids:
-                        raise ValueError(f"duplicate Klam ID in {source_key}: {record['id']}")
-                    seen_ids.add(record["id"])
-                    source_rows += 1
-                    total_records += 1
-                    total_words += int(record["word_count"])
-                    human_reviewed += record["review_status"] == "human_reviewed"
-                    batch.append(record)
-                    if len(batch) >= SHARD_RECORDS:
-                        shards.append(write_shard(output, len(shards) + 1, batch))
-                        batch = []
-        if source_record_count is not None and source_rows != source_record_count:
-            raise ValueError(
-                f"{source_key}: manifest says {source_record_count} rows, read {source_rows}"
-            )
-        sources.append({
-            "id": source_key,
-            "name": profile["display"],
-            "license": profile["license"],
-            "license_url": LICENSE_URLS[profile["license"]],
-            "release_manifest_sha256": hashlib.sha256(manifest_bytes).hexdigest(),
-            "release_manifest": source_manifest,
-            "records": source_rows,
+    record_count = token_count = reviewed_count = 0
+    for path in files:
+        payload_hash = sha256_bytes(path.read_bytes())
+        file_records = 0
+        with path.open(encoding="utf-8") as stream:
+            for line_number, line in enumerate(stream, 1):
+                if not line.strip():
+                    raise ValueError(f"blank line in {path}:{line_number}")
+                source_row = json.loads(line)
+                row = normalize_row(source_row, sources)
+                if row["id"] in rows_by_id:
+                    raise ValueError(f"duplicate Klam record ID: {row['id']}")
+                text_key = canonical(row["text"])
+                if text_key in texts:
+                    raise ValueError(f"duplicate Klam text at {path}:{line_number}")
+                rows_by_id.add(row["id"])
+                texts.add(text_key)
+                batch.append(row)
+                record_count += 1
+                file_records += 1
+                token_count += len(row["text"].split())
+                reviewed_count += row["review_status"] == "human_reviewed"
+                if len(batch) >= SHARD_RECORDS:
+                    shards.append(write_shard(output, len(shards) + 1, batch))
+                    batch = []
+        input_files.append({
+            "name": path.name,
+            "records": file_records,
+            "sha256": payload_hash,
         })
     if batch:
         shards.append(write_shard(output, len(shards) + 1, batch))
     (output / "sources.json").write_text(
-        json.dumps(sources, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    checksums = []
-    for shard in shards:
-        checksums.append(f'{shard["sha256"]}  {shard["path"]}')
-    sources_sha = digest(output / "sources.json")
-    checksums.append(f"{sources_sha}  sources.json")
+        json.dumps(registry, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    checksums = [
+        f'{item["sha256"]}  {item["path"]}' for item in shards
+    ]
+    sources_hash = sha256_bytes((output / "sources.json").read_bytes())
+    checksums.append(f"{sources_hash}  sources.json")
     (output / "checksums.sha256").write_text("\n".join(checksums) + "\n", encoding="utf-8")
     manifest = {
         "dataset": "Klam (کلام)",
         "schema_version": "1.0",
         "format": "JSONL.GZ",
-        "record_count": total_records,
-        "whitespace_delimited_tokens": total_words,
-        "human_verified_records": human_reviewed,
-        "review_status": "unreviewed" if human_reviewed == 0 else "mixed",
-        "license": "mixed; see per-record license and sources.json",
-        "sources": sources,
+        "record_count": record_count,
+        "whitespace_delimited_tokens": token_count,
+        "human_reviewed_records": reviewed_count,
+        "review_status": "mixed" if 0 < reviewed_count < record_count else (
+            "human_reviewed" if reviewed_count == record_count else "unreviewed"),
+        "license": "CC-BY-4.0 plus verified public-domain records; see per-record rights fields",
+        "source_policy": "original, contributor-permissioned, or rights-verified public-domain material only",
+        "sources": registry["sources"],
+        "input_files": input_files,
         "shards": shards,
-        "checksums_sha256": "checksums.sha256",
     }
     (output / "manifest.json").write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     (output / "LICENSE").write_text(
-        "# Klam data licenses\n\n"
-        "Klam combines records under different source licenses. There is no single "
-        "license for all text. Each record contains its applicable `license`, "
-        "`license_url`, and `attribution`; sources.json provides source-level "
-        "details. Follow the terms for the records you use.\n",
+        "# Klam data rights\n\n"
+        "Original and contributor-permissioned records are released under CC BY 4.0. "
+        "Verified public-domain records remain public domain. Every row carries its "
+        "rights basis, applicable license, evidence link, and attribution.\n",
         encoding="utf-8")
     (output / "SOURCES.md").write_text(
         "# Klam sources\n\n"
-        "Every record identifies its source, source release, license, and review status. "
-        "The exact source release manifests are summarized in sources.json. "
-        "All text remains unreviewed unless the record explicitly says otherwise.\n",
+        "Only original, explicitly permissioned, or rights-verified public-domain "
+        "records are included. See sources.json for source versions and rights evidence.\n",
         encoding="utf-8")
     (output / "DATASET_CARD.md").write_text(
         "# Klam (کلام)\n\n"
-        f"Klam contains {total_records:,} records in one simple schema. It combines "
-        "eligible Urdu and Roman Urdu text, including text and sentiment records. "
-        "Records preserve source, source version, license, attribution, and review status.\n\n"
-        f"**Native-speaker reviewed records: {human_reviewed:,}.** "
-        "Automated checks do not confirm linguistic correctness, safety, or privacy.\n\n"
-        "Licenses differ by source; there is no single license for the entire collection. "
-        "See the per-record license fields and sources.json.\n",
+        f"Klam contains {record_count:,} records in one consistent schema.\n\n"
+        f"Native-speaker reviewed records: {reviewed_count:,}. "
+        "Records without review evidence remain marked unreviewed.\n",
         encoding="utf-8")
-    return manifest
+    return {"ready": True, **manifest}
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", required=True)
-    parser.add_argument("--release-root", default="artifacts/phase2-release")
     args = parser.parse_args()
-    print(json.dumps(build(args.output, args.release_root), ensure_ascii=False))
+    result = build(args.output)
+    print(json.dumps(result, ensure_ascii=False))
 
 
 if __name__ == "__main__":
