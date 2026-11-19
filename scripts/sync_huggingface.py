@@ -129,6 +129,8 @@ def main():
             json.dumps(release_manifest, indent=2) + "\n", encoding="utf-8")
         release_files = ["DATASET_CARD.md", "SOURCES.md", "LICENSE", "manifest.json",
                          "checksums.sha256"] + [item["path"] for item in release_manifest["shards"]]
+        if (root / "sources.json").is_file():
+            release_files.append("sources.json")
         for filename in release_files:
             local = root / filename
             if not local.is_file():
