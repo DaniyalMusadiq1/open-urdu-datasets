@@ -6,4 +6,4 @@ authors:
   - name: DaniyalMusadiq1
 repository-code: "https://github.com/DaniyalMusadiq1/open-urdu-datasets"
 license: MIT
-abstract: "One normalized Urdu and Roman Urdu dataset with record-level source, license, attribution, and review metadata."
+abstract: "Original-source Urdu dataset in preparation, with one schema and explicit rights, attribution, and review metadata."
