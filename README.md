@@ -1,16 +1,16 @@
 # Klam (کلام)
 
-Klam is being built as one simple Urdu dataset from material created for Klam, contributor text with explicit permission, and rights-verified public-domain works.
+Klam (کلام) is one Urdu dataset with a simple, consistent record format. It starts with a curated poetry collection and will grow only from rights-cleared, traceable Urdu text.
 
 ## Current status
 
-The original-source registry is empty, so **there is no Klam data release to load yet**. Earlier third-party corpus releases remain in the repository for reference; they are not part of the new Klam collection. Klam will publish only after its source rights and records are checked.
+The starter collection contains **307 Ghalib poetry records** from a CC0-dedicated digital transcription. Its preface identifies the 1862 Nizami edition as the base text and notes additional variants from other editions. All 307 records are marked `unreviewed`; native-speaker reviewed: **0**. This is a start, not complete coverage of Urdu.
 
-The release builder creates one consistent record format and includes each record's source, source version, rights basis, license, attribution, and review status. Users will load one Klam release instead of managing upstream datasets individually.
+The release builder places the records in one consistent format with title, text, genre, source link, source version, rights, attribution, and review status. Older third-party NLP corpora remain separate and are not Klam inputs.
 
 ## Contribute
 
-To add original or permissioned Urdu text, follow the [Klam contribution guide](docs/KLAM_CONTRIBUTION.md). Sources without clear rights evidence stay out. OCR drafts and books whose redistribution rights are unclear are not published.
+To add original, permissioned, CC0, or verified public-domain Urdu text, follow the [Klam contribution guide](docs/KLAM_CONTRIBUTION.md). Sources without clear rights evidence stay out. OCR drafts and books whose redistribution rights are unclear are not published.
 
 **Native-speaker reviewed Klam records: 0.** Text remains unreviewed until people review it.
 

@@ -4,6 +4,7 @@
   "type": "object",
   "required": [
     "id",
+    "title",
     "text",
     "language",
     "script",
@@ -25,26 +26,91 @@
     "review_scope"
   ],
   "properties": {
-    "id": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
-    "text": {"type": "string", "minLength": 1},
-    "language": {"const": "ur"},
-    "script": {"enum": ["Arabic", "Latin", "Mixed"]},
-    "task": {"type": "string", "minLength": 1},
-    "label": {"type": "string"},
-    "split": {"type": "string"},
-    "source_id": {"type": "string", "minLength": 1},
-    "source_version": {"type": "string", "minLength": 1},
-    "source_record_id": {"type": "string", "minLength": 1},
-    "source_locator": {"type": "string"},
-    "rights_basis": {"enum": ["original", "contributor_permission", "public_domain"]},
-    "license": {"type": "string", "minLength": 1},
-    "license_url": {"type": "string"},
-    "rights_evidence_url": {"type": "string", "minLength": 1},
-    "attribution": {"type": "string", "minLength": 1},
-    "review_status": {"enum": ["unreviewed", "human_reviewed"]},
-    "reviewer_id": {"type": "string"},
-    "review_date": {"type": "string"},
-    "review_scope": {"type": "string"}
+    "id": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "language": {
+      "const": "ur"
+    },
+    "script": {
+      "enum": [
+        "Arabic",
+        "Latin",
+        "Mixed"
+      ]
+    },
+    "task": {
+      "type": "string",
+      "minLength": 1
+    },
+    "label": {
+      "type": "string"
+    },
+    "split": {
+      "type": "string"
+    },
+    "source_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_record_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_locator": {
+      "type": "string"
+    },
+    "rights_basis": {
+      "enum": [
+        "original",
+        "contributor_permission",
+        "public_domain",
+        "cc0"
+      ]
+    },
+    "license": {
+      "type": "string",
+      "minLength": 1
+    },
+    "license_url": {
+      "type": "string"
+    },
+    "rights_evidence_url": {
+      "type": "string",
+      "minLength": 1
+    },
+    "attribution": {
+      "type": "string",
+      "minLength": 1
+    },
+    "review_status": {
+      "enum": [
+        "unreviewed",
+        "human_reviewed"
+      ]
+    },
+    "reviewer_id": {
+      "type": "string"
+    },
+    "review_date": {
+      "type": "string"
+    },
+    "review_scope": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    }
   },
   "additionalProperties": false
 }

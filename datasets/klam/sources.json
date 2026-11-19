@@ -1,4 +1,19 @@
 {
   "policy_version": "1.0",
-  "sources": []
+  "sources": [
+    {
+      "source_id": "ghalib-kulliyat-cc0",
+      "title": "Kulliyāt-e-Ghalib (UrduWeb web-book transcription)",
+      "source_url": "https://github.com/saadatm/ghalib",
+      "source_version": "03fcabc61d8b00dc7415aeaddc009957688e4f8c",
+      "rights_basis": "cc0",
+      "rights_status": "approved",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "rights_evidence_url": "https://github.com/saadatm/ghalib/blob/03fcabc61d8b00dc7415aeaddc009957688e4f8c/README.md#license",
+      "attribution": "Mirza Asadullah Khan Ghalib; digital transcription by Saadat Mateen and UrduWeb.org volunteers. The pinned source preface identifies the 1862 Nizami edition as the base and notes additional variants from other editions. Klam removed Pollen markup and preserved Urdu text and line breaks.",
+      "permission_evidence_recorded": true,
+      "accessed_at": "2026-11-19"
+    }
+  ]
 }

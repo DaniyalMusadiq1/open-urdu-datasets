@@ -19,9 +19,9 @@
     "title": {"type": "string", "minLength": 1},
     "source_url": {"type": "string", "format": "uri"},
     "source_version": {"type": "string", "minLength": 1},
-    "rights_basis": {"enum": ["original", "contributor_permission", "public_domain"]},
+    "rights_basis": {"enum": ["original", "contributor_permission", "public_domain", "cc0"]},
     "rights_status": {"enum": ["candidate", "pending", "approved", "rejected"]},
-    "license": {"enum": ["CC-BY-4.0", "Public-Domain"]},
+    "license": {"enum": ["CC-BY-4.0", "CC0-1.0", "Public-Domain"]},
     "license_url": {"type": "string"},
     "rights_evidence_url": {"type": "string", "format": "uri"},
     "attribution": {"type": "string", "minLength": 1},
@@ -41,6 +41,20 @@
         "properties": {
           "license": {"const": "CC-BY-4.0"},
           "license_url": {"const": "https://creativecommons.org/licenses/by/4.0/"},
+          "permission_evidence_recorded": {"const": true}
+        },
+        "required": ["permission_evidence_recorded"]
+      }
+    },
+    {
+      "if": {
+        "properties": {"rights_basis": {"const": "cc0"}},
+        "required": ["rights_basis"]
+      },
+      "then": {
+        "properties": {
+          "license": {"const": "CC0-1.0"},
+          "license_url": {"const": "https://creativecommons.org/publicdomain/zero/1.0/"},
           "permission_evidence_recorded": {"const": true}
         },
         "required": ["permission_evidence_recorded"]

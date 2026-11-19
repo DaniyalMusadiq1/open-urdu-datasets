@@ -1,4 +1,4 @@
-"""Build Klam only from rights-cleared Klam-originated records."""
+"""Build Klam from rights-cleared source text with traceable records."""
 import argparse
 import gzip
 import hashlib
@@ -13,6 +13,7 @@ SOURCE_REGISTRY = INPUT_ROOT / "sources.json"
 RECORD_ROOT = INPUT_ROOT / "records"
 SHARD_RECORDS = 50_000
 CC_BY_4 = "https://creativecommons.org/licenses/by/4.0/"
+CC0_1 = "https://creativecommons.org/publicdomain/zero/1.0/"
 
 
 def sha256_bytes(value):
@@ -46,7 +47,7 @@ def read_sources():
         if source.get("rights_status") != "approved":
             raise ValueError(f"{source_id}: source rights have not been approved")
         if source.get("rights_basis") not in {
-            "original", "contributor_permission", "public_domain"
+            "original", "contributor_permission", "public_domain", "cc0"
         }:
             raise ValueError(f"{source_id}: unsupported rights_basis")
         if not source.get("source_version") or not source.get("rights_evidence_url"):
@@ -58,6 +59,11 @@ def read_sources():
                 raise ValueError(f"{source_id}: original/submitted text must use CC BY 4.0")
             if source.get("permission_evidence_recorded") is not True:
                 raise ValueError(f"{source_id}: permission record is missing")
+        elif source["rights_basis"] == "cc0":
+            if source.get("license") != "CC0-1.0" or source.get("license_url") != CC0_1:
+                raise ValueError(f"{source_id}: CC0 source must use the CC0 1.0 URL")
+            if source.get("permission_evidence_recorded") is not True:
+                raise ValueError(f"{source_id}: CC0 dedication evidence is missing")
         elif source.get("license") != "Public-Domain":
             raise ValueError(f"{source_id}: public-domain source must be labeled Public-Domain")
         sources[source_id] = source
@@ -75,6 +81,9 @@ def normalize_row(row, sources):
     record_id = row.get("source_record_id")
     if not isinstance(record_id, str) or not record_id.strip():
         raise ValueError("source_record_id must be a stable, nonempty string")
+    title = row.get("title")
+    if not isinstance(title, str) or not title.strip():
+        raise ValueError(f"title is required for {record_id}")
     script = row.get("script")
     if script not in {"Arabic", "Latin", "Mixed"}:
         raise ValueError(f"invalid script for {record_id}: {script!r}")
@@ -92,6 +101,7 @@ def normalize_row(row, sources):
     digest_input = source_id + "\0" + record_id + "\0" + canonical(text)
     return {
         "id": sha256_bytes(digest_input.encode("utf-8")),
+        "title": title,
         "text": text,
         "language": "ur",
         "script": script,
@@ -136,7 +146,7 @@ def build(output):
     if output.exists():
         raise FileExistsError(output)
     registry, sources = read_sources()
-    files = sorted(RECORD_ROOT.glob("*.jsonl"))
+    files = sorted([*RECORD_ROOT.glob("*.jsonl"), *RECORD_ROOT.glob("*.jsonl.gz")])
     if not sources or not files:
         return {
             "ready": False,
@@ -154,7 +164,8 @@ def build(output):
     for path in files:
         payload_hash = sha256_bytes(path.read_bytes())
         file_records = 0
-        with path.open(encoding="utf-8") as stream:
+        opener = gzip.open if path.suffix == ".gz" else open
+        with opener(path, "rt", encoding="utf-8") as stream:
             for line_number, line in enumerate(stream, 1):
                 if not line.strip():
                     raise ValueError(f"blank line in {path}:{line_number}")
@@ -199,8 +210,8 @@ def build(output):
         "human_reviewed_records": reviewed_count,
         "review_status": "mixed" if 0 < reviewed_count < record_count else (
             "human_reviewed" if reviewed_count == record_count else "unreviewed"),
-        "license": "CC-BY-4.0 plus verified public-domain records; see per-record rights fields",
-        "source_policy": "original, contributor-permissioned, or rights-verified public-domain material only",
+        "license": "Per record: CC-BY-4.0, CC0-1.0, or verified public domain; see row rights fields and sources.json",
+        "source_policy": "original, contributor-permissioned, CC0-dedicated, or rights-verified public-domain material only",
         "sources": registry["sources"],
         "input_files": input_files,
         "shards": shards,
