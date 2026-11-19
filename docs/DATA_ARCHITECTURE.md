@@ -1,75 +1,44 @@
-# Data architecture
+# Klam data architecture
 
-The repository keeps a simple Klam release for users and source-specific reference material for auditing. Klam is built only from original, explicitly permissioned, or rights-verified public-domain text; previously published third-party corpus packages are not inputs.
+Klam is one simple dataset release built from original material, contributor text with explicit permission, and rights-verified public-domain works. Earlier third-party corpus packages remain separate reference material and are not Klam inputs.
 
-## Responsibilities
+## Where things live
 
 | Location | Purpose |
 | --- | --- |
-| GitHub `catalog/` | Canonical source inventory, evidence, published-subset counts and link checks |
-| GitHub `datasets/<category>/<slug>/` | Cards, source notes, licenses, schemas and small or locally hosted data packages |
-| GitHub `scripts/`, `src/`, `tests/` | Pinned import and validation code, normalization utilities and examples |
-| Hugging Face `corpora/<slug>/` | Published JSONL.GZ corpus files and their release metadata |
-| Hugging Face `classification/<slug>/` | Published task datasets, keeping source labels and task semantics explicit |
-| Hugging Face `github-sync/` | Versioned snapshots of the GitHub catalog and selected project documentation |
-| Hugging Face root `README.md` | Dataset card with separate loadable configurations and per-source license notes |
+| `datasets/klam/sources.json` | Approved source and rights registry |
+| `datasets/klam/records/` | Klam-originated records awaiting release |
+| `schemas/klam-record.schema.json` | One normalized Klam record schema |
+| `scripts/build_klam_release.py` | Builds a rights-checked Klam release |
+| Hugging Face `klam-original/` | Normalized JSONL.GZ release and manifests |
+| Existing corpus directories and catalog | Historical/reference datasets; never inputs to Klam |
 
-GitHub is the source of truth for repository code, the discovery catalog and documented processing rules. Hugging Face is the download and streaming location for the large generated releases. A catalog entry is not proof that its data is hosted. Check its `hosted`, `local_path`, `download_url` and verification evidence fields.
+GitHub is the source of truth for the source registry, code, and release policy. Hugging Face provides the single loadable Klam collection once approved records exist.
 
-## Dataset package layout
+## Record and rights flow
 
-Use one directory per source or independently versioned subset:
+1. A source is registered with its version, rights basis, evidence link, license, and attribution.
+2. A maintainer approves the source rights before records can enter Klam.
+3. Records are normalized to one schema. Exact duplicates and unapproved sources stop the build.
+4. Each output row carries its source, rights basis, license, attribution, and review status. Full source details remain in `sources.json`.
+5. The release gets one Klam revision and checksum manifest. Users can load Klam without choosing an upstream dataset.
 
-```text
-datasets/<category>/<dataset-id>/
-├── DATASET_CARD.md
-├── SOURCES.md
-├── LICENSE
-├── manifest.json
-├── checksums.sha256
-└── data/
-    └── *.jsonl or *.jsonl.gz
-```
+Original and contributor-submitted text must have explicit permission for CC BY 4.0. Public-domain records remain marked as public domain and require evidence for the exact work and edition. Klam does not relicense text it does not own.
 
-The generated Wikipedia and Sangraha releases keep large data and generated manifests on Hugging Face; GitHub carries their cards, source notes, licenses, build code and catalog evidence. Do not commit large generated releases to GitHub. Keep file paths aligned between GitHub metadata and the Hugging Face release family.
+## Loading
 
-## Hugging Face layout and loading
-
-The Hugging Face repository groups files by corpus family. Its root card defines a separate Datasets configuration for each schema:
-
-- `urdu-wikipedia`
-- `sangraha-verified-urdu` (combines the eight source shards in one logical configuration)
-- `dakshina-urdu-native-text`
-- `roman-urdu-sentiment`
-- `urwikisource-pd-old`
-
-Load one configuration at a time. Do not concatenate different configurations without an explicit schema mapping: source fields, task labels, script and license can differ. JSONL.GZ records are UTF-8 JSON objects, one per line. Dataset-specific cards and manifests define the fields, splits, record counts, whitespace-token counts and SHA-256 hashes.
-
-Example:
+The Klam source registry is currently empty, so an original-source Klam release is not available to load yet. Once records pass rights review and validation, the default dataset can be read with:
 
 ```python
 from datasets import load_dataset
 
-dataset = load_dataset(
+data = load_dataset(
     "Daniyal643/open-urdu-datasets",
-    "urdu-wikipedia",
     split="train",
     streaming=True,
 )
-print(next(iter(dataset)))
+for row in data.take(3):
+    print(row["text"])
 ```
 
-The word `streaming` avoids materializing all records in memory; it does not change the data or its license. Pin the Hugging Face repository revision when exact repeatability is required.
-
-## Provenance and quality rules
-
-- Preserve source IDs, URLs, revision IDs, timestamps, creator/attribution fields and license fields when supplied by the source.
-- Record source revision and source-file SHA-256 in release manifests. Record output shard hashes, counts and transformation settings too.
-- Keep original source text available when a transformation is applied; document transformations and do not silently “correct” Urdu.
-- Use exact duplicate identity checks only as documented. NFC normalization and whitespace collapse are comparison keys; they do not by themselves authorize rewriting stored text.
-- Keep every record's `review_status`. Machine filters and upstream “verified” labels do not count as local human review.
-- Keep evaluation material in a separate evaluation-only package and warn users against training or model-selection contamination.
-- Treat contact-pattern checks as triage; never claim a corpus is PII-free on that basis.
-- Do not merge datasets with incompatible licenses or label systems into one downloadable configuration.
-
-See [license policy](LICENSE_POLICY.md), [dataset card template](DATASET_CARD_TEMPLATE.md), and [Hugging Face sync details](HUGGINGFACE_SYNC.md).
+See the [Klam contribution guide](KLAM_CONTRIBUTION.md), [license policy](LICENSE_POLICY.md), and [record schema](../schemas/klam-record.schema.json).
