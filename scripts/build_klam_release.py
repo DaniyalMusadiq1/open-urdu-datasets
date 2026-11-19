@@ -67,9 +67,9 @@ def read_sources():
             raise ValueError(f"{source_id}: version and rights evidence are required")
         if not source.get("attribution"):
             raise ValueError(f"{source_id}: attribution text is required")
-        if rights_basis in {"original", "contributor_permission", "cc0"}:
-            if source.get("permission_evidence_recorded") is not True:
-                raise ValueError(f"{source_id}: permission/dedication evidence is missing")
+        if (rights_basis in {"original", "contributor_permission", "cc0"}
+                and source.get("permission_evidence_recorded") is not True):
+            raise ValueError(f"{source_id}: permission/dedication evidence is missing")
         sources[source_id] = source
     return registry, sources
 
