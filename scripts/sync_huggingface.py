@@ -113,14 +113,7 @@ def main():
                     operations.append(CommitOperationAdd(
                         path_in_repo=f"corpora/{root.name}/{filename}", path_or_fileobj=payload))
                     metadata_release_docs.append((root, filename))
-    release_specs = [] if args.metadata_only else [
-        (URWIKI_ROOT, URWIKI_REMOTE),
-        (SANGRAHA_ROOT, SANGRAHA_REMOTE),
-        (SANGRAHA1_ROOT, SANGRAHA1_REMOTE),
-        *((path, f"corpora/{path.name}") for path in sorted(
-            RELEASE_ROOT.glob("sangraha-verified-urdu-data-*"))
-          if path.name != "sangraha-verified-urdu-data-1"),
-    ]
+    release_specs = []
     klam_root = RELEASE_ROOT / "klam-original"
     if not args.metadata_only and (klam_root / "manifest.json").is_file():
         release_specs.append((klam_root, "klam-original"))

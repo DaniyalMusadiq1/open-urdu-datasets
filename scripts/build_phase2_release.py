@@ -88,40 +88,51 @@ def main():
         raise FileExistsError(artifact_root)
     artifact_root.mkdir(parents=True)
     intake = artifact_root / "source-files"
-    downloaded = {name: download(url, intake / name, digest) for url, digest, name in SOURCES}
+    source_specs = {name: (url, digest) for url, digest, name in SOURCES}
     index = artifact_root / "dedup-index"
     index_existing_jsonl([ROOT / "datasets"], index)
 
     wiki = artifact_root / "urwiki-articles"
-    run("scripts/import_urwiki_articles.py", downloaded["urwiki-20261101-pages-articles.xml.bz2"],
+    wiki_url, wiki_sha = source_specs["urwiki-20261101-pages-articles.xml.bz2"]
+    wiki_dump = download(wiki_url, intake / "urwiki-20261101-pages-articles.xml.bz2", wiki_sha)
+    run("scripts/import_urwiki_articles.py", wiki_dump,
         wiki, "--existing-root", index)
     add_release_docs(wiki, ROOT / "datasets/corpora/urwiki-articles")
     run("scripts/validate_urwiki_articles.py", wiki)
     index_release(wiki, index)
+    wiki_dump.unlink()
 
     sangraha0 = artifact_root / "sangraha-verified-urdu"
-    run("scripts/import_sangraha_urdu.py", downloaded["sangraha-urd-data-0.parquet"],
-        downloaded["lid.176.ftz"], sangraha0, "--existing-root", index)
+    fasttext_url, fasttext_sha = source_specs["lid.176.ftz"]
+    fasttext = download(fasttext_url, intake / "lid.176.ftz", fasttext_sha)
+    data0_url, data0_sha = source_specs["sangraha-urd-data-0.parquet"]
+    data0 = download(data0_url, intake / "sangraha-urd-data-0.parquet", data0_sha)
+    run("scripts/import_sangraha_urdu.py", data0, fasttext, sangraha0, "--existing-root", index)
     add_release_docs(sangraha0, ROOT / "datasets/corpora/sangraha-verified-urdu")
     run("scripts/validate_sangraha_urdu.py", sangraha0)
     index_release(sangraha0, index)
+    data0.unlink()
 
     sangraha1 = artifact_root / "sangraha-verified-urdu-data-1"
-    run("scripts/import_sangraha_urdu.py", downloaded["sangraha-urd-data-1.parquet"],
-        downloaded["lid.176.ftz"], sangraha1, "--existing-root", index,
+    data1_url, data1_sha = source_specs["sangraha-urd-data-1.parquet"]
+    data1 = download(data1_url, intake / "sangraha-urd-data-1.parquet", data1_sha)
+    run("scripts/import_sangraha_urdu.py", data1, fasttext, sangraha1, "--existing-root", index,
         "--source-path", "verified/urd/data-1.parquet")
     add_release_docs(sangraha1, ROOT / "datasets/corpora/sangraha-verified-urdu-data-1")
     run("scripts/validate_sangraha_urdu.py", sangraha1)
     index_release(sangraha1, index)
+    data1.unlink()
 
     sangraha_expansions = []
     for shard_number in range(2, 27):
         source_path = f"verified/urd/data-{shard_number}.parquet"
         corpus_name = f"sangraha-verified-urdu-data-{shard_number}"
         corpus_root = artifact_root / corpus_name
+        source_name = f"sangraha-urd-data-{shard_number}.parquet"
+        source_url, source_sha = source_specs[source_name]
+        source_file = download(source_url, intake / source_name, source_sha)
         run("scripts/import_sangraha_urdu.py",
-            downloaded[f"sangraha-urd-data-{shard_number}.parquet"],
-            downloaded["lid.176.ftz"], corpus_root, "--existing-root", index,
+            source_file, fasttext, corpus_root, "--existing-root", index,
             "--source-path", source_path, "--source-revision", EXPANSION_REVISION)
         add_release_docs(corpus_root, ROOT / "datasets/corpora/sangraha-verified-urdu-data-1")
         manifest = json.loads((corpus_root / "manifest.json").read_text(encoding="utf-8"))
@@ -145,6 +156,7 @@ def main():
         run("scripts/validate_sangraha_urdu.py", corpus_root)
         index_release(corpus_root, index)
         sangraha_expansions.append(corpus_root)
+        source_file.unlink()
 
     all_corpora = [wiki, sangraha0, sangraha1, *sangraha_expansions]
     run("scripts/audit_new_corpus_duplicates.py", "--existing-root", ROOT / "datasets",
@@ -162,6 +174,7 @@ def main():
     }
     (artifact_root / "release-summary.json").write_text(
         json.dumps(summary, indent=2) + "\n", encoding="utf-8")
+    fasttext.unlink(missing_ok=True)
     print(json.dumps(summary, indent=2))
 
 

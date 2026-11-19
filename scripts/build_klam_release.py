@@ -5,6 +5,8 @@ import hashlib
 import io
 import json
 import os
+import shutil
+import sqlite3
 import unicodedata
 from pathlib import Path
 
@@ -233,14 +235,19 @@ def write_shard(output, index, rows):
     }
 
 
-def build(output, phase2_root=PHASE2_ROOT):
+def build(output, phase2_root=PHASE2_ROOT, cleanup_phase2_inputs=False):
     output = Path(output)
     if output.exists():
         raise FileExistsError(output)
     registry, sources = read_sources()
     inputs = source_inputs(Path(phase2_root))
-    rows_by_id = set()
-    texts = set()
+    seen_path = output / ".dedup.sqlite3"
+    seen_db = sqlite3.connect(seen_path)
+    seen_db.execute("PRAGMA journal_mode=OFF")
+    seen_db.execute("PRAGMA synchronous=OFF")
+    seen_db.execute("CREATE TABLE seen_text (digest TEXT, task TEXT, label TEXT, PRIMARY KEY (digest, task, label))")
+    seen_db.execute("CREATE TABLE seen_ids (id TEXT PRIMARY KEY)")
+    cursor = seen_db.cursor()
     input_files = []
     output.mkdir(parents=True)
     (output / "data").mkdir()
@@ -250,7 +257,7 @@ def build(output, phase2_root=PHASE2_ROOT):
     records_by_source = {}
     duplicates_by_source = {}
     licenses = {}
-    for source_id, path, payload_hash, _manifest in inputs:
+    for input_index, (source_id, path, payload_hash, _manifest) in enumerate(inputs, 1):
         file_read = file_kept = 0
         opener = gzip.open if path.suffix == ".gz" else open
         with opener(path, "rt", encoding="utf-8") as stream:
@@ -260,15 +267,16 @@ def build(output, phase2_root=PHASE2_ROOT):
                 source_row = json.loads(line)
                 row = adapt_source_row(source_id, source_row, sources[source_id])
                 file_read += 1
-                text_key = (canonical(row["text"]), row["task"], row["label"])
-                if text_key in texts:
+                digest = sha256_bytes(canonical(row["text"]).encode("utf-8"))
+                cursor.execute("INSERT OR IGNORE INTO seen_text VALUES (?, ?, ?)",
+                               (digest, row["task"], row["label"]))
+                if cursor.rowcount == 0:
                     duplicate_count += 1
                     duplicates_by_source[source_id] = duplicates_by_source.get(source_id, 0) + 1
                     continue
-                if row["id"] in rows_by_id:
+                cursor.execute("INSERT OR IGNORE INTO seen_ids VALUES (?)", (row["id"],))
+                if cursor.rowcount == 0:
                     raise ValueError(f"duplicate Klam record ID: {row['id']}")
-                texts.add(text_key)
-                rows_by_id.add(row["id"])
                 batch.append(row)
                 record_count += 1
                 file_kept += 1
@@ -279,6 +287,8 @@ def build(output, phase2_root=PHASE2_ROOT):
                 if len(batch) >= SHARD_RECORDS:
                     shards.append(write_shard(output, len(shards) + 1, batch))
                     batch = []
+                if record_count % 10_000 == 0:
+                    seen_db.commit()
         input_files.append({
             "source_id": source_id,
             "name": path.name,
@@ -286,8 +296,13 @@ def build(output, phase2_root=PHASE2_ROOT):
             "records_kept": file_kept,
             "sha256": payload_hash,
         })
+        if cleanup_phase2_inputs and path.is_relative_to(Path(phase2_root)):
+            path.unlink(missing_ok=True)
     if batch:
         shards.append(write_shard(output, len(shards) + 1, batch))
+    seen_db.close()
+    seen_path.unlink(missing_ok=True)
+    seen_path.with_name(seen_path.name + "-journal").unlink(missing_ok=True)
     sources_path = output / "sources.json"
     sources_path.write_text(
         json.dumps(registry, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -351,6 +366,15 @@ def build(output, phase2_root=PHASE2_ROOT):
         "| Source | Records | License |\n| --- | ---: | --- |\n"
         + source_table + "\n",
         encoding="utf-8")
+    if cleanup_phase2_inputs:
+        phase2_root = Path(phase2_root).resolve()
+        for child in phase2_root.iterdir():
+            if child.resolve() == output.resolve():
+                continue
+            if child.is_dir():
+                shutil.rmtree(child)
+            else:
+                child.unlink()
     return {"ready": True, **manifest}
 
 
@@ -358,8 +382,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", required=True)
     parser.add_argument("--phase2-root", default=str(PHASE2_ROOT))
+    parser.add_argument("--cleanup-phase2-inputs", action="store_true")
     args = parser.parse_args()
-    result = build(args.output, args.phase2_root)
+    result = build(args.output, args.phase2_root, args.cleanup_phase2_inputs)
     print(json.dumps(result, ensure_ascii=False))
 
 
