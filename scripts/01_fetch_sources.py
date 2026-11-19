@@ -4,7 +4,6 @@ import argparse
 import hashlib
 import json
 import os
-import shutil
 import sys
 import urllib.request
 from datetime import datetime, timezone

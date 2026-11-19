@@ -5,12 +5,7 @@ from pathlib import Path
 
 from jsonschema import Draft202012Validator
 
-from scripts.build_klam_release import (
-    adapt_source_row,
-    dedup_key,
-    normalize_row,
-    write_shard,
-)
+from scripts.build_klam_release import adapt_source_row, dedup_key, normalize_row, write_shard
 from scripts.validate_klam_release import validate
 
 
