@@ -1,5 +1,7 @@
 # Dataset catalog
 
+For everyday use, start with the single [Klam dataset on Hugging Face](https://huggingface.co/datasets/Daniyal643/open-urdu-datasets) and follow its quick-start guide. This file is the detailed source and license reference behind Klam; most users do not need to browse the individual upstream entries.
+
 This catalog contains **37 upstream resource entries**: 2 with scoped technical verification, 11 pending review, and 24 not yet verified. The separate [processed corpus registry](catalog/processed-corpora.json) describes published releases. Derived demonstration samples are tracked in [their own manifest](catalog/hosted-samples.json).
 
 Technical verification covers the specified source, files, license evidence and mechanical checks only. It does not certify Urdu accuracy. Native-speaker verified records: **0**. Follow each source's own license and attribution terms. Counts can overlap and must not be summed as unique records.
