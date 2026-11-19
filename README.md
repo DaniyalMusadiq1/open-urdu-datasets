@@ -1,79 +1,49 @@
-# Open Urdu Datasets
+# Open Urdu Dataset
 
-A source-aware collection of Urdu and Roman Urdu datasets with clear provenance, license notes, reusable files and validation tools.
+A simple, source-traceable dataset for working with Urdu text.
 
-**Published corpus:** 2,217,970 records and 1,006,902,795 whitespace-delimited tokens. This count is a text-size measure, not a model-token count. Native-speaker verified records: **0**. Records that have not received native-speaker review are labeled `unreviewed`.
+## Start here
 
-[Browse the dataset on Hugging Face](https://huggingface.co/datasets/Daniyal643/open-urdu-datasets) · [Quick start and export formats](docs/QUICKSTART.md) · [Browse the catalog](CATALOG.md) · [How the data is organized](docs/DATA_ARCHITECTURE.md) · [Contribute](CONTRIBUTING.md) · [Licensing and removal](docs/LICENSE_POLICY.md)
+Use the **Sangraha Urdu text collection** as the main starting dataset. It contains **1,491,487 records** in one consistent text format and has one declared source license: **CC BY 4.0**.
 
-## What is here
-
-The collection keeps each source separate so its schema, license, attribution and quality notes travel with the data.
-
-| Collection | Records | Whitespace tokens | License | Record review |
-| --- | ---: | ---: | --- | --- |
-| Urdu Wikipedia articles | 543,011 | 96,417,163 | CC BY-SA 4.0 | Unreviewed |
-| AI4Bharat Sangraha verified Urdu, data-0–7 | 1,491,487 | 905,720,516 | CC BY 4.0 declared upstream | Unreviewed |
-| Dakshina Urdu native text (published subset) | 150,000 | 2,935,498 | CC BY-SA 4.0 | Unreviewed |
-| UCI Roman Urdu sentiment sources | 27,106 | 528,943 | CC BY 4.0 | Pending review |
-| Urdu Wikisource pages tagged PD-old | 6,366 | 1,300,675 | CC BY-SA 4.0 compilation | Unreviewed |
-
-The aggregate is deduplicated using exact text identity checks. It does not mean the sources are semantically unique: quotations, alternate editions and near duplicates may remain. Read each dataset card before use. Licenses and attribution rules apply separately to each source.
-
-## Load a dataset
-
-Install the Hugging Face Datasets library:
+- [Open the dataset on Hugging Face](https://huggingface.co/datasets/Daniyal643/open-urdu-datasets)
+- [Read the simple usage guide](docs/QUICKSTART.md)
+- [See source, license, and quality details](CATALOG.md)
 
 ```bash
 python -m pip install "datasets>=3,<5"
 ```
 
-Each published corpus has its own configuration because fields and labels differ by source. For example, stream the Sangraha corpus:
-
 ```python
 from datasets import load_dataset
 
-rows = load_dataset(
+data = load_dataset(
     "Daniyal643/open-urdu-datasets",
     "sangraha-verified-urdu",
     split="train",
     streaming=True,
 )
 
-for row in rows.take(3):
-    print(row["text"], row["review_status"])
+for row in data.take(3):
+    print(row["text"])
 ```
 
-Other configurations are `urdu-wikipedia`, `dakshina-urdu-native-text`, `roman-urdu-sentiment`, and `urwikisource-pd-old`. The [Hugging Face dataset card](https://huggingface.co/datasets/Daniyal643/open-urdu-datasets) lists each configuration, its files and its license. Use a pinned Hugging Face revision when you need a reproducible snapshot.
+Streaming lets you read records without downloading the entire dataset into memory. Keep the dataset’s attribution and license information when sharing or publishing data derived from it.
 
-Small local examples are available too: the [25-record Dakshina vocabulary sample](datasets/vocabulary/dakshina-urdu-sample/) and the [five-pair Belebele evaluation sample](datasets/translation/belebele-urdu-english-eval-sample/). The Belebele sample is evaluation-only; do not train or select models with it. These derived examples are not part of the published corpus total.
+## What “trusted” means here
 
-Run the local examples with:
+The release is traceable to a pinned upstream source. Its published files have manifests, record counts, and checksums, and automated checks were used during processing.
 
-```bash
-python -m pip install -e ".[examples]"
-python examples/plain_python.py
-```
+**No records have been reviewed by a native Urdu speaker yet.** All records remain marked `unreviewed`. Automated checks and the upstream word “verified” do not establish that text is linguistically correct, safe, private, or human-verified. Check the dataset card and review the data for your intended use.
 
-## In this repository
+The Sangraha source declares **CC BY 4.0**. See the source card for attribution and reuse terms.
 
-- Start with [the quick-start guide](docs/QUICKSTART.md) for streaming, local JSONL export, Parquet, Pandas and CSV examples.
-- `catalog/datasets.json` is the canonical machine-readable source inventory; `catalog/datasets.csv` is its typed, generated counterpart.
-- `catalog/processed-corpora.json` records the published subsets and counts.
-- `datasets/` holds dataset cards, source and license records, schemas, and small or locally hosted releases.
-- `src/`, `scripts/`, and `tests/` contain reusable readers, importers, validators and checks.
-- The large Wikipedia and Sangraha releases are hosted on Hugging Face. Their source pins, filters, manifests and checksums travel with the release.
+## Other collections
 
-See [data architecture](docs/DATA_ARCHITECTURE.md), [catalog definitions](CATALOG.md), [development guide](docs/DEVELOPMENT.md), and [coverage gaps](docs/COVERAGE.md).
+The project also indexes smaller task-specific datasets, such as Roman Urdu sentiment and evaluation data. They have different fields, purposes, and license terms, so they are kept separate. You can ignore them if you only need the main Urdu text collection.
 
-## Data quality
-
-The catalog distinguishes technical source/file checks from review of Urdu content. A `verified` catalog status means the stated source and files passed the listed technical checks; it does **not** mean the Urdu was reviewed by a native speaker. Upstream labels such as “verified” are not this project's human review.
-
-Exact duplicate checks use SHA-256 over NFC-normalized text after whitespace collapse. This does not remove semantic or near-duplicate text. Automated language identification, script filters and contact-pattern screening have stated limits and are not guarantees of linguistic accuracy, safety or privacy.
+Browse the [dataset catalog](CATALOG.md) or [all published files](https://huggingface.co/datasets/Daniyal643/open-urdu-datasets/tree/main).
 
 ## Contribute
 
-Check [CONTRIBUTING.md](CONTRIBUTING.md) and the [dataset card template](docs/DATASET_CARD_TEMPLATE.md) before adding a source. Include its original license, immutable source reference, source hashes, record schema, transformation steps and validation evidence. Do not mark text as human reviewed without actual human review.
-
-The English README is maintained as the primary guide. [The Urdu introduction](README.ur.md) is still marked unreviewed.
+Read [CONTRIBUTING.md](CONTRIBUTING.md) before adding data. Every contribution should include its source, license, and validation evidence. Do not label Urdu text as human-reviewed unless a person has actually reviewed it.
