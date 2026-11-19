@@ -1,44 +1,19 @@
 # Klam (کلام)
 
-One simple, source-traceable Urdu dataset.
+Klam is being built as one simple Urdu dataset from material created for Klam, contributor text with explicit permission, and rights-verified public-domain works.
 
-Klam brings the project's published Urdu and Roman Urdu collections together in **one consistent format** and one dataset you can load directly. The current release contains about **2.2 million records**.
+## Current status
 
-## Start here
+The original-source registry is empty, so **there is no Klam data release to load yet**. Earlier third-party corpus releases remain in the repository for reference; they are not part of the new Klam collection. Klam will publish only after its source rights and records are checked.
 
-Install Hugging Face Datasets:
-
-```bash
-python -m pip install "datasets>=3,<5"
-```
-
-Load Klam and print a few records:
-
-```python
-from datasets import load_dataset
-
-data = load_dataset(
-    "Daniyal643/open-urdu-datasets",
-    split="train",
-    streaming=True,
-)
-
-for row in data.take(3):
-    print(row["text"])
-```
-
-The main field is `text`. Each row also carries task, script, source, release version, license, attribution, and review status. You can ignore those fields for a quick start; they are there when you need them.
-
-## Clear reuse information
-
-Klam combines material with different source licenses, so the whole dataset does **not** have one license. Every record includes its own `license`, `license_url`, and ready-to-use `attribution`. The `sources.json` file explains the source records and versions in this Klam release. Users can cite one Klam release while the source details stay available in the data.
-
-**Native-speaker verified records: 0.** Text remains marked `unreviewed` unless a record says otherwise. Automated checks do not establish linguistic correctness, privacy, or safety.
-
-- [Open Klam on Hugging Face](https://huggingface.co/datasets/Daniyal643/open-urdu-datasets)
-- [Read the quick start](docs/QUICKSTART.md)
-- [See source and reuse details](CATALOG.md)
+The release builder creates one consistent record format and includes each record's source, source version, rights basis, license, attribution, and review status. Users will load one Klam release instead of managing upstream datasets individually.
 
 ## Contribute
 
-Read [CONTRIBUTING.md](CONTRIBUTING.md) before adding data. Each contribution needs a clear source, reuse terms, and validation evidence. Never mark text human-reviewed unless a person has reviewed it.
+To add original or permissioned Urdu text, follow the [Klam contribution guide](docs/KLAM_CONTRIBUTION.md). Sources without clear rights evidence stay out. OCR drafts and books whose redistribution rights are unclear are not published.
+
+**Native-speaker reviewed Klam records: 0.** Text remains unreviewed until people review it.
+
+- [Read the Klam contribution guide](docs/KLAM_CONTRIBUTION.md)
+- [See the source and license policy](docs/LICENSE_POLICY.md)
+- [Browse the legacy source catalog](CATALOG.md)
