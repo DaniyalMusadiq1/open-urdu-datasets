@@ -119,6 +119,7 @@ def main():
         (SANGRAHA1_ROOT, SANGRAHA1_REMOTE),
         *((path, f"corpora/{path.name}") for path in sorted(
             RELEASE_ROOT.glob("sangraha-verified-urdu-data-[2-7]"))),
+        (RELEASE_ROOT / "klam", "klam"),
     ]
     for root, remote in release_specs:
         release_manifest = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
@@ -251,6 +252,10 @@ def main():
             "published_sangraha_shard_1_tokens": new_releases[2]["manifest"]["whitespace_delimited_tokens"],
         })
         for release in new_releases[3:]:
+            if release["root"].name == "klam":
+                summary["published_klam_records"] = release["manifest"]["record_count"]
+                summary["published_klam_tokens"] = release["manifest"]["whitespace_delimited_tokens"]
+                continue
             number = release["manifest"]["source"]["file"].rsplit("-", 1)[-1].split(".", 1)[0]
             summary[f"published_sangraha_shard_{number}_records"] = release["manifest"]["record_count"]
             summary[f"published_sangraha_shard_{number}_tokens"] = release["manifest"]["whitespace_delimited_tokens"]
