@@ -10,4 +10,6 @@ To host data, provide explicit redistribution permission under the documented al
 
 Human review must identify who reviewed which records and what was checked. AI drafts remain `review_status: unreviewed` until the maintainer confirms them. Never add invented translations, glosses, POS tags, examples or counts. Do not train models as part of this repository.
 
+To contribute original Urdu text to the Klam core, follow [`docs/KLAM_CONTRIBUTION.md`](docs/KLAM_CONTRIBUTION.md). The Klam source registry is currently empty; do not add records until their source rights are approved.
+
 Run the commands in `docs/DEVELOPMENT.md`. Include the exact results and any failures. Source-page accessibility and source-reported sizes are not local data validation. Gated downloads require a separate permission decision; do not request access automatically.
