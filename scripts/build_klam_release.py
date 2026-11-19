@@ -71,8 +71,17 @@ def source_roots(release_root):
 
 
 def record_attribution(source_key, row, profile):
+    source_id = row.get("source_id")
+    if source_key == "roman-urdu-sentiment" and source_id == "UCI-458":
+        return ("Zareen Sharf, Roman Urdu Data Set, UCI Machine Learning Repository, "
+                "DOI 10.24432/C58325 — " + row["license"] + " — "
+                "https://doi.org/10.24432/C58325")
+    if source_key == "roman-urdu-sentiment" and source_id == "UCI-854":
+        return ("Khawar Mehmood, Daryl Essam, and Muhammad Kamran Malik, RUSAD, "
+                "UCI Machine Learning Repository, DOI 10.24432/C59046 — "
+                + row["license"] + " — https://doi.org/10.24432/C59046")
     urls = []
-    for key in ("revision_url", "page_url", "source_url", "history_url"):
+    for key in ("revision_url", "page_url"):
         value = row.get(key)
         if isinstance(value, str) and value.startswith("https://"):
             urls.append(value)
@@ -85,6 +94,10 @@ def record_attribution(source_key, row, profile):
     doi = row.get("source_doi")
     if isinstance(doi, str) and doi:
         urls.append("https://doi.org/" + doi)
+    for key in ("source_url", "history_url"):
+        value = row.get(key)
+        if isinstance(value, str) and value.startswith("https://"):
+            urls.append(value)
     if profile.get("source_url"):
         urls.append(profile["source_url"])
     link = next(iter(dict.fromkeys(urls)), "")
@@ -168,7 +181,6 @@ def build(output, release_root):
         manifest_bytes = manifest_path.read_bytes()
         source_manifest = json.loads(manifest_bytes)
         version = hashlib.sha256(manifest_bytes).hexdigest()[:16]
-        manifest_count = source_manifest.get("record_count", source_manifest.get("retained_records"))
         source_record_count = source_manifest.get("record_count", source_manifest.get("retained_records"))
         files = sorted((root / "data").glob("*.jsonl")) + sorted((root / "data").glob("*.jsonl.gz"))
         if not files:
