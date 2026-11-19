@@ -24,12 +24,22 @@ def canonical(text):
 
 
 def read_sources():
+    from jsonschema import Draft202012Validator, FormatChecker
+
     registry = json.loads(SOURCE_REGISTRY.read_text(encoding="utf-8"))
     entries = registry.get("sources")
     if not isinstance(entries, list):
         raise ValueError("Klam source registry must contain a sources list")
+    schema = json.loads(
+        (ROOT / "schemas/klam-source.schema.json").read_text(encoding="utf-8"))
+    Draft202012Validator.check_schema(schema)
+    validator = Draft202012Validator(schema, format_checker=FormatChecker())
     sources = {}
     for source in entries:
+        errors = sorted(validator.iter_errors(source), key=lambda error: list(error.path))
+        if errors:
+            details = "; ".join(error.message for error in errors)
+            raise ValueError("invalid Klam source registry entry: " + details)
         source_id = source.get("source_id")
         if not source_id or source_id in sources:
             raise ValueError("Klam source IDs must be present and unique")
