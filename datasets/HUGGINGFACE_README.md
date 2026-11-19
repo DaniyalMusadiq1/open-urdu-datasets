@@ -1,80 +1,63 @@
 ---
 language:
 - ur
-pretty_name: Open Urdu Datasets
+pretty_name: Klam (کلام)
 configs:
-- config_name: urdu-wikipedia
-  data_files:
-  - split: train
-    path: "corpora/urwiki-articles/data/*.jsonl.gz"
-- config_name: sangraha-verified-urdu
+- config_name: klam
   default: true
   data_files:
   - split: train
-    path:
-    - "corpora/sangraha-verified-urdu/data/*.jsonl.gz"
-    - "corpora/sangraha-verified-urdu-data-1/data/*.jsonl.gz"
-    - "corpora/sangraha-verified-urdu-data-2/data/*.jsonl.gz"
-    - "corpora/sangraha-verified-urdu-data-3/data/*.jsonl.gz"
-    - "corpora/sangraha-verified-urdu-data-4/data/*.jsonl.gz"
-    - "corpora/sangraha-verified-urdu-data-5/data/*.jsonl.gz"
-    - "corpora/sangraha-verified-urdu-data-6/data/*.jsonl.gz"
-    - "corpora/sangraha-verified-urdu-data-7/data/*.jsonl.gz"
-- config_name: dakshina-urdu-native-text
-  data_files:
-  - split: train
-    path: "corpora/dakshina-urdu-bulk/data/*.jsonl.gz"
-- config_name: roman-urdu-sentiment
-  data_files:
-  - split: train
-    path: "classification/uci-roman-urdu-sentiment/data/*.jsonl.gz"
-- config_name: urwikisource-pd-old
-  data_files:
-  - split: train
-    path: "corpora/urwikisource-pd-old/data/*.jsonl.gz"
+    path: "klam/data/*.jsonl.gz"
 ---
 
-# Open Urdu Datasets
+# Klam (کلام)
 
-## Start with one dataset
+Klam is one easy-to-use collection for Urdu and Roman Urdu data. It combines the project's currently published collections in one consistent record format. The current release contains about **2.2 million records**.
 
-The default collection is **Sangraha Urdu**: 1,491,487 records in one consistent format. To load it, you do not need to choose a configuration:
+## Load the dataset
+
+Install Hugging Face Datasets:
 
 ```bash
 python -m pip install "datasets>=3,<5"
 ```
 
+Then load Klam:
+
 ```python
 from datasets import load_dataset
 
-rows = load_dataset(
+data = load_dataset(
     "Daniyal643/open-urdu-datasets",
     split="train",
     streaming=True,
 )
 
-for row in rows.take(3):
+for row in data.take(3):
     print(row["text"])
 ```
 
-The source declares **CC BY 4.0**. The release has source details, manifests, record counts, and checksums. **The text has not been reviewed by native Urdu speakers**; records are marked `unreviewed`. Automated checks do not certify linguistic correctness or safety. See the [quick-start and export guide](https://github.com/DaniyalMusadiq1/open-urdu-datasets/blob/main/docs/QUICKSTART.md).
+You can use `text` and ignore the other fields for basic text work. The common fields are:
 
-## Optional datasets
+| Field | Meaning |
+| --- | --- |
+| `id` | Stable Klam record ID |
+| `text` | Original text; not rewritten |
+| `language`, `script` | Language and writing system |
+| `task` | `text`, `sentiment_classification`, or `romanization` |
+| `label`, `roman`, `split` | Task fields; blank when not used |
+| `source`, `source_version` | Source and pinned source-release manifest |
+| `license`, `license_url`, `attribution` | Reuse information for this record |
+| `review_status` | Whether people have reviewed the record |
+| `word_count` | Whitespace-delimited word count |
+| `metadata_json` | Original source metadata for traceability |
 
-Other collections serve different tasks and have their own formats and licenses. Use them only when needed. This Hub repository is mixed-license; each collection's license is stated below and in its `LICENSE` and `SOURCES.md` files.
+## Reuse terms
 
-| Configuration | Records | Whitespace tokens | License | Dataset card |
-| --- | ---: | ---: | --- | --- |
-| `urdu-wikipedia` | 543,011 | 96,417,163 | CC BY-SA 4.0 | [card](corpora/urwiki-articles/DATASET_CARD.md) |
-| `sangraha-verified-urdu` | 1,491,487 | 905,720,516 | CC BY 4.0 declared upstream | [card](corpora/sangraha-verified-urdu/DATASET_CARD.md) and shard cards |
-| `dakshina-urdu-native-text` | 150,000 | 2,935,498 | CC BY-SA 4.0 | [card](corpora/dakshina-urdu-bulk/DATASET_CARD.md) |
-| `roman-urdu-sentiment` | 27,106 | 528,943 | CC BY 4.0 | [card](classification/uci-roman-urdu-sentiment/DATASET_CARD.md) |
-| `urwikisource-pd-old` | 6,366 | 1,300,675 | CC BY-SA 4.0 compilation | [card](corpora/urwikisource-pd-old/DATASET_CARD.md) |
+Klam brings multiple openly licensed collections into one dataset, but the content does not have one universal license. Every row carries its own license and attribution, and `sources.json` records the full source manifests used in this Klam release. You can use one Klam release and cite its Hugging Face revision; Klam keeps the source details alongside it. Follow the terms attached to the records you use.
 
-Counts describe published files. Project-wide totals count records across collections and are not unique text totals. Native-speaker verified records: **0**.
+## Quality and review
 
-## Source and license
+**Native-speaker verified records: 0.** The records remain marked `unreviewed`. Automated filtering and file checks do not confirm linguistic correctness, privacy, or safety. Review records for your intended use.
 
-Keep attribution and follow the license for the collection you use. The Sangraha upstream card declares CC BY 4.0. The word “verified” in its source name does not mean this project has completed local human review.
-
-Exact duplicate checks use NFC-normalized text after whitespace collapse; they do not remove semantic, quotation, or near-duplicate overlap. Contact-pattern checks are triage and do not establish that data contains no personal information. See each dataset card, `manifest.json`, and `checksums.sha256` before redistribution. For repeatable work, record the dataset revision and source information.
+The JSONL.GZ files under `klam/data/` are the single normalized dataset. Source-specific files and manifests remain available in their folders for audit and reproducibility, but users can load Klam without selecting among them.
