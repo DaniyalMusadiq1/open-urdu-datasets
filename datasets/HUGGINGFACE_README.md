@@ -36,7 +36,7 @@ configs:
 
 # Open Urdu Datasets
 
-This Hub repository contains separate, source-aware configurations. Select one corpus at a time; each configuration preserves its own fields and source meaning. This is a mixed-license repository, so the license is stated per corpus below and in each folder's `LICENSE` and `SOURCES.md` files.
+This Hub repository contains separate, source-aware configurations. Select one corpus at a time; each configuration preserves its own fields and source meaning. This is a mixed-license repository, so the license is stated per corpus below and in each folder's `LICENSE` and `SOURCES.md` files. See the [quick-start and export guide](https://github.com/DaniyalMusadiq1/open-urdu-datasets/blob/main/docs/QUICKSTART.md) for streaming, JSONL, Parquet, Pandas and CSV examples.
 
 ## Available configurations
 
@@ -74,7 +74,7 @@ for row in rows.take(3):
     print(row["text"], row["review_status"])
 ```
 
-For repeatable work, pin the repository to a commit revision and record that revision in your own experiment metadata. The file-level source revisions and SHA-256 values are recorded in each release manifest.
+For repeatable work, pin the repository to a commit revision and record that revision in your own experiment metadata. The file-level source revisions and SHA-256 values are recorded in each release manifest. Hugging Face's automatically generated Parquet view is available on the [conversion branch](https://huggingface.co/datasets/Daniyal643/open-urdu-datasets/tree/refs%2Fconvert%2Fparquet); the versioned JSONL.GZ releases and manifests remain the project's source files.
 
 ## License and use
 
