@@ -11,6 +11,8 @@ Klam's core release is built from material created for Klam, contributor submiss
 
 For original and contributor-submitted text, Klam requires explicit permission to redistribute under CC BY 4.0. Keep consent evidence outside the public repository; record that the maintainer checked it. For public-domain text, document the author, work, edition, publication history, and evidence for the exact edition. A downloadable book page or a public-domain label by itself is not enough.
 
+A source registry entry follows [the source schema](../schemas/klam-source.schema.json). For original or contributor-permissioned text, it needs fields such as `rights_basis`, `rights_status`, `license`, `rights_evidence_url`, `attribution`, and `permission_evidence_recorded: true`. Use real evidence; never fill unknown fields with guesses. Do not put contributor names, emails, signatures, or private consent files in the public registry. Keep consent evidence securely with the maintainer.
+
 ## Record format
 
 Add one record per UTF-8 JSONL line with these fields:
