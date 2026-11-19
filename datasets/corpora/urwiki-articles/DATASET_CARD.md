@@ -1,6 +1,6 @@
 # Urdu Wikipedia articles
 
-This release contains **537,950 records and 96,417,163 whitespace-delimited
+This release contains **543,011 records and 96,417,163 whitespace-delimited
 tokens** from the pinned 2026-11-01 dump. Whitespace units are not model tokens.
 The CI release job rebuilds this corpus from the complete pinned dump, validates
 every generated shard, and publishes the resulting manifest and checksums with
