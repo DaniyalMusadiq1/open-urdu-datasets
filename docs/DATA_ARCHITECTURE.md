@@ -1,6 +1,6 @@
 # Data architecture
 
-The repository separates discovery, reproducible processing and published data. This keeps source-specific license terms and record fields visible instead of flattening unrelated sources into one opaque file.
+The repository keeps a simple Klam release for users and source-specific reference material for auditing. Klam is built only from original, explicitly permissioned, or rights-verified public-domain text; previously published third-party corpus packages are not inputs.
 
 ## Responsibilities
 
