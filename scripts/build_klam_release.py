@@ -17,26 +17,31 @@ SOURCES = {
         "root": "urwiki-articles",
         "display": "Urdu Wikipedia contributors",
         "license": "CC-BY-SA-4.0",
+        "source_url": "https://dumps.wikimedia.org/urwiki/",
     },
     "sangraha-urdu": {
         "root": "sangraha-verified-urdu",
         "display": "AI4Bharat Sangraha",
         "license": "CC-BY-4.0",
+        "source_url": "https://huggingface.co/datasets/ai4bharat/sangraha",
     },
     "dakshina-urdu": {
         "root": "datasets/corpora/dakshina-urdu-bulk",
         "display": "Google Research Dakshina",
         "license": "CC-BY-SA-4.0",
+        "source_url": "https://github.com/google-research-datasets/dakshina",
     },
     "roman-urdu-sentiment": {
         "root": "datasets/classification/uci-roman-urdu-sentiment",
         "display": "UCI Roman Urdu datasets",
         "license": "CC-BY-4.0",
+        "source_url": "https://archive.ics.uci.edu/",
     },
     "urdu-wikisource": {
         "root": "datasets/corpora/urwikisource-pd-old",
         "display": "Urdu Wikisource contributors",
         "license": "CC-BY-SA-4.0",
+        "source_url": "https://ur.wikisource.org/",
     },
 }
 
@@ -67,6 +72,8 @@ def source_roots(release_root):
 
 def record_attribution(source_key, row, profile):
     urls = []
+    if profile.get("source_url"):
+        urls.append(profile["source_url"])
     for key in ("revision_url", "source_url", "page_url", "history_url"):
         value = row.get(key)
         if isinstance(value, str) and value.startswith("https://"):
@@ -179,7 +186,7 @@ def build(output, release_root):
                     source_rows += 1
                     total_records += 1
                     total_words += int(record["word_count"])
-                    human_reviewed += record["review_status"] in {"verified", "human_reviewed"}
+                    human_reviewed += record["review_status"] == "human_reviewed"
                     batch.append(record)
                     if len(batch) >= SHARD_RECORDS:
                         shards.append(write_shard(output, len(shards) + 1, batch))
@@ -194,7 +201,7 @@ def build(output, release_root):
             "license": profile["license"],
             "license_url": LICENSE_URLS[profile["license"]],
             "release_manifest_sha256": hashlib.sha256(manifest_bytes).hexdigest(),
-            "source_manifest": source_manifest.get("source", {}),
+            "release_manifest": source_manifest,
             "records": source_rows,
         })
     if batch:
