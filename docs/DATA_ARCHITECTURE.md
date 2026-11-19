@@ -1,44 +1,34 @@
 # Klam data architecture
 
-Klam is one simple dataset release built from original material, contributor text with explicit permission, and rights-verified public-domain works. Earlier third-party corpus packages remain separate reference material and are not Klam inputs.
+Klam is one dataset for users. The build combines approved, version-pinned Urdu sources into one normalized release. It removes duplicate records with the same normalized text, task, and label, while carrying record-level provenance, license, and review metadata.
 
 ## Where things live
 
 | Location | Purpose |
 | --- | --- |
-| `datasets/klam/sources.json` | Approved source and rights registry |
-| `datasets/klam/records/` | Klam-originated records awaiting release |
-| `schemas/klam-record.schema.json` | One normalized Klam record schema |
-| `scripts/build_klam_release.py` | Builds a rights-checked Klam release |
-| Hugging Face `klam-original/` | Normalized JSONL.GZ release and manifests |
-| Existing corpus directories and catalog | Historical/reference datasets; never inputs to Klam |
+| `datasets/klam/sources.json` | Approved sources, versions, rights evidence, licenses, and attribution |
+| `datasets/klam/records/` | Klam-originated records |
+| `schemas/klam-record.schema.json` | Normalized record format |
+| `scripts/build_klam_release.py` | Builds the unified Klam release |
+| Hugging Face `klam-original/` | Loadable Klam records, source list, license notes, and checksums |
+| Other corpus folders | Reproducible input collections used to build Klam; users can ignore them |
 
-GitHub is the source of truth for the source registry, code, and release policy. Hugging Face provides the single loadable Klam collection once approved records exist.
+GitHub holds the source registry and reproducible build. Hugging Face exposes one default Klam config, so users can load Klam without selecting the input datasets.
 
-## Record and rights flow
+## What each row contains
 
-1. A source is registered with its version, rights basis, evidence link, license, and attribution.
-2. A maintainer approves the source rights before records can enter Klam.
-3. Records are normalized to one schema. Exact duplicates and unapproved sources stop the build.
-4. Each output row carries its source, rights basis, license, attribution, and review status. Full source details remain in `sources.json`.
-5. The release gets one Klam revision and checksum manifest. Users can load Klam without choosing an upstream dataset.
+Text, title where available, language and script, task and label where available, source ID and exact source record ID, locator, source version, license and rights evidence, attribution, and review status. Duplicate records are detected after Unicode NFC normalization and whitespace collapse, with task and label included so conflicting labels remain intact. Similar text may remain.
 
-Original and contributor-submitted text must have explicit permission for CC BY 4.0. Public-domain records remain marked as public domain and require evidence for the exact work and edition. Klam does not relicense text it does not own.
+A Klam release has one manifest with record totals, source and license counts, file checksums, and source versions. The same source and license details needed for reuse stay with every row.
 
 ## Loading
-
-The Klam source registry is currently empty, so an original-source Klam release is not available to load yet. Once records pass rights review and validation, the default dataset can be read with:
 
 ```python
 from datasets import load_dataset
 
-data = load_dataset(
-    "Daniyal643/open-urdu-datasets",
-    split="train",
-    streaming=True,
-)
+data = load_dataset("Daniyal643/open-urdu-datasets", split="train", streaming=True)
 for row in data.take(3):
-    print(row["text"])
+    print(row["text"], row["license"], row["source_id"])
 ```
 
-See the [Klam contribution guide](KLAM_CONTRIBUTION.md), [license policy](LICENSE_POLICY.md), and [record schema](../schemas/klam-record.schema.json).
+See the [quick start](QUICKSTART.md), [license policy](LICENSE_POLICY.md), and [record schema](../schemas/klam-record.schema.json).

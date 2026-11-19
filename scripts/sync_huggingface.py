@@ -118,7 +118,8 @@ def main():
         (SANGRAHA_ROOT, SANGRAHA_REMOTE),
         (SANGRAHA1_ROOT, SANGRAHA1_REMOTE),
         *((path, f"corpora/{path.name}") for path in sorted(
-            RELEASE_ROOT.glob("sangraha-verified-urdu-data-[2-7]"))),
+            RELEASE_ROOT.glob("sangraha-verified-urdu-data-*"))
+          if path.name != "sangraha-verified-urdu-data-1"),
     ]
     klam_root = RELEASE_ROOT / "klam-original"
     if not args.metadata_only and (klam_root / "manifest.json").is_file():

@@ -15,58 +15,191 @@
     "attribution"
   ],
   "properties": {
-    "source_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]+$"},
-    "title": {"type": "string", "minLength": 1},
-    "source_url": {"type": "string", "format": "uri"},
-    "source_version": {"type": "string", "minLength": 1},
-    "rights_basis": {"enum": ["original", "contributor_permission", "public_domain", "cc0"]},
-    "rights_status": {"enum": ["candidate", "pending", "approved", "rejected"]},
-    "license": {"enum": ["CC-BY-4.0", "CC0-1.0", "Public-Domain"]},
-    "license_url": {"type": "string"},
-    "rights_evidence_url": {"type": "string", "format": "uri"},
-    "attribution": {"type": "string", "minLength": 1},
-    "permission_evidence_recorded": {"type": "boolean"},
-    "permission_form_version": {"type": "string"},
-    "accessed_at": {"type": "string", "format": "date"}
+    "source_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]+$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "source_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rights_basis": {
+      "enum": [
+        "original",
+        "contributor_permission",
+        "public_domain",
+        "cc0",
+        "cc_by",
+        "cc_by_sa"
+      ]
+    },
+    "rights_status": {
+      "enum": [
+        "candidate",
+        "pending",
+        "approved",
+        "rejected"
+      ]
+    },
+    "license": {
+      "enum": [
+        "CC-BY-4.0",
+        "CC0-1.0",
+        "Public-Domain",
+        "CC-BY-SA-4.0"
+      ]
+    },
+    "license_url": {
+      "type": "string"
+    },
+    "rights_evidence_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "attribution": {
+      "type": "string",
+      "minLength": 1
+    },
+    "permission_evidence_recorded": {
+      "type": "boolean"
+    },
+    "permission_form_version": {
+      "type": "string"
+    },
+    "accessed_at": {
+      "type": "string",
+      "format": "date"
+    }
   },
   "allOf": [
     {
       "if": {
         "properties": {
-          "rights_basis": {"enum": ["original", "contributor_permission"]}
+          "rights_basis": {
+            "const": "cc_by"
+          }
         },
-        "required": ["rights_basis"]
+        "required": [
+          "rights_basis"
+        ]
       },
       "then": {
         "properties": {
-          "license": {"const": "CC-BY-4.0"},
-          "license_url": {"const": "https://creativecommons.org/licenses/by/4.0/"},
-          "permission_evidence_recorded": {"const": true}
-        },
-        "required": ["permission_evidence_recorded"]
+          "license": {
+            "const": "CC-BY-4.0"
+          },
+          "license_url": {
+            "const": "https://creativecommons.org/licenses/by/4.0/"
+          }
+        }
       }
     },
     {
       "if": {
-        "properties": {"rights_basis": {"const": "cc0"}},
-        "required": ["rights_basis"]
+        "properties": {
+          "rights_basis": {
+            "const": "cc_by_sa"
+          }
+        },
+        "required": [
+          "rights_basis"
+        ]
       },
       "then": {
         "properties": {
-          "license": {"const": "CC0-1.0"},
-          "license_url": {"const": "https://creativecommons.org/publicdomain/zero/1.0/"},
-          "permission_evidence_recorded": {"const": true}
-        },
-        "required": ["permission_evidence_recorded"]
+          "license": {
+            "const": "CC-BY-SA-4.0"
+          },
+          "license_url": {
+            "const": "https://creativecommons.org/licenses/by-sa/4.0/"
+          }
+        }
       }
     },
     {
       "if": {
-        "properties": {"rights_basis": {"const": "public_domain"}},
-        "required": ["rights_basis"]
+        "properties": {
+          "rights_basis": {
+            "enum": [
+              "original",
+              "contributor_permission"
+            ]
+          }
+        },
+        "required": [
+          "rights_basis"
+        ]
       },
       "then": {
-        "properties": {"license": {"const": "Public-Domain"}}
+        "properties": {
+          "license": {
+            "const": "CC-BY-4.0"
+          },
+          "license_url": {
+            "const": "https://creativecommons.org/licenses/by/4.0/"
+          },
+          "permission_evidence_recorded": {
+            "const": true
+          }
+        },
+        "required": [
+          "permission_evidence_recorded"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "rights_basis": {
+            "const": "cc0"
+          }
+        },
+        "required": [
+          "rights_basis"
+        ]
+      },
+      "then": {
+        "properties": {
+          "license": {
+            "const": "CC0-1.0"
+          },
+          "license_url": {
+            "const": "https://creativecommons.org/publicdomain/zero/1.0/"
+          },
+          "permission_evidence_recorded": {
+            "const": true
+          }
+        },
+        "required": [
+          "permission_evidence_recorded"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "rights_basis": {
+            "const": "public_domain"
+          }
+        },
+        "required": [
+          "rights_basis"
+        ]
+      },
+      "then": {
+        "properties": {
+          "license": {
+            "const": "Public-Domain"
+          }
+        }
       }
     }
   ],

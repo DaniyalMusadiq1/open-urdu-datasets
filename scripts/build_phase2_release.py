@@ -25,7 +25,7 @@ SOURCES = [
      "8f3472cfe8738a7b6099e8e999c3cbfae0dcd15696aac7d7738a8039db603e83",
      "lid.176.ftz"),
 ]
-for _shard_number in range(2, 8):
+for _shard_number in range(2, 27):
     SOURCES.append((
         f"https://huggingface.co/datasets/ai4bharat/sangraha/resolve/{EXPANSION_REVISION}/verified/urd/data-{_shard_number}.parquet?download=true",
         None, f"sangraha-urd-data-{_shard_number}.parquet"))
@@ -115,7 +115,7 @@ def main():
     index_release(sangraha1, index)
 
     sangraha_expansions = []
-    for shard_number in range(2, 8):
+    for shard_number in range(2, 27):
         source_path = f"verified/urd/data-{shard_number}.parquet"
         corpus_name = f"sangraha-verified-urdu-data-{shard_number}"
         corpus_root = artifact_root / corpus_name
@@ -157,7 +157,7 @@ def main():
                     (artifact_root / name / "manifest.json").read_text())["whitespace_delimited_tokens"]}
             for name in ("urwiki-articles", "sangraha-verified-urdu",
                          "sangraha-verified-urdu-data-1",
-                         *(f"sangraha-verified-urdu-data-{i}" for i in range(2, 8)))
+                         *(f"sangraha-verified-urdu-data-{i}" for i in range(2, 27)))
         ]
     }
     (artifact_root / "release-summary.json").write_text(

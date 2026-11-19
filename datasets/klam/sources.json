@@ -14,6 +14,84 @@
       "attribution": "Mirza Asadullah Khan Ghalib; digital transcription by Saadat Mateen and UrduWeb.org volunteers. The pinned source preface identifies the 1862 Nizami edition as the base and notes additional variants from other editions. Klam removed Pollen markup and preserved Urdu text and line breaks.",
       "permission_evidence_recorded": true,
       "accessed_at": "2026-11-19"
+    },
+    {
+      "source_id": "dakshina-urdu-bulk",
+      "title": "Dakshina Urdu native text and transliteration records",
+      "source_url": "https://github.com/google-research-datasets/dakshina",
+      "source_version": "Dakshina v1.0; archive SHA-256 83530bec211893d9df429298f42e63c350c25ad56f9f5172f85edb0575ee5b03",
+      "rights_basis": "cc_by_sa",
+      "rights_status": "approved",
+      "license": "CC-BY-SA-4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "rights_evidence_url": "https://github.com/google-research-datasets/dakshina#license",
+      "attribution": "Dakshina v1.0 by Brian Roark, Lawrence Wolf-Sonkin, Christo Kirov, Sabrina J. Mielke, Cibu Johny, Işın Demirşahin and Keith Hall; source text attribution retained in each record where supplied.",
+      "accessed_at": "2026-11-19"
+    },
+    {
+      "source_id": "urwikisource-pd-old",
+      "title": "Urdu Wikisource works tagged PD-old",
+      "source_url": "https://ur.wikisource.org/",
+      "source_version": "Wikimedia Urdu Wikisource dump 2026-11-01; SHA-256 91d115f44f561366acdeead2d83f7e4b2426c77d527abe0eb1f124fd5c56cb60",
+      "rights_basis": "cc_by_sa",
+      "rights_status": "approved",
+      "license": "CC-BY-SA-4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "rights_evidence_url": "https://en.wikisource.org/wiki/WS:CT",
+      "attribution": "Urdu Wikisource contributors; page and revision attribution is retained in each record. Underlying works selected with the exact PD-old tag remain public domain; Wikisource transcription/compilation terms apply.",
+      "accessed_at": "2026-11-19"
+    },
+    {
+      "source_id": "uci-roman-urdu-sentiment",
+      "title": "UCI Roman Urdu sentiment datasets 458 and 854 (RUSAD)",
+      "source_url": "https://archive.ics.uci.edu/",
+      "source_version": "UCI 458 archive SHA-256 78e7cd1d7b0dc8e960a52c9151fc3114c70a3809111d3421581bbad931a6f5a8; UCI 854 archive SHA-256 4fe3618d9353abe27fb94414f2741b8ed634a4467cec056be4a10732ec9a0be5",
+      "rights_basis": "cc_by",
+      "rights_status": "approved",
+      "license": "CC-BY-4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "rights_evidence_url": "https://archive.ics.uci.edu/dataset/458/roman+urdu+data+set#license",
+      "attribution": "UCI Roman Urdu Data Set (DOI 10.24432/C58325) and RUSAD (DOI 10.24432/C59046). Preserve per-row source dataset ID, source row, original label, and source URL. Both UCI pages declare CC BY 4.0.",
+      "accessed_at": "2026-11-19"
+    },
+    {
+      "source_id": "urwiki-articles",
+      "title": "Urdu Wikipedia articles",
+      "source_url": "https://dumps.wikimedia.org/urwiki/20261101/",
+      "source_version": "Wikimedia Urdu Wikipedia dump 2026-11-01; SHA-256 5cf02a04981c9efe8698ad880b09ca74e6404513a3c7cdb4eea9291ab8e52d0d",
+      "rights_basis": "cc_by_sa",
+      "rights_status": "approved",
+      "license": "CC-BY-SA-4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "rights_evidence_url": "https://foundation.wikimedia.org/wiki/Terms_of_Use/en",
+      "attribution": "Urdu Wikipedia contributors; page title, page ID, revision ID and revision URL are retained per record. Text distributed under the applicable CC BY-SA terms.",
+      "accessed_at": "2026-11-19"
+    },
+    {
+      "source_id": "sangraha-verified-urdu-r1",
+      "title": "AI4Bharat Sangraha verified Urdu, revision 1",
+      "source_url": "https://huggingface.co/datasets/ai4bharat/sangraha",
+      "source_version": "8b813c3f62d37b2fa174d68c31e8b35ae2fe85e8 (verified/urd/data-0.parquet and data-1.parquet)",
+      "rights_basis": "cc_by",
+      "rights_status": "approved",
+      "license": "CC-BY-4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "rights_evidence_url": "https://huggingface.co/datasets/ai4bharat/sangraha/blob/8b813c3f62d37b2fa174d68c31e8b35ae2fe85e8/README.md",
+      "attribution": "AI4Bharat Sangraha verified Urdu, CC BY 4.0; Klam retains upstream document IDs and exact pinned file provenance. Original page URLs and creator names are not present on all rows.",
+      "accessed_at": "2026-11-19"
+    },
+    {
+      "source_id": "sangraha-verified-urdu-r2",
+      "title": "AI4Bharat Sangraha verified Urdu, revision 2",
+      "source_url": "https://huggingface.co/datasets/ai4bharat/sangraha",
+      "source_version": "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629 (verified/urd/data-2.parquet through data-26.parquet)",
+      "rights_basis": "cc_by",
+      "rights_status": "approved",
+      "license": "CC-BY-4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "rights_evidence_url": "https://huggingface.co/datasets/ai4bharat/sangraha/blob/654c02de6fa4cff1e3ade4e5c9242bedc7ad7629/README.md",
+      "attribution": "AI4Bharat Sangraha verified Urdu, CC BY 4.0; Klam retains upstream document IDs and exact pinned file provenance. Original page URLs and creator names are not present on all rows.",
+      "accessed_at": "2026-11-19"
     }
   ]
 }

@@ -1,19 +1,31 @@
 # Klam (کلام)
 
-Klam (کلام) is one Urdu dataset with a simple, consistent record format. It starts with a curated poetry collection and will grow only from rights-cleared, traceable Urdu text.
+Klam is one easy-to-use Urdu dataset. It combines the project's approved, openly licensed Urdu sources into one JSONL.GZ format, removes duplicate records with the same normalized text, task, and label, and keeps the source, version, attribution, license, and review status with every record.
 
-## Current status
+The release is built from pinned Dakshina, Urdu Wikisource PD-old, Urdu Wikipedia, UCI Roman Urdu sentiment, AI4Bharat Sangraha verified Urdu, and the CC0 Ghalib transcription. Source-specific terms remain attached to each row; Klam does not replace them. All unreviewed records stay marked `unreviewed`; automated language filters are not human review. See the generated dataset card for exact release counts.
 
-The starter collection contains **307 Ghalib poetry records** from a CC0-dedicated digital transcription. Its preface identifies the 1862 Nizami edition as the base text and notes additional variants from other editions. All 307 records are marked `unreviewed`; native-speaker reviewed: **0**. This is a start, not complete coverage of Urdu.
+## Load Klam
 
-The release builder places the records in one consistent format with title, text, genre, source link, source version, rights, attribution, and review status. Older third-party NLP corpora remain separate and are not Klam inputs.
+```bash
+python -m pip install "datasets>=3,<5"
+```
 
-## Contribute
+```python
+from datasets import load_dataset
 
-To add original, permissioned, CC0, or verified public-domain Urdu text, follow the [Klam contribution guide](docs/KLAM_CONTRIBUTION.md). Sources without clear rights evidence stay out. OCR drafts and books whose redistribution rights are unclear are not published.
+data = load_dataset(
+    "Daniyal643/open-urdu-datasets",
+    split="train",
+    streaming=True,
+)
+for row in data.take(3):
+    print(row["text"], row["license"], row["source_id"])
+```
 
-**Native-speaker reviewed Klam records: 0.** Text remains unreviewed until people review it.
+Users can use this one dataset without installing or selecting its upstream datasets. The row fields and `sources.json` keep provenance available for attribution and audit.
 
-- [Read the Klam contribution guide](docs/KLAM_CONTRIBUTION.md)
-- [See the source and license policy](docs/LICENSE_POLICY.md)
-- [Browse the legacy source catalog](CATALOG.md)
+- [Quick start](docs/QUICKSTART.md)
+- [Sources and licensing](docs/LICENSE_POLICY.md)
+- [Contribution guide](docs/KLAM_CONTRIBUTION.md)
+
+Klam aims for broad coverage of currently available, rights-cleared Urdu sources. It does not claim to contain all Urdu text, and no record is marked human-reviewed without reviewer evidence.

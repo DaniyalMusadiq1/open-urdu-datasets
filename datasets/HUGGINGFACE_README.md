@@ -12,11 +12,13 @@ configs:
 
 # Klam (کلام)
 
-Klam is one simple Urdu dataset with a single record format. Its starter corpus contains 307 Ghalib poetry records from a CC0-dedicated digital transcription.
+Klam is one easy-to-use Urdu dataset in a single normalized JSONL.GZ format. It brings together the project's approved, pinned sources and removes duplicate records with the same normalized text, task, and label. Every row includes its source, source version, license, attribution, and review status.
 
-**Starter corpus: 307 records; native-speaker reviewed: 0.** All starter records are marked `unreviewed`. The poetry transcription's preface says it is based on the 1862 Nizami edition, with additional variants from other editions. Klam preserves per-record source links and the pinned source version. The earlier third-party NLP corpus releases are not inputs to Klam.
+The release includes rights-cleared Urdu text from Dakshina, Urdu Wikisource works tagged PD-old, Urdu Wikipedia, UCI Roman Urdu sentiment datasets, AI4Bharat Sangraha verified Urdu, and a CC0 Ghalib transcription. Klam preserves the applicable source terms: licenses can differ by row. See `klam-original/DATASET_CARD.md` and `klam-original/SOURCES.md` for actual release counts, source details, and license summaries.
 
-When records are available, load the single Klam dataset with:
+No automated filter counts as native-speaker review. Records without reviewer evidence are marked `unreviewed`.
+
+## Load Klam
 
 ```bash
 python -m pip install "datasets>=3,<5"
@@ -30,11 +32,10 @@ data = load_dataset(
     split="train",
     streaming=True,
 )
-
 for row in data.take(3):
-    print(row["text"])
+    print(row["text"], row["license"], row["source_id"])
 ```
 
-The release uses one record format with title, text, genre label, source version, rights basis, license, attribution, and review status. Source manifests stay with the Klam release for people who need to audit them.
+Users can load this one dataset without selecting upstream datasets or managing their revisions. Per-record provenance and license fields carry those details inside Klam.
 
-See the [Klam contribution guide](https://github.com/DaniyalMusadiq1/open-urdu-datasets/blob/main/docs/KLAM_CONTRIBUTION.md) for how original, permissioned, CC0, and verified public-domain text can be added.
+See the [quick start](https://github.com/DaniyalMusadiq1/open-urdu-datasets/blob/main/docs/QUICKSTART.md) and [license policy](https://github.com/DaniyalMusadiq1/open-urdu-datasets/blob/main/docs/LICENSE_POLICY.md).

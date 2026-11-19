@@ -1,10 +1,8 @@
 # Klam quick start
 
-Klam is being rebuilt as one original-source Urdu dataset with a consistent format.
+Klam is the single, normalized Urdu dataset release in this project. Its build combines approved pinned sources, removes exact duplicate text, and keeps license, version, attribution, and review status on each record.
 
-**The new Klam data release is not ready to load yet.** Its source registry is empty, and records will be published only after rights and data checks pass. The previous mixed-source files are not part of this Klam release.
-
-Once the release is available, the simple loading pattern will be:
+## Load the dataset
 
 ```bash
 python -m pip install "datasets>=3,<5"
@@ -21,6 +19,9 @@ data = load_dataset(
 
 for row in data.take(3):
     print(row["text"])
+    print(row["license"], row["source_id"])
 ```
 
-For now, follow the [contribution guide](KLAM_CONTRIBUTION.md) to prepare original or explicitly permissioned text. Do not publish text from a book, OCR file, website, or dataset until its exact redistribution rights have been checked.
+Use `text` as the text field. For attribution or reuse, check `license`, `license_url`, `attribution`, `source_version`, and `source_locator` on each record. The generated Klam dataset card reports the current record count and source breakdown.
+
+Records without documented human review are marked `unreviewed`.

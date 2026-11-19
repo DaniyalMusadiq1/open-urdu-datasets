@@ -1,15 +1,13 @@
 # Klam record intake
 
-Klam accepts original records, contributor submissions with explicit permission, CC0-dedicated source texts, and public-domain material whose status is evidenced for the exact work and edition.
+Klam accepts material only after its source and redistribution rights are documented in [sources.json](../sources.json). Approved sources may be original or permissioned text, CC0, CC BY, CC BY-SA, or evidenced public-domain content.
 
-Do not put text here until its source has an approved entry in [sources.json](../sources.json). The current starter corpus has **307 Ghalib poetry records** from a CC0-dedicated transcription. All are marked `unreviewed`; none is marked human reviewed.
-
-Add one UTF-8 JSON object per line in a `.jsonl` or `.jsonl.gz` file. Each input row must contain:
+Add one UTF-8 JSON object per line in a `.jsonl` or `.jsonl.gz` file. Each input row should contain:
 
 ```json
-{"title":"<record title>","text":"<source text>","source_id":"<approved source ID>","source_record_id":"<stable source record ID>","source_locator":"<page, paragraph, or other locator>","script":"Arabic","task":"text","label":"","split":"","review_status":"unreviewed"}
+{"title":"<title or empty string>","text":"<source text>","source_id":"<approved source ID>","source_record_id":"<stable source record ID>","source_locator":"<page or source location>","script":"Arabic","task":"text","label":"","split":"","review_status":"unreviewed"}
 ```
 
-Replace every placeholder with real evidence. Never include sample or AI-generated text as dataset content. Keep the source text unchanged except for documented markup removal. Klam output carries the title, source version, rights, and review fields. The build process creates stable IDs and fills the approved source version, rights, and attribution fields from the registry.
+Use only real source text. Do not add synthetic or AI-generated text, unclear-rights material, or silent spelling edits. Klam output fills in the pinned source version, rights, license, attribution, and stable ID.
 
-For public-domain material, the source entry must identify the exact work and edition and link to rights evidence. For CC0 material, pin the exact source commit and link to the explicit dedication. A public download page alone is not proof of rights. Keep scans/OCR drafts and unclear-rights books out until cleared.
+Mark a record `human_reviewed` only when reviewer ID, date, and review scope are present. Automated filtering is not human review.
