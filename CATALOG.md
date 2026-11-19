@@ -1,6 +1,6 @@
 # Dataset catalog
 
-For everyday use, start with the single [Klam dataset on Hugging Face](https://huggingface.co/datasets/Daniyal643/open-urdu-datasets) and follow its quick-start guide. This file is the detailed source and license reference behind Klam; most users do not need to browse the individual upstream entries.
+Klam's original-source dataset is in preparation and has no records ready to load yet. This catalog is a reference inventory of earlier third-party datasets; those entries are not part of the new Klam core. Most users can ignore it when the Klam release becomes available.
 
 This catalog contains **37 upstream resource entries**: 2 with scoped technical verification, 11 pending review, and 24 not yet verified. The separate [processed corpus registry](catalog/processed-corpora.json) describes published releases. Derived demonstration samples are tracked in [their own manifest](catalog/hosted-samples.json).
 
