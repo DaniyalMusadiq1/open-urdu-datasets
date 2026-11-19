@@ -72,9 +72,7 @@ def source_roots(release_root):
 
 def record_attribution(source_key, row, profile):
     urls = []
-    if profile.get("source_url"):
-        urls.append(profile["source_url"])
-    for key in ("revision_url", "source_url", "page_url", "history_url"):
+    for key in ("revision_url", "page_url", "source_url", "history_url"):
         value = row.get(key)
         if isinstance(value, str) and value.startswith("https://"):
             urls.append(value)
@@ -87,6 +85,8 @@ def record_attribution(source_key, row, profile):
     doi = row.get("source_doi")
     if isinstance(doi, str) and doi:
         urls.append("https://doi.org/" + doi)
+    if profile.get("source_url"):
+        urls.append(profile["source_url"])
     link = next(iter(dict.fromkeys(urls)), "")
     return profile["display"] + " — " + row["license"] + ((" — " + link) if link else "")
 
@@ -247,7 +247,7 @@ def build(output, release_root):
         f"Klam contains {total_records:,} records in one simple schema. It combines "
         "eligible Urdu and Roman Urdu text, including text and sentiment records. "
         "Records preserve source, source version, license, attribution, and review status.\n\n"
-        "**Native-speaker verified records: 0.** All current records are unreviewed. "
+        f"**Native-speaker reviewed records: {human_reviewed:,}.** "
         "Automated checks do not confirm linguistic correctness, safety, or privacy.\n\n"
         "Licenses differ by source; there is no single license for the entire collection. "
         "See the per-record license fields and sources.json.\n",
