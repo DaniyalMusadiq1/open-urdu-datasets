@@ -20,8 +20,11 @@ data = load_dataset(
 for row in data.take(3):
     print(row["text"])
     print(row["license"], row["source_id"])
+    if row["task"] == "transliteration_pair":
+        print(row["paired_text"])
 ```
 
 Use `text` as the text field. For attribution or reuse, check `license`, `license_url`, `attribution`, `source_version`, and `source_locator` on each record. The generated Klam dataset card reports the current record count and source breakdown.
 
 Records without documented human review are marked `unreviewed`.
+

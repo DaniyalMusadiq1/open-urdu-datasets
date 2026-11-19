@@ -52,7 +52,11 @@
       "type": "string"
     },
     "split": {
-      "type": "string"
+      "enum": [
+        "train",
+        "validation",
+        "test"
+      ]
     },
     "source_id": {
       "type": "string",
@@ -111,7 +115,51 @@
     },
     "title": {
       "type": "string"
+    },
+    "paired_text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "paired_script": {
+      "enum": [
+        "Arabic",
+        "Latin",
+        "Mixed"
+      ]
     }
   },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "task": {
+            "const": "transliteration_pair"
+          }
+        },
+        "required": [
+          "task"
+        ]
+      },
+      "then": {
+        "required": [
+          "paired_text",
+          "paired_script"
+        ]
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "paired_text"
+        ]
+      },
+      "then": {
+        "required": [
+          "paired_script"
+        ]
+      }
+    }
+  ],
   "additionalProperties": false
 }
+

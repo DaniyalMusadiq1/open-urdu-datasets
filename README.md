@@ -20,6 +20,8 @@ data = load_dataset(
 )
 for row in data.take(3):
     print(row["text"], row["license"], row["source_id"])
+    if row["task"] == "transliteration_pair":
+        print(row["paired_text"])
 ```
 
 Users can use this one dataset without installing or selecting its upstream datasets. The row fields and `sources.json` keep provenance available for attribution and audit.
@@ -29,3 +31,4 @@ Users can use this one dataset without installing or selecting its upstream data
 - [Contribution guide](docs/KLAM_CONTRIBUTION.md)
 
 Klam aims for broad coverage of currently available, rights-cleared Urdu sources. It does not claim to contain all Urdu text, and no record is marked human-reviewed without reviewer evidence.
+

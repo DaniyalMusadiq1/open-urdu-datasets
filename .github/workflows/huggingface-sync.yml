@@ -30,6 +30,8 @@ jobs:
           PHASE2_RELEASE_ROOT: artifacts/phase2-release
         run: |
           python scripts/build_klam_release.py --output artifacts/phase2-release/klam-original --cleanup-phase2-inputs
+      - name: Validate unified Klam release
+        run: python scripts/validate_klam_release.py artifacts/phase2-release/klam-original
       - name: Validate repository and prior hosted corpora
         env:
           PHASE2_RELEASE_ROOT: artifacts/phase2-release
@@ -74,3 +76,4 @@ jobs:
           HF_REPO_ID: Daniyal643/open-urdu-datasets
           GITHUB_SHA: ${{ github.sha }}
         run: python scripts/sync_huggingface.py --metadata-only
+

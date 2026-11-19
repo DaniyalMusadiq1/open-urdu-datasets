@@ -4,22 +4,25 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
-python scripts/01_fetch_sources.py "$@"
+PHASE2_ROOT="${PHASE2_RELEASE_ROOT:-$ROOT/artifacts/phase2-release}"
+KLAM_ROOT="$PHASE2_ROOT/klam-original"
 
-# Later numbered stages are intentionally gated until their implementations,
-# source rights, and validation reports are approved.
-for stage in \
-  scripts/02_extract_text.py \
-  scripts/03_normalize.py \
-  scripts/04_quality_filter.py \
-  scripts/05_dedup_minhash.py \
-  scripts/06_tag_script.py \
-  scripts/07_package_release.py \
-  scripts/08_generate_datacard.py
-do
-  if [[ ! -f "$stage" ]]; then
-    printf 'Stopped after Stage A: %s is not implemented yet.\n' "$stage"
-    exit 2
-  fi
-  python "$stage"
-done
+if [[ -e "$PHASE2_ROOT" ]]; then
+  printf 'Build output already exists: %s\n' "$PHASE2_ROOT" >&2
+  printf 'Choose a new PHASE2_RELEASE_ROOT; this runner never overwrites output.\n' >&2
+  exit 2
+fi
+export PHASE2_RELEASE_ROOT="$PHASE2_ROOT"
+
+# The source-specific pinned importers perform fetching, extraction,
+# normalization, language routing, and input validation.
+python scripts/build_phase2_release.py
+
+# Combine rights-cleared inputs into the single Klam record schema and retain
+# row-level source/license metadata.
+python scripts/build_klam_release.py \
+  --output "$KLAM_ROOT" \
+  --phase2-root "$PHASE2_ROOT" \
+  --cleanup-phase2-inputs
+
+python scripts/validate_klam_release.py "$KLAM_ROOT"

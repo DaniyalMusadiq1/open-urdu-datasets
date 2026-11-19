@@ -7,7 +7,11 @@ configs:
   default: true
   data_files:
   - split: train
-    path: "klam-original/data/*.jsonl.gz"
+    path: "klam-original/data/train/*.jsonl.gz"
+  - split: validation
+    path: "klam-original/data/validation/*.jsonl.gz"
+  - split: test
+    path: "klam-original/data/test/*.jsonl.gz"
 ---
 
 # Klam (کلام)
@@ -39,3 +43,4 @@ for row in data.take(3):
 Users can load this one dataset without selecting upstream datasets or managing their revisions. Per-record provenance and license fields carry those details inside Klam.
 
 See the [quick start](https://github.com/DaniyalMusadiq1/open-urdu-datasets/blob/main/docs/QUICKSTART.md) and [license policy](https://github.com/DaniyalMusadiq1/open-urdu-datasets/blob/main/docs/LICENSE_POLICY.md).
+

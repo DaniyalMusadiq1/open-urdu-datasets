@@ -1,38 +1,40 @@
-# Klam-Urdu-Roman initial audit
+# Klam-Urdu-Roman audit
 
-Audit date: 2026-11-19. This audit uses the repository catalog and release workflow at commit 86242bdb90b4230d2d46b949f209c65e1dbf4b11.
+Audit date: 2026-11-19
 
-## Current state
+This audit separates the last published counts from the next full pinned rebuild. Counts from source cards or historical manifests are not Klam release counts.
 
-The repository currently has a 307-record Klam Ghalib starter release. The checked-in, previously processed input catalogs list 2,217,970 records across Dakshina, Urdu Wikisource, UCI Roman Urdu sentiment, Urdu Wikipedia, and Sangraha shards 0-7. Those counts are input-corpus counts, not a deduplicated Klam release count. The expanded build for Sangraha shards 0-26 is running; its final Klam manifest and record count are not available yet.
+## Published snapshot before the current rebuild
 
-The current catalogs report zero human-reviewed records. The default Klam format already carries source, version, license, attribution, and review status per record. It deduplicates exact matching normalized text, task, and label; it does not claim near-duplicate removal.
+The repository reports **2,217,970 records and 1,006,902,795 whitespace-delimited tokens** across its hosted corpus releases. These are whitespace counts, not model-token estimates. The expanded build for Sangraha shards 0–26 and a complete Dakshina import must finish before a new Klam total is available.
 
-## Gap against the uploaded brief
+A historical full Dakshina import manifest reports 622,805 retained rows, including 127,201 Urdu–Roman transliteration pairs. The currently hosted Dakshina copy contains only 150,000 native training sentences; it does not include the full import or those pairs. The updated build now fetches the pinned official archive, keeps both sides of pair records, and separates train, validation, and test.
 
-| Brief target | Evidence in repository now | Gap / status |
+## Gap against the brief
+
+| Brief target | Current evidence | Status |
 |---|---|---|
-| 5M Nastaliq pretraining records | Existing inputs total 2,217,970 records across scripts/tasks; expanded Sangraha build pending | Not yet measured as a Klam split; 5M target unproven |
-| 2M Roman Urdu pretraining records | UCI Roman Urdu sentiment contributes 27,106 Roman-script rows; Dakshina contains Romanization data but its script/task split needs a Klam manifest | Large shortfall; exact Roman count pending |
-| 200k Nastaliq SFT pairs | No published Klam SFT split identified | Not met; open, rights-cleared pair count not established |
-| 100k Roman Urdu SFT pairs | No published Klam Roman SFT split identified | Not met; do not manufacture rows to meet the number |
-| 500k aligned Nastaliq/Roman or Urdu/English pairs | No Klam parallel split identified | Not met; source and alignment audit required |
-| 5,000 held-out evaluation rows | No Klam evaluation split identified | Not met; source licensing and train/eval isolation required |
-| Record-level source and license provenance | Present in the current Klam schema and source registry | Keep each source’s terms; there is no single data license for all Klam text |
-| MinHash near-deduplication at Jaccard 0.8 | Current Klam builder does exact deduplication | Not implemented or measured |
-| 10,000 native-speaker verified records | Current catalogs report 0 human-reviewed records | Not met; recruit reviewers and keep all other rows unreviewed |
-| Gopher-style filters and discard-rate report | Current source importers have source-specific filters, not the complete brief checklist | Not met; add measured, reproducible checks before claiming them |
-| Rebuild from scripts/run_all.sh | Existing pinned-source build workflow exists; the requested complete Roman/SFT/eval pipeline does not | Partial; this file set adds a Stage A fetcher and a deliberately gated orchestrator |
+| 5M Nastaliq pretraining records | Published sources total 2.22M records across scripts and tasks; expanded 27-shard build is pending | Not yet established as 5M Klam pretraining records |
+| 2M Roman Urdu pretraining documents | 27,106 hosted UCI Roman Urdu records are sentiment data, not pretraining text; Dakshina adds linked transliteration pairs, not standalone Roman documents | Not met |
+| 200k Nastaliq SFT pairs | No cleared Klam SFT split | Not met; no synthetic rows are being generated |
+| 100k Roman Urdu SFT pairs | No cleared Klam Roman SFT split | Not met; no synthetic rows are being generated |
+| 500k parallel pairs | Historical full Dakshina import reports 127,201 pairs before Klam cross-source deduplication | Below target; exact rebuilt count pending |
+| 5,000 held-out evaluation rows | Dakshina source validation/test rows are retained in separate Klam splits; no Klam eval suite exists | Not met |
+| Per-record source and license | Klam rows carry source ID/version, locator, license, evidence, attribution, and review status | Implemented; new validator checks these fields |
+| Exact duplicate removal | NFC and whitespace-collapsed exact dedup includes task, label, and both pair sides | Implemented |
+| MinHash near-deduplication | No MinHash index or measured near-duplicate rate | Not implemented |
+| Native-speaker verification | Current reported count is 0 | Not met; rows remain unreviewed |
+| Full Gopher-style filter and discard report | Source-specific filters and language routing exist; the whole brief's filter set is not implemented | Partial |
+| One-command reproducible build | Pinned importers, normalized Klam packager, validator, and HF workflow are wired through the build runner | Implemented; full build is long and requires network access |
 
-## Source and rights decisions
+## Rights and source decisions
 
-- Sangraha verified Urdu is declared CC BY 4.0 by its publisher. The source card reports 3.6581 billion verified Urdu tokens; this is an upstream token statistic, not Klam’s record or token count.
-- Dakshina declares CC BY-SA 4.0. Keep attribution and share-alike obligations with the applicable records.
-- Wikimedia text is subject to CC BY-SA terms; preserve revision links and attribution.
-- Makhzan raw text is excluded. Its repository says the text files are copyrighted and may not be republished without the relevant rights holder’s permission.
-- Aya is listed as a candidate source only. Its collection card declares Apache 2.0, but the exact Urdu subset, underlying dataset licenses, and row-level provenance still need an audit before ingestion.
-- Social-platform and news scraping, unlicensed OCR, GPL-only corpora, synthetic instructions, and AI-generated evaluation rows are not included in Stage A.
+- Include only sources with explicit redistribution rights and pinned source evidence. Keep the source license on every record; Klam does not apply one license to all text.
+- Makhzan raw text stays excluded because its repository does not grant permission to republish those files.
+- Aya remains a candidate until the exact Urdu subset and its component provenance are audited.
+- News/social scraping and private messages are excluded. Public availability is not a license.
+- GPT-generated instructions, translations, and evaluation records are not being added. No AI-written text is represented as human-authored or human-verified.
+- Roman-Urdu-Parl-split is a promising large parallel source, but its third-party card's Apache declaration and underlying source-rights chain need review before intake. It is not counted in Klam.
 
-## Release status
+Klam is not ready for v1.0 under the brief's release gates. Do not claim the targets, near-dedup coverage, SFT coverage, or native verification until the generated release manifest and reviewer evidence support them.
 
-Klam-Urdu-Roman is not ready as a v1.0 dataset under the uploaded release gates. Do not claim the size, SFT share, parallel count, near-dedup rate, or native-speaker verification until a generated release manifest and reviewer log support those figures.

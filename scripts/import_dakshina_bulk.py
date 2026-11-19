@@ -165,7 +165,10 @@ def run(archive, output, work_db, shard_rows=50000):
                        "records": current_rows, "bytes": size,
                        "sha256": sha256(current_path), "kind": kind, "split": split})
 
-    for kind, split in db.execute("SELECT DISTINCT kind,split FROM records ORDER BY kind,split"):
+    for kind, split in db.execute(
+            "SELECT DISTINCT kind,split FROM records "
+            "ORDER BY kind, CASE split WHEN 'validation' THEN 0 "
+            "WHEN 'valid' THEN 0 WHEN 'dev' THEN 0 WHEN 'test' THEN 1 ELSE 2 END, split"):
         writer = None
         raw = None
         index = 0
@@ -224,3 +227,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

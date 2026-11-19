@@ -1,4 +1,5 @@
 """Stream every bulk record through its schema, identity and content checks."""
+import argparse
 import gzip
 import json
 from collections import Counter
@@ -13,7 +14,14 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def main():
-    folder = ROOT / "datasets/corpora/dakshina-urdu-bulk"
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "folder",
+        nargs="?",
+        type=Path,
+        default=ROOT / "datasets/corpora/dakshina-urdu-bulk",
+    )
+    folder = parser.parse_args().folder
     manifest = json.loads((folder / "manifest.json").read_text(encoding="utf-8"))
     schema = json.loads((ROOT / "schemas/dakshina-bulk.schema.json").read_text(encoding="utf-8"))
     Draft202012Validator.check_schema(schema)
@@ -60,3 +68,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

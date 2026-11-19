@@ -85,7 +85,8 @@ def script_for(text):
 
 
 def normalize_row(row, source_id, source, *, source_record_id=None,
-                  source_locator="", task="text", label=None):
+                  source_locator="", task="text", label=None,
+                  paired_text=None, paired_script=None):
     text = row.get("text")
     if not isinstance(text, str) or not text.strip():
         raise ValueError("record text must be a nonempty string")
@@ -105,8 +106,18 @@ def normalize_row(row, source_id, source, *, source_record_id=None,
     review_scope = row.get("review_scope", "")
     if review_status == "human_reviewed" and not all((reviewer_id, review_date, review_scope)):
         raise ValueError(f"human-reviewed record lacks review evidence: {record_id}")
+    if paired_text is not None and (
+            not isinstance(paired_text, str) or not paired_text.strip() or not paired_script):
+        raise ValueError(f"invalid paired text for {record_id}")
+    if task == "transliteration_pair" and paired_text is None:
+        raise ValueError(f"transliteration pair lacks paired text: {record_id}")
+    split = str(row.get("split") or "train")
+    if split in {"dev", "valid"}:
+        split = "validation"
+    if split not in {"train", "validation", "test"}:
+        raise ValueError(f"unsupported split for {record_id}: {split}")
     digest_input = source_id + "\0" + record_id + "\0" + canonical(text)
-    return {
+    normalized = {
         "id": sha256_bytes(digest_input.encode("utf-8")),
         "title": title,
         "text": text,
@@ -114,7 +125,7 @@ def normalize_row(row, source_id, source, *, source_record_id=None,
         "script": row.get("script") or script_for(text),
         "task": task,
         "label": str(label if label is not None else row.get("label") or ""),
-        "split": str(row.get("split") or "train"),
+        "split": split,
         "source_id": source_id,
         "source_version": source["source_version"],
         "source_record_id": record_id,
@@ -129,6 +140,17 @@ def normalize_row(row, source_id, source, *, source_record_id=None,
         "review_date": review_date,
         "review_scope": review_scope,
     }
+    if paired_text is not None:
+        normalized["paired_text"] = paired_text
+        normalized["paired_script"] = paired_script
+    return normalized
+
+
+def dedup_key(row):
+    text = canonical(row["text"])
+    paired = canonical(row["paired_text"]) if row.get("paired_text") else ""
+    digest = sha256_bytes((text + "\0" + paired).encode("utf-8"))
+    return digest, row["task"], row["label"]
 
 
 def adapt_source_row(source_id, row, source):
@@ -141,6 +163,12 @@ def adapt_source_row(source_id, row, source):
         locator = details.get("revision_url") or details.get("page_url") or ""
         if locator.startswith("http://"):
             locator = "https://" + locator.removeprefix("http://")
+        if row.get("record_type") == "romanization_pair":
+            return normalize_row(
+                row, source_id, source,
+                source_record_id=f"{member}:{line}:{row.get('id', '')}",
+                source_locator=locator, task="transliteration_pair",
+                paired_text=row.get("roman"), paired_script="Latin", label="")
         return normalize_row(
             row, source_id, source,
             source_record_id=f"{member}:{line}:{row.get('id', '')}",
@@ -196,8 +224,11 @@ def manifest_files(root):
 
 
 def source_inputs(phase2_root):
+    dakshina_root = phase2_root / "dakshina-urdu-bulk"
+    if not dakshina_root.is_dir():
+        dakshina_root = ROOT / "datasets/corpora/dakshina-urdu-bulk"
     roots = [
-        ("dakshina-urdu-bulk", ROOT / "datasets/corpora/dakshina-urdu-bulk"),
+        ("dakshina-urdu-bulk", dakshina_root),
         ("urwikisource-pd-old", ROOT / "datasets/corpora/urwikisource-pd-old"),
         ("uci-roman-urdu-sentiment", ROOT / "datasets/classification/uci-roman-urdu-sentiment"),
         ("urwiki-articles", phase2_root / "urwiki-articles"),
@@ -218,9 +249,10 @@ def source_inputs(phase2_root):
     return result
 
 
-def write_shard(output, index, rows):
-    relative = f"data/klam-{index:05d}.jsonl.gz"
+def write_shard(output, index, rows, split):
+    relative = f"data/{split}/klam-{index:05d}.jsonl.gz"
     path = output / relative
+    path.parent.mkdir(parents=True, exist_ok=True)
     with (path.open("wb") as raw,
           gzip.GzipFile(fileobj=raw, mode="wb", filename="", mtime=0) as zipped,
           io.TextIOWrapper(zipped, encoding="utf-8", newline="\n") as stream):
@@ -232,6 +264,7 @@ def write_shard(output, index, rows):
         "records": len(rows),
         "bytes": len(payload),
         "sha256": sha256_bytes(payload),
+        "split": split,
     }
 
 
@@ -250,10 +283,11 @@ def build(output, phase2_root=PHASE2_ROOT, cleanup_phase2_inputs=False):
     cursor = seen_db.cursor()
     input_files = []
     output.mkdir(parents=True)
-    (output / "data").mkdir()
     shards = []
-    batch = []
-    record_count = token_count = reviewed_count = duplicate_count = 0
+    batches = {}
+    shard_indices = {}
+    record_count = token_count = paired_token_count = reviewed_count = duplicate_count = 0
+    records_by_task = {}
     records_by_source = {}
     duplicates_by_source = {}
     licenses = {}
@@ -267,9 +301,7 @@ def build(output, phase2_root=PHASE2_ROOT, cleanup_phase2_inputs=False):
                 source_row = json.loads(line)
                 row = adapt_source_row(source_id, source_row, sources[source_id])
                 file_read += 1
-                digest = sha256_bytes(canonical(row["text"]).encode("utf-8"))
-                cursor.execute("INSERT OR IGNORE INTO seen_text VALUES (?, ?, ?)",
-                               (digest, row["task"], row["label"]))
+                cursor.execute("INSERT OR IGNORE INTO seen_text VALUES (?, ?, ?)", dedup_key(row))
                 if cursor.rowcount == 0:
                     duplicate_count += 1
                     duplicates_by_source[source_id] = duplicates_by_source.get(source_id, 0) + 1
@@ -277,16 +309,21 @@ def build(output, phase2_root=PHASE2_ROOT, cleanup_phase2_inputs=False):
                 cursor.execute("INSERT OR IGNORE INTO seen_ids VALUES (?)", (row["id"],))
                 if cursor.rowcount == 0:
                     raise ValueError(f"duplicate Klam record ID: {row['id']}")
+                batch = batches.setdefault(row["split"], [])
                 batch.append(row)
                 record_count += 1
                 file_kept += 1
                 token_count += len(row["text"].split())
+                paired_token_count += len(row.get("paired_text", "").split())
+                records_by_task[row["task"]] = records_by_task.get(row["task"], 0) + 1
                 reviewed_count += row["review_status"] == "human_reviewed"
                 records_by_source[source_id] = records_by_source.get(source_id, 0) + 1
                 licenses[row["license"]] = licenses.get(row["license"], 0) + 1
                 if len(batch) >= SHARD_RECORDS:
-                    shards.append(write_shard(output, len(shards) + 1, batch))
-                    batch = []
+                    shard_indices[row["split"]] = shard_indices.get(row["split"], 0) + 1
+                    shards.append(write_shard(
+                        output, shard_indices[row["split"]], batch, row["split"]))
+                    batches[row["split"]] = []
                 if record_count % 10_000 == 0:
                     seen_db.commit()
         input_files.append({
@@ -298,8 +335,10 @@ def build(output, phase2_root=PHASE2_ROOT, cleanup_phase2_inputs=False):
         })
         if cleanup_phase2_inputs and path.is_relative_to(Path(phase2_root)):
             path.unlink(missing_ok=True)
-    if batch:
-        shards.append(write_shard(output, len(shards) + 1, batch))
+    for split, batch in sorted(batches.items()):
+        if batch:
+            shard_indices[split] = shard_indices.get(split, 0) + 1
+            shards.append(write_shard(output, shard_indices[split], batch, split))
     seen_db.close()
     seen_path.unlink(missing_ok=True)
     seen_path.with_name(seen_path.name + "-journal").unlink(missing_ok=True)
@@ -309,6 +348,10 @@ def build(output, phase2_root=PHASE2_ROOT, cleanup_phase2_inputs=False):
     checksums = [f'{item["sha256"]}  {item["path"]}' for item in shards]
     checksums.append(f'{sha256_bytes(sources_path.read_bytes())}  sources.json')
     (output / "checksums.sha256").write_text("\n".join(checksums) + "\n", encoding="utf-8")
+    split_counts = {
+        split: sum(shard["records"] for shard in shards if shard["split"] == split)
+        for split in sorted({shard["split"] for shard in shards})
+    }
     manifest = {
         "dataset": "Klam (کلام)",
         "schema_version": "1.1",
@@ -316,6 +359,9 @@ def build(output, phase2_root=PHASE2_ROOT, cleanup_phase2_inputs=False):
         "record_count": record_count,
         "exact_duplicate_records_removed": duplicate_count,
         "whitespace_delimited_tokens": token_count,
+        "paired_whitespace_delimited_tokens": paired_token_count,
+        "task_record_counts": records_by_task,
+        "split_record_counts": split_counts,
         "human_reviewed_records": reviewed_count,
         "review_status": "mixed" if 0 < reviewed_count < record_count else (
             "human_reviewed" if reviewed_count == record_count else "unreviewed"),
@@ -360,6 +406,12 @@ def build(output, phase2_root=PHASE2_ROOT, cleanup_phase2_inputs=False):
         "# Klam (کلام)\n\n"
         f"Klam contains {record_count:,} deduplicated Urdu records from "
         f"{len(registry['sources'])} traceable sources, all in one schema.\n\n"
+        f"Transliteration pairs: {records_by_task.get('transliteration_pair', 0):,}. "
+        "For these rows, `text` is the source side and `paired_text` is the linked "
+        "Roman Urdu side; check `script` and `paired_script` for direction.\n\n"
+        f"Records by split: {', '.join(f'{name} {count:,}' for name, count in split_counts.items())}.\n\n"
+        "Source train, validation, and test rows are packaged into separate Hugging Face "
+        "splits. Validation and test rows are excluded from the train split.\n\n"
         f"Native-speaker reviewed records: {reviewed_count:,}. Records without evidence "
         "remain `unreviewed`. Duplicate records with matching task and label were removed "
         "after NFC normalization and whitespace collapse; similar text may remain.\n\n"
@@ -390,3 +442,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

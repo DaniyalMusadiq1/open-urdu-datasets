@@ -17,7 +17,7 @@ GitHub holds the source registry and reproducible build. Hugging Face exposes on
 
 ## What each row contains
 
-Text, title where available, language and script, task and label where available, source ID and exact source record ID, locator, source version, license and rights evidence, attribution, and review status. Duplicate records are detected after Unicode NFC normalization and whitespace collapse, with task and label included so conflicting labels remain intact. Similar text may remain.
+Text, title where available, language and script, task and label where available, source ID and exact source record ID, locator, source version, license and rights evidence, attribution, and review status. Transliteration pairs keep the Urdu side in `text` and the Roman side in `paired_text`, with a script tag for each side. Duplicate records are detected after Unicode NFC normalization and whitespace collapse, with task, label, and both pair sides included so alternate Roman spellings remain distinct. Similar text may remain.
 
 A Klam release has one manifest with record totals, source and license counts, file checksums, and source versions. The same source and license details needed for reuse stay with every row.
 
@@ -32,3 +32,4 @@ for row in data.take(3):
 ```
 
 See the [quick start](QUICKSTART.md), [license policy](LICENSE_POLICY.md), and [record schema](../schemas/klam-record.schema.json).
+

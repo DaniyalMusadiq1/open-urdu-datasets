@@ -1,33 +1,38 @@
-# Klam-Urdu-Roman staged plan
+# Klam build plan
 
-Goal: grow Klam to cover both Urdu Arabic-script text and Roman Urdu while preserving one easy-to-load dataset and record-level source rights. The target counts in the brief are goals, not estimates or release claims.
+Klam is one user-facing dataset. The build keeps source IDs, versions, licenses, attribution, and review status on each record. The targets in the uploaded brief are goals, not achieved counts.
 
-| Stage | Work | Output | Count estimate / dependency |
-|---|---|---|---|
-| A. Fetch | Download only approved, pinned, open sources; record URL, revision, license, SHA-256, and fetch date | data/raw plus manifest.json | Three sources can be staged now: Sangraha, Dakshina, Urdu Wikipedia. Full source bytes are large; Sangraha’s upstream verified Urdu statistic is 3.6581B tokens, not a Klam record count. |
-| B. Extract and normalize | Preserve source text; add script-aware fields and separate raw/normalized Roman forms; document every transformation | normalized JSONL shards | Record totals after extraction and filters; do not infer them from archive size |
-| C. Quality | Run schema, script, language-ID, length, repeated n-gram, and PII triage; report each discard reason | quality report and flags | No current all-source discard-rate estimate |
-| D. Deduplicate | Keep exact deduplication; add a disk-backed near-duplicate pass only after threshold, memory use, and false-positive behavior are documented | duplicate audit and retained rows | Current Klam handles exact duplicates only; no MinHash count yet |
-| E. Instruction data | Add only openly licensed, traceable human or publisher-authored prompt/response data after component-level rights review | klam-sft split | No verified count established. AI-generated or machine-translated text is excluded unless separately authorized, licensed, labeled, and reviewed |
-| F. Parallel data | Use source-provided parallel rows or explicitly labeled transliteration outputs; never present derived transliteration as human-authored | klam-parallel split | Count unknown until sources are licensed and alignment checks run |
-| G. Rights and review | Require source, version, license, attribution, and evidence for every row; keep review status unreviewed unless reviewer evidence exists | manifest and reviewer log | Current repository catalogs report 0 human-reviewed records |
-| H. Package and release | Generate one JSONL.GZ dataset with task/script subsets, counts, licenses, checksums, card, and loading examples | GitHub metadata and Hugging Face release | Full release must pass schema, license, leakage, dedup, and split-isolation checks |
+## Stages
 
-## First implementation
+| Stage | Existing / updated files | Expected output and count basis | External need | Status |
+|---|---|---|---|---|
+| A. Pin and fetch inputs | configs/sources.yaml; scripts/build_phase2_release.py; scripts/import_dakshina_bulk.py; scripts/import_sangraha_urdu.py; scripts/import_urwiki_articles.py | Counts come from importer manifests. Dakshina's historical full-build manifest reports 622,805 rows; the current published copy is only 150,000. Sangraha source record counts are measured per shard; no upstream token total is substituted for Klam totals. | Network access to official source archives and Hugging Face | Rebuild wired; result pending |
+| B. Extract and normalize | Source-specific importers; scripts/build_klam_release.py | Unicode NFC/whitespace normalization is used for identities. Original text is preserved in each record. | None beyond build dependencies | Implemented |
+| C. Quality checks | Source-specific validation scripts and import filters | Each importer records its own accepted/rejected rows; the complete brief's Gopher rule set is not implemented | FastText model is pinned for Urdu language routing | Partial |
+| D. Deduplicate | scripts/build_klam_release.py; scripts/validate_klam_release.py | Exact dedup uses normalized primary text plus paired text, task, and label. Similar records may remain. | Disk space for SQLite dedup index | Exact dedup implemented; MinHash pending |
+| E. SFT | No SFT synthesis step | No target count is claimed. Translation/self-instruct generation is not part of this build. | Native contributors needed for authentic authored SFT; any synthetic-text plan requires separate review | Not implemented |
+| F. Parallel records | scripts/import_dakshina_bulk.py; scripts/build_klam_release.py | Keep source Urdu/Roman pairs linked in paired_text; historical Dakshina full-build manifest reports 127,201 pairs before cross-source dedup. | None | Implemented for Dakshina; 500k goal not met |
+| G. Rights and provenance | datasets/klam/sources.json; schemas/klam-record.schema.json; scripts/validate_klam_release.py | Validate each row against its approved source version, license, evidence URL, and attribution | Rights review for any new source | Implemented |
+| H. Package and publish | scripts/run_all.sh; scripts/build_klam_release.py; scripts/validate_klam_release.py; datasets/HUGGINGFACE_README.md; .github/workflows/huggingface-sync.yml | Deterministic JSONL.GZ shards and separate train/validation/test splits; final counts from manifest only | GitHub Actions HF_TOKEN for automatic hosted sync | Implemented; new full build pending |
 
-- AUDIT.md records current counts and release-gate gaps.
-- configs/sources.yaml is a JSON-compatible YAML registry; the fetcher uses only the Python standard library.
-- scripts/01_fetch_sources.py downloads three approved pinned source families and writes a checksum manifest under data/raw/.
-- docs/VERIFICATION.md defines review labels and a blank reviewer log.
-- scripts/run_all.sh runs Stage A and stops at the first not-yet-implemented stage. It does not pretend the full pipeline exists.
+## What the next rebuild will do
 
-## Scope limits
+1. Download the checksummed Dakshina v1.0 archive and import its full native and transliteration records.
+2. Build Urdu Wikipedia and Sangraha revisions 0–26 through their pinned source importers.
+3. Preserve source validation/test data outside the Hugging Face train split.
+4. Merge inputs into Klam, remove exact duplicates, generate a manifest and source/license documentation, then validate every row and shard.
+5. Publish Klam through the existing Hugging Face workflow when the repository build succeeds.
 
-Makhzan’s raw text is not copied: its publisher prohibits republishing that text absent specific rights-holder permission. No scraping of news, Reddit, YouTube, or X is part of this plan. The project’s earlier rule against fabricated and AI-generated dataset records remains in force. Aya remains a candidate until the exact Urdu subset and its source-level licensing are checked.
+## Counts and release gates
 
-## Human and service dependencies
+The last published corpus snapshot is 2,217,970 records / 1,006,902,795 whitespace-delimited tokens. It is not the next Klam count. The in-progress expanded build may change this total; Klam's final manifest is authoritative. Record counts from source cards, historical manifests, or upstream token estimates are not added to the published Klam count.
 
-- Human reviewers: required before any native-speaker verification claim; none is presumed available.
-- Hugging Face: the existing repository workflow uses the configured HF_TOKEN secret for publication. A full rebuild is large and must finish before a final count can be reported.
-- GPT API: not required for the approved ingestion path. No synthetic instruction/evaluation records are generated.
-- Additional licenses or rights-holder permissions: required before adding sources whose public pages do not grant redistribution rights.
+Still open: 2M Roman Urdu pretraining docs, 200k Nastaliq SFT pairs, 100k Roman Urdu SFT pairs, 500k parallel pairs, a 5k held-out eval suite, MinHash near-deduplication, all required quality filters, and 10k native-speaker-verified rows. No record becomes human-verified without reviewer evidence.
+
+## Needs people or credentials
+
+- GitHub Actions needs the repository's existing HF_TOKEN secret to publish automatically.
+- Native Urdu and Roman Urdu reviewers must be recruited for human quality checks.
+- Rights holders or stronger provenance evidence are required before adding restricted or unclear-license sources.
+- GPT/API keys are not needed; this plan does not generate synthetic or translated text.
+

@@ -15,6 +15,9 @@ SOURCES = [
     ("https://dumps.wikimedia.org/urwiki/20261101/urwiki-20261101-pages-articles.xml.bz2",
      "5cf02a04981c9efe8698ad880b09ca74e6404513a3c7cdb4eea9291ab8e52d0d",
      "urwiki-20261101-pages-articles.xml.bz2"),
+    ("https://storage.googleapis.com/gresearch/dakshina/dakshina_dataset_v1.0.tar",
+     "83530bec211893d9df429298f42e63c350c25ad56f9f5172f85edb0575ee5b03",
+     "dakshina_dataset_v1.0.tar"),
     (f"https://huggingface.co/datasets/ai4bharat/sangraha/resolve/{REVISION}/verified/urd/data-0.parquet?download=true",
      "0220cd62b7dde5d12fa52c6c40f47f7e06df3e7ccb659576488fd8a83b110d48",
      "sangraha-urd-data-0.parquet"),
@@ -80,6 +83,38 @@ def add_release_docs(root, source_dir):
         shutil.copy2(source_dir / filename, root / filename)
 
 
+def add_dakshina_docs(root, source_dir):
+    manifest = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
+    shutil.copy2(source_dir / "LICENSE", root / "LICENSE")
+    retained = manifest["retained_records"]
+    buckets = manifest["retained_by_type_split"]
+    (root / "DATASET_CARD.md").write_text(
+        "# Dakshina Urdu source release\n\n"
+        f"This pinned full-source build contains {retained:,} retained records "
+        f"across {len(buckets)} record-type/split buckets. It includes native Urdu "
+        "sentences and Urdu-to-Roman-Urdu transliteration pairs. Records remain "
+        "unreviewed by Klam native speakers.\n\n"
+        "Counts are produced by the importer and are not unique counts across all "
+        "Klam sources. Roman pair sides are preserved as linked fields in Klam.\n",
+        encoding="utf-8",
+    )
+    members = "\n".join(
+        f"- {item['member']} — {item['bytes']:,} bytes, SHA-256 {item['sha256']}"
+        for item in manifest["members"]
+    )
+    (root / "SOURCES.md").write_text(
+        "# Dakshina source and rights\n\n"
+        "- Source: https://github.com/google-research-datasets/dakshina\n"
+        "- Version: Dakshina v1.0\n"
+        "- Archive: https://storage.googleapis.com/gresearch/dakshina/dakshina_dataset_v1.0.tar\n"
+        "- Archive SHA-256: 83530bec211893d9df429298f42e63c350c25ad56f9f5172f85edb0575ee5b03\n"
+        "- License: CC BY-SA 4.0; see the copied source license and row metadata.\n"
+        "- Klam native-speaker verified records: 0.\n\n"
+        "## Processed source members\n\n" + members + "\n",
+        encoding="utf-8",
+    )
+
+
 def main():
     artifact_root = Path(os.environ.get("PHASE2_RELEASE_ROOT", "artifacts/phase2-release"))
     if not artifact_root.is_absolute():
@@ -91,6 +126,17 @@ def main():
     source_specs = {name: (url, digest) for url, digest, name in SOURCES}
     index = artifact_root / "dedup-index"
     index_existing_jsonl([ROOT / "datasets"], index)
+
+    dakshina = artifact_root / "dakshina-urdu-bulk"
+    dakshina_url, dakshina_sha = source_specs["dakshina_dataset_v1.0.tar"]
+    dakshina_archive = download(
+        dakshina_url, intake / "dakshina_dataset_v1.0.tar", dakshina_sha)
+    run("scripts/import_dakshina_bulk.py", dakshina_archive, dakshina,
+        artifact_root / "dakshina-work.sqlite")
+    add_dakshina_docs(dakshina, ROOT / "datasets/corpora/dakshina-urdu-bulk")
+    run("scripts/validate_bulk.py", dakshina)
+    index_release(dakshina, index)
+    dakshina_archive.unlink()
 
     wiki = artifact_root / "urwiki-articles"
     wiki_url, wiki_sha = source_specs["urwiki-20261101-pages-articles.xml.bz2"]
@@ -161,8 +207,16 @@ def main():
     all_corpora = [wiki, sangraha0, sangraha1, *sangraha_expansions]
     run("scripts/audit_new_corpus_duplicates.py", "--existing-root", ROOT / "datasets",
         "--corpora", *all_corpora)
+    dakshina_manifest = json.loads(
+        (dakshina / "manifest.json").read_text(encoding="utf-8"))
     summary = {
-        "corpora": [
+        "corpora": [{
+            "id": "dakshina-urdu-bulk",
+            "records": dakshina_manifest["retained_records"],
+            "whitespace_delimited_tokens": sum(
+                dakshina_manifest["whitespace_delimited_tokens_by_type"].values()),
+            "retained_by_type_split": dakshina_manifest["retained_by_type_split"],
+        }] + [
             {"id": name, "records": json.loads(
                 (artifact_root / name / "manifest.json").read_text())["record_count"],
                 "whitespace_delimited_tokens": json.loads(
@@ -180,3 +234,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
