@@ -62,7 +62,7 @@ rows = load_dataset(
 
 with open("urdu-wikipedia-sample.jsonl", "w", encoding="utf-8") as output:
     for row in islice(rows, 10_000):
-        output.write(json.dumps(row, ensure_ascii=False) + "\\n")
+        output.write(json.dumps(row, ensure_ascii=False) + "\n")
 ```
 
 Remove `islice(..., 10_000)` and iterate over `rows` to export the full configuration. The full exports are large and may take time and disk space.
