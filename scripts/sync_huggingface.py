@@ -102,7 +102,8 @@ def main():
     new_releases = []
     metadata_release_docs = []
     if args.metadata_only:
-        metadata_roots = [Path("datasets/corpora/urwiki-articles"),\n                          Path("datasets/corpora/sangraha-verified-urdu")]
+        metadata_roots = [Path("datasets/corpora/urwiki-articles"),
+                          Path("datasets/corpora/sangraha-verified-urdu")]
         metadata_roots.extend(sorted(Path("datasets/corpora").glob("sangraha-verified-urdu-data-*")))
         for root in metadata_roots:
             for filename in ("DATASET_CARD.md", "SOURCES.md", "LICENSE"):
