@@ -21,10 +21,23 @@ jobs:
           python-version: '3.12'
       - name: Install build and publishing dependencies
         run: python -m pip install -e '.[dev,ingest]' 'huggingface_hub>=0.26,<2'
+      - name: Restore pinned source release cache
+        id: phase2-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: artifacts/phase2-release
+          key: klam-phase2-v1-py312-${{ hashFiles('scripts/build_phase2_release.py', 'scripts/import_*.py', 'scripts/validate_*.py', 'scripts/audit_new_corpus_duplicates.py', 'configs/sources.yaml', 'datasets/corpora/**') }}
       - name: Build pinned source releases and validate
+        if: steps.phase2-cache.outputs.cache-hit != 'true'
         env:
           PHASE2_RELEASE_ROOT: artifacts/phase2-release
         run: python scripts/build_phase2_release.py
+      - name: Save pinned source release cache
+        if: steps.phase2-cache.outputs.cache-hit != 'true' && success()
+        uses: actions/cache/save@v4
+        with:
+          path: artifacts/phase2-release
+          key: klam-phase2-v1-py312-${{ hashFiles('scripts/build_phase2_release.py', 'scripts/import_*.py', 'scripts/validate_*.py', 'scripts/audit_new_corpus_duplicates.py', 'configs/sources.yaml', 'datasets/corpora/**') }}
       - name: Build one normalized Klam dataset
         env:
           PHASE2_RELEASE_ROOT: artifacts/phase2-release
