@@ -272,6 +272,7 @@ def build(output, phase2_root=PHASE2_ROOT, cleanup_phase2_inputs=False):
     output = Path(output)
     if output.exists():
         raise FileExistsError(output)
+    output.mkdir(parents=True)
     registry, sources = read_sources()
     inputs = source_inputs(Path(phase2_root))
     seen_path = output / ".dedup.sqlite3"
@@ -282,7 +283,6 @@ def build(output, phase2_root=PHASE2_ROOT, cleanup_phase2_inputs=False):
     seen_db.execute("CREATE TABLE seen_ids (id TEXT PRIMARY KEY)")
     cursor = seen_db.cursor()
     input_files = []
-    output.mkdir(parents=True)
     shards = []
     batches = {}
     shard_indices = {}
