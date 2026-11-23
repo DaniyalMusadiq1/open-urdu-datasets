@@ -240,23 +240,21 @@ def main():
                "verified_new_corpus_files": sum(len(item["files"]) for item in new_releases),
                "metadata_only": args.metadata_only,
                "metadata_release_docs": len(metadata_release_docs)}
-    if new_releases:
-        summary.update({
-            "published_urwiki_records": new_releases[0]["manifest"]["record_count"],
-            "published_urwiki_tokens": new_releases[0]["manifest"]["whitespace_delimited_tokens"],
-            "published_sangraha_records": new_releases[1]["manifest"]["record_count"],
-            "published_sangraha_tokens": new_releases[1]["manifest"]["whitespace_delimited_tokens"],
-            "published_sangraha_shard_1_records": new_releases[2]["manifest"]["record_count"],
-            "published_sangraha_shard_1_tokens": new_releases[2]["manifest"]["whitespace_delimited_tokens"],
-        })
-        for release in new_releases[3:]:
-            if release["root"].name == "klam-original":
-                summary["published_klam_records"] = release["manifest"]["record_count"]
-                summary["published_klam_tokens"] = release["manifest"]["whitespace_delimited_tokens"]
-                continue
-            number = release["manifest"]["source"]["file"].rsplit("-", 1)[-1].split(".", 1)[0]
-            summary[f"published_sangraha_shard_{number}_records"] = release["manifest"]["record_count"]
-            summary[f"published_sangraha_shard_{number}_tokens"] = release["manifest"]["whitespace_delimited_tokens"]
+    for release in new_releases:
+        name = release["root"].name
+        if name == "klam-original":
+            prefix = "published_klam"
+        elif name == "urwiki-articles":
+            prefix = "published_urwiki"
+        elif name == "sangraha-verified-urdu":
+            prefix = "published_sangraha"
+        elif name.startswith("sangraha-verified-urdu-data-"):
+            shard_number = name.rsplit("-", 1)[-1]
+            prefix = f"published_sangraha_shard_{shard_number}"
+        else:
+            prefix = "published_" + name.replace("-", "_")
+        summary[f"{prefix}_records"] = release["manifest"]["record_count"]
+        summary[f"{prefix}_tokens"] = release["manifest"]["whitespace_delimited_tokens"]
     print(json.dumps(summary))
 
 
