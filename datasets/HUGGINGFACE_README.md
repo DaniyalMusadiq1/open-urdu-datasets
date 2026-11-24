@@ -18,9 +18,21 @@ configs:
 
 Klam is one easy-to-use Urdu dataset in a single normalized JSONL.GZ format. It brings together the project's approved, pinned sources and removes duplicate records with the same normalized text, task, and label. Every row includes its source, source version, license, attribution, and review status.
 
-The release includes rights-cleared Urdu text from Dakshina, Urdu Wikisource works tagged PD-old, Urdu Wikipedia, UCI Roman Urdu sentiment datasets, AI4Bharat Sangraha verified Urdu, and a CC0 Ghalib transcription. Klam preserves the applicable source terms: licenses can differ by row. See `klam-original/DATASET_CARD.md` and `klam-original/SOURCES.md` for actual release counts, source details, and license summaries.
+The release includes rights-cleared Urdu text from Dakshina (including word and sentence transliterations), Urdu Wikisource works tagged PD-old, Urdu Wikipedia, UCI Roman Urdu sentiment datasets, AI4Bharat Sangraha verified Urdu, and a CC0 Ghalib transcription. Klam preserves the applicable source terms: licenses can differ by row. See `klam-original/DATASET_CARD.md` and `klam-original/SOURCES.md` for actual release counts, source details, and license summaries.
 
 No automated filter counts as native-speaker review. Records without reviewer evidence are marked `unreviewed`.
+
+## Dataset contents
+
+| Task | Main field | Related fields |
+| --- | --- | --- |
+| `text` | Urdu text | `title`, `label` when supplied |
+| `transliteration_pair` | Urdu-script text | `paired_text` for Roman Urdu, `label=sentence` for full sentences |
+| `sentiment_classification` | Roman Urdu text | `label` for the source sentiment |
+
+Dakshina sentence pairs follow the publisher's development and test assignments, exposed
+as `validation` and `test`. The Urdu prompts come from Wikipedia and may appear in
+other corpora. Exact record deduplication does not measure this evaluation overlap.
 
 ## Load Klam
 

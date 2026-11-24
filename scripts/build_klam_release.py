@@ -156,6 +156,10 @@ def dedup_key(row):
 def adapt_source_row(source_id, row, source):
     if source_id == "ghalib-kulliyat-cc0":
         return normalize_row(row, source_id, source)
+    if source_id == "dakshina-urdu-sentence-pairs":
+        return normalize_row(
+            row, source_id, source, task="transliteration_pair", label="sentence",
+            paired_text=row["paired_text"], paired_script=script_for(row["paired_text"]))
     if source_id == "dakshina-urdu-bulk":
         details = row.get("source") or {}
         member = details.get("member", "")
@@ -244,8 +248,12 @@ def source_inputs(phase2_root):
         manifest, files = manifest_files(root)
         result.extend((source_id, path, digest, manifest) for path, digest in files)
     for path in sorted(RECORD_ROOT.glob("*.jsonl*")):
-        digest = sha256_bytes(path.read_bytes())
-        result.append(("ghalib-kulliyat-cc0", path, digest, None))
+        source_id = (
+            "dakshina-urdu-sentence-pairs"
+            if path.name == "dakshina-urdu-sentence-pairs.jsonl.gz"
+            else "ghalib-kulliyat-cc0"
+        )
+        result.append((source_id, path, sha256_bytes(path.read_bytes()), None))
     return result
 
 
@@ -402,19 +410,26 @@ def build(output, phase2_root=PHASE2_ROOT, cleanup_phase2_inputs=False):
     source_table = "\n".join(
         f"| {source['title']} | {records_by_source.get(source['source_id'], 0):,} | {source['license']} |"
         for source in registry["sources"])
+    task_table = "\n".join(
+        f"| `{task}` | {count:,} |" for task, count in sorted(records_by_task.items()))
     (output / "DATASET_CARD.md").write_text(
         "# Klam (کلام)\n\n"
         f"Klam contains {record_count:,} deduplicated Urdu records from "
         f"{len(registry['sources'])} traceable sources, all in one schema.\n\n"
         f"Transliteration pairs: {records_by_task.get('transliteration_pair', 0):,}. "
         "For these rows, `text` is the source side and `paired_text` is the linked "
-        "Roman Urdu side; check `script` and `paired_script` for direction.\n\n"
+        "Roman Urdu side; check `script` and `paired_script` for direction. The `sentence` "
+        "label identifies full Dakshina sentence pairs.\n\n"
         f"Records by split: {', '.join(f'{name} {count:,}' for name, count in split_counts.items())}.\n\n"
         "Source train, validation, and test rows are packaged into separate Hugging Face "
-        "splits. Validation and test rows are excluded from the train split.\n\n"
+        "splits. Validation and test rows are excluded from the train split. "
+        "Dakshina sentence pairs originate from Wikipedia. Their Urdu text may overlap "
+        "other source corpora, so the splits do not establish contamination-free evaluation.\n\n"
         f"Native-speaker reviewed records: {reviewed_count:,}. Records without evidence "
         "remain `unreviewed`. Duplicate records with matching task and label were removed "
         "after NFC normalization and whitespace collapse; similar text may remain.\n\n"
+        "## Tasks\n\n| Task | Records |\n| --- | ---: |\n"
+        + task_table + "\n\n## Sources\n\n"
         "| Source | Records | License |\n| --- | ---: | --- |\n"
         + source_table + "\n",
         encoding="utf-8")

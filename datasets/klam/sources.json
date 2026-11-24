@@ -29,6 +29,19 @@
       "accessed_at": "2026-11-19"
     },
     {
+      "source_id": "dakshina-urdu-sentence-pairs",
+      "title": "Dakshina v1.0 Urdu sentence-level transliterations",
+      "source_url": "https://github.com/google-research-datasets/dakshina",
+      "source_version": "Dakshina v1.0; archive SHA-256 83530bec211893d9df429298f42e63c350c25ad56f9f5172f85edb0575ee5b03",
+      "rights_basis": "cc_by_sa",
+      "rights_status": "approved",
+      "license": "CC-BY-SA-4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "rights_evidence_url": "https://github.com/google-research-datasets/dakshina#license",
+      "attribution": "Dakshina v1.0 by Brian Roark, Lawrence Wolf-Sonkin, Christo Kirov, Sabrina J. Mielke, Cibu Johny, Işın Demirşahin and Keith Hall. Urdu Wikipedia contributors are credited through the original article revision URLs in source_locator. Klam preserves both sides and the publisher's development and test split assignments.",
+      "accessed_at": "2026-11-24"
+    },
+    {
       "source_id": "urwikisource-pd-old",
       "title": "Urdu Wikisource works tagged PD-old",
       "source_url": "https://ur.wikisource.org/",

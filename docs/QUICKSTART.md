@@ -28,3 +28,17 @@ Use `text` as the text field. For attribution or reuse, check `license`, `licens
 
 Records without documented human review are marked `unreviewed`.
 
+## Load Urdu–Roman Urdu sentence pairs
+
+```python
+pairs = load_dataset("Daniyal643/open-urdu-datasets", split="test", streaming=True)
+pairs = pairs.filter(
+    lambda row: row["task"] == "transliteration_pair" and row["label"] == "sentence"
+)
+for row in pairs.take(3):
+    print(row["text"], row["paired_text"])
+```
+
+Use `validation` for the publisher's development subset. These Wikipedia prompts
+may overlap other training sources. Inspect the release manifest for split and task
+counts and retain the source attribution when redistributing the pairs.
