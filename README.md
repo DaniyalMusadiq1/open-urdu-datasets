@@ -16,6 +16,11 @@ Dakshina sentence pairs follow the publisher's development and test assignments,
 as `validation` and `test`. The Urdu prompts come from Wikipedia and may appear in
 other corpora. Exact record deduplication does not measure this evaluation overlap.
 
+The release also includes Tatoeba Urdu sentences with author attribution and
+Wikivoyage Urdu phrases paired with the source's Latin-script pronunciation
+guides (`label=phrase`). These guides retain the source spelling and stress
+notation.
+
 ## Load Klam
 
 ```bash
