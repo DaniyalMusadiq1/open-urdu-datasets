@@ -38,6 +38,7 @@
         "public_domain",
         "cc0",
         "cc_by",
+        "cc_by_2_fr",
         "cc_by_sa"
       ]
     },
@@ -52,6 +53,7 @@
     "license": {
       "enum": [
         "CC-BY-4.0",
+        "CC-BY-2.0-FR",
         "CC0-1.0",
         "Public-Domain",
         "CC-BY-SA-4.0"

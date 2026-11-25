@@ -23,10 +23,12 @@ LICENSE_RULES = {
     "original": ("CC-BY-4.0", CC_BY_4),
     "contributor_permission": ("CC-BY-4.0", CC_BY_4),
     "cc_by": ("CC-BY-4.0", CC_BY_4),
+    "cc_by_2_fr": ("CC-BY-2.0-FR", "https://creativecommons.org/licenses/by/2.0/fr/"),
     "cc_by_sa": ("CC-BY-SA-4.0", CC_BY_SA_4),
     "cc0": ("CC0-1.0", CC0_1),
     "public_domain": ("Public-Domain", ""),
 }
+EXTRA_SOURCES = {"tatoeba-urdu", "wikivoyage-urdu-phrasebook"}
 
 
 def sha256_bytes(value):
@@ -154,6 +156,17 @@ def dedup_key(row):
 
 
 def adapt_source_row(source_id, row, source):
+    if source_id == "tatoeba-urdu":
+        author = row["author"].strip()
+        if not author:
+            raise ValueError("Tatoeba sentences require an author")
+        record = normalize_row(row, source_id, source)
+        record["attribution"] += f" {author}."
+        return record
+    if source_id == "wikivoyage-urdu-phrasebook":
+        return normalize_row(
+            row, source_id, source, task="transliteration_pair", label="phrase",
+            paired_text=row["paired_text"], paired_script=script_for(row["paired_text"]))
     if source_id == "ghalib-kulliyat-cc0":
         return normalize_row(row, source_id, source)
     if source_id == "dakshina-urdu-sentence-pairs":
@@ -247,12 +260,13 @@ def source_inputs(phase2_root):
     for source_id, root in roots:
         manifest, files = manifest_files(root)
         result.extend((source_id, path, digest, manifest) for path, digest in files)
-    for path in sorted(RECORD_ROOT.glob("*.jsonl*")):
-        source_id = (
-            "dakshina-urdu-sentence-pairs"
-            if path.name == "dakshina-urdu-sentence-pairs.jsonl.gz"
-            else "ghalib-kulliyat-cc0"
-        )
+    tracked_sources = {
+        "dakshina-urdu-sentence-pairs.jsonl.gz": "dakshina-urdu-sentence-pairs",
+        "ghalib-cc0.jsonl.gz": "ghalib-kulliyat-cc0",
+    }
+    tracked_sources.update({f"{source_id}.jsonl.gz": source_id for source_id in sorted(EXTRA_SOURCES)})
+    for filename, source_id in tracked_sources.items():
+        path = RECORD_ROOT / filename
         result.append((source_id, path, sha256_bytes(path.read_bytes()), None))
     return result
 
@@ -283,6 +297,13 @@ def build(output, phase2_root=PHASE2_ROOT, cleanup_phase2_inputs=False):
     output.mkdir(parents=True)
     registry, sources = read_sources()
     inputs = source_inputs(Path(phase2_root))
+    extra_digests = set()
+    for source_id, path, _, _ in inputs:
+        if source_id in EXTRA_SOURCES:
+            with gzip.open(path, "rt", encoding="utf-8") as stream:
+                for line in stream:
+                    row = adapt_source_row(source_id, json.loads(line), sources[source_id])
+                    extra_digests.add(dedup_key(row)[0])
     seen_path = output / ".dedup.sqlite3"
     seen_db = sqlite3.connect(seen_path)
     seen_db.execute("PRAGMA journal_mode=OFF")
@@ -309,7 +330,14 @@ def build(output, phase2_root=PHASE2_ROOT, cleanup_phase2_inputs=False):
                 source_row = json.loads(line)
                 row = adapt_source_row(source_id, source_row, sources[source_id])
                 file_read += 1
-                cursor.execute("INSERT OR IGNORE INTO seen_text VALUES (?, ?, ?)", dedup_key(row))
+                key = dedup_key(row)
+                digest = key[0]
+                if source_id in EXTRA_SOURCES and digest not in extra_digests:
+                    duplicate_count += 1
+                    duplicates_by_source[source_id] = duplicates_by_source.get(source_id, 0) + 1
+                    continue
+                extra_digests.discard(digest)
+                cursor.execute("INSERT OR IGNORE INTO seen_text VALUES (?, ?, ?)", key)
                 if cursor.rowcount == 0:
                     duplicate_count += 1
                     duplicates_by_source[source_id] = duplicates_by_source.get(source_id, 0) + 1

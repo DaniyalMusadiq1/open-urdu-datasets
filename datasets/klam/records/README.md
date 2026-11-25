@@ -28,3 +28,20 @@ Both sides retain the upstream text. Klam maps `dev` to `validation` and keeps
 `test` as `test`. It retains the first exact normalized pair, with test taking
 precedence, and excludes blank sides, text matching the project's contact and
 credential filters, and prompts without an unambiguous Wikipedia revision.
+
+## Additional Urdu and Roman Urdu text
+
+The Tatoeba Urdu detailed export and Wikivoyage Urdu phrasebook revision
+`5320526` are pinned by SHA-256 in the source registry. To reproduce the inputs,
+pass those exact snapshots to the importer from the repository root.
+
+```bash
+python scripts/prepare_klam_extra_text.py urd_sentences_detailed.tsv.bz2 phrasebook.wiki /tmp
+```
+
+Tatoeba sentences without an author are skipped. The author and sentence URL are
+preserved. Wikivoyage rows retain only explicitly paired Urdu phrases and Latin
+pronunciations. Pronunciation guides are informal and sometimes mark stress.
+Both sources go into training with `unreviewed` status. The release keeps only
+new exact normalized text or pair matches after processing the earlier sources,
+regardless of task label.

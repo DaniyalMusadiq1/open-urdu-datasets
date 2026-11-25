@@ -67,9 +67,16 @@ def validate(folder):
                         if source is None:
                             raise ValueError("record has unknown source_id")
                         for field in ("source_version", "rights_basis", "license",
-                                      "license_url", "rights_evidence_url", "attribution"):
+                                      "license_url", "rights_evidence_url"):
                             if row[field] != source.get(field, ""):
                                 raise ValueError(f"source metadata mismatch: {field}")
+                        attribution = source["attribution"]
+                        if row["source_id"] == "tatoeba-urdu":
+                            author = row["attribution"].removeprefix(attribution + " ")
+                            if author == row["attribution"] or not author.removesuffix(".").strip():
+                                raise ValueError("Tatoeba sentence lacks author attribution")
+                        elif row["attribution"] != attribution:
+                            raise ValueError("source metadata mismatch: attribution")
                         expected_id = sha256_bytes((
                             row["source_id"] + "\0" + row["source_record_id"] + "\0"
                             + canonical(row["text"])

@@ -105,6 +105,32 @@
       "rights_evidence_url": "https://huggingface.co/datasets/ai4bharat/sangraha/blob/654c02de6fa4cff1e3ade4e5c9242bedc7ad7629/README.md",
       "attribution": "AI4Bharat Sangraha verified Urdu, CC BY 4.0; Klam retains upstream document IDs and exact pinned file provenance. Original page URLs and creator names are not present on all rows.",
       "accessed_at": "2026-11-19"
+    },
+    {
+      "source_id": "tatoeba-urdu",
+      "title": "Tatoeba Urdu sentences",
+      "source_url": "https://tatoeba.org/en/downloads",
+      "source_version": "Urdu detailed export 2026-11-25; SHA-256 871ad465167baa731cf9b541f1041958d48df60d5811edd3da2b46ae173548e1",
+      "rights_basis": "cc_by_2_fr",
+      "rights_status": "approved",
+      "license": "CC-BY-2.0-FR",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/fr/",
+      "rights_evidence_url": "https://en.wiki.tatoeba.org/articles/show/using-the-tatoeba-corpus",
+      "attribution": "Tatoeba Urdu sentence by",
+      "accessed_at": "2026-11-25"
+    },
+    {
+      "source_id": "wikivoyage-urdu-phrasebook",
+      "title": "Wikivoyage Urdu phrasebook",
+      "source_url": "https://en.wikivoyage.org/wiki/Urdu_phrasebook",
+      "source_version": "Wikivoyage revision 5320526; SHA-256 9b52aaf63dd2ad8b3970d15cee3a89ff7beb5deb17bacb822a7384a90d6763f3",
+      "rights_basis": "cc_by_sa",
+      "rights_status": "approved",
+      "license": "CC-BY-SA-4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "rights_evidence_url": "https://en.wikivoyage.org/w/index.php?title=Urdu_phrasebook&oldid=5320526",
+      "attribution": "Wikivoyage Urdu phrasebook contributors (see revision history). Klam extracts Urdu and Latin-script pronunciation pairs and strips wiki formatting.",
+      "accessed_at": "2026-11-25"
     }
   ]
 }
