@@ -8,6 +8,9 @@ import sys
 import urllib.request
 from pathlib import Path
 
+from import_sangraha_urdu import build as build_sangraha
+from import_sangraha_urdu import published_hashes
+
 ROOT = Path(__file__).resolve().parents[1]
 REVISION = "8b813c3f62d37b2fa174d68c31e8b35ae2fe85e8"
 EXPANSION_REVISION = "654c02de6fa4cff1e3ade4e5c9242bedc7ad7629"
@@ -148,25 +151,31 @@ def main():
     index_release(wiki, index)
     wiki_dump.unlink()
 
+    existing_hashes, existing_records = published_hashes(index)
+    shutil.rmtree(index)
+
     sangraha0 = artifact_root / "sangraha-verified-urdu"
     fasttext_url, fasttext_sha = source_specs["lid.176.ftz"]
     fasttext = download(fasttext_url, intake / "lid.176.ftz", fasttext_sha)
     data0_url, data0_sha = source_specs["sangraha-urd-data-0.parquet"]
     data0 = download(data0_url, intake / "sangraha-urd-data-0.parquet", data0_sha)
-    run("scripts/import_sangraha_urdu.py", data0, fasttext, sangraha0, "--existing-root", index)
+    build_sangraha(data0, fasttext, sangraha0,
+                   existing_index=(existing_hashes, existing_records))
     add_release_docs(sangraha0, ROOT / "datasets/corpora/sangraha-verified-urdu")
     run("scripts/validate_sangraha_urdu.py", sangraha0)
-    index_release(sangraha0, index)
+    _, records = published_hashes(sangraha0, existing_hashes)
+    existing_records += records
     data0.unlink()
 
     sangraha1 = artifact_root / "sangraha-verified-urdu-data-1"
     data1_url, data1_sha = source_specs["sangraha-urd-data-1.parquet"]
     data1 = download(data1_url, intake / "sangraha-urd-data-1.parquet", data1_sha)
-    run("scripts/import_sangraha_urdu.py", data1, fasttext, sangraha1, "--existing-root", index,
-        "--source-path", "verified/urd/data-1.parquet")
+    build_sangraha(data1, fasttext, sangraha1, source_path="verified/urd/data-1.parquet",
+                   existing_index=(existing_hashes, existing_records))
     add_release_docs(sangraha1, ROOT / "datasets/corpora/sangraha-verified-urdu-data-1")
     run("scripts/validate_sangraha_urdu.py", sangraha1)
-    index_release(sangraha1, index)
+    _, records = published_hashes(sangraha1, existing_hashes)
+    existing_records += records
     data1.unlink()
 
     sangraha_expansions = []
@@ -177,11 +186,11 @@ def main():
         source_name = f"sangraha-urd-data-{shard_number}.parquet"
         source_url, source_sha = source_specs[source_name]
         source_file = download(source_url, intake / source_name, source_sha)
-        run("scripts/import_sangraha_urdu.py",
-            source_file, fasttext, corpus_root, "--existing-root", index,
-            "--source-path", source_path, "--source-revision", EXPANSION_REVISION)
+        manifest = build_sangraha(
+            source_file, fasttext, corpus_root, source_path=source_path,
+            source_revision=EXPANSION_REVISION, existing_index=(existing_hashes, existing_records),
+        )
         add_release_docs(corpus_root, ROOT / "datasets/corpora/sangraha-verified-urdu-data-1")
-        manifest = json.loads((corpus_root / "manifest.json").read_text(encoding="utf-8"))
         card = (
             "# AI4Bharat Sangraha verified Urdu shard " + str(shard_number) + "\n\n"
             + "This release contains **" + format(manifest["record_count"], ",")
@@ -200,10 +209,13 @@ def main():
                    + "- Original page URLs and creator names are absent from upstream rows.\n")
         (corpus_root / "SOURCES.md").write_text(sources, encoding="utf-8")
         run("scripts/validate_sangraha_urdu.py", corpus_root)
-        index_release(corpus_root, index)
+        if shard_number < 26:
+            _, records = published_hashes(corpus_root, existing_hashes)
+            existing_records += records
         sangraha_expansions.append(corpus_root)
         source_file.unlink()
 
+    del existing_hashes
     all_corpora = [wiki, sangraha0, sangraha1, *sangraha_expansions]
     run("scripts/audit_new_corpus_duplicates.py", "--existing-root", ROOT / "datasets",
         "--corpora", *all_corpora)

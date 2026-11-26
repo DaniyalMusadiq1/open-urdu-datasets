@@ -7,7 +7,7 @@ permissions:
   contents: read
 concurrency:
   group: huggingface-sync-main
-  cancel-in-progress: true
+  cancel-in-progress: false
 jobs:
   corpus-release:
     if: github.event_name != 'push' || !contains(github.event.head_commit.message, '[hf-sync-metadata]')
@@ -19,6 +19,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+          cache: pip
+          cache-dependency-path: pyproject.toml
       - name: Install build and publishing dependencies
         run: python -m pip install -e '.[dev,ingest]' 'huggingface_hub>=0.26,<2'
       - name: Restore pinned source release cache
@@ -26,7 +28,7 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: artifacts/phase2-release
-          key: klam-phase2-v1-py312-${{ hashFiles('scripts/build_phase2_release.py', 'scripts/import_*.py', 'scripts/validate_*.py', 'scripts/audit_new_corpus_duplicates.py', 'configs/sources.yaml', 'datasets/corpora/**') }}
+          key: klam-phase2-v2-py312-${{ hashFiles('scripts/build_phase2_release.py', 'scripts/import_*.py', 'scripts/validate_*.py', 'scripts/audit_new_corpus_duplicates.py', 'configs/sources.yaml', 'datasets/**', 'src/**', 'pyproject.toml') }}
       - name: Build pinned source releases and validate
         if: steps.phase2-cache.outputs.cache-hit != 'true'
         env:
@@ -37,7 +39,7 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: artifacts/phase2-release
-          key: klam-phase2-v1-py312-${{ hashFiles('scripts/build_phase2_release.py', 'scripts/import_*.py', 'scripts/validate_*.py', 'scripts/audit_new_corpus_duplicates.py', 'configs/sources.yaml', 'datasets/corpora/**') }}
+          key: klam-phase2-v2-py312-${{ hashFiles('scripts/build_phase2_release.py', 'scripts/import_*.py', 'scripts/validate_*.py', 'scripts/audit_new_corpus_duplicates.py', 'configs/sources.yaml', 'datasets/**', 'src/**', 'pyproject.toml') }}
       - name: Build one normalized Klam dataset
         env:
           PHASE2_RELEASE_ROOT: artifacts/phase2-release
@@ -79,6 +81,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+          cache: pip
+          cache-dependency-path: pyproject.toml
       - name: Install metadata sync dependencies
         run: python -m pip install -e '.[dev]' 'huggingface_hub>=0.26,<2'
       - name: Validate updated catalog
