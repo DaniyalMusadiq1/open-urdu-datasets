@@ -8,7 +8,8 @@ import sys
 import urllib.request
 from pathlib import Path
 
-from import_sangraha_urdu import build as build_sangraha, published_hashes
+from import_sangraha_urdu import build as build_sangraha
+from import_sangraha_urdu import published_hashes
 
 ROOT = Path(__file__).resolve().parents[1]
 REVISION = "8b813c3f62d37b2fa174d68c31e8b35ae2fe85e8"
