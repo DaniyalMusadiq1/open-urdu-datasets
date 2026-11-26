@@ -56,8 +56,10 @@ def text_hash(text):
     return hashlib.sha256(canonical(text).encode("utf-8")).hexdigest()
 
 
-def published_hashes(root):
-    hashes, records = set(), 0
+def published_hashes(root, hashes=None):
+    if hashes is None:
+        hashes = set()
+    records = 0
     paths = sorted(glob.glob(str(root / "**/*.jsonl"), recursive=True)
                    + glob.glob(str(root / "**/*.jsonl.gz"), recursive=True))
     for name in paths:
@@ -94,23 +96,25 @@ def write_shard(out, index, batch):
 def build(parquet, lid_model, out, existing_root=Path("datasets"),
           shard_records=3000, min_lid_confidence=0.70, classify_chars=5000,
           source_path=SOURCE_PATH, source_revision=SOURCE_REVISION,
-          source_sha256=None):
+          source_sha256=None, *, existing_index=None):
     parquet, lid_model, out = Path(parquet), Path(lid_model), Path(out)
     if out.exists():
         raise FileExistsError(out)
     expected_source_sha = SOURCE_FILES.get(source_path)
     if source_path not in SOURCE_FILES:
         raise ValueError("source file must be a pinned verified/urd shard")
-    source_sha = source_sha256 or sha256(parquet)
+    source_sha = sha256(parquet)
     if expected_source_sha and source_sha != expected_source_sha:
         raise ValueError("Sangraha Parquet SHA-256 mismatch")
-    if sha256(parquet) != source_sha:
+    if source_sha256 and source_sha != source_sha256:
         raise ValueError("Sangraha Parquet SHA-256 mismatch")
     if sha256(lid_model) != LID_MODEL_SHA256:
         raise ValueError("fastText model SHA-256 mismatch")
     if shard_records < 1 or not 0 < min_lid_confidence <= 1 or classify_chars < 100:
         raise ValueError("invalid shard, confidence, or classifier window setting")
-    existing, existing_records = published_hashes(existing_root)
+    if existing_index is None:
+        existing_index = published_hashes(existing_root)
+    existing, existing_records = existing_index
     model = fasttext.load_model(str(lid_model))
     parquet_file = pq.ParquetFile(parquet)
     out.mkdir(parents=True)
@@ -122,10 +126,10 @@ def build(parquet, lid_model, out, existing_root=Path("datasets"),
             counts["source_rows_read"] += 1
             text = row.get("text") or ""
             canonical_text = canonical(text)
-            if len(canonical_text) < 100 or sum(ch.isalpha() for ch in canonical_text) < 40:
+            letters = sum(ch.isalpha() for ch in canonical_text) if len(canonical_text) >= 100 else 0
+            if letters < 40:
                 rejected["short_or_empty"] += 1
                 continue
-            letters = sum(ch.isalpha() for ch in canonical_text)
             arabic_letters = sum("\u0600" <= ch <= "\u06ff" for ch in canonical_text)
             if arabic_letters / max(1, letters) < 0.55:
                 rejected["low_arabic_script_ratio"] += 1
@@ -141,7 +145,7 @@ def build(parquet, lid_model, out, existing_root=Path("datasets"),
                 rejected["language_id_rejected"] += 1
                 continue
             counts["urdu_lid_candidates"] += 1
-            identity = text_hash(text)
+            identity = hashlib.sha256(canonical_text.encode("utf-8")).hexdigest()
             if identity in existing:
                 rejected["duplicate_existing_published_text"] += 1
                 continue
