@@ -15,8 +15,11 @@ The large Urdu Wikipedia and Sangraha releases are rebuilt from pinned inputs in
 Regular pushes to `main` skip corpus builds. Use **Actions > Publish pinned corpus releases to Hugging Face > Run workflow** on `main` to choose a release operation.
 
 - `metadata` mirrors the validated catalog, dataset card and GitHub-hosted packages without rebuilding the large corpus. A push to `main` with `[hf-sync-metadata]` also selects this operation.
-- `publish-cached` reuses and revalidates the normalized Klam release for the current inputs. It stops before publishing if the matching cache is unavailable.
+- `publish-cached` reuses the validated normalized Klam release for the current inputs and verifies its checksums before upload. It stops before publishing if the matching cache is unavailable.
+- `prepare-only` builds or restores the release, validates a fresh build, and saves the resulting files for review without publishing to Hugging Face.
 - `build-if-needed` explicitly allows a rebuild on a cache miss. It saves the validated normalized release before upload so a publishing retry can reuse it. Changed inputs or cache eviction can require a new build.
+
+Preparation and publishing run as separate jobs. If publishing fails, retry the failed job to reuse the same release artifact while it is retained for 14 days. The uploader verifies shard checksums before committing.
 
 **One-time maintainer setup:** Create a Hugging Face token with write access to this dataset. In GitHub repository Settings > Secrets and variables > Actions, set the repository secret `HF_TOKEN`. Never commit or paste the token. The dataset repository must already exist. The workflow uses a concurrency group to prevent overlapping sync runs.
 

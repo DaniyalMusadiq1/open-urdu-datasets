@@ -152,9 +152,11 @@ def main():
         path_in_repo=f"{PREFIX}/sync-manifest.json",
         path_or_fileobj=(json.dumps(manifest, indent=2) + "\n").encode("utf-8")))
     api = HfApi(token=token)
-    api.repo_info(repo_id=repo_id, repo_type="dataset")
+    parent = api.repo_info(repo_id=repo_id, repo_type="dataset").sha
+    if not parent:
+        raise RuntimeError("Could not determine the current Hugging Face revision")
     result = api.create_commit(repo_id=repo_id, repo_type="dataset",
-                               operations=operations,
+                               operations=operations, parent_commit=parent,
                                commit_message=f"Sync GitHub metadata {sha[:12]}")
     # Verify the remote manifest content, not just the API success response.
     from huggingface_hub import hf_hub_download
