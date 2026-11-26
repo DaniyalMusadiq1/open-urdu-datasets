@@ -115,7 +115,9 @@ def main():
                     metadata_release_docs.append((root, filename))
     release_specs = []
     klam_root = RELEASE_ROOT / "klam-original"
-    if not args.metadata_only and (klam_root / "manifest.json").is_file():
+    if not args.metadata_only:
+        if not (klam_root / "manifest.json").is_file():
+            raise RuntimeError("Missing validated Klam release manifest: " + str(klam_root))
         release_specs.append((klam_root, "klam-original"))
     for root, remote in release_specs:
         release_manifest = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
@@ -131,13 +133,15 @@ def main():
             local = root / filename
             if not local.is_file():
                 raise RuntimeError("Missing corpus release file: " + str(local))
-            payload = local.read_bytes()
             shard = next((item for item in release_manifest["shards"]
                           if item["path"] == filename), None)
-            if shard and hashlib.sha256(payload).hexdigest() != shard["sha256"]:
-                raise RuntimeError("Local corpus hash mismatch: " + filename)
+            if shard:
+                with local.open("rb") as stream:
+                    digest = hashlib.file_digest(stream, "sha256").hexdigest()
+                if digest != shard["sha256"]:
+                    raise RuntimeError("Local corpus hash mismatch: " + filename)
             operations.append(CommitOperationAdd(
-                path_in_repo=f"{remote}/{filename}", path_or_fileobj=payload))
+                path_in_repo=f"{remote}/{filename}", path_or_fileobj=local))
         new_releases.append({"root": root, "remote": remote,
                              "files": release_files, "manifest": release_manifest})
     manifest["corpora"] = [
@@ -148,9 +152,11 @@ def main():
         path_in_repo=f"{PREFIX}/sync-manifest.json",
         path_or_fileobj=(json.dumps(manifest, indent=2) + "\n").encode("utf-8")))
     api = HfApi(token=token)
-    api.repo_info(repo_id=repo_id, repo_type="dataset")
+    parent = api.repo_info(repo_id=repo_id, repo_type="dataset").sha
+    if not parent:
+        raise RuntimeError("Could not determine the current Hugging Face revision")
     result = api.create_commit(repo_id=repo_id, repo_type="dataset",
-                               operations=operations,
+                               operations=operations, parent_commit=parent,
                                commit_message=f"Sync GitHub metadata {sha[:12]}")
     # Verify the remote manifest content, not just the API success response.
     from huggingface_hub import hf_hub_download
