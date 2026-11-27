@@ -17,6 +17,7 @@ jobs:
       - run: python -m ruff check src tests scripts examples
       - run: python -m pytest
       - run: python scripts/validate_repo.py
+      - run: python scripts/validate_klam_chat.py
       - run: python scripts/validate_uci_roman_urdu.py
       - run: python scripts/validate_urwikisource_pd_old.py datasets/corpora/urwikisource-pd-old
       - run: python examples/plain_python.py

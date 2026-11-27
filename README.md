@@ -4,6 +4,10 @@ Klam is one easy-to-use Urdu dataset. It combines the project's approved, openly
 
 The release is built from pinned Dakshina native text, word-level transliterations, and full-sentence Urdu–Roman Urdu pairs, Urdu Wikisource PD-old, Urdu Wikipedia, UCI Roman Urdu sentiment, AI4Bharat Sangraha verified Urdu, and the CC0 Ghalib transcription. Source-specific terms remain attached to each row; Klam does not replace them. All unreviewed records stay marked `unreviewed`; automated language filters are not human review. See the generated dataset card for exact release counts.
 
+## Chatbot fine-tuning
+
+The [Klam Chat starter set](training/klam-chat/README.md) provides Urdu-script and Roman Urdu `messages` examples for testing supervised fine-tuning workflows. Its card includes loading instructions, split counts, and review status.
+
 ## Dataset contents
 
 | Task | Main field | Related fields |
