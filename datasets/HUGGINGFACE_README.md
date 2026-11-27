@@ -2,6 +2,55 @@
 language:
 - ur
 pretty_name: Klam (کلام)
+dataset_info:
+- config_name: klam
+  features:
+  - name: id
+    dtype: string
+  - name: text
+    dtype: string
+  - name: language
+    dtype: string
+  - name: script
+    dtype: string
+  - name: task
+    dtype: string
+  - name: label
+    dtype: string
+  - name: split
+    dtype: string
+  - name: source_id
+    dtype: string
+  - name: source_version
+    dtype: string
+  - name: source_record_id
+    dtype: string
+  - name: source_locator
+    dtype: string
+  - name: rights_basis
+    dtype: string
+  - name: license
+    dtype: string
+  - name: license_url
+    dtype: string
+  - name: rights_evidence_url
+    dtype: string
+  - name: attribution
+    dtype: string
+  - name: review_status
+    dtype: string
+  - name: reviewer_id
+    dtype: string
+  - name: review_date
+    dtype: string
+  - name: review_scope
+    dtype: string
+  - name: title
+    dtype: string
+  - name: paired_text
+    dtype: string
+  - name: paired_script
+    dtype: string
 configs:
 - config_name: klam
   default: true
@@ -48,6 +97,8 @@ guides (`label=phrase`). These guides retain the source spelling and stress
 notation.
 
 ## Load Klam
+
+The `klam` configuration declares a shared schema across all tasks. For rows without a paired form, `paired_text` and `paired_script` load as null.
 
 ```bash
 python -m pip install "datasets>=3,<5"
