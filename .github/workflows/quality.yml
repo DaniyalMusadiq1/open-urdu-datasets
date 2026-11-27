@@ -23,3 +23,4 @@ jobs:
       - run: python examples/plain_python.py
       - run: python examples/pandas_example.py
       - run: python examples/huggingface_example.py
+      - run: python scripts/check_huggingface_loading.py
