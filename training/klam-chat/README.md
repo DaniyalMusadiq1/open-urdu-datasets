@@ -38,3 +38,7 @@ python examples/klam_transliteration_sft.py validation transliteration-validatio
 ```
 
 The exporter streams sentence pairs from a pinned Hugging Face revision and preserves the upstream split, attribution, license, and review status. It excludes word-level and pronunciation-guide rows. A split without eligible sentence pairs exports zero rows. Keep the original evaluation splits separate from training and check overlap against any pretraining corpus. These examples train or evaluate transliteration, while the chat starter exercises general instruction formatting.
+
+## Generate more unreviewed examples
+
+See [local generation and export](GENERATION.md) for the resumable process toward one million rows.
