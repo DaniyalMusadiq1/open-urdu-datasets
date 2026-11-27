@@ -101,11 +101,11 @@ def export_release(db, destination, model):
                 with (staged / f"{split}.jsonl").open("w", encoding="utf-8") as output:
                     count = 0
                     for line in source:
-                        output.write(line.rstrip("\\n") + "\\n")
+                        output.write(line.rstrip("\n") + "\n")
                         count += 1
                     if split == "train":
                         for (row,) in db.execute("SELECT row FROM candidates ORDER BY rowid"):
-                            output.write(row + "\\n")
+                            output.write(row + "\n")
                             count += 1
             counts[split] = count
         manifest = {
@@ -113,7 +113,7 @@ def export_release(db, destination, model):
             "generator_model": model, "generated_review_status": "unreviewed",
         }
         (staged / "manifest.json").write_text(
-            json.dumps(manifest, indent=2) + "\\n", encoding="utf-8"
+            json.dumps(manifest, indent=2) + "\n", encoding="utf-8"
         )
         staged.rename(destination)
     print(f"Exported {manifest['total']} rows to {destination}")
