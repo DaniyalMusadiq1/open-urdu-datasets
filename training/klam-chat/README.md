@@ -4,11 +4,11 @@ A starter supervised fine-tuning dataset for Urdu-script and Roman Urdu assistan
 
 | Split | Urdu script | Roman Urdu |
 | --- | ---: | ---: |
-| Train | 35 | 35 |
+| Train | 49 | 49 |
 | Validation | 3 | 3 |
 | Test | 3 | 3 |
 
-All examples were generated for this project, are marked unreviewed, and are offered under [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/). The two script variants share a `group_id` and always remain in the same split. The examples cover writing, planning, basic reasoning, explanation, summarization, and other everyday requests.
+All examples were generated for this project, are marked unreviewed, and are offered under [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/). The two script variants share a `group_id` and always remain in the same split. The examples cover writing, planning, basic reasoning, explanation, summarization, and other everyday requests. Multi-turn examples include asking for missing details, revising a draft when the user changes a requirement, and adapting a plan to a new constraint.
 
 ## Load the dataset
 
@@ -29,7 +29,7 @@ print(roman_urdu[0]["messages"])
 
 Feed `messages` into your instruction model's chat template. Use train for fitting, validation for tuning, and test for a final check. Run `python scripts/validate_klam_chat.py` from a checkout with the project's Python dependencies installed.
 
-The 82 rows are suitable for testing an SFT pipeline. A chatbot training release still needs broader task coverage, more multi-turn conversations, native-speaker review of both scripts, and a larger independent evaluation set.
+The 110 rows are suitable for testing an SFT pipeline. A chatbot training release still needs broader task coverage, more multi-turn conversations, native-speaker review of both scripts, and a larger independent evaluation set.
 
 ## Export source-backed transliteration examples
 
