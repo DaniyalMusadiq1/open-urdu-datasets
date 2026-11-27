@@ -4,8 +4,9 @@ import json
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from datasets import load_dataset
 from huggingface_hub import DatasetCard
+
+from datasets import load_dataset
 
 ROOT = Path(__file__).resolve().parents[1]
 
