@@ -12,7 +12,7 @@ All examples were generated for this project, are marked unreviewed, and are off
 
 ## Load the dataset
 
-Install `datasets` with `python -m pip install datasets`. The example loads the dataset directly from GitHub. Use a commit SHA in place of `main` to reproduce a particular snapshot.
+Install `datasets` with `python -m pip install datasets`. The example loads the dataset directly from GitHub. On Hugging Face, use `load_dataset("Daniyal643/open-urdu-datasets", "klam-chat")` to get all three splits. Use a commit SHA in place of `main` to reproduce a particular snapshot.
 
 ```python
 from datasets import load_dataset

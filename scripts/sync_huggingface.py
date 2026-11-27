@@ -16,6 +16,10 @@ FILES = (
     "datasets/HUGGINGFACE_README.md",
     "docs/DATA_ARCHITECTURE.md",
     "docs/LICENSE_POLICY.md",
+    "training/klam-chat/README.md",
+    "training/klam-chat/train.jsonl",
+    "training/klam-chat/validation.jsonl",
+    "training/klam-chat/test.jsonl",
 )
 PREFIX = "github-sync"
 BULK_ROOT = Path("datasets/corpora/dakshina-urdu-bulk")

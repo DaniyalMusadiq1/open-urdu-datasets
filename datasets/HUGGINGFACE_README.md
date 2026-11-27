@@ -12,6 +12,14 @@ configs:
     path: "klam-original/data/validation/*.jsonl.gz"
   - split: test
     path: "klam-original/data/test/*.jsonl.gz"
+- config_name: klam-chat
+  data_files:
+  - split: train
+    path: "github-sync/training/klam-chat/train.jsonl"
+  - split: validation
+    path: "github-sync/training/klam-chat/validation.jsonl"
+  - split: test
+    path: "github-sync/training/klam-chat/test.jsonl"
 ---
 
 # Klam (کلام)
@@ -61,3 +69,16 @@ Users can load this one dataset without selecting upstream datasets or managing 
 
 See the [quick start](https://github.com/DaniyalMusadiq1/open-urdu-datasets/blob/main/docs/QUICKSTART.md) and [license policy](https://github.com/DaniyalMusadiq1/open-urdu-datasets/blob/main/docs/LICENSE_POLICY.md).
 
+
+## Load Klam Chat
+
+Select the `klam-chat` configuration for Urdu-script and Roman Urdu supervised fine-tuning examples. It provides separate train, validation, and test splits. Each row has a `messages` array with alternating `user` and `assistant` turns. The `script` field uses `Arab` for Urdu script and `Latn` for Roman Urdu.
+
+```python
+from datasets import load_dataset
+
+chat = load_dataset("Daniyal643/open-urdu-datasets", "klam-chat")
+print(chat["train"][0]["messages"])
+```
+
+The chat examples are AI-generated and unreviewed. They are intended for small fine-tuning trials. See the [Klam Chat dataset card](github-sync/training/klam-chat/README.md) for split counts, license information, and limitations.
