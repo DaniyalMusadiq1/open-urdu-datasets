@@ -4,7 +4,7 @@ A starter supervised fine-tuning dataset for Urdu-script and Roman Urdu assistan
 
 | Split | Urdu script | Roman Urdu |
 | --- | ---: | ---: |
-| Train | 13 | 13 |
+| Train | 35 | 35 |
 | Validation | 3 | 3 |
 | Test | 3 | 3 |
 
@@ -12,22 +12,24 @@ All examples were generated for this project, are marked unreviewed, and are off
 
 ## Load the dataset
 
-From the repository root, install `datasets` and run:
+Install `datasets` with `python -m pip install datasets`. The example loads the dataset directly from GitHub. Use a commit SHA in place of `main` to reproduce a particular snapshot.
 
 ```python
 from datasets import load_dataset
 
 splits = ("train", "validation", "test")
+base = "https://raw.githubusercontent.com/DaniyalMusadiq1/open-urdu-datasets/main"
 data = load_dataset(
     "json",
-    data_files={split: f"training/klam-chat/{split}.jsonl" for split in splits},
+    data_files={split: f"{base}/training/klam-chat/{split}.jsonl" for split in splits},
 )
-print(data["train"][0]["messages"])
+roman_urdu = data["train"].filter(lambda row: row["script"] == "Latn")
+print(roman_urdu[0]["messages"])
 ```
 
 Feed `messages` into your instruction model's chat template. Use train for fitting, validation for tuning, and test for a final check. Run `python scripts/validate_klam_chat.py` from a checkout with the project's Python dependencies installed.
 
-The 38 rows are suitable for testing an SFT pipeline. A chatbot training release still needs broader task coverage, more multi-turn conversations, native-speaker review of both scripts, and a larger independent evaluation set.
+The 82 rows are suitable for testing an SFT pipeline. A chatbot training release still needs broader task coverage, more multi-turn conversations, native-speaker review of both scripts, and a larger independent evaluation set.
 
 ## Export source-backed transliteration examples
 
