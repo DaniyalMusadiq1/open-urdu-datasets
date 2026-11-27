@@ -1,0 +1,81 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "group_id",
+    "language",
+    "script",
+    "task",
+    "source",
+    "license",
+    "review_status",
+    "messages"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^chat-[1-9][0-9]*-(Arab|Latn)$"
+    },
+    "group_id": {
+      "type": "string",
+      "pattern": "^chat-[1-9][0-9]*$"
+    },
+    "language": {
+      "const": "ur"
+    },
+    "script": {
+      "enum": [
+        "Arab",
+        "Latn"
+      ]
+    },
+    "task": {
+      "enum": [
+        "writing",
+        "math",
+        "explanation",
+        "planning",
+        "summarization",
+        "clarification",
+        "formatting",
+        "reasoning",
+        "extraction",
+        "rewriting"
+      ]
+    },
+    "source": {
+      "const": "original-ai-generated"
+    },
+    "license": {
+      "const": "CC0-1.0"
+    },
+    "review_status": {
+      "const": "unreviewed"
+    },
+    "messages": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "role",
+          "content"
+        ],
+        "properties": {
+          "role": {
+            "enum": [
+              "user",
+              "assistant"
+            ]
+          },
+          "content": {
+            "type": "string",
+            "pattern": "\\S"
+          }
+        }
+      }
+    }
+  }
+}
